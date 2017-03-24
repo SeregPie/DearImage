@@ -1,54 +1,58 @@
 $(function() {
-	
-	let _queue = $({});
-	let _cccs = [];
-	let _xxx = function(ggg, image) {
-		let canvas = ggg(image);
-		$(this).empty().append(canvas);
-	};
-	let _aaa = function(element, ggg) {
-		_cccs.push(_xxx.bind(element, ggg));
-	};
-	let _fff = function(image) {
-		_queue.clearQueue();
-		_cccs.forEach(ccc => {
-			_queue.queue(next => {
-				ccc(image);
-				setTimeout(next, 1);
-			});
+
+	let _runQueue = $({});
+	let _runElements = $();
+	let _runHandler = function(event, image) {
+		let {run} = event.data;
+		_runQueue.queue(next => {
+			image = run(image);
+			let canvas = image.toCanvas();
+			$(this).empty().append(canvas);
+			setTimeout(next, 1);
 		});
+		return false;
 	};
-	
+	let _run = function(image) {
+		_runQueue.clearQueue();
+		_runElements.trigger(':run', [image]);
+	};
+
 	$('body')
 		.find('code')
 			.replaceWith(function() {
 				let code = $(this).text();
+				let run = (new Function('image', `return image${code};`));
+				let runElement = $('<div>')
+					.addClass('o-transparency-grid-background')
+					.on(':run', {run}, _runHandler);
+				_runElements = $(_runElements.add(runElement));
 				return $('<div>', {
 					class: 'uk-padding-small uk-flex uk-flex-column uk-flex-middle',
-					append: [
-						$(this).clone(),
-						$('<div>', {
-							css: {
-								'background-image': 'url(docs/media/transparency-grid.png)',
-							},
-						}).each(function() {
-							let ggg = (new Function('image', `return image${code}.toCanvas();`));
-							_aaa(this, ggg);
-						}),
-					],
+					append: [$(this).clone(), runElement],
 				});
 			})
 		.end()
 		.find('img[src]')
-			.each(function() {
-				$(this).parent().find('.uk-overlay').text(`${this.naturalWidth}x${this.naturalHeight}`);
-			})
 			.click(function() {
-				_fff(PicMap(this));
+				let image = PicMap(this);
+				_run(image);
+			})
+			.one('load', function() {
+				$(this)
+					.parent()
+					.find('.uk-overlay')
+					.text(`${this.naturalWidth}x${this.naturalHeight}`);
 			})
 			.first()
-				.click()
+				.one('load', function() {
+					$(this).click();
+				})
 			.end()
+			.each(function() {
+				if (this.complete) {
+					$(this).triggerHandler('load');
+				}
+			})
 		.end();
 
 });

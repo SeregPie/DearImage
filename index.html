@@ -8,6 +8,7 @@
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.18/css/uikit.min.css"/>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.18/js/uikit.min.js"></script>
 		<script src="PicMap.js"></script>
+		<link rel="stylesheet" href="demo/demo.css"/>
 		<script src="demo/demo.js"></script>
 	</head>
 	<body>
@@ -29,25 +30,25 @@
 			<div class="uk-flex uk-flex-between">
 				<div>
 					<div class="uk-inline-clip uk-transition-toggle" style="cursor: pointer;">
-						<img class="uk-height-medium uk-transition-scale-up uk-transition-opaque" src="demo/media/image-1.jpg"/>
+						<img class="uk-height-medium uk-transition-scale-up uk-transition-opaque" src="demo/example-1.jpg"/>
 						<div class="uk-transition-slide-bottom uk-position-bottom uk-overlay uk-overlay-primary uk-padding-remove uk-text-center"></div>
 					</div>
 				</div>
 				<div>
 					<div class="uk-inline-clip uk-transition-toggle" style="cursor: pointer;">
-						<img class="uk-height-medium uk-transition-scale-up uk-transition-opaque" src="demo/media/image-2.jpg"/>
+						<img class="uk-height-medium uk-transition-scale-up uk-transition-opaque" src="demo/example-2.jpg"/>
 						<div class="uk-transition-slide-bottom uk-position-bottom uk-overlay uk-overlay-primary uk-padding-remove uk-text-center"></div>
 					</div>
 				</div>
 				<div>
 					<div class="uk-inline-clip uk-transition-toggle" style="cursor: pointer;">
-						<img class="uk-height-medium uk-transition-scale-up uk-transition-opaque" src="demo/media/image-3.png"/>
+						<img class="uk-height-medium uk-transition-scale-up uk-transition-opaque" src="demo/example-3.png"/>
 						<div class="uk-transition-slide-bottom uk-position-bottom uk-overlay uk-overlay-primary uk-padding-remove uk-text-center"></div>
 					</div>
 				</div>
 			</div>
 			<hr/>
-			<h2>clip</h2>
+			<h2>crop</h2>
 			<div class="uk-flex uk-flex-wrap uk-flex-around uk-flex-middle">
 				<div class="uk-flex uk-flex-column uk-flex-around">
 					<code>.crop(200, 100, 400, 200)</code>
@@ -57,21 +58,21 @@
 				</div>
 			</div>
 			<hr/>
-			<h2>zzzz</h2>
+			<h2>cropAlign</h2>
 			<div class="uk-flex uk-flex-wrap uk-flex-around">
-				<code>.zzzz(300, 300, 'top left')</code>
-				<code>.zzzz(300, 300, 'top center')</code>
-				<code>.zzzz(300, 300, 'top right')</code>
+				<code>.cropAlign(300, 300, 'top left')</code>
+				<code>.cropAlign(300, 300, 'top center')</code>
+				<code>.cropAlign(300, 300, 'top right')</code>
 			</div>
 			<div class="uk-flex uk-flex-wrap uk-flex-around">
-				<code>.zzzz(300, 300, 'center left')</code>
-				<code>.zzzz(300, 300, 'center')</code>
-				<code>.zzzz(300, 300, 'center right')</code>
+				<code>.cropAlign(300, 300, 'center left')</code>
+				<code>.cropAlign(300, 300, 'center')</code>
+				<code>.cropAlign(300, 300, 'center right')</code>
 			</div>
 			<div class="uk-flex uk-flex-wrap uk-flex-around">
-				<code>.zzzz(300, 300, 'bottom left')</code>
-				<code>.zzzz(300, 300, 'bottom center')</code>
-				<code>.zzzz(300, 300, 'bottom right')</code>
+				<code>.cropAlign(300, 300, 'bottom left')</code>
+				<code>.cropAlign(300, 300, 'bottom center')</code>
+				<code>.cropAlign(300, 300, 'bottom right')</code>
 			</div>
 			<hr/>
 			<h2>resize</h2>
@@ -101,16 +102,20 @@
 					<code>.scale(1/20, 1/2)</code>
 				</div>
 			</div>
-			<div><code>.resize(100, '')</code></div>
-			<div class="uk-flex uk-flex-wrap uk-flex-around">
-				<code><span hidden>.resize(100, '')</span>.scale(3, 0)</code>
-				<code><span hidden>.resize(100, '')</span>.scale(3, 1/2)</code>
-				<code><span hidden>.resize(100, '')</span>.scale(3, 8/9)</code>
-			</div>
-			<div class="uk-flex uk-flex-column">
-				<code><span hidden>.resize(100, '')</span>.scale(8, 0)</code>
-				<code><span hidden>.resize(100, '')</span>.scale(8, 1/2)</code>
-				<code><span hidden>.resize(100, '')</span>.scale(8, 8/9)</code>
+			<div class="uk-flex uk-flex-wrap uk-flex-around uk-flex-top">
+				<div>
+					<code>.resize(100, '')</code>
+				</div>
+				<div class="uk-flex uk-flex-column">
+					<code><span hidden>.resize(100, '')</span>.scale(3, 0)</code>
+					<code><span hidden>.resize(100, '')</span>.scale(3, 1/2)</code>
+					<code><span hidden>.resize(100, '')</span>.scale(3, 8/9)</code>
+				</div>
+				<div class="uk-flex uk-flex-column">
+					<code><span hidden>.resize(100, '')</span>.scale(6, 0)</code>
+					<code><span hidden>.resize(100, '')</span>.scale(6, 1/2)</code>
+					<code><span hidden>.resize(100, '')</span>.scale(6, 8/9)</code>
+				</div>
 			</div>
 			<hr/>
 			<h2>contain</h2>
@@ -143,6 +148,13 @@
 				<code><span hidden>.resize(200, '')</span>.flip()</code>
 				<code><span hidden>.resize(200, '')</span>.flop()</code>
 				<code><span hidden>.resize(200, '')</span>.flip().flop()</code>
+			</div>
+			<h2>orientate</h2>
+			<div class="uk-flex uk-flex-wrap uk-flex-around">
+				<code>.resize(200, '')</code>
+				<code><span hidden>.resize(200, '')</span>.orientate1()</code>
+				<code><span hidden>.resize(200, '')</span>.orientate2()</code>
+				<code><span hidden>.resize(200, '')</span>.orientate3()</code>
 			</div>
 		</div>
 	</body>

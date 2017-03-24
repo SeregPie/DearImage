@@ -1,28 +1,26 @@
 (function() {
 
-	this.PicMap = function Class(ctx) {
-		if (this instanceof Class) {
-			this._ctx = ctx;
-		} else {
-			ctx = (function(value) {
-				if (value instanceof Class) {
-					return value._ctx;
-				}
-				if (value instanceof CanvasRenderingContext2D || value instanceof WebGLRenderingContext) {
-					value = value.canvas;
-				}
-				//console.log(value instanceof HTMLImageElement);
-				var ctx = document.createElement('canvas').getContext('2d');
-				ctx.canvas.width = value.naturalWidth || value.width;
-				ctx.canvas.height = value.naturalHeight || value.height;
-				ctx.drawImage(value, 0, 0);
-				return ctx;
-			})(ctx);
+	var PicMap = function Class(ctx) {
+		if (!(this instanceof Class)) {
 			return new Class(ctx);
 		}
+		this._ctx = (function(value) {
+			if (value instanceof Class) {
+				return value._ctx;
+			}
+			if (value instanceof CanvasRenderingContext2D || value instanceof WebGLRenderingContext) {
+				value = value.canvas;
+			}
+			//console.log(value instanceof HTMLImageElement);
+			var ctx = document.createElement('canvas').getContext('2d');
+			ctx.canvas.width = value.naturalWidth || value.width;
+			ctx.canvas.height = value.naturalHeight || value.height;
+			ctx.drawImage(value, 0, 0);
+			return ctx;
+		})(ctx);
 	};
 
-	this.PicMap.load = function(url, callback) {
+	PicMap.load = function(url, callback) {
 		var image = new Image();
 		image.setAttribute('crossOrigin', 'anonymous');
 		image.onload = function() {
@@ -31,8 +29,8 @@
 		image.src = url;
 	};
 
-	this.PicMap.prototype = {
-		constructor: this.PicMap,
+	PicMap.fn = PicMap.prototype = {
+		constructor: PicMap,
 
 		getWidth: function() {
 			return this._ctx.canvas.width;
@@ -156,7 +154,7 @@
 		},
 
 		//wrap
-		zzzz: function(sizeX, sizeY, align) {
+		cropAlign: function(sizeX, sizeY, align) {
 			sizeX = Math.abs(parseInt(sizeX));
 			sizeY = Math.abs(parseInt(sizeY));
 			if (sizeX === 0 || sizeY === 0) {
@@ -218,7 +216,7 @@
 
 		contain: function(sizeX, sizeY, smoothing) {
 			//align
-			return this.scaleToContain(sizeX, sizeY, smoothing).zzzz(sizeX, sizeY);
+			return this.scaleToContain(sizeX, sizeY, smoothing).cropAlign(sizeX, sizeY);
 		},
 
 		scaleToCover: function(sizeX, sizeY, smoothing) {
@@ -232,7 +230,7 @@
 
 		cover: function(sizeX, sizeY, smoothing) {
 			//align
-			return this.scaleToCover(sizeX, sizeY, smoothing).zzzz(sizeX, sizeY);
+			return this.scaleToCover(sizeX, sizeY, smoothing).cropAlign(sizeX, sizeY);
 		},
 
 		rotate: function() {
@@ -257,6 +255,39 @@
 			ctx.canvas.height = canvas.height;
 			ctx.translate(canvas.width, 0);
 			ctx.scale(-1, 1);
+			ctx.drawImage(canvas, 0, 0);
+			return new this.constructor(ctx);
+		},
+
+		orientate1: function() {
+			var canvas = this._ctx.canvas;
+			var ctx = document.createElement('canvas').getContext('2d');
+			ctx.canvas.width = canvas.width;
+			ctx.canvas.height = canvas.height;
+			ctx.translate(canvas.width, 0);
+			ctx.scale(-1, 1);
+			ctx.drawImage(canvas, 0, 0);
+			return new this.constructor(ctx);
+		},
+
+		orientate2: function() {
+			var canvas = this._ctx.canvas;
+			var ctx = document.createElement('canvas').getContext('2d');
+			ctx.canvas.width = canvas.width;
+			ctx.canvas.height = canvas.height;
+			ctx.translate(canvas.width, 0);
+			ctx.scale(-1, 1);
+			ctx.drawImage(canvas, 0, 0);
+			return new this.constructor(ctx);
+		},
+
+		orientate3: function() {
+			var canvas = this._ctx.canvas;
+			var ctx = document.createElement('canvas').getContext('2d');
+			ctx.canvas.width = canvas.width;
+			ctx.canvas.height = canvas.height;
+			ctx.translate(canvas.width, canvas.height);
+			ctx.scale(-1, -1);
 			ctx.drawImage(canvas, 0, 0);
 			return new this.constructor(ctx);
 		},
@@ -289,6 +320,8 @@
 			return canvas.toDataURL.apply(canvas, arguments);
 		},
 	};
+
+	this.PicMap = PicMap;
 
 }).call(this);
 
