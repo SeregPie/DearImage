@@ -5,6 +5,7 @@ $(function() {
 	let _runHandler = function(event, image) {
 		let {run} = event.data;
 		_runQueue.queue(next => {
+			//console.log($(this).data('code'));
 			image = run(image);
 			let canvas = image.toCanvas();
 			$(this).empty().append(canvas);
@@ -23,7 +24,8 @@ $(function() {
 				let code = $(this).text();
 				let run = (new Function('image', `return image${code};`));
 				let runElement = $('<div>')
-					.addClass('o-transparency-grid-background')
+					.addClass('o-transparency-grid-background uk-preserve-width')
+					//.data({code})
 					.on(':run', {run}, _runHandler);
 				_runElements = $(_runElements.add(runElement));
 				return $('<div>', {
