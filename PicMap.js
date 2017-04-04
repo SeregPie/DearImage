@@ -2,22 +2,22 @@
 
 	var PicMap = function Class(ctx) {
 		if (!(this instanceof Class)) {
-			return new Class(ctx);
+			return new Class((function(value) {
+				if (value instanceof Class) {
+					return value._ctx;
+				}
+				if (value instanceof CanvasRenderingContext2D || value instanceof WebGLRenderingContext) {
+					value = value.canvas;
+				}
+				//console.log(value instanceof HTMLImageElement);
+				var ctx = document.createElement('canvas').getContext('2d');
+				ctx.canvas.width = value.naturalWidth || value.width;
+				ctx.canvas.height = value.naturalHeight || value.height;
+				ctx.drawImage(value, 0, 0);
+				return ctx;
+			})(ctx));
 		}
-		this._ctx = (function(value) {
-			if (value instanceof Class) {
-				return value._ctx;
-			}
-			if (value instanceof CanvasRenderingContext2D || value instanceof WebGLRenderingContext) {
-				value = value.canvas;
-			}
-			//console.log(value instanceof HTMLImageElement);
-			var ctx = document.createElement('canvas').getContext('2d');
-			ctx.canvas.width = value.naturalWidth || value.width;
-			ctx.canvas.height = value.naturalHeight || value.height;
-			ctx.drawImage(value, 0, 0);
-			return ctx;
-		})(ctx);
+		this._ctx = ctx;
 	};
 
 	PicMap.load = function(url, callback) {
@@ -112,36 +112,37 @@
 			var ctx = this._ctx;
 			var currSizeX = ctx.canvas.width;
 			var currSizeY = ctx.canvas.height;
-			if (isNaN(sizeX)) {
-				sizeX = Infinity;
-			} else if (sizeX < 0) {
-				offsetX += sizeX;
-				sizeX = -sizeX;
-			}
-			if (isNaN(sizeY)) {
-				sizeY = Infinity;
-			} else if (sizeY < 0) {
-				offsetY += sizeY;
-				sizeY = -sizeY;
-			}
 			if (isNaN(offsetX)) {
 				offsetX = 0;
+			} else if (offsetX < 0) {
+				offsetX = Math.max(offsetX + currSizeX, 0);
 			} else {
-				offsetX %= currSizeX;
-				if (offsetX < 0) {
-					offsetX += currSizeX;
-				}
+				offsetX = Math.min(offsetX, currSizeX);
 			}
 			if (isNaN(offsetY)) {
 				offsetY = 0;
 			} else if (offsetY < 0) {
-				offsetY %= currSizeY;
-				if (offsetY < 0) {
-					offsetY += currSizeY;
-				}
+				offsetY = Math.max(offsetY + currSizeY, 0);
+			} else {
+				offsetY = Math.min(offsetY, currSizeY);
 			}
-			sizeX = Math.min(sizeX, currSizeX - offsetX);
-			sizeY = Math.min(sizeY, currSizeY - offsetY);
+			if (isNaN(sizeX)) {
+				sizeX = currSizeX - offsetX;
+			} else if (sizeX < 0) {
+				sizeX = Math.min(-sizeX, offsetX);
+				offsetX -= sizeX;
+			} else {
+				sizeX = Math.min(sizeX, currSizeX - offsetX);
+			}
+			if (isNaN(sizeY)) {
+				sizeY = currSizeY - offsetY;
+			} else if (sizeY < 0) {
+				sizeY = Math.min(-sizeY, offsetY);
+				offsetY -= sizeY;
+			} else {
+				sizeY = Math.min(sizeY, currSizeY - offsetY);
+			}
+			//console.log({sizeX, currSizeX, offsetX, sizeY, currSizeY, offsetY});
 			if (sizeX === 0 || sizeY === 0) {
 				//return this.constructor.empty(sizeX, sizeY);
 			}
@@ -174,19 +175,19 @@
 				case 'left top':
 					return this.crop(0, 0, sizeX, sizeY);
 				case 'right top':
-					return this.crop(0, 0, -sizeX, sizeY);
+					return this.crop(-sizeX, 0, Infinity, sizeY);
 				case 'bottom left':
-					return this.crop(0, 0, sizeX, -sizeY);
+					return this.crop(0, -sizeY, sizeX, Infinity);
 				case 'bottom right':
-					return this.crop(0, 0, -sizeX, -sizeY);
+					return this.crop(-sizeX, -sizeY, Infinity, Infinity);
 				case 'center left':
 					return this.crop(0, Math.max((currSizeY - sizeY) / 2, 0), sizeX, sizeY);
 				case 'center right':
-					return this.crop(0, Math.max((currSizeY - sizeY) / 2, 0), -sizeX, sizeY);
+					return this.crop(-sizeX, Math.max((currSizeY - sizeY) / 2, 0), Infinity, sizeY);
 				case 'center top':
 					return this.crop(Math.max((currSizeX - sizeX) / 2, 0), 0, sizeX, sizeY);
 				case 'bottom center':
-					return this.crop(Math.max((currSizeX - sizeX) / 2, 0), 0, sizeX, -sizeY);
+					return this.crop(Math.max((currSizeX - sizeX) / 2, 0), -sizeY, sizeX, Infinity);
 			}
 			return this.crop(Math.max((currSizeX - sizeX) / 2, 0), Math.max((currSizeY - sizeY) / 2, 0), sizeX, sizeY);
 		},
