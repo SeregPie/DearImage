@@ -20,13 +20,13 @@ Creates a new instance of PaperDuck.
 
 `.fn.getWidth()`
 
-Returns width of the image.
+Returns the width of the image.
 
 ---
 
 `.fn.getHeight()`
 
-Returns height of the image.
+Returns the height of the image.
 
 ---
 
