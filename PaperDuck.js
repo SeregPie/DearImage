@@ -1,6 +1,6 @@
 (function() {
 
-	var PicMap = function Class(ctx) {
+	var PaperDuck = function Class(ctx) {
 		if (!(this instanceof Class)) {
 			return new Class((function(value) {
 				if (value instanceof Class) {
@@ -9,7 +9,6 @@
 				if (value instanceof CanvasRenderingContext2D || value instanceof WebGLRenderingContext) {
 					value = value.canvas;
 				}
-				//console.log(value instanceof HTMLImageElement);
 				var ctx = document.createElement('canvas').getContext('2d');
 				ctx.canvas.width = value.naturalWidth || value.width;
 				ctx.canvas.height = value.naturalHeight || value.height;
@@ -20,7 +19,7 @@
 		this._ctx = ctx;
 	};
 
-	PicMap.load = function(url, callback) {
+	PaperDuck.load = function(url, callback) {
 		var image = new Image();
 		image.setAttribute('crossOrigin', 'anonymous');
 		image.onload = function() {
@@ -29,8 +28,27 @@
 		image.src = url;
 	};
 
-	PicMap.fn = PicMap.prototype = {
-		constructor: PicMap,
+	PaperDuck.empty = function(sizeX, sizeY) {
+		sizeX = parseInt(sizeX);
+		sizeY = parseInt(sizeY);
+		if (isNaN(sizeX)) {
+			sizeX = 0;
+		} else {
+			sizeX = Math.abs(sizeX);
+		}
+		if (isNaN(sizeY)) {
+			sizeY = 0;
+		} else {
+			sizeY = Math.abs(sizeY);
+		}
+		var ctx = document.createElement('canvas').getContext('2d');
+		ctx.canvas.width = sizeX;
+		ctx.canvas.height = sizeY;
+		return new this(ctx);
+	};
+
+	PaperDuck.fn = PaperDuck.prototype = {
+		constructor: PaperDuck,
 
 		getWidth: function() {
 			return this._ctx.canvas.width;
@@ -46,9 +64,6 @@
 			if (isNaN(sizeX) && isNaN(sizeY)) {
 				return this;
 			}
-			if (sizeX === 0 || sizeY === 0) {
-				//return this.constructor.empty(sizeX, sizeY);
-			}
 			if (!isNaN(sizeX)) {
 				sizeX = Math.abs(sizeX);
 			}
@@ -59,13 +74,22 @@
 			var currSizeX = ctx.canvas.width;
 			var currSizeY = ctx.canvas.height;
 			if (isNaN(sizeX)) {
+				if (currSizeY === 0) {
+					return this.constructor.empty(0, sizeY);
+				}
 				sizeX = Math.round(currSizeX * sizeY / currSizeY);
 			} else
 			if (isNaN(sizeY)) {
+				if (currSizeX === 0) {
+					return this.constructor.empty(sizeX, 0);
+				}
 				sizeY = Math.round(currSizeY * sizeX / currSizeX);
 			}
 			if (sizeX === currSizeX && sizeY === currSizeY) {
 				return this;
+			}
+			if (currSizeX === 0 || sizeX === 0 || currSizeY === 0 || sizeY === 0) {
+				return this.constructor.empty(sizeX, sizeY);
 			}
 			smoothing = parseFloat(smoothing);
 			if (isNaN(smoothing)) {
@@ -142,9 +166,11 @@
 			} else {
 				sizeY = Math.min(sizeY, currSizeY - offsetY);
 			}
-			//console.log({sizeX, currSizeX, offsetX, sizeY, currSizeY, offsetY});
-			if (sizeX === 0 || sizeY === 0) {
-				//return this.constructor.empty(sizeX, sizeY);
+			if (sizeX === currSizeX && sizeY === currSizeY) {
+				return this;
+			}
+			if (currSizeX === 0 || sizeX === 0 || currSizeY === 0 || sizeY === 0) {
+				return this.constructor.empty(sizeX, sizeY);
 			}
 			var canvas = ctx.canvas;
 			ctx = document.createElement('canvas').getContext('2d');
@@ -154,12 +180,14 @@
 			return new this.constructor(ctx);
 		},
 
-		//wrap
 		cropAlign: function(sizeX, sizeY, align) {
-			sizeX = Math.abs(parseInt(sizeX));
-			sizeY = Math.abs(parseInt(sizeY));
+			sizeX = parseInt(sizeX);
+			sizeY = parseInt(sizeY);
+			if (isNaN(sizeX) && isNaN(sizeY)) {
+				return this;
+			}
 			if (sizeX === 0 || sizeY === 0) {
-				//return this.constructor.empty(sizeX, sizeY);
+				return this.constructor.empty(sizeX, sizeY);
 			}
 			var currSizeX = this.getWidth();
 			var currSizeY = this.getHeight();
@@ -168,9 +196,8 @@
 			}
 			if (typeof align === 'string') {
 				// trim remove duplicates
-				align = align.toLowerCase().split(/[^a-z]+/).sort().join(' ');
+				align = align.toLowerCase().split(/[^a-z0-9]+/).sort().join(' ');
 			}
-			//console.log(align);
 			switch (align) {
 				case 'left top':
 					return this.crop(0, 0, sizeX, sizeY);
@@ -193,57 +220,25 @@
 		},
 
 		scale: function(factor, smoothing) {
-			factor = Math.max(parseFloat(factor), 0);
-			if (factor === 1) {
+			factor = parseFloat(factor);
+			if (isNaN(factor)) {
 				return this;
 			}
-			//var sizeX = this.getWidth() * factor;
-			//var sizeY = this.getHeight() * factor;
-			if (factor <= 0) {
-				// return empty(0, 0);
-			}
+			factor = Math.abs(factor);
 			return this.resize(this.getWidth() * factor, this.getHeight() * factor, smoothing);
-		},
-
-		//fit
-		scaleToContain: function(sizeX, sizeY, smoothing) {
-			sizeX = Math.abs(parseInt(sizeX));
-			sizeY = Math.abs(parseInt(sizeY));
-			var scaleFactorX = sizeX / this.getWidth();
-			var scaleFactorY = sizeY / this.getHeight();
-			var scaleFactor = Math.min(scaleFactorX, scaleFactorY);
-			return this.scale(scaleFactor);
-		},
-
-		contain: function(sizeX, sizeY, smoothing) {
-			//align
-			return this.scaleToContain(sizeX, sizeY, smoothing).cropAlign(sizeX, sizeY);
-		},
-
-		scaleToCover: function(sizeX, sizeY, smoothing) {
-			sizeX = Math.abs(parseInt(sizeX));
-			sizeY = Math.abs(parseInt(sizeY));
-			var scaleFactorX = sizeX / this.getWidth();
-			var scaleFactorY = sizeY / this.getHeight();
-			var scaleFactor = Math.max(scaleFactorX, scaleFactorY);
-			return this.scale(scaleFactor);
-		},
-
-		cover: function(sizeX, sizeY, smoothing) {
-			//align
-			return this.scaleToCover(sizeX, sizeY, smoothing).cropAlign(sizeX, sizeY);
-		},
-
-		rotate: function() {
-
 		},
 
 		flip: function() {
 			var canvas = this._ctx.canvas;
+			var currSizeX = canvas.width;
+			var currSizeY = canvas.height;
+			if (currSizeX === 0 || currSizeY === 0) {
+				return this;
+			}
 			var ctx = document.createElement('canvas').getContext('2d');
-			ctx.canvas.width = canvas.width;
-			ctx.canvas.height = canvas.height;
-			ctx.translate(0, canvas.height);
+			ctx.canvas.width = currSizeX;
+			ctx.canvas.height = currSizeY;
+			ctx.translate(0, currSizeY);
 			ctx.scale(1, -1);
 			ctx.drawImage(canvas, 0, 0);
 			return new this.constructor(ctx);
@@ -251,45 +246,65 @@
 
 		flop: function() {
 			var canvas = this._ctx.canvas;
+			var currSizeX = canvas.width;
+			var currSizeY = canvas.height;
+			if (currSizeX === 0 || currSizeY === 0) {
+				return this;
+			}
 			var ctx = document.createElement('canvas').getContext('2d');
-			ctx.canvas.width = canvas.width;
-			ctx.canvas.height = canvas.height;
-			ctx.translate(canvas.width, 0);
+			ctx.canvas.width = currSizeX;
+			ctx.canvas.height = currSizeY;
+			ctx.translate(currSizeX, 0);
 			ctx.scale(-1, 1);
 			ctx.drawImage(canvas, 0, 0);
 			return new this.constructor(ctx);
 		},
 
-		orientate1: function() {
+		rotate90: function() {
 			var canvas = this._ctx.canvas;
+			var currSizeX = canvas.width;
+			var currSizeY = canvas.height;
+			if (currSizeX === 0 || currSizeY === 0) {
+				return this.constructor.empty(currSizeY, currSizeX);
+			}
 			var ctx = document.createElement('canvas').getContext('2d');
-			ctx.canvas.width = canvas.width;
-			ctx.canvas.height = canvas.height;
-			ctx.translate(canvas.width, 0);
-			ctx.scale(-1, 1);
-			ctx.drawImage(canvas, 0, 0);
+			ctx.canvas.width = currSizeY;
+			ctx.canvas.height = currSizeX;
+			ctx.translate((currSizeY / 2), (currSizeX / 2));
+			ctx.rotate(Math.PI / 2);
+			ctx.drawImage(canvas, -(currSizeX / 2), -(currSizeY / 2));
 			return new this.constructor(ctx);
 		},
 
-		orientate2: function() {
+		rotate180: function() {
 			var canvas = this._ctx.canvas;
+			var currSizeX = canvas.width;
+			var currSizeY = canvas.height;
+			if (currSizeX === 0 || currSizeY === 0) {
+				return this;
+			}
 			var ctx = document.createElement('canvas').getContext('2d');
-			ctx.canvas.width = canvas.width;
-			ctx.canvas.height = canvas.height;
-			ctx.translate(canvas.width, 0);
-			ctx.scale(-1, 1);
-			ctx.drawImage(canvas, 0, 0);
-			return new this.constructor(ctx);
-		},
-
-		orientate3: function() {
-			var canvas = this._ctx.canvas;
-			var ctx = document.createElement('canvas').getContext('2d');
-			ctx.canvas.width = canvas.width;
-			ctx.canvas.height = canvas.height;
-			ctx.translate(canvas.width, canvas.height);
+			ctx.canvas.width = currSizeX;
+			ctx.canvas.height = currSizeY;
+			ctx.translate(currSizeX, currSizeY);
 			ctx.scale(-1, -1);
 			ctx.drawImage(canvas, 0, 0);
+			return new this.constructor(ctx);
+		},
+
+		rotate270: function() {
+			var canvas = this._ctx.canvas;
+			var currSizeX = canvas.width;
+			var currSizeY = canvas.height;
+			if (currSizeX === 0 || currSizeY === 0) {
+				return this.constructor.empty(currSizeY, currSizeX);
+			}
+			var ctx = document.createElement('canvas').getContext('2d');
+			ctx.canvas.width = currSizeY;
+			ctx.canvas.height = currSizeX;
+			ctx.translate((currSizeY / 2), (currSizeX / 2));
+			ctx.rotate(Math.PI / -2);
+			ctx.drawImage(canvas, (currSizeX / -2), (currSizeY / -2));
 			return new this.constructor(ctx);
 		},
 
@@ -311,7 +326,7 @@
 			var canvas = this._ctx.canvas;
 			var ctx = document.createElement('canvas').getContext('2d');
 			ctx.canvas.width = canvas.width;
-			ctx.canvas.height = canvas.height
+			ctx.canvas.height = canvas.height;
 			ctx.drawImage(canvas, 0, 0);
 			return ctx;
 		},
@@ -322,148 +337,6 @@
 		},
 	};
 
-	this.PicMap = PicMap;
+	this.PaperDuck = PaperDuck;
 
 }).call(this);
-
-/*
-
-
-CanvasRenderingContext2D
-WebGLRenderingContext
-WebGL2RenderingContext
-RenderingContext
-
-HTMLCanvasElement
-
-
-
-var canvas = document.createElement('canvas');
-var context = canvas.getContext('2d');
-canvas.width = size[0];
-canvas.height = size[1];
-if (draw_background) {
-	let gradient = context.createLinearGradient(0, 0, 0, canvas.height);
-	gradient.addColorStop(0, this._scene_color_1);
-	gradient.addColorStop(1, this._scene_color_2);
-	context.fillStyle = gradient;
-	context.fillRect(0, 0, canvas.width, canvas.height);
-}
-context.drawImage(this._generate_canvas_of_3d_renderer(), 0, 0, size[0], size[1]);
-let image = canvas.toDataURL(`image/${type}`, encoder_options);
-return image;
-
-
-
-
-
-image.contain( w, h[, alignBits || mode, mode] );    // scale the image to the given width and height, some parts of the image may be letter boxed
-image.cover( w, h[, alignBits || mode, mode] );      // scale the image to the given width and height, some parts of the image may be clipped
-image.resize( w, h[, mode] );     // resize the image. Jimp.AUTO can be passed as one of the values.
-image.scale( f[, mode] );         // scale the image by the factor f
-image.scaleToFit( w, h[, mode] ); // scale the image to the largest size that fits inside the given width and height
-
-
-
-
-image.resize(250, 250);           // resize the image to 250 x 250
-image.resize(Jimp.AUTO, 250);     // resize the height to 250 and scale the width accordingly
-image.resize(250, Jimp.AUTO);     // resize the width to 250 and scale the height accordingly
-
-image.resize(250, 250, Jimp.RESIZE_BEZIER);
-
-Jimp.RESIZE_NEAREST_NEIGHBOR;
-Jimp.RESIZE_BILINEAR;
-Jimp.RESIZE_BICUBIC;
-Jimp.RESIZE_HERMITE;
-Jimp.RESIZE_BEZIER;
-
-
-
-
-
-Jimp.HORIZONTAL_ALIGN_LEFT;
-Jimp.HORIZONTAL_ALIGN_CENTER;
-Jimp.HORIZONTAL_ALIGN_RIGHT;
-
-Jimp.VERTICAL_ALIGN_TOP;
-Jimp.VERTICAL_ALIGN_MIDDLE;
-Jimp.VERTICAL_ALIGN_BOTTOM;
-For example:
-
-image.contain(250, 250, Jimp.HORIZONTAL_ALIGN_LEFT | Jimp.VERTICAL_ALIGN_TOP);
-Default align modes are :
-
-Jimp.HORIZONTAL_ALIGN_CENTER | Jimp.VERTICAL_ALIGN_MIDDLE;
-
-
-
-
-
-image.getBuffer( mime, cb ); // Node-style callback will be fired with result
-For convenience, supported MIME types are available as static properties:
-
-Jimp.MIME_PNG;  // "image/png"
-Jimp.MIME_JPEG; // "image/jpeg"
-Jimp.MIME_BMP;  // "image/bmp"
-
-
-
-
-image.getBase64( mime, cb ); // Node-style callback will be fired with result
-PNG and JPEG quality
-
-The quality of JPEGs can be set with:
-
-image.quality( n ); // set the quality of saved JPEG, 0 - 100
-The format of PNGs can be set with:
-
-image.rgba( bool );             // set whether PNGs are saved as RGBA (true, default) or RGB (false)
-image.filterType( number );     // set the filter type for the saved PNG
-image.deflateLevel( number );   // set the deflate level for the saved PNG
-Jimp.deflateStrategy( number ); // set the deflate for the saved PNG (0-3)
-
-For convenience, supported filter types are available as static properties:
-
-Jimp.PNG_FILTER_AUTO;    // -1
-Jimp.PNG_FILTER_NONE;    //  0
-Jimp.PNG_FILTER_SUB;     //  1
-Jimp.PNG_FILTER_UP;      //  2
-Jimp.PNG_FILTER_AVERAGE; //  3
-Jimp.PNG_FILTER_PAETH;   //  4
-
-
-clip: function(offsetX, offsetY, sizeX, sizeY) {
-			sizeX = parseInt(sizeX);
-			sizeY = parseInt(sizeY);
-			if (sizeX === 0 || sizeY === 0) {
-				//return this.constructor.empty(sizeX, sizeY);
-			}
-			offsetX = parseInt(offsetX);
-			offsetY = parseInt(offsetY);
-			var ctx = this._ctx;
-			var canvas = ctx.canvas;
-			var currSizeX = canvas.width;
-			var currSizeY = canvas.height;
-			if (sizeX < 0) {
-				offsetX += sizeX;
-				sizeX = -sizeX;
-			}
-			if (sizeY < 0) {
-				offsetY += sizeY;
-				sizeY = -sizeY;
-			}
-			if (offsetX === 0 && sizeX === currSizeX && offsetY === 0 && sizeY === currSizeY) {
-				return this;
-			}
-			ctx = document.createElement('canvas').getContext('2d');
-			ctx.canvas.width = sizeX;
-			ctx.canvas.height = sizeY;
-			console.log('clip', -offsetX, -offsetY, currSizeX, currSizeY);
-			ctx.drawImage(canvas, -offsetX, -offsetY, currSizeX, currSizeY);
-			return new this.constructor(ctx);
-		},
-
-
-
-*/
