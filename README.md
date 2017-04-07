@@ -1,1 +1,1 @@
-# PicMap
+# PaperDuck
