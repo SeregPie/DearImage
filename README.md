@@ -56,21 +56,31 @@ Returns a new instance of PaperDuck. Can also return the same instance, if no ch
 
 `.fn.flip()`
 
+Returns a new instance of PaperDuck. Can also return the same instance, if no changes were made.
+
 ---
 
 `.fn.flop()`
+
+Returns a new instance of PaperDuck. Can also return the same instance, if no changes were made.
 
 ---
 
 `.fn.rotate90()`
 
+Returns a new instance of PaperDuck. Can also return the same instance, if no changes were made.
+
 ---
 
 `.fn.rotate180()`
 
+Returns a new instance of PaperDuck. Can also return the same instance, if no changes were made.
+
 ---
 
 `.fn.rotate270()`
+
+Returns a new instance of PaperDuck. Can also return the same instance, if no changes were made.
 
 ---
 
