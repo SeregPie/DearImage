@@ -8,6 +8,12 @@ Creates a new instance of PaperDuck.
 | ---: | :--- |
 | `image` | An element to draw into the context. The value can be any canvas image source, such as an HTMLImageElement, an HTMLVideoElement, an HTMLCanvasElement or an ImageBitmap. |
 
+## dependencies
+
+*no dependencies*
+
+## static functions
+
 ---
 
 `.load(url, callback)`
@@ -17,6 +23,8 @@ Creates a new instance of PaperDuck.
 `.empty(w = 0, h = 0)`
 
 ---
+
+## prototype functions
 
 `.fn.getWidth()`
 
