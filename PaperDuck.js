@@ -169,7 +169,7 @@
 			if (sizeX === currSizeX && sizeY === currSizeY) {
 				return this;
 			}
-			if (currSizeX === 0 || sizeX === 0 || currSizeY === 0 || sizeY === 0) {
+			if (sizeX === 0 || sizeY === 0) {
 				return this.constructor.empty(sizeX, sizeY);
 			}
 			var canvas = ctx.canvas;
@@ -181,22 +181,38 @@
 		},
 
 		cropAlign: function(sizeX, sizeY, align) {
+			var currSizeX = this.getWidth();
+			var currSizeY = this.getHeight();
 			sizeX = parseInt(sizeX);
 			sizeY = parseInt(sizeY);
-			if (isNaN(sizeX) && isNaN(sizeY)) {
-				return this;
+			if (isNaN(sizeX)) {
+				sizeX = currSizeX;
+			} else {
+				sizeX = Math.min(Math.abs(sizeX), currSizeX);
+			}
+			if (isNaN(sizeY)) {
+				sizeY = currSizeY;
+			} else {
+				sizeY = Math.min(Math.abs(sizeY), currSizeY);
 			}
 			if (sizeX === 0 || sizeY === 0) {
 				return this.constructor.empty(sizeX, sizeY);
 			}
-			var currSizeX = this.getWidth();
-			var currSizeY = this.getHeight();
 			if (sizeX === currSizeX && sizeY === currSizeY) {
 				return this;
 			}
 			if (typeof align === 'string') {
-				// trim remove duplicates
-				align = align.toLowerCase().split(/[^a-z0-9]+/).sort().join(' ');
+				align = align
+					.toLowerCase()
+					.split(/[^a-z0-9]+/)
+					.sort()
+					.filter((function() {
+						var prevValue = null;
+						return function(value) {
+							return prevValue !== value && (prevValue = value);
+						};
+					})())
+					.join(' ');
 			}
 			switch (align) {
 				case 'left top':
