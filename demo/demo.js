@@ -5,7 +5,6 @@ $(function() {
 	let _runHandler = function(event, image) {
 		let {run} = event.data;
 		_runQueue.queue(next => {
-			//console.log($(this).data('code'));
 			image = run(image);
 			let canvas = image.toCanvas();
 			$(this).empty().append(canvas);
@@ -19,24 +18,29 @@ $(function() {
 	};
 
 	$('body')
-		.find('code')
+		.find('[data-eval]')
 			.replaceWith(function() {
 				let code = $(this).text();
 				let run = (new Function('image', `return image${code};`));
-				let runElement = $('<div>')
-					.addClass('o-transparency-grid-background uk-preserve-width')
-					//.data({code})
-					.on(':run', {run}, _runHandler);
-				_runElements = $(_runElements.add(runElement));
 				return $('<div>', {
 					class: 'uk-padding-small uk-flex uk-flex-column uk-flex-middle',
-					append: [$(this).clone(), runElement],
+					append: [
+						$('<code>')
+							.html($(this).html()),
+						$('<div>')
+							.addClass('o-transparency-grid uk-preserve-width')
+							.on(':run', {run}, _runHandler)
+							.each(function() {
+								_runElements = $(_runElements.add(this));
+							}),
+					],
 				});
 			})
 		.end()
-		.find('img[src]')
+		.find('[data-example]')
+			.attr('data-example', null)
 			.click(function() {
-				let image = PicMap(this);
+				let image = PaperDuck(this);
 				_run(image);
 			})
 			.one('load', function() {
