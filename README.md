@@ -18,6 +18,8 @@ Creates a new instance of PaperDuck.
 
 `.load(url, callback)`
 
+
+
 ---
 
 `.empty(w = 0, h = 0)`
@@ -90,7 +92,7 @@ Returns a new instance of PaperDuck. Can also return the same instance, if no ch
 
 ---
 
-`.fn.toImage()`
+`.fn.toImage(...args)`
 
 ---
 
@@ -102,6 +104,6 @@ Returns a new instance of PaperDuck. Can also return the same instance, if no ch
 
 ---
 
-`.fn.toDataURL()`
+`.fn.toDataURL(...args)`
 
 ---
