@@ -21,11 +21,9 @@ Creates a new instance of PaperDuck.
 ```javascript
 PaperDuck.load('/img/tree.jpg', image => {
   image = image.resize(200, '').toImage();
-  document.getElementById('container').appendChild(image);
+  document.getElementById('trees').appendChild(image);
 });
 ```
-
-
 
 ---
 
@@ -66,6 +64,8 @@ Returns a new instance of PaperDuck. Can also return the same instance, if no ch
 `.fn.scale(factor, smoothing = 1/2)`
 
 Returns a new instance of PaperDuck. Can also return the same instance, if no changes were made.
+
+[usage >>](https://seregpie.github.io/PaperDuck/#scale)
 
 ---
 
