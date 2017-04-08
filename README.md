@@ -12,7 +12,7 @@ Creates a new instance of PaperDuck.
 
 *no dependencies*
 
-## static functions
+## functions
 
 ---
 
@@ -23,8 +23,6 @@ Creates a new instance of PaperDuck.
 `.empty(w = 0, h = 0)`
 
 ---
-
-## prototype functions
 
 `.fn.getWidth()`
 
