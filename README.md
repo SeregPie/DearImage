@@ -18,6 +18,13 @@ Creates a new instance of PaperDuck.
 
 `.load(url, callback)`
 
+```javascript
+PaperDuck.load('/img/tree.jpg', image => {
+  image = image.resize(200, '').toImage();
+  document.getElementById('container').appendChild(image);
+});
+```
+
 
 
 ---
