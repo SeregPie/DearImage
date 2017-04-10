@@ -17,48 +17,47 @@ $(function() {
 		_runElements.trigger(':run', [image]);
 	};
 
-	$('body')
-		.find('[data-eval]')
-			.replaceWith(function() {
-				let code = $(this).text();
-				let run = (new Function('image', `return image${code};`));
-				return $('<div>', {
-					class: 'uk-padding-small uk-flex uk-flex-column uk-flex-middle',
-					append: [
-						$('<code>')
-							.html($(this).html()),
-						$('<div>')
-							.addClass('o-transparency-grid uk-preserve-width')
-							.on(':run', {run}, _runHandler)
-							.each(function() {
-								_runElements = $(_runElements.add(this));
-							}),
-					],
+	$('[data-eval]')
+		.replaceWith(function() {
+			let code = $(this).text();
+			let run = (new Function('image', `return image${code};`));
+			return $('<div>', {
+				class: 'uk-padding-small uk-flex uk-flex-column uk-flex-middle',
+				append: [
+					$('<code>')
+						.html($(this).html()),
+					$('<div>')
+						.addClass('o-transparency-grid uk-preserve-width')
+						.on(':run', {run}, _runHandler)
+						.each(function() {
+							_runElements = $(_runElements.add(this));
+						}),
+				],
+			});
+		});
+
+	$('[data-example]')
+		.attr('data-example', null)
+		.each(function() {
+			PaperDuck.load(this, image => {
+				$(this).click(function() {
+					_run(image);
 				});
-			})
-		.end()
-		.find('[data-example]')
-			.attr('data-example', null)
-			.click(function() {
-				let image = PaperDuck(this);
-				_run(image);
-			})
-			.one('load', function() {
-				$(this)
-					.parent()
-					.find('.uk-overlay')
-					.text(`${this.naturalWidth}x${this.naturalHeight}`);
-			})
-			.first()
-				.one('load', function() {
-					$(this).click();
-				})
-			.end()
-			.each(function() {
-				if (this.complete) {
-					$(this).triggerHandler('load');
+				$(this).parent().find('.uk-overlay').text(`${image.getWidth()}x${image.getHeight()}`);
+				if (!_runQueue.queue().length) {
+					_run(image);
 				}
-			})
-		.end();
+			});
+		});
+
+	$('#loadFromURL').click(function() {
+		UIkit.modal.prompt('URL').then(url => {
+			PaperDuck.load(url, _run);
+		});
+	});
+
+	$('#loadFromFile').change(function() {
+		PaperDuck.load(this, _run);
+	});
 
 });
