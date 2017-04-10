@@ -27,7 +27,7 @@
 			<div class="uk-visible@xl uk-position-medium uk-position-top-right uk-width-small">
 				<div uk-sticky="offset: 200">
 					<ul class="uk-nav uk-nav-default" uk-scrollspy-nav="closest: li; scroll: true">
-						<li><a href="#examples">examples</a></li>
+						<li><a href="#load">load</a></li>
 						<li class="uk-nav-divider"></li>
 						<li><a href="#crop">crop</a></li>
 						<li><a href="#cropAlign">cropAlign</a></li>
@@ -43,8 +43,8 @@
 			<div class="uk-container">
 				<p>This is a demonstration page for <strong>PaperDuck</strong> library. Documentation and source code are available on <a href="https://github.com/SeregPie/PaperDuck">GitHub</a>.</p>
 				<hr/>
-				<h2 id="examples">examples</h2>
-				<p>Please click on an image to see live examples.</p>
+				<h2 id="load">load</h2>
+				<p>Upload an image via <a id="loadFromURL">URL</a> or from your local <a class="uk-text-baseline" uk-form-custom><input type="file" id="loadFromFile"/><span>file</span></a> system or just click on one of the images below.</p>
 				<div class="uk-flex uk-flex-between">
 					<div>
 						<div class="uk-inline-clip uk-transition-toggle" style="cursor: pointer;">
@@ -160,17 +160,17 @@
 				<hr/>
 				<h2 id="flip_flop">flip &amp; flop</h2>
 				<div class="uk-flex uk-flex-wrap uk-flex-around">
-					<code data-eval>.resize(200, '')</code>
-					<code data-eval><span hidden>.resize(200, '')</span>.flip()</code>
-					<code data-eval><span hidden>.resize(200, '')</span>.flop()</code>
-					<code data-eval><span hidden>.resize(200, '')</span>.flip().flop()</code>
+					<code data-eval>.scaleMin(200, 200)</code>
+					<code data-eval><span hidden>.scaleMin(200, 200)</span>.flip()</code>
+					<code data-eval><span hidden>.scaleMin(200, 200)</span>.flop()</code>
+					<code data-eval><span hidden>.scaleMin(200, 200)</span>.flip().flop()</code>
 				</div>
 				<h2 id="rotate">rotate</h2>
 				<div class="uk-flex uk-flex-wrap uk-flex-around">
-					<code data-eval>.resize(200, '')</code>
-					<code data-eval><span hidden>.resize(200, '')</span>.rotate90()</code>
-					<code data-eval><span hidden>.resize(200, '')</span>.rotate180()</code>
-					<code data-eval><span hidden>.resize(200, '')</span>.rotate270()</code>
+					<code data-eval>.scaleMin(200, 200)</code>
+					<code data-eval><span hidden>.scaleMin(200, 200)</span>.rotate90()</code>
+					<code data-eval><span hidden>.scaleMin(200, 200)</span>.rotate180()</code>
+					<code data-eval><span hidden>.scaleMin(200, 200)</span>.rotate270()</code>
 				</div>
 			</div>
 		</div>

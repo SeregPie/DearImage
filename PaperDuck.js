@@ -1,5 +1,7 @@
 (function() {
 
+	var URL = window.URL || window.webkitURL;
+
 	var PaperDuck = function Class(ctx) {
 		if (!(this instanceof Class)) {
 			return new Class((function(value) {
@@ -19,13 +21,72 @@
 		this._ctx = ctx;
 	};
 
-	PaperDuck.load = function(url, callback) {
-		var image = new Image();
-		image.setAttribute('crossOrigin', 'anonymous');
-		image.onload = function() {
-			callback(this(image));
-		}.bind(this);
-		image.src = url;
+	PaperDuck.load = function(source, callback) {
+		if (source) {
+			switch (typeof source) {
+				case 'object': {
+					if (source instanceof HTMLImageElement) {
+						if (source.complete) {
+							callback(this(source));
+						} else {
+							source.addEventListener('load', function() {
+								callback(this(source));
+							}.bind(this));
+						}
+					} else
+					if (source instanceof HTMLInputElement) {
+						switch (source.type) {
+							case 'file': {
+								this.load(source.files, callback);
+								break;
+							}
+							default: {
+								this.load(source.value, callback);
+							}
+						}
+					} else
+					if (source instanceof Uint8Array) {
+						this.load(new Blob([source]), callback);
+					} else
+					if (source instanceof ArrayBuffer) {
+						this.load(new Uint8Array(source), callback);
+					} else
+					if (source instanceof File) {
+						var reader  = new FileReader();
+						reader.readAsDataURL(source);
+						this.load(reader, callback);
+					} else
+					if (source instanceof Blob) {
+						var urlObject = URL.createObjectURL(source);
+						var image = new Image();
+						image.src = urlObject;
+						callback(this(image));
+						URL.revokeObjectURL(urlObject);
+					} else
+					if (source instanceof FileReader) {
+						if (source.readyState > 1) {
+							this.load(source.result, callback);
+						} else {
+							source.addEventListener('load', function() {
+								this.load(source.result, callback);
+							}.bind(this));
+						}
+					} else {
+						if (typeof source.length == 'number' && (source.length - 1) in source) {
+							this.load(source[0], callback);
+						}
+					}
+					break;
+				}
+				case 'string': {
+					var image = new Image();
+					image.setAttribute('crossOrigin', 'anonymous');
+					image.src = source;
+					this.load(image, callback);
+					break;
+				}
+			}
+		}
 	};
 
 	PaperDuck.empty = function(sizeX, sizeY) {
@@ -181,10 +242,10 @@
 		},
 
 		cropAlign: function(sizeX, sizeY, align) {
-			var currSizeX = this.getWidth();
-			var currSizeY = this.getHeight();
 			sizeX = parseInt(sizeX);
 			sizeY = parseInt(sizeY);
+			var currSizeX = this.getWidth();
+			var currSizeY = this.getHeight();
 			if (isNaN(sizeX)) {
 				sizeX = currSizeX;
 			} else {
@@ -201,19 +262,17 @@
 			if (sizeX === currSizeX && sizeY === currSizeY) {
 				return this;
 			}
-			if (typeof align === 'string') {
-				align = align
-					.toLowerCase()
-					.split(/[^a-z0-9]+/)
-					.sort()
-					.filter((function() {
-						var prevValue = null;
-						return function(value) {
-							return prevValue !== value && (prevValue = value);
-						};
-					})())
-					.join(' ');
-			}
+			align = (''+align)
+				.toLowerCase()
+				.split(/[^a-z0-9]+/)
+				.sort()
+				.filter((function() {
+					var prevValue = null;
+					return function(value) {
+						return prevValue !== value && (prevValue = value);
+					};
+				})())
+				.join(' ');
 			switch (align) {
 				case 'left top':
 					return this.crop(0, 0, sizeX, sizeY);
