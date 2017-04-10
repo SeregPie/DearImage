@@ -23,113 +23,155 @@
 			</div>
 		</nav>
 		<div class="uk-margin-top"></div>
-		<div class="uk-container">
-			<p>This is a demonstration page for <strong>PaperDuck</strong> library. Documentation and source code are available on <a href="https://github.com/SeregPie/PaperDuck">GitHub</a>.</p>
-			<hr/>
-			<p>Please click on an image to see live examples.</p>
-			<div class="uk-flex uk-flex-between">
-				<div>
-					<div class="uk-inline-clip uk-transition-toggle" style="cursor: pointer;">
-						<img class="uk-height-medium uk-transition-scale-up uk-transition-opaque" src="demo/example-1.jpg" data-example/>
-						<div class="uk-transition-slide-bottom uk-position-bottom uk-overlay uk-overlay-primary uk-padding-remove uk-text-center"></div>
+		<div class="uk-position-relative">
+			<div class="uk-visible@xl uk-position-medium uk-position-top-right uk-width-small">
+				<div uk-sticky="offset: 200">
+					<ul class="uk-nav uk-nav-default" uk-scrollspy-nav="closest: li; scroll: true">
+						<li><a href="#examples">examples</a></li>
+						<li class="uk-nav-divider"></li>
+						<li><a href="#crop">crop</a></li>
+						<li><a href="#cropAlign">cropAlign</a></li>
+						<li><a href="#resize">resize</a></li>
+						<li><a href="#scale">scale</a></li>
+						<li><a href="#scaleMin_scaleMax">scaleMin &amp; scaleMax</a></li>
+						<li><a href="#scaleCrop">scaleCrop</a></li>
+						<li><a href="#flip_flop">flip &amp; flop</a></li>
+						<li><a href="#rotate">rotate</a></li>
+					</ul>
+				</div>
+			</div>
+			<div class="uk-container">
+				<p>This is a demonstration page for <strong>PaperDuck</strong> library. Documentation and source code are available on <a href="https://github.com/SeregPie/PaperDuck">GitHub</a>.</p>
+				<hr/>
+				<h2 id="examples">examples</h2>
+				<p>Please click on an image to see live examples.</p>
+				<div class="uk-flex uk-flex-between">
+					<div>
+						<div class="uk-inline-clip uk-transition-toggle" style="cursor: pointer;">
+							<img class="uk-height-medium uk-transition-scale-up uk-transition-opaque" src="demo/example-1.jpg" data-example/>
+							<div class="uk-transition-slide-bottom uk-position-bottom uk-overlay uk-overlay-primary uk-padding-remove uk-text-center"></div>
+						</div>
+					</div>
+					<div>
+						<div class="uk-inline-clip uk-transition-toggle" style="cursor: pointer;">
+							<img class="uk-height-medium uk-transition-scale-up uk-transition-opaque" src="demo/example-2.jpg" data-example/>
+							<div class="uk-transition-slide-bottom uk-position-bottom uk-overlay uk-overlay-primary uk-padding-remove uk-text-center"></div>
+						</div>
+					</div>
+					<div>
+						<div class="uk-inline-clip uk-transition-toggle" style="cursor: pointer;">
+							<img class="uk-height-medium uk-transition-scale-up uk-transition-opaque" src="demo/example-3.png" data-example/>
+							<div class="uk-transition-slide-bottom uk-position-bottom uk-overlay uk-overlay-primary uk-padding-remove uk-text-center"></div>
+						</div>
 					</div>
 				</div>
-				<div>
-					<div class="uk-inline-clip uk-transition-toggle" style="cursor: pointer;">
-						<img class="uk-height-medium uk-transition-scale-up uk-transition-opaque" src="demo/example-2.jpg" data-example/>
-						<div class="uk-transition-slide-bottom uk-position-bottom uk-overlay uk-overlay-primary uk-padding-remove uk-text-center"></div>
+				<hr/>
+				<h2 id="crop">crop</h2>
+				<div class="uk-flex uk-flex-between uk-flex-top">
+					<code data-eval>.crop(0, 200, 300, 200)</code>
+					<code data-eval>.crop(200, 0, 200, '')</code>
+					<code data-eval>.crop(300, -200, 400, -400)</code>
+				</div>
+				<hr/>
+				<h2 id="cropAlign">cropAlign</h2>
+				<div class="uk-flex uk-flex-wrap uk-flex-around">
+					<code data-eval>.cropAlign(300, 300, 'top left')</code>
+					<code data-eval>.cropAlign(300, 300, 'top center')</code>
+					<code data-eval>.cropAlign(300, 300, 'top right')</code>
+				</div>
+				<div class="uk-flex uk-flex-wrap uk-flex-around">
+					<code data-eval>.cropAlign(300, 300, 'center left')</code>
+					<code data-eval>.cropAlign(300, 300, 'center')</code>
+					<code data-eval>.cropAlign(300, 300, 'center right')</code>
+				</div>
+				<div class="uk-flex uk-flex-wrap uk-flex-around">
+					<code data-eval>.cropAlign(300, 300, 'bottom left')</code>
+					<code data-eval>.cropAlign(300, 300, 'bottom center')</code>
+					<code data-eval>.cropAlign(300, 300, 'bottom right')</code>
+				</div>
+				<hr/>
+				<h2 id="resize">resize</h2>
+				<div class="uk-flex uk-flex-around">
+					<code data-eval>.resize(100, 400, 0)</code>
+					<code data-eval>.resize(100, 400, 1/2)</code>
+					<code data-eval>.resize('', 400, 1/2)</code>
+				</div>
+				<div class="uk-flex uk-flex-column uk-flex-around">
+					<code data-eval>.resize(400, 100, 0)</code>
+					<code data-eval>.resize(400, 100, 1/2)</code>
+					<code data-eval>.resize(400, '', 1/2)</code>
+				</div>
+				<hr/>
+				<h2 id="scale">scale</h2>
+				<div class="uk-flex uk-flex-wrap uk-flex-around">
+					<div class="uk-flex uk-flex-column uk-flex-around">
+						<code data-eval>.scale(1/5, 0)</code>
+						<code data-eval>.scale(1/5, 1/2)</code>
+					</div>
+					<div class="uk-flex uk-flex-column uk-flex-around">
+						<code data-eval>.scale(1/10, 0)</code>
+						<code data-eval>.scale(1/10, 1/2)</code>
+					</div>
+					<div class="uk-flex uk-flex-column uk-flex-around">
+						<code data-eval>.scale(1/20, 0)</code>
+						<code data-eval>.scale(1/20, 1/2)</code>
 					</div>
 				</div>
-				<div>
-					<div class="uk-inline-clip uk-transition-toggle" style="cursor: pointer;">
-						<img class="uk-height-medium uk-transition-scale-up uk-transition-opaque" src="demo/example-3.png" data-example/>
-						<div class="uk-transition-slide-bottom uk-position-bottom uk-overlay uk-overlay-primary uk-padding-remove uk-text-center"></div>
+				<hr/>
+				<div class="uk-flex uk-flex-wrap uk-flex-around uk-flex-top">
+					<div>
+						<code data-eval>.resize(100, '')</code>
+					</div>
+					<div class="uk-flex uk-flex-column">
+						<code data-eval><span hidden>.resize(100, '')</span>.scale(3, 0)</code>
+						<code data-eval><span hidden>.resize(100, '')</span>.scale(3, 1/2)</code>
+						<code data-eval><span hidden>.resize(100, '')</span>.scale(3, 8/9)</code>
+					</div>
+					<div class="uk-flex uk-flex-column">
+						<code data-eval><span hidden>.resize(100, '')</span>.scale(6, 0)</code>
+						<code data-eval><span hidden>.resize(100, '')</span>.scale(6, 1/2)</code>
+						<code data-eval><span hidden>.resize(100, '')</span>.scale(6, 8/9)</code>
 					</div>
 				</div>
-			</div>
-			<hr/>
-			<h2>crop</h2>
-			<div class="uk-flex uk-flex-between uk-flex-top">
-				<code data-eval>.crop(0, 200, 300, 200)</code>
-				<code data-eval>.crop(200, 0, 200, '')</code>
-				<code data-eval>.crop(300, -200, 400, -400)</code>
-			</div>
-			<hr/>
-			<h2>cropAlign</h2>
-			<div class="uk-flex uk-flex-wrap uk-flex-around">
-				<code data-eval>.cropAlign(300, 300, 'top left')</code>
-				<code data-eval>.cropAlign(300, 300, 'top center')</code>
-				<code data-eval>.cropAlign(300, 300, 'top right')</code>
-			</div>
-			<div class="uk-flex uk-flex-wrap uk-flex-around">
-				<code data-eval>.cropAlign(300, 300, 'center left')</code>
-				<code data-eval>.cropAlign(300, 300, 'center')</code>
-				<code data-eval>.cropAlign(300, 300, 'center right')</code>
-			</div>
-			<div class="uk-flex uk-flex-wrap uk-flex-around">
-				<code data-eval>.cropAlign(300, 300, 'bottom left')</code>
-				<code data-eval>.cropAlign(300, 300, 'bottom center')</code>
-				<code data-eval>.cropAlign(300, 300, 'bottom right')</code>
-			</div>
-			<hr/>
-			<h2>resize</h2>
-			<div class="uk-flex uk-flex-around">
-				<code data-eval>.resize(100, 400, 0)</code>
-				<code data-eval>.resize(100, 400, 1/2)</code>
-				<code data-eval>.resize('', 400, 1/2)</code>
-			</div>
-			<div class="uk-flex uk-flex-column uk-flex-around">
-				<code data-eval>.resize(400, 100, 0)</code>
-				<code data-eval>.resize(400, 100, 1/2)</code>
-				<code data-eval>.resize(400, '', 1/2)</code>
-			</div>
-			<hr/>
-			<h2>scale</h2>
-			<div class="uk-flex uk-flex-wrap uk-flex-around">
-				<div class="uk-flex uk-flex-column uk-flex-around">
-					<code data-eval>.scale(1/5, 0)</code>
-					<code data-eval>.scale(1/5, 1/2)</code>
+				<hr/>
+				<h2 id="scaleMin_scaleMax">scaleMin &amp; scaleMax</h2>
+				<div class="uk-flex uk-flex-wrap uk-flex-around">
+					<code data-eval>.scaleMin(100, 100)</code>
+					<code data-eval>.scaleMax(100, 100)</code>
+					<code data-eval>.scaleMin(200, 200)</code>
+					<code data-eval>.scaleMax(200, 200)</code>
 				</div>
-				<div class="uk-flex uk-flex-column uk-flex-around">
-					<code data-eval>.scale(1/10, 0)</code>
-					<code data-eval>.scale(1/10, 1/2)</code>
+				<hr/>
+				<h2 id="scaleCrop">scaleCrop</h2>
+				<div class="uk-flex uk-flex-wrap uk-flex-around uk-flex-middle">
+					<div class="uk-flex uk-flex-column">
+						<code data-eval>.scaleCrop(200, 200)</code>
+						<code data-eval>.scaleCrop(200, 200, 'top left')</code>
+					</div>
+					<div class="uk-flex uk-flex-column">
+						<code data-eval>.scaleCrop(300, 100)</code>
+						<code data-eval>.scaleCrop(300, 100, 'top left')</code>
+					</div>
+					<div class="uk-flex">
+						<code data-eval>.scaleCrop(100, 300)</code>
+						<code data-eval>.scaleCrop(100, 300, 'top left')</code>
+					</div>
 				</div>
-				<div class="uk-flex uk-flex-column uk-flex-around">
-					<code data-eval>.scale(1/20, 0)</code>
-					<code data-eval>.scale(1/20, 1/2)</code>
+				<hr/>
+				<h2 id="flip_flop">flip &amp; flop</h2>
+				<div class="uk-flex uk-flex-wrap uk-flex-around">
+					<code data-eval>.resize(200, '')</code>
+					<code data-eval><span hidden>.resize(200, '')</span>.flip()</code>
+					<code data-eval><span hidden>.resize(200, '')</span>.flop()</code>
+					<code data-eval><span hidden>.resize(200, '')</span>.flip().flop()</code>
 				</div>
-			</div>
-			<hr/>
-			<div class="uk-flex uk-flex-wrap uk-flex-around uk-flex-top">
-				<div>
-					<code data-eval>.resize(100, '')</code>
+				<h2 id="rotate">rotate</h2>
+				<div class="uk-flex uk-flex-wrap uk-flex-around">
+					<code data-eval>.resize(200, '')</code>
+					<code data-eval><span hidden>.resize(200, '')</span>.rotate90()</code>
+					<code data-eval><span hidden>.resize(200, '')</span>.rotate180()</code>
+					<code data-eval><span hidden>.resize(200, '')</span>.rotate270()</code>
 				</div>
-				<div class="uk-flex uk-flex-column">
-					<code data-eval><span hidden>.resize(100, '')</span>.scale(3, 0)</code>
-					<code data-eval><span hidden>.resize(100, '')</span>.scale(3, 1/2)</code>
-					<code data-eval><span hidden>.resize(100, '')</span>.scale(3, 8/9)</code>
-				</div>
-				<div class="uk-flex uk-flex-column">
-					<code data-eval><span hidden>.resize(100, '')</span>.scale(6, 0)</code>
-					<code data-eval><span hidden>.resize(100, '')</span>.scale(6, 1/2)</code>
-					<code data-eval><span hidden>.resize(100, '')</span>.scale(6, 8/9)</code>
-				</div>
-			</div>
-			<hr/>
-			<h2>flip &amp; flop</h2>
-			<div class="uk-flex uk-flex-wrap uk-flex-around">
-				<code data-eval>.resize(200, '')</code>
-				<code data-eval><span hidden>.resize(200, '')</span>.flip()</code>
-				<code data-eval><span hidden>.resize(200, '')</span>.flop()</code>
-				<code data-eval><span hidden>.resize(200, '')</span>.flip().flop()</code>
-			</div>
-			<hr/>
-			<h2>rotate</h2>
-			<div class="uk-flex uk-flex-wrap uk-flex-around">
-				<code data-eval>.resize(200, '')</code>
-				<code data-eval><span hidden>.resize(200, '')</span>.rotate90()</code>
-				<code data-eval><span hidden>.resize(200, '')</span>.rotate180()</code>
-				<code data-eval><span hidden>.resize(200, '')</span>.rotate270()</code>
 			</div>
 		</div>
 	</body>

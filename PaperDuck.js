@@ -88,7 +88,7 @@
 			if (sizeX === currSizeX && sizeY === currSizeY) {
 				return this;
 			}
-			if (currSizeX === 0 || sizeX === 0 || currSizeY === 0 || sizeY === 0) {
+			if (currSizeX === 0 || currSizeY === 0 || sizeX === 0 || sizeY === 0) {
 				return this.constructor.empty(sizeX, sizeY);
 			}
 			smoothing = parseFloat(smoothing);
@@ -244,6 +244,64 @@
 			return this.resize(this.getWidth() * factor, this.getHeight() * factor, smoothing);
 		},
 
+		scaleMin: function(sizeX, sizeY, smoothing) {
+			sizeX = parseInt(sizeX);
+			sizeY = parseInt(sizeY);
+			var currSizeX = this.getWidth();
+			var currSizeY = this.getHeight();
+			if (isNaN(sizeX)) {
+				sizeX = currSizeX;
+			} else {
+				sizeX = Math.abs(sizeX);
+			}
+			if (isNaN(sizeY)) {
+				sizeY = currSizeY;
+			} else {
+				sizeY = Math.abs(sizeY);
+			}
+			if (sizeX === currSizeX && sizeY === currSizeY) {
+				return this;
+			}
+			if (currSizeX === 0 || currSizeY === 0 || sizeX === 0 || sizeY === 0) {
+				return this.constructor.empty(sizeX, sizeY);
+			}
+			var scaleFactorX = sizeX / currSizeX;
+			var scaleFactorY = sizeY / currSizeY;
+			var scaleFactor = Math.min(scaleFactorX, scaleFactorY);
+			return this.scale(scaleFactor, smoothing);
+		},
+
+		scaleMax: function(sizeX, sizeY, smoothing) {
+			sizeX = parseInt(sizeX);
+			sizeY = parseInt(sizeY);
+			var currSizeX = this.getWidth();
+			var currSizeY = this.getHeight();
+			if (isNaN(sizeX)) {
+				sizeX = currSizeX;
+			} else {
+				sizeX = Math.abs(sizeX);
+			}
+			if (isNaN(sizeY)) {
+				sizeY = currSizeY;
+			} else {
+				sizeY = Math.abs(sizeY);
+			}
+			if (sizeX === currSizeX && sizeY === currSizeY) {
+				return this;
+			}
+			if (currSizeX === 0 || currSizeY === 0 || sizeX === 0 || sizeY === 0) {
+				return this.constructor.empty(sizeX, sizeY);
+			}
+			var scaleFactorX = sizeX / currSizeX;
+			var scaleFactorY = sizeY / currSizeY;
+			var scaleFactor = Math.max(scaleFactorX, scaleFactorY);
+			return this.scale(scaleFactor, smoothing);
+		},
+
+		scaleCrop: function(sizeX, sizeY, align, smoothing) {
+			return this.scaleMax(sizeX, sizeY, smoothing).cropAlign(sizeX, sizeY, align);
+		},
+
 		flip: function() {
 			var canvas = this._ctx.canvas;
 			var currSizeX = canvas.width;
@@ -281,6 +339,9 @@
 			var currSizeX = canvas.width;
 			var currSizeY = canvas.height;
 			if (currSizeX === 0 || currSizeY === 0) {
+				if (currSizeX === currSizeY) {
+					return this;
+				}
 				return this.constructor.empty(currSizeY, currSizeX);
 			}
 			var ctx = document.createElement('canvas').getContext('2d');
@@ -313,6 +374,9 @@
 			var currSizeX = canvas.width;
 			var currSizeY = canvas.height;
 			if (currSizeX === 0 || currSizeY === 0) {
+				if (currSizeX === currSizeY) {
+					return this;
+				}
 				return this.constructor.empty(currSizeY, currSizeX);
 			}
 			var ctx = document.createElement('canvas').getContext('2d');
