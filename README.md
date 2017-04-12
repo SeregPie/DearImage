@@ -2,7 +2,7 @@
 
 Manipulates images in the browser via native canvas functions.
 
-[demo](https://seregpie.github.io/PaperDuck/)
+Try out the [demo](https://seregpie.github.io/PaperDuck/)!
 
 ## dependencies
 
