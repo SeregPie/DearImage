@@ -20,7 +20,7 @@ Creates a new instance of PaperDuck.
 
 ---
 
-`.load(url, callback)`
+######`.load(url, callback)`
 
 ```javascript
 PaperDuck.load('/img/tree.jpg', instance => {
@@ -31,7 +31,7 @@ PaperDuck.load('/img/tree.jpg', instance => {
 
 ---
 
-`.blank(w = 0, h = 0)`
+######`.blank(w = 0, h = 0)`
 
 Creates a PaperDuck instance with a blank transparent image of the given size.
 
@@ -44,7 +44,7 @@ Returns a new instance of PaperDuck.
 
 ---
 
-`.fn.getWidth()`
+######`.fn.getWidth()`
 
 Returns the width of the image.
 
