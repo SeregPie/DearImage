@@ -72,7 +72,7 @@ Resizes the image to the given size.
 
 | argument | description |
 | ---: | :--- |
-| `w` | Th width of the resized image. If the value is not a number, the width scales proportionally to the height. |
+| `w` | The width of the resized image. If the value is not a number, the width scales proportionally to the height. |
 | `h` | The height of the resized image. If the value is not a number, the height scales proportionally to the width. |
 | `smoothing` | The smoothing factor. The value must be a float between 0 (inclusive) and 1 (exclusive). 0 means no smoothing. |
 
@@ -102,7 +102,7 @@ Resizes the image proportionally by the given factor.
 
 | argument | description |
 | ---: | :--- |
-| `factor` | The scale factor. If the value is greater than 1, the scale is an enlargement. If the value is between 0 and 1, the scale is a reduction. |
+| `factor` | The scale factor. If the value is greater than 1, the image is an enlargement. If the value is between 0 and 1, the image is a reduction. |
 | `smoothing` | The smoothing factor. The value must be a float between 0 (inclusive) and 1 (exclusive). 0 means no smoothing. |
 
 Returns a new instance of PaperDuck. Can also return the same instance, if no changes were made.
