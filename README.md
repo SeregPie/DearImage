@@ -68,8 +68,8 @@ Resizes the image to the given size.
 
 | argument | description |
 | ---: | :--- |
-| `w` | Th width of the resized image. If the value is not a number, then the width is resized proportionally to the height. |
-| `h` | The height of the resized image. If the value is not a number, then the height is resized proportionally to the width. |
+| `w` | Th width of the resized image. If the value is not a number, the width scales proportionally to the height. |
+| `h` | The height of the resized image. If the value is not a number, the height scales proportionally to the width. |
 | `smoothing` | The smoothing factor. The value must be a float between 0 (inclusive) and 1 (exclusive). 0 means no smoothing. |
 
 Returns a new instance of PaperDuck. Can also return the same instance, if no changes were made.
@@ -98,7 +98,7 @@ Resizes the image proportionally by the given factor.
 
 | argument | description |
 | ---: | :--- |
-| `factor` | The scale factor. |
+| `factor` | The scale factor. If the value is greater than 1, the scale is an enlargement. If the value is between 0 and 1, the scale is a reduction. |
 | `smoothing` | The smoothing factor. The value must be a float between 0 (inclusive) and 1 (exclusive). 0 means no smoothing. |
 
 Returns a new instance of PaperDuck. Can also return the same instance, if no changes were made.
@@ -111,31 +111,61 @@ let canvas = PaperDuck(image).scale(4).toCanvas();
 
 `.fn.flip()`
 
+Flips the image vertically.
+
 Returns a new instance of PaperDuck. Can also return the same instance, if no changes were made.
+
+```javascript
+let canvas = PaperDuck(image).flip().toCanvas();
+```
 
 ---
 
 `.fn.flop()`
 
+Flops the image horizontally.
+
 Returns a new instance of PaperDuck. Can also return the same instance, if no changes were made.
+
+```javascript
+let canvas = PaperDuck(image).flop().toCanvas();
+```
 
 ---
 
 `.fn.rotate90()`
 
+Rotates the image by 90 degrees clockwise.
+
 Returns a new instance of PaperDuck. Can also return the same instance, if no changes were made.
+
+```javascript
+let canvas = PaperDuck(image).rotate90().toCanvas();
+```
 
 ---
 
 `.fn.rotate180()`
 
+Rotates the image by 180 degrees.
+
 Returns a new instance of PaperDuck. Can also return the same instance, if no changes were made.
+
+```javascript
+let canvas = PaperDuck(image).rotate180().toCanvas();
+```
 
 ---
 
 `.fn.rotate270()`
 
+Rotates the image by 270 degrees clockwise.
+
 Returns a new instance of PaperDuck. Can also return the same instance, if no changes were made.
+
+```javascript
+let canvas = PaperDuck(image).rotate270().toCanvas();
+```
 
 ---
 
