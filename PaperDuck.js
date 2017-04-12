@@ -76,7 +76,7 @@
 							this.load(source[0], callback);
 						}
 					}
-					break;
+					return callback(this(source));
 				}
 				case 'string': {
 					var image = new Image();
