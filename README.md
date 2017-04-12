@@ -19,15 +19,24 @@ Creates a new instance of PaperDuck.
 `.load(url, callback)`
 
 ```javascript
-PaperDuck.load('/img/tree.jpg', image => {
-  image = image.resize(200, '').toImage();
-  document.getElementById('trees').appendChild(image);
+PaperDuck.load('/img/tree.jpg', instance => {
+  let canvas = instance.resize(200, '').toCanvas();
+  document.getElementById('trees').appendChild(canvas);
 });
 ```
 
 ---
 
-`.empty(w = 0, h = 0)`
+`.blank(w = 0, h = 0)`
+
+Creates a PaperDuck instance with a blank transparent image of the given size.
+
+| argument | description |
+| ---: | :--- |
+| `w` | The width of the image. |
+| `h` | The height of the image. |
+
+Returns a new instance of PaperDuck.
 
 ---
 
@@ -35,17 +44,39 @@ PaperDuck.load('/img/tree.jpg', image => {
 
 Returns the width of the image.
 
+```javascript
+let instance = PaperDuck.blank(256, 128);
+console.log(instance.getWidth()); // => 256
+```
+
 ---
 
 `.fn.getHeight()`
 
 Returns the height of the image.
 
+```javascript
+let instance = PaperDuck.blank(256, 128);
+console.log(instance.getHeight()); // => 128
+```
+
 ---
 
 `.fn.resize(w = 'auto', h = 'auto', smoothing = 1/2)`
 
+Resizes the image to the given size.
+
+| argument | description |
+| ---: | :--- |
+| `w` | Th width of the resized image. If the value is not a number, then the width is resized proportionally to the height. |
+| `h` | The height of the resized image. If the value is not a number, then the height is resized proportionally to the width. |
+| `smoothing` | The smoothing factor. The value must be a float between 0 (inclusive) and 1 (exclusive). 0 means no smoothing. |
+
 Returns a new instance of PaperDuck. Can also return the same instance, if no changes were made.
+
+```javascript
+let canvas = PaperDuck(image).resize('', 512).toCanvas();
+```
 
 ---
 
@@ -63,9 +94,18 @@ Returns a new instance of PaperDuck. Can also return the same instance, if no ch
 
 `.fn.scale(factor, smoothing = 1/2)`
 
+Resizes the image proportionally by the given factor.
+
+| argument | description |
+| ---: | :--- |
+| `factor` | The scale factor. |
+| `smoothing` | The smoothing factor. The value must be a float between 0 (inclusive) and 1 (exclusive). 0 means no smoothing. |
+
 Returns a new instance of PaperDuck. Can also return the same instance, if no changes were made.
 
-[usage >>](https://seregpie.github.io/PaperDuck/#scale)
+```javascript
+let canvas = PaperDuck(image).scale(4).toCanvas();
+```
 
 ---
 
