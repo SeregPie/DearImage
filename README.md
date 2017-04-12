@@ -1,5 +1,15 @@
 # PaperDuck
 
+Manipulates images in the browser via native canvas functions.
+
+[demo](https://seregpie.github.io/PaperDuck/)
+
+## dependencies
+
+*no dependencies*
+
+## functions
+
 `PaperDuck(image)`
 
 Creates a new instance of PaperDuck.
@@ -7,12 +17,6 @@ Creates a new instance of PaperDuck.
 | argument | description |
 | ---: | :--- |
 | `image` | An element to draw into the context. The value can be any canvas image source, such as an HTMLImageElement, an HTMLVideoElement, an HTMLCanvasElement or an ImageBitmap. |
-
-## dependencies
-
-*no dependencies*
-
-## functions
 
 ---
 
