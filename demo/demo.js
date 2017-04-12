@@ -1,63 +1,80 @@
 $(function() {
 
-	let _runQueue = $({});
-	let _runElements = $();
-	let _runHandler = function(event, image) {
-		let {run} = event.data;
-		_runQueue.queue(next => {
-			image = run(image);
-			let canvas = image.toCanvas();
-			$(this).empty().append(canvas);
-			setTimeout(next, 1);
-		});
-		return false;
-	};
-	let _run = function(image) {
-		_runQueue.clearQueue();
-		_runElements.trigger(':run', [image]);
+	const demo = {
+		_queue: $({}),
+		_elements: new Map(),
+
+		addElement(element, code) {
+			let run = (new Function('image', `return image${code};`));
+			this._elements.set(element, run);
+		},
+
+		run(image) {
+			PaperDuck.load(image, image => {
+				this._queue.clearQueue();
+				this._elements.forEach((run, element) => {
+					this._queue.queue(next => {
+						let canvas = run(image).toCanvas();
+						$(element).empty().append(canvas);
+						setTimeout(next, 1);
+					});
+				});
+			});
+		},
+
+		isRunning(image) {
+			return this._queue.queue().length > 0;
+		},
 	};
 
-	$('[data-eval]')
+	$('.run')
 		.replaceWith(function() {
-			let code = $(this).text();
-			let run = (new Function('image', `return image${code};`));
+			let text = $(this).text();
+			let html = $(this).html();
 			return $('<div>', {
 				class: 'uk-padding-small uk-flex uk-flex-column uk-flex-middle',
 				append: [
-					$('<code>')
-						.html($(this).html()),
-					$('<div>')
-						.addClass('o-transparency-grid uk-preserve-width')
-						.on(':run', {run}, _runHandler)
-						.each(function() {
-							_runElements = $(_runElements.add(this));
-						}),
+					$('<code>', {html}),
+					$('<div>', {
+						class: 'o-transparency-grid uk-preserve-width',
+					}).each(function() {
+						demo.addElement(this, text);
+					})
 				],
 			});
 		});
 
-	$('[data-example]')
-		.attr('data-example', null)
+	$('.runFromImage')
+		.removeClass('runFromImage')
 		.each(function() {
 			PaperDuck.load(this, image => {
 				$(this).click(function() {
-					_run(image);
+					demo.run(image);
 				});
 				$(this).parent().find('.uk-overlay').text(`${image.getWidth()}x${image.getHeight()}`);
-				if (!_runQueue.queue().length) {
-					_run(image);
+				if (!demo.isRunning()) {
+					demo.run(image);
 				}
 			});
 		});
 
-	$('#loadFromURL').click(function() {
-		UIkit.modal.prompt('URL').then(url => {
-			PaperDuck.load(url, _run);
+	$('.runFromURL')
+		.removeClass('runFromURL')
+		.click(function() {
+			UIkit.modal.prompt('URL').then(url => {
+				demo.run(url);
+			});
 		});
-	});
 
-	$('#loadFromFile').change(function() {
-		PaperDuck.load(this, _run);
-	});
+	$('.runFromFile')
+		.removeClass('runFromFile')
+		.click(function() {
+			$('<input>', {
+				type: 'file',
+				change: function() {
+					demo.run(this);
+				},
+			}).click();
+		});
 
 });
