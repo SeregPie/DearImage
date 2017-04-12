@@ -18,7 +18,7 @@ Creates a new instance of PaperDuck.
 | ---: | :--- |
 | `image` | An element to draw into the context. The value can be any canvas image source, such as an HTMLImageElement, an HTMLVideoElement, an HTMLCanvasElement or an ImageBitmap. |
 
-### .load
+---
 
 `.load(url, callback)`
 
@@ -29,7 +29,7 @@ PaperDuck.load('/img/tree.jpg', instance => {
 });
 ```
 
-### .blank
+---
 
 `.blank(w = 0, h = 0)`
 
@@ -42,7 +42,7 @@ Creates a PaperDuck instance with a blank transparent image of the given size.
 
 Returns a new instance of PaperDuck.
 
-### .fn.getWidth
+---
 
 `.fn.getWidth()`
 
@@ -53,7 +53,7 @@ let instance = PaperDuck.blank(256, 128);
 console.log(instance.getWidth()); // => 256
 ```
 
-### .fn.getHeight
+---
 
 `.fn.getHeight()`
 
@@ -64,7 +64,7 @@ let instance = PaperDuck.blank(256, 128);
 console.log(instance.getHeight()); // => 128
 ```
 
-### .fn.resize
+---
 
 `.fn.resize(w = 'auto', h = 'auto', smoothing = 1/2)`
 
@@ -82,19 +82,19 @@ Returns a new instance of PaperDuck. Can also return the same instance, if no ch
 let canvas = PaperDuck(image).resize('', 512).toCanvas();
 ```
 
-### .fn.crop
+---
 
 `.fn.crop(x = 0, y = 0, w = ∞, h = ∞)`
 
 Returns a new instance of PaperDuck. Can also return the same instance, if no changes were made.
 
-### .fn.cropAlign
+---
 
 `.fn.cropAlign(w = ∞, h = ∞, align = 'center')`
 
 Returns a new instance of PaperDuck. Can also return the same instance, if no changes were made.
 
-### .fn.scale
+---
 
 `.fn.scale(factor, smoothing = 1/2)`
 
@@ -111,7 +111,7 @@ Returns a new instance of PaperDuck. Can also return the same instance, if no ch
 let canvas = PaperDuck(image).scale(4).toCanvas();
 ```
 
-### .fn.flip
+---
 
 `.fn.flip()`
 
@@ -123,7 +123,7 @@ Returns a new instance of PaperDuck. Can also return the same instance, if no ch
 let canvas = PaperDuck(image).flip().toCanvas();
 ```
 
-### .fn.flop
+---
 
 `.fn.flop()`
 
@@ -135,7 +135,7 @@ Returns a new instance of PaperDuck. Can also return the same instance, if no ch
 let canvas = PaperDuck(image).flop().toCanvas();
 ```
 
-### .fn.rotate90
+---
 
 `.fn.rotate90()`
 
@@ -147,7 +147,7 @@ Returns a new instance of PaperDuck. Can also return the same instance, if no ch
 let canvas = PaperDuck(image).rotate90().toCanvas();
 ```
 
-### .fn.rotate180
+---
 
 `.fn.rotate180()`
 
@@ -159,7 +159,7 @@ Returns a new instance of PaperDuck. Can also return the same instance, if no ch
 let canvas = PaperDuck(image).rotate180().toCanvas();
 ```
 
-### .fn.rotate270
+---
 
 `.fn.rotate270()`
 
@@ -171,18 +171,18 @@ Returns a new instance of PaperDuck. Can also return the same instance, if no ch
 let canvas = PaperDuck(image).rotate270().toCanvas();
 ```
 
-### .fn.toImage
+---
 
 `.fn.toImage(...args)`
 
-### .fn.toCanvas
+---
 
 `.fn.toCanvas()`
 
-### .fn.toContext
+---
 
 `.fn.toContext()`
 
-### .fn.toDataURL
+---
 
 `.fn.toDataURL(...args)`
