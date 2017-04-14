@@ -92,13 +92,19 @@ Returns a new instance of PaperDuck. Can also return the same instance, if no ch
 
 `.fn.cropAlign(w = ∞, h = ∞, align = 'center')`
 
+Aligns and crops the image to the given size.
+
 | argument | description |
 | ---: | :--- |
 | `w` | The width of the cropped image. |
 | `h` | The height of the cropped image. |
-| `align` | The alignment of the cropping. Possible values are `top left`, `top center`, `top right`, `center left`, `center`, `center right`, `bottom left`, `bottom center` and `bottom right`. The order of words does not matter. |
+| `align` | The alignment of the cropping. Possible values are `'top left'`, `'top center'`, `'top right'`, `'center left'`, `'center'`, `'center right'`, `'bottom left'`, `'bottom center'` and `'bottom right'`. The order of words does not matter. |
 
 Returns a new instance of PaperDuck. Can also return the same instance, if no changes were made.
+
+```javascript
+let canvas = PaperDuck(image).cropAlign(256, 128, 'top center').toCanvas();
+```
 
 ---
 
