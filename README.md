@@ -96,7 +96,7 @@ Returns a new instance of PaperDuck. Can also return the same instance, if no ch
 | ---: | :--- |
 | `w` | The width of the cropped image. |
 | `h` | The height of the cropped image. |
-| `align` | The position where to align the image. Possible values are `top left`, `top center` (`top`), `top right`, `center left` (`left`), `center` (any not recognized value), `center right` (`right`), `bottom left`, `bottom center` (`bottom`), `bottom right`. |
+| `align` | The alignment of the cropping. Possible values are `top left`, `top center`, `top right`, `center left`, `center`, `center right`, `bottom left`, `bottom center` and `bottom right`. The order of words does not matter. |
 
 Returns a new instance of PaperDuck. Can also return the same instance, if no changes were made.
 
