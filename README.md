@@ -92,6 +92,12 @@ Returns a new instance of PaperDuck. Can also return the same instance, if no ch
 
 `.fn.cropAlign(w = ∞, h = ∞, align = 'center')`
 
+| argument | description |
+| ---: | :--- |
+| `w` | The width of the cropped image. |
+| `h` | The height of the cropped image. |
+| `align` | The position where to align the image. Possible values are `top left`, `top center` (`top`), `top right`, `center left` (`left`), `center` (any not recognized value), `center right` (`right`), `bottom left`, `bottom center` (`bottom`), `bottom right`. |
+
 Returns a new instance of PaperDuck. Can also return the same instance, if no changes were made.
 
 ---
