@@ -86,7 +86,22 @@ let canvas = PaperDuck(image).resize('', 512).toCanvas();
 
 `.fn.crop(x = 0, y = 0, w = ∞, h = ∞)`
 
+Positions and crops the image to the given size.
+
+| argument | description |
+| ---: | :--- |
+| `x` | The left offset of the cropping. |
+| `y` | The top offset of the cropping.  |
+| `w` | The width of the cropped image. |
+| `h` | The height of the cropped image. |
+
+... image ...
+
 Returns a new instance of PaperDuck. Can also return the same instance, if no changes were made.
+
+```javascript
+let canvas = PaperDuck(image).crop(128, -512, '', 256).toCanvas();
+```
 
 ---
 
