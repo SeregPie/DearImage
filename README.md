@@ -213,3 +213,11 @@ let canvas = PaperDuck(image).rotate270().toCanvas();
 ---
 
 `.fn.toDataURL(...args)`
+
+Returns a data URI containing a representation of the image.
+
+See [`HTMLCanvasElement.toDataURL()`](https://developer.mozilla.org/docs/Web/API/HTMLCanvasElement/toDataURL).
+
+| argument | description |
+| ---: | :--- |
+| `args` | Any number of arguments to be passed to the function `.toDataURL()` of the canvas element. |
