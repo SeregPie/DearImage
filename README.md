@@ -216,8 +216,13 @@ let canvas = PaperDuck(image).rotate270().toCanvas();
 
 Returns a data URI containing a representation of the image.
 
-See [`HTMLCanvasElement.toDataURL()`](https://developer.mozilla.org/docs/Web/API/HTMLCanvasElement/toDataURL).
-
 | argument | description |
 | ---: | :--- |
-| `args` | Any number of arguments to be passed to the function `.toDataURL()` of the canvas element. |
+| `args` | Any number of arguments to be passed to the function [`.toDataURL()`](https://developer.mozilla.org/docs/Web/API/HTMLCanvasElement/toDataURL) of the canvas element. |
+
+```javascript
+let canvas = PaperDuck(image)
+  .cropAlign(256, 256)
+  .rotate180()
+  .toDataURL();
+```
