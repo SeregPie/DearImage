@@ -221,8 +221,9 @@ Returns a data URI containing a representation of the image.
 | `args` | Any number of arguments to be passed to the function [`.toDataURL()`](https://developer.mozilla.org/docs/Web/API/HTMLCanvasElement/toDataURL) of the canvas element. |
 
 ```javascript
-let canvas = PaperDuck(image)
+let dataURL = PaperDuck(image)
   .cropAlign(256, 256)
   .rotate180()
-  .toDataURL();
+  .toDataURL('image/jpeg', 0.5);
+// => data:image/jpeg;base64,...
 ```
