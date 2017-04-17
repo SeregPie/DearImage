@@ -10,13 +10,13 @@ Try out the [demo](https://seregpie.github.io/PaperDuck/)!
 
 ## functions
 
-`PaperDuck(image)`
+`PaperDuck(source)`
 
 Creates a new instance of PaperDuck.
 
 | argument | description |
 | ---: | :--- |
-| `image` | An element to draw into the context. The value can be any canvas image source, such as an HTMLImageElement, an HTMLVideoElement, an HTMLCanvasElement or an ImageBitmap. |
+| `source` | An element to draw into the context. The value can be any canvas image source, such as an HTMLImageElement, an HTMLVideoElement, an HTMLCanvasElement or an ImageBitmap. |
 
 ---
 
@@ -24,14 +24,27 @@ Creates a new instance of PaperDuck.
 
 | argument | description |
 | ---: | :--- |
-| `source` | ... |
+| `source` | The source to load from. In addition to the type, that is accepted by `PaperDuck()`, the value can also be a string, an array-like object or an instance of `HTMLImageElement`, `HTMLInputElement`, `File` or `FileReader`. |
 
 Returns a promise that is resolved once the image has been loaded.
 
 ```javascript
 PaperDuck.load('/img/tree.jpg').then(instance => {
   let canvas = instance.resize(200, '').toCanvas();
-  document.getElementById('trees').appendChild(canvas);
+  document.body.appendChild(canvas);
+});
+```
+
+```javascript
+object.addEventListener('change', function() {
+  PaperDuck.load(this)
+    .then(instance => {
+      let canvas = instance.resize(200, '').toCanvas();
+      document.body.appendChild(canvas);
+    })
+    .catch(reason => {
+      alert('Ups!'):
+    });
 });
 ```
 
@@ -85,7 +98,7 @@ Resizes the image to the given size.
 Returns a new instance of PaperDuck. Can also return the same instance, if no changes were made.
 
 ```javascript
-let canvas = PaperDuck(image).resize('', 512).toCanvas();
+let canvas = PaperDuck(source).resize('', 512).toCanvas();
 ```
 
 ---
@@ -104,7 +117,7 @@ Positions and crops the image to the given size.
 Returns a new instance of PaperDuck. Can also return the same instance, if no changes were made.
 
 ```javascript
-let canvas = PaperDuck(image).crop(128, -512, '', 256).toCanvas();
+let canvas = PaperDuck(source).crop(128, -512, '', 256).toCanvas();
 ```
 
 ---
@@ -122,7 +135,7 @@ Aligns and crops the image to the given size.
 Returns a new instance of PaperDuck. Can also return the same instance, if no changes were made.
 
 ```javascript
-let canvas = PaperDuck(image).cropAlign(256, 128, 'top center').toCanvas();
+let canvas = PaperDuck(source).cropAlign(256, 128, 'top center').toCanvas();
 ```
 
 ---
@@ -139,7 +152,7 @@ Resizes the image proportionally by the given factor.
 Returns a new instance of PaperDuck. Can also return the same instance, if no changes were made.
 
 ```javascript
-let canvas = PaperDuck(image).scale(4).toCanvas();
+let canvas = PaperDuck(source).scale(4).toCanvas();
 ```
 
 ---
@@ -151,7 +164,7 @@ Flips the image vertically.
 Returns a new instance of PaperDuck. Can also return the same instance, if no changes were made.
 
 ```javascript
-let canvas = PaperDuck(image).flip().toCanvas();
+let canvas = PaperDuck(source).flip().toCanvas();
 ```
 
 ---
@@ -163,7 +176,7 @@ Flops the image horizontally.
 Returns a new instance of PaperDuck. Can also return the same instance, if no changes were made.
 
 ```javascript
-let canvas = PaperDuck(image).flop().toCanvas();
+let canvas = PaperDuck(source).flop().toCanvas();
 ```
 
 ---
@@ -175,7 +188,7 @@ Rotates the image by 90 degrees clockwise.
 Returns a new instance of PaperDuck. Can also return the same instance, if no changes were made.
 
 ```javascript
-let canvas = PaperDuck(image).rotate90().toCanvas();
+let canvas = PaperDuck(source).rotate90().toCanvas();
 ```
 
 ---
@@ -187,7 +200,7 @@ Rotates the image by 180 degrees.
 Returns a new instance of PaperDuck. Can also return the same instance, if no changes were made.
 
 ```javascript
-let canvas = PaperDuck(image).rotate180().toCanvas();
+let canvas = PaperDuck(source).rotate180().toCanvas();
 ```
 
 ---
@@ -199,7 +212,7 @@ Rotates the image by 270 degrees clockwise.
 Returns a new instance of PaperDuck. Can also return the same instance, if no changes were made.
 
 ```javascript
-let canvas = PaperDuck(image).rotate270().toCanvas();
+let canvas = PaperDuck(source).rotate270().toCanvas();
 ```
 
 ---
@@ -207,7 +220,7 @@ let canvas = PaperDuck(image).rotate270().toCanvas();
 `.fn.toCanvas()`
 
 ```javascript
-let canvas = PaperDuck(image)
+let canvas = PaperDuck(source)
   .cropAlign(256, 256)
   .rotate180()
   .toCanvas();
@@ -221,7 +234,7 @@ document.body.appendChild(canvas);
 Returns a 2D rendering context for a canvas.
 
 ```javascript
-let instance = PaperDuck(image);
+let instance = PaperDuck(source);
 // ...
 let ctx = instance.toContext();
 ctx.font = '32px serif';
@@ -240,7 +253,7 @@ Returns a data URL containing a representation of the image.
 | `args` | Any number of arguments to be passed to the function [`.toDataURL()`](https://developer.mozilla.org/docs/Web/API/HTMLCanvasElement/toDataURL) of the canvas element. |
 
 ```javascript
-let dataURL = PaperDuck(image)
+let dataURL = PaperDuck(source)
   .cropAlign(256, 256)
   .rotate180()
   .toDataURL('image/jpeg', 0.5);
