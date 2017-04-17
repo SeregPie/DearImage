@@ -20,10 +20,16 @@ Creates a new instance of PaperDuck.
 
 ---
 
-`.load(url, callback)`
+`.load(source)`
+
+| argument | description |
+| ---: | :--- |
+| `source` | ... |
+
+Returns a promise that is resolved once the image has been loaded.
 
 ```javascript
-PaperDuck.load('/img/tree.jpg', instance => {
+PaperDuck.load('/img/tree.jpg').then(instance => {
   let canvas = instance.resize(200, '').toCanvas();
   document.getElementById('trees').appendChild(canvas);
 });
@@ -90,12 +96,10 @@ Positions and crops the image to the given size.
 
 | argument | description |
 | ---: | :--- |
-| `x` | The left offset of the cropping. |
-| `y` | The top offset of the cropping.  |
-| `w` | The width of the cropped image. |
-| `h` | The height of the cropped image. |
-
-... image ...
+| `x` | The left offset of the cropping. A negative value is a right offset. |
+| `y` | The top offset of the cropping. A negative value is a bottom offset. |
+| `w` | The width of the cropped image. A negative value starts cropping from the right offset and goes to the left. |
+| `h` | The height of the cropped image. A negative value starts cropping from the bottom offset and goes to the top. |
 
 Returns a new instance of PaperDuck. Can also return the same instance, if no changes were made.
 
@@ -202,8 +206,6 @@ let canvas = PaperDuck(image).rotate270().toCanvas();
 
 `.fn.toImage(...args)`
 
-Returns a data URI containing a representation of the image.
-
 ```javascript
 let image = PaperDuck(canvas)
   .cropAlign(256, 256)
@@ -229,19 +231,22 @@ document.body.appendChild(canvas);
 
 `.fn.toContext()`
 
+Returns a 2D rendering context for a canvas.
+
 ```javascript
-let context = PaperDuck(image)
-  .cropAlign(256, 256)
-  .rotate180()
-  .toContext();
-// => data:image/jpeg;base64,...
+let instance = PaperDuck(image);
+// ...
+let ctx = instance.toContext();
+ctx.font = '32px serif';
+ctx.fillText('Carpe Diem', 32, 64);
+instance = PaperDuck(ctx);
 ```
 
 ---
 
 `.fn.toDataURL(...args)`
 
-Returns a data URI containing a representation of the image.
+Returns a data URL containing a representation of the image.
 
 | argument | description |
 | ---: | :--- |
