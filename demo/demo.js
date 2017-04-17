@@ -10,7 +10,7 @@ $(function() {
 		},
 
 		run(image) {
-			PaperDuck.load(image, image => {
+			PaperDuck.load(image).then(image => {
 				this._queue.clearQueue();
 				this._elements.forEach((run, element) => {
 					this._queue.queue(next => {
@@ -46,23 +46,32 @@ $(function() {
 
 	$('.runFromImage')
 		.removeClass('runFromImage')
+		.click(function() {
+			demo.run(this);
+		})
+		.one('load', function() {
+			$(this)
+				.parent()
+				.find('.uk-overlay')
+				.text(`${this.naturalWidth}x${this.naturalHeight}`);
+			return false;
+		})
 		.each(function() {
-			PaperDuck.load(this, image => {
-				$(this).click(function() {
-					demo.run(image);
-				});
-				$(this).parent().find('.uk-overlay').text(`${image.getWidth()}x${image.getHeight()}`);
-				if (!demo.isRunning()) {
-					demo.run(image);
-				}
-			});
-		});
+			if (this.complete) {
+				$(this).trigger('load');
+			}
+		})
+		.first()
+			.click()
+		.end();
 
 	$('.runFromURL')
 		.removeClass('runFromURL')
 		.click(function() {
 			UIkit.modal.prompt('URL').then(url => {
-				demo.run(url);
+				if (url) {
+					demo.run(url);
+				}
 			});
 		});
 
@@ -72,7 +81,9 @@ $(function() {
 			$('<input>', {
 				type: 'file',
 				change: function() {
-					demo.run(this);
+					if (this.value) {
+						demo.run(this);
+					}
 				},
 			}).click();
 		});
