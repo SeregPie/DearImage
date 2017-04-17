@@ -202,13 +202,40 @@ let canvas = PaperDuck(image).rotate270().toCanvas();
 
 `.fn.toImage(...args)`
 
+Returns a data URI containing a representation of the image.
+
+```javascript
+let image = PaperDuck(canvas)
+  .cropAlign(256, 256)
+  .rotate180()
+  .toImage();
+image.style.border = '1px solid BlueViolet';
+document.body.appendChild(image);
+```
+
 ---
 
 `.fn.toCanvas()`
 
+```javascript
+let canvas = PaperDuck(image)
+  .cropAlign(256, 256)
+  .rotate180()
+  .toCanvas();
+document.body.appendChild(canvas);
+```
+
 ---
 
 `.fn.toContext()`
+
+```javascript
+let context = PaperDuck(image)
+  .cropAlign(256, 256)
+  .rotate180()
+  .toContext();
+// => data:image/jpeg;base64,...
+```
 
 ---
 
