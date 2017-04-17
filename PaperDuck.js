@@ -2,94 +2,106 @@
 
 	var URL = window.URL || window.webkitURL;
 
-	var PaperDuck = function Class(ctx) {
-		if (!(this instanceof Class)) {
-			return new Class((function(value) {
-				if (value instanceof Class) {
-					return value._ctx;
-				}
-				if (value instanceof CanvasRenderingContext2D || value instanceof WebGLRenderingContext) {
-					value = value.canvas;
-				}
-				var ctx = document.createElement('canvas').getContext('2d');
-				ctx.canvas.width = value.naturalWidth || value.width;
-				ctx.canvas.height = value.naturalHeight || value.height;
-				ctx.drawImage(value, 0, 0);
-				return ctx;
-			})(ctx));
+
+
+	var PaperDuck = function constructor(source) {
+		if (!(this instanceof constructor)) {
+			if (source instanceof constructor) {
+				return source;
+			}
+			if (source && source.canvas instanceof HTMLCanvasElement) {
+				source = source.canvas;
+			}
+			var ctx = document.createElement('canvas').getContext('2d');
+			ctx.canvas.width = source.naturalWidth || source.width || 0;
+			ctx.canvas.height = source.naturalHeight || source.height || 0;
+			ctx.drawImage(source, 0, 0);
+			return new constructor(ctx);
 		}
-		this._ctx = ctx;
+		this._ctx = source;
 	};
 
-	PaperDuck.load = function(source, callback) {
-		if (source) {
-			switch (typeof source) {
-				case 'object': {
-					if (source instanceof HTMLImageElement) {
-						if (source.complete) {
-							callback(this(source));
-						} else {
-							source.addEventListener('load', function() {
-								callback(this(source));
-							}.bind(this));
-						}
-					} else
-					if (source instanceof HTMLInputElement) {
-						switch (source.type) {
-							case 'file': {
-								this.load(source.files, callback);
-								break;
-							}
-							default: {
-								this.load(source.value, callback);
-							}
-						}
-					} else
-					if (source instanceof Uint8Array) {
-						this.load(new Blob([source]), callback);
-					} else
-					if (source instanceof ArrayBuffer) {
-						this.load(new Uint8Array(source), callback);
-					} else
-					if (source instanceof File) {
-						var reader  = new FileReader();
-						reader.readAsDataURL(source);
-						this.load(reader, callback);
-					} else
-					if (source instanceof Blob) {
-						var urlObject = URL.createObjectURL(source);
+	PaperDuck.load = function(source) {
+		return Promise.resolve().then(function() {
+			if (source) {
+				switch (typeof source) {
+					case 'string': {
 						var image = new Image();
-						image.src = urlObject;
-						callback(this(image));
-						URL.revokeObjectURL(urlObject);
-					} else
-					if (source instanceof FileReader) {
-						if (source.readyState > 1) {
-							this.load(source.result, callback);
-						} else {
-							source.addEventListener('load', function() {
-								this.load(source.result, callback);
+						image.setAttribute('crossOrigin', 'anonymous');
+						image.src = source;
+						return this.load(image);
+					}
+					case 'object': {
+						if (source instanceof this) {
+							return source;
+						}
+						if (source instanceof HTMLImageElement) {
+							if (source.complete) {
+								return this(source);
+							}
+							return new Promise(function(resolve, reject) {
+								source.addEventListener('load', function() {
+									resolve(this(source));
+								}.bind(this));
+								source.addEventListener('error', function() {
+									reject(source);
+								});
 							}.bind(this));
 						}
-					} else {
-						if (typeof source.length == 'number' && (source.length - 1) in source) {
-							this.load(source[0], callback);
+						if (source instanceof HTMLInputElement) {
+							if (source.type === 'file') {
+								return this.load(source.files);
+							}
+							return this.load(source.value);
 						}
+						/*
+						if (source instanceof Uint8Array) {
+							//var blob = new Blob([file], { type: "image/png" });
+							return this.load(new Blob([source]));
+						} else
+						if (source instanceof ArrayBuffer) {
+							this.load(new Uint8Array(source));
+						}
+						*/
+						if (source instanceof File) {
+							var reader  = new FileReader();
+							reader.readAsDataURL(source);
+							return this.load(reader);
+						}
+						/*
+						if (source instanceof Blob) {
+							var urlObject = URL.createObjectURL(source);
+							var image = new Image();
+							image.src = urlObject;
+							callback(this(image));
+							URL.revokeObjectURL(urlObject);
+						}
+						*/
+						if (source instanceof FileReader) {
+							if (source.readyState > 1) {
+								return this.load(source.result);
+							}
+							return new Promise(function(resolve, reject) {
+								source.addEventListener('load', function() {
+									this.load(source.result).then(resolve, reject);
+								}.bind(this));
+								source.addEventListener('error', function() {
+									reject(source);
+								});
+							}.bind(this));
+						}
+						if (typeof source.length === 'number' && (source.length - 1) in source) {
+							return this.load(source[0]);
+						}
+						break;
 					}
-					return callback(this(source));
-				}
-				case 'string': {
-					var image = new Image();
-					image.setAttribute('crossOrigin', 'anonymous');
-					image.src = source;
-					this.load(image, callback);
-					break;
 				}
 			}
-		}
+			return this(source);
+		}.bind(this));
 	};
 
-	PaperDuck.empty = function(sizeX, sizeY) {
+	PaperDuck.blank = function(sizeX, sizeY) {
 		sizeX = parseInt(sizeX);
 		sizeY = parseInt(sizeY);
 		if (isNaN(sizeX)) {
@@ -136,13 +148,13 @@
 			var currSizeY = ctx.canvas.height;
 			if (isNaN(sizeX)) {
 				if (currSizeY === 0) {
-					return this.constructor.empty(0, sizeY);
+					return this.constructor.blank(0, sizeY);
 				}
 				sizeX = Math.round(currSizeX * sizeY / currSizeY);
 			} else
 			if (isNaN(sizeY)) {
 				if (currSizeX === 0) {
-					return this.constructor.empty(sizeX, 0);
+					return this.constructor.blank(sizeX, 0);
 				}
 				sizeY = Math.round(currSizeY * sizeX / currSizeX);
 			}
@@ -150,7 +162,7 @@
 				return this;
 			}
 			if (currSizeX === 0 || currSizeY === 0 || sizeX === 0 || sizeY === 0) {
-				return this.constructor.empty(sizeX, sizeY);
+				return this.constructor.blank(sizeX, sizeY);
 			}
 			smoothing = parseFloat(smoothing);
 			if (isNaN(smoothing)) {
@@ -187,6 +199,39 @@
 				ctx = resizeContext(ctx, currSizeX, currSizeY);
 			}
 			return new this.constructor(ctx);
+		},
+
+		clip: function(offsetX, offsetY, sizeX, sizeY) {
+			/*
+			sizeX = parseInt(sizeX);
+			sizeY = parseInt(sizeY);
+			if (sizeX === 0 || sizeY === 0) {
+				//return this.constructor.empty(sizeX, sizeY);
+			}
+			offsetX = parseInt(offsetX);
+			offsetY = parseInt(offsetY);
+			var ctx = this._ctx;
+			var canvas = ctx.canvas;
+			var currSizeX = canvas.width;
+			var currSizeY = canvas.height;
+			if (sizeX < 0) {
+				offsetX += sizeX;
+				sizeX = -sizeX;
+			}
+			if (sizeY < 0) {
+				offsetY += sizeY;
+				sizeY = -sizeY;
+			}
+			if (offsetX === 0 && sizeX === currSizeX && offsetY === 0 && sizeY === currSizeY) {
+				return this;
+			}
+			ctx = document.createElement('canvas').getContext('2d');
+			ctx.canvas.width = sizeX;
+			ctx.canvas.height = sizeY;
+			console.log('clip', -offsetX, -offsetY, currSizeX, currSizeY);
+			ctx.drawImage(canvas, -offsetX, -offsetY, currSizeX, currSizeY);
+			return new this.constructor(ctx);
+			*/
 		},
 
 		crop: function(offsetX, offsetY, sizeX, sizeY) {
@@ -231,7 +276,7 @@
 				return this;
 			}
 			if (sizeX === 0 || sizeY === 0) {
-				return this.constructor.empty(sizeX, sizeY);
+				return this.constructor.blank(sizeX, sizeY);
 			}
 			var canvas = ctx.canvas;
 			ctx = document.createElement('canvas').getContext('2d');
@@ -239,6 +284,10 @@
 			ctx.canvas.height = sizeY;
 			ctx.drawImage(canvas, offsetX, offsetY, sizeX, sizeY, 0, 0, sizeX, sizeY);
 			return new this.constructor(ctx);
+		},
+
+		clipAlign: function(sizeX, sizeY, align) {
+
 		},
 
 		cropAlign: function(sizeX, sizeY, align) {
@@ -257,7 +306,7 @@
 				sizeY = Math.min(Math.abs(sizeY), currSizeY);
 			}
 			if (sizeX === 0 || sizeY === 0) {
-				return this.constructor.empty(sizeX, sizeY);
+				return this.constructor.blank(sizeX, sizeY);
 			}
 			if (sizeX === currSizeX && sizeY === currSizeY) {
 				return this;
@@ -303,6 +352,10 @@
 			return this.resize(this.getWidth() * factor, this.getHeight() * factor, smoothing);
 		},
 
+		zoom: function(offsetX, offsetY, factor, smoothing) {
+			// ???
+		},
+
 		scaleMin: function(sizeX, sizeY, smoothing) {
 			sizeX = parseInt(sizeX);
 			sizeY = parseInt(sizeY);
@@ -322,7 +375,7 @@
 				return this;
 			}
 			if (currSizeX === 0 || currSizeY === 0 || sizeX === 0 || sizeY === 0) {
-				return this.constructor.empty(sizeX, sizeY);
+				return this.constructor.blank(sizeX, sizeY);
 			}
 			var scaleFactorX = sizeX / currSizeX;
 			var scaleFactorY = sizeY / currSizeY;
@@ -349,12 +402,16 @@
 				return this;
 			}
 			if (currSizeX === 0 || currSizeY === 0 || sizeX === 0 || sizeY === 0) {
-				return this.constructor.empty(sizeX, sizeY);
+				return this.constructor.blank(sizeX, sizeY);
 			}
 			var scaleFactorX = sizeX / currSizeX;
 			var scaleFactorY = sizeY / currSizeY;
 			var scaleFactor = Math.max(scaleFactorX, scaleFactorY);
 			return this.scale(scaleFactor, smoothing);
+		},
+
+		scaleClip: function(sizeX, sizeY, align, smoothing) {
+			return this.scaleMin(sizeX, sizeY, smoothing).clipAlign(sizeX, sizeY, align);
 		},
 
 		scaleCrop: function(sizeX, sizeY, align, smoothing) {
@@ -401,7 +458,7 @@
 				if (currSizeX === currSizeY) {
 					return this;
 				}
-				return this.constructor.empty(currSizeY, currSizeX);
+				return this.constructor.blank(currSizeY, currSizeX);
 			}
 			var ctx = document.createElement('canvas').getContext('2d');
 			ctx.canvas.width = currSizeY;
@@ -436,7 +493,7 @@
 				if (currSizeX === currSizeY) {
 					return this;
 				}
-				return this.constructor.empty(currSizeY, currSizeX);
+				return this.constructor.blank(currSizeY, currSizeX);
 			}
 			var ctx = document.createElement('canvas').getContext('2d');
 			ctx.canvas.width = currSizeY;
@@ -454,7 +511,7 @@
 		},
 
 		toImageData: function() {
-
+			// ???
 		},
 
 		toCanvas: function() {
@@ -475,6 +532,8 @@
 			return canvas.toDataURL.apply(canvas, arguments);
 		},
 	};
+
+
 
 	this.PaperDuck = PaperDuck;
 
