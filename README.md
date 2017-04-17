@@ -204,19 +204,6 @@ let canvas = PaperDuck(image).rotate270().toCanvas();
 
 ---
 
-`.fn.toImage(...args)`
-
-```javascript
-let image = PaperDuck(canvas)
-  .cropAlign(256, 256)
-  .rotate180()
-  .toImage();
-image.style.border = '1px solid BlueViolet';
-document.body.appendChild(image);
-```
-
----
-
 `.fn.toCanvas()`
 
 ```javascript
@@ -258,4 +245,21 @@ let dataURL = PaperDuck(image)
   .rotate180()
   .toDataURL('image/jpeg', 0.5);
 // => data:image/jpeg;base64,...
+```
+
+---
+
+`.fn.toImage(...args)`
+
+| argument | description |
+| ---: | :--- |
+| `args` | Any number of arguments to be passed to the function [`.toDataURL()`](https://developer.mozilla.org/docs/Web/API/HTMLCanvasElement/toDataURL) of the canvas element. |
+
+```javascript
+let image = PaperDuck(canvas)
+  .cropAlign(256, 256)
+  .rotate180()
+  .toImage();
+image.style.border = '1px solid BlueViolet';
+document.body.appendChild(image);
 ```
