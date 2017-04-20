@@ -85,7 +85,7 @@ console.log(instance.getHeight()); // => 128
 
 ---
 
-`.fn.resize(w = 'auto', h = 'auto', smoothing = 1/2)`
+`.fn.resize(w = 'auto', h = 'auto', smoothing = 2)`
 
 Resizes the image to the given size.
 
@@ -93,12 +93,12 @@ Resizes the image to the given size.
 | ---: | :--- |
 | `w` | The width of the resized image. If the value is not a number, the width scales proportionally to the height. |
 | `h` | The height of the resized image. If the value is not a number, the height scales proportionally to the width. |
-| `smoothing` | The smoothing factor. The value must be a float between 0 (inclusive) and 1 (exclusive). 0 means no smoothing. |
+| `smoothing` | The smoothing factor. The value must be is greater than or equal to 1. 1 means no smoothing. |
 
 Returns a new instance of PaperDuck. Can also return the same instance, if no changes were made.
 
 ```javascript
-let canvas = PaperDuck(source).resize('', 512).toCanvas();
+let canvas = PaperDuck(source).resize('', 512, 3.3).toCanvas();
 ```
 
 ---
@@ -140,19 +140,19 @@ let canvas = PaperDuck(source).cropAlign(256, 128, 'top center').toCanvas();
 
 ---
 
-`.fn.scale(factor, smoothing = 1/2)`
+`.fn.scale(factor, smoothing = 2)`
 
 Resizes the image proportionally by the given factor.
 
 | argument | description |
 | ---: | :--- |
 | `factor` | The scale factor. If the value is greater than 1, the image is an enlargement. If the value is between 0 and 1, the image is a reduction. |
-| `smoothing` | The smoothing factor. The value must be a float between 0 (inclusive) and 1 (exclusive). 0 means no smoothing. |
+| `smoothing` | The smoothing factor. The value must be is greater than or equal to 1. 1 means no smoothing. |
 
 Returns a new instance of PaperDuck. Can also return the same instance, if no changes were made.
 
 ```javascript
-let canvas = PaperDuck(source).scale(4).toCanvas();
+let canvas = PaperDuck(source).scale(2.5).toCanvas();
 ```
 
 ---
