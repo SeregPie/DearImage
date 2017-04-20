@@ -27,14 +27,11 @@
 				switch (typeof source) {
 					case 'string': {
 						var image = new Image();
-						image.setAttribute('crossOrigin', 'anonymous');
+						image.crossOrigin = 'anonymous';
 						image.src = source;
 						return this.load(image);
 					}
 					case 'object': {
-						if (source instanceof this) {
-							return source;
-						}
 						if (source instanceof HTMLImageElement) {
 							if (source.complete) {
 								return this(source);
@@ -164,11 +161,15 @@
 			if (currSizeX === 0 || currSizeY === 0 || sizeX === 0 || sizeY === 0) {
 				return this.constructor.blank(sizeX, sizeY);
 			}
-			smoothing = parseFloat(smoothing);
+			smoothing = parseInt(smoothing);
 			if (isNaN(smoothing)) {
-				smoothing = 1/2;
+				smoothing = 2;
+			} else
+			if (smoothing > 1) {
+				smoothing /= smoothing - 1;
+			} else {
+				smoothing = Infinity;
 			}
-			var reversedSmoothing = (0 < smoothing && smoothing < 1) ? 1/smoothing : Infinity;
 			var resizeContext = function(ctx, sizeX, sizeY) {
 				var canvas = ctx.canvas;
 				ctx = document.createElement('canvas').getContext('2d');
@@ -181,10 +182,10 @@
 			var b;
 			var f = function(currSize, finalSize) {
 				if (currSize < finalSize) {
-					currSize = Math.min(Math.round(currSize * reversedSmoothing), finalSize);
+					currSize = Math.min(Math.round(currSize * smoothing), finalSize);
 				} else
 				if (currSize > finalSize) {
-					currSize = Math.max(Math.round(currSize / reversedSmoothing), finalSize);
+					currSize = Math.max(Math.round(currSize / smoothing), finalSize);
 				} else {
 					return finalSize;
 				}
