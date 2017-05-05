@@ -8,7 +8,7 @@ Try out the [demo](https://seregpie.github.io/PaperDuck/)!
 
 *no dependencies*
 
-## functions
+## members
 
 `PaperDuck(source)`
 
@@ -17,6 +17,11 @@ Creates a new instance of PaperDuck.
 | argument | description |
 | ---: | :--- |
 | `source` | An element to draw into the context. The value can be any canvas image source, such as an HTMLImageElement, an HTMLVideoElement, an HTMLCanvasElement or an ImageBitmap. |
+
+```javascript
+let canvas = document.getElementById('demo');
+let instance = PaperDuck(canvas);
+```
 
 ---
 
