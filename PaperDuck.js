@@ -1,6 +1,6 @@
 (function() {
 
-	var URL = window.URL || window.webkitURL;
+	//var URL = this.URL || this.webkitURL;
 
 
 
@@ -161,7 +161,7 @@
 			if (currSizeX === 0 || currSizeY === 0 || sizeX === 0 || sizeY === 0) {
 				return this.constructor.blank(sizeX, sizeY);
 			}
-			smoothing = parseInt(smoothing);
+			smoothing = parseFloat(smoothing);
 			if (isNaN(smoothing)) {
 				smoothing = 2;
 			} else
