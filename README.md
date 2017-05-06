@@ -25,6 +25,22 @@ let instance = PaperDuck(canvas);
 
 ---
 
+`.constructor(context)`
+
+Creates a new instance of PaperDuck.
+
+| argument | description |
+| ---: | :--- |
+| `context` | ... |
+
+```javascript
+let canvas = document.getElementById('demo');
+var context = canvas.getContext('2d');
+let instance = new PaperDuck(context);
+```
+
+---
+
 `.load(source)`
 
 | argument | description |
