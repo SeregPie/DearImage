@@ -35,7 +35,7 @@ Creates a new instance of PaperDuck.
 
 ```javascript
 let canvas = document.getElementById('demo');
-var context = canvas.getContext('2d');
+let context = canvas.getContext('2d');
 let instance = new PaperDuck(context);
 ```
 
@@ -119,7 +119,7 @@ Resizes the image to the given size.
 Returns a new instance of PaperDuck. Can also return the same instance, if no changes were made.
 
 ```javascript
-let canvas = PaperDuck(source).resize('', 512, 3.3).toCanvas();
+let canvas = PaperDuck(source).resize('', 512, 5/2).toCanvas();
 ```
 
 ---
@@ -151,12 +151,12 @@ Aligns and crops the image to the given size.
 | ---: | :--- |
 | `w` | The width of the cropped image. |
 | `h` | The height of the cropped image. |
-| `align` | The alignment of the cropping. Possible values are `'top left'`, `'top center'`, `'top right'`, `'center left'`, `'center'`, `'center right'`, `'bottom left'`, `'bottom center'` and `'bottom right'`. The order of words does not matter. |
+| `align` | The alignment of the cropping. Possible values are `'top left'`, `'top'`, `'top right'`, `'left'`, `'center'`, `'right'`, `'bottom left'`, `'bottom'` and `'bottom right'`. The order of words does not matter. |
 
 Returns a new instance of PaperDuck. Can also return the same instance, if no changes were made.
 
 ```javascript
-let canvas = PaperDuck(source).cropAlign(256, 128, 'top center').toCanvas();
+let canvas = PaperDuck(source).cropAlign(256, 128, 'left bottom').toCanvas();
 ```
 
 ---
@@ -173,7 +173,11 @@ Resizes the image proportionally by the given factor.
 Returns a new instance of PaperDuck. Can also return the same instance, if no changes were made.
 
 ```javascript
-let canvas = PaperDuck(source).scale(2.5).toCanvas();
+let canvas = PaperDuck(source).scale(5).toCanvas();
+```
+
+```javascript
+let canvas = PaperDuck(source).scale(1/3).toCanvas();
 ```
 
 ---
@@ -277,7 +281,7 @@ Returns a data URL containing a representation of the image.
 let dataURL = PaperDuck(source)
   .cropAlign(256, 256)
   .rotate180()
-  .toDataURL('image/jpeg', 0.5);
+  .toDataURL('image/jpeg', 1/2);
 // => data:image/jpeg;base64,...
 ```
 
