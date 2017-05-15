@@ -61,19 +61,6 @@ object.addEventListener('change', function() {
 
 ---
 
-`.blankContext(w = 0, h = 0)`
-
-Creates a new instance of `CanvasRenderingContext2D` of the given size.
-
-| argument | description |
-| ---: | :--- |
-| `w` | The width of the context. |
-| `h` | The height of the context. |
-
-Returns .
-
----
-
 `.blank(w = 0, h = 0)`
 
 Creates a PaperDuck instance with a blank transparent image of the given size.
@@ -304,3 +291,16 @@ let image = PaperDuck(canvas)
 image.style.border = '1px solid BlueViolet';
 document.body.appendChild(image);
 ```
+
+---
+
+`.blankContext(w = 0, h = 0)`
+
+Creates a new instance of `CanvasRenderingContext2D` of the given size.
+
+| argument | description |
+| ---: | :--- |
+| `w` | The width of the context. |
+| `h` | The height of the context. |
+
+Returns the created instance.
