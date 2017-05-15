@@ -10,9 +10,15 @@ Try out the [demo](https://seregpie.github.io/PaperDuck/)!
 
 ## members
 
-`PaperDuck(source)`
+`PaperDuck(...args)`
 
-Creates a new instance of `PaperDuck`.
+Is a shortcut for `.from()`.
+
+---
+
+`.from(source)`
+
+Creates an instance of `PaperDuck`.
 
 | argument | description |
 | ---: | :--- |
@@ -21,22 +27,6 @@ Creates a new instance of `PaperDuck`.
 ```javascript
 let canvas = document.getElementById('demo');
 let instance = PaperDuck(canvas);
-```
-
----
-
-`.constructor(context)`
-
-Creates a new instance of `PaperDuck`.
-
-| argument | description |
-| ---: | :--- |
-| `context` | The instance of `CanvasRenderingContext2D` .  |
-
-```javascript
-let canvas = document.getElementById('demo');
-let context = canvas.getContext('2d');
-let instance = new PaperDuck(context);
 ```
 
 ---
@@ -68,6 +58,19 @@ object.addEventListener('change', function() {
     });
 });
 ```
+
+---
+
+`.blankContext(w = 0, h = 0)`
+
+Creates a new instance of `CanvasRenderingContext2D` of the given size.
+
+| argument | description |
+| ---: | :--- |
+| `w` | The width of the context. |
+| `h` | The height of the context. |
+
+Returns .
 
 ---
 
