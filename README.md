@@ -18,20 +18,25 @@ Is a shortcut for `.from()`.
 
 `.from(source)`
 
-Creates an instance of `PaperDuck`.
+Creates an instance of `PaperDuck` from the given image source. If the source is an instance of `PaperDuck`, returns it.
 
 | argument | description |
 | ---: | :--- |
-| `source` | An element to draw into the context. The value can be any canvas image source, such as an `HTMLImageElement`, an `HTMLVideoElement`, an `HTMLCanvasElement` or an `ImageBitmap`. |
+| `source` |  An element to draw into the context. The value can be any canvas image source, such as an `HTMLImageElement`, an `HTMLVideoElement`, an `HTMLCanvasElement` or an `ImageBitmap`. |
+
+Returns the created instance.
 
 ```javascript
 let canvas = document.getElementById('demo');
-let instance = PaperDuck(canvas);
+let instance = PaperDuck.from(canvas);
+console.log(instance instanceof PaperDuck); // => true
 ```
 
 ---
 
 `.load(source)`
+
+
 
 | argument | description |
 | ---: | :--- |
@@ -63,14 +68,14 @@ object.addEventListener('change', function() {
 
 `.blank(w = 0, h = 0)`
 
-Creates a PaperDuck instance with a blank transparent image of the given size.
+Creates an instance of `PaperDuck` with a blank transparent image of the given size.
 
 | argument | description |
 | ---: | :--- |
 | `w` | The width of the image. |
 | `h` | The height of the image. |
 
-Returns a new instance of `PaperDuck`.
+Returns the created instance.
 
 ---
 
@@ -163,11 +168,10 @@ Resizes the image proportionally by the given factor.
 Returns a new instance of `PaperDuck`. Can also return the same instance, if no changes were made.
 
 ```javascript
-let canvas = PaperDuck(source).scale(5).toCanvas();
-```
-
-```javascript
-let canvas = PaperDuck(source).scale(1/3).toCanvas();
+let canvas = document.getElementById('demo');
+let instance = PaperDuck(canvas);
+let enlargedCanvas = instance.scale(5).toCanvas();
+let reducedCanvas = instance.scale(1/3).toCanvas();
 ```
 
 ---
