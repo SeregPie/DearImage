@@ -31,7 +31,7 @@ Creates a new instance of PaperDuck.
 
 | argument | description |
 | ---: | :--- |
-| `context` | ... |
+| `context` | The instance of `CanvasRenderingContext2D` .  |
 
 ```javascript
 let canvas = document.getElementById('demo');
