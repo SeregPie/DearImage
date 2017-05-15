@@ -1,6 +1,6 @@
 # PaperDuck
 
-Manipulates images in the browser via native canvas functions.
+Manipulates images in the browser via native functions of `CanvasRenderingContext2D`.
 
 Try out the [demo](https://seregpie.github.io/PaperDuck/)!
 
@@ -12,11 +12,11 @@ Try out the [demo](https://seregpie.github.io/PaperDuck/)!
 
 `PaperDuck(source)`
 
-Creates a new instance of PaperDuck.
+Creates a new instance of `PaperDuck`.
 
 | argument | description |
 | ---: | :--- |
-| `source` | An element to draw into the context. The value can be any canvas image source, such as an HTMLImageElement, an HTMLVideoElement, an HTMLCanvasElement or an ImageBitmap. |
+| `source` | An element to draw into the context. The value can be any canvas image source, such as an `HTMLImageElement`, an `HTMLVideoElement`, an `HTMLCanvasElement` or an `ImageBitmap`. |
 
 ```javascript
 let canvas = document.getElementById('demo');
@@ -27,7 +27,7 @@ let instance = PaperDuck(canvas);
 
 `.constructor(context)`
 
-Creates a new instance of PaperDuck.
+Creates a new instance of `PaperDuck`.
 
 | argument | description |
 | ---: | :--- |
@@ -80,7 +80,7 @@ Creates a PaperDuck instance with a blank transparent image of the given size.
 | `w` | The width of the image. |
 | `h` | The height of the image. |
 
-Returns a new instance of PaperDuck.
+Returns a new instance of `PaperDuck`.
 
 ---
 
@@ -116,7 +116,7 @@ Resizes the image to the given size.
 | `h` | The height of the resized image. If the value is not a number, the height scales proportionally to the width. |
 | `smoothing` | The smoothing factor. The value must be is greater than or equal to 1. 1 means no smoothing. |
 
-Returns a new instance of PaperDuck. Can also return the same instance, if no changes were made.
+Returns a new instance of `PaperDuck`. Can also return the same instance, if no changes were made.
 
 ```javascript
 let canvas = PaperDuck(source).resize('', 512, 5/2).toCanvas();
@@ -135,7 +135,7 @@ Positions and crops the image to the given size.
 | `w` | The width of the cropped image. A negative value starts cropping from the right offset and goes to the left. |
 | `h` | The height of the cropped image. A negative value starts cropping from the bottom offset and goes to the top. |
 
-Returns a new instance of PaperDuck. Can also return the same instance, if no changes were made.
+Returns a new instance of `PaperDuck`. Can also return the same instance, if no changes were made.
 
 ```javascript
 let canvas = PaperDuck(source).crop(128, -512, '', 256).toCanvas();
@@ -153,7 +153,7 @@ Aligns and crops the image to the given size.
 | `h` | The height of the cropped image. |
 | `align` | The alignment of the cropping. Possible values are `'top left'`, `'top'`, `'top right'`, `'left'`, `'center'`, `'right'`, `'bottom left'`, `'bottom'` and `'bottom right'`. The order of words does not matter. |
 
-Returns a new instance of PaperDuck. Can also return the same instance, if no changes were made.
+Returns a new instance of `PaperDuck`. Can also return the same instance, if no changes were made.
 
 ```javascript
 let canvas = PaperDuck(source).cropAlign(256, 128, 'left bottom').toCanvas();
@@ -170,7 +170,7 @@ Resizes the image proportionally by the given factor.
 | `factor` | The scale factor. If the value is greater than 1, the image is an enlargement. If the value is between 0 and 1, the image is a reduction. |
 | `smoothing` | The smoothing factor. The value must be is greater than or equal to 1. 1 means no smoothing. |
 
-Returns a new instance of PaperDuck. Can also return the same instance, if no changes were made.
+Returns a new instance of `PaperDuck`. Can also return the same instance, if no changes were made.
 
 ```javascript
 let canvas = PaperDuck(source).scale(5).toCanvas();
@@ -186,7 +186,7 @@ let canvas = PaperDuck(source).scale(1/3).toCanvas();
 
 Flips the image vertically.
 
-Returns a new instance of PaperDuck. Can also return the same instance, if no changes were made.
+Returns a new instance of `PaperDuck`. Can also return the same instance, if no changes were made.
 
 ```javascript
 let canvas = PaperDuck(source).flip().toCanvas();
@@ -198,7 +198,7 @@ let canvas = PaperDuck(source).flip().toCanvas();
 
 Flops the image horizontally.
 
-Returns a new instance of PaperDuck. Can also return the same instance, if no changes were made.
+Returns a new instance of `PaperDuck`. Can also return the same instance, if no changes were made.
 
 ```javascript
 let canvas = PaperDuck(source).flop().toCanvas();
@@ -210,7 +210,7 @@ let canvas = PaperDuck(source).flop().toCanvas();
 
 Rotates the image by 90 degrees clockwise.
 
-Returns a new instance of PaperDuck. Can also return the same instance, if no changes were made.
+Returns a new instance of `PaperDuck`. Can also return the same instance, if no changes were made.
 
 ```javascript
 let canvas = PaperDuck(source).rotate90().toCanvas();
@@ -222,7 +222,7 @@ let canvas = PaperDuck(source).rotate90().toCanvas();
 
 Rotates the image by 180 degrees.
 
-Returns a new instance of PaperDuck. Can also return the same instance, if no changes were made.
+Returns a new instance of `PaperDuck`. Can also return the same instance, if no changes were made.
 
 ```javascript
 let canvas = PaperDuck(source).rotate180().toCanvas();
@@ -234,7 +234,7 @@ let canvas = PaperDuck(source).rotate180().toCanvas();
 
 Rotates the image by 270 degrees clockwise.
 
-Returns a new instance of PaperDuck. Can also return the same instance, if no changes were made.
+Returns a new instance of `PaperDuck`. Can also return the same instance, if no changes were made.
 
 ```javascript
 let canvas = PaperDuck(source).rotate270().toCanvas();
