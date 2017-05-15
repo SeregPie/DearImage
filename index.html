@@ -4,10 +4,20 @@
 		<title>PaperDuck</title>
 		<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0"/>
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.20/css/uikit.min.css"/>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.20/js/uikit.min.js"></script>
-		<script src="PaperDuck.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.22/css/uikit.min.css"/>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.22/js/uikit.min.js"></script>
+		<script src="src/PaperDuck.js"></script>
+		<script src="src/load.js"></script>
+		<script src="src/fn.crop.js"></script>
+		<script src="src/fn.clipScale.js"></script>
+		<script src="src/fn.cropAlign.js"></script>
+		<script src="src/fn.cropScale.js"></script>
+		<script src="src/fn.flip.js"></script>
+		<script src="src/fn.resize.js"></script>
+		<script src="src/fn.rotate90.js"></script>
+		<script src="src/fn.scale.js"></script>		
+		<script src="src/fn.scaleBy.js"></script>
 		<link rel="stylesheet" href="demo/demo.css"/>
 		<script src="demo/demo.js"></script>
 	</head>
@@ -34,7 +44,7 @@
 						<li><a href="#resize">resize</a></li>
 						<li><a href="#scale">scale</a></li>
 						<li><a href="#scaleMin_scaleMax">scaleMin &amp; scaleMax</a></li>
-						<li><a href="#scaleCrop">scaleCrop</a></li>
+						<li><a href="#cropScale">cropScale</a></li>
 						<li><a href="#flip_flop">flip &amp; flop</a></li>
 						<li><a href="#rotate">rotate</a></li>
 					</ul>
@@ -76,17 +86,17 @@
 				<h2 id="cropAlign">cropAlign</h2>
 				<div class="uk-flex uk-flex-wrap uk-flex-around">
 					<code class="run">.cropAlign(300, 300, 'top left')</code>
-					<code class="run">.cropAlign(300, 300, 'top center')</code>
+					<code class="run">.cropAlign(300, 300, 'top')</code>
 					<code class="run">.cropAlign(300, 300, 'top right')</code>
 				</div>
 				<div class="uk-flex uk-flex-wrap uk-flex-around">
-					<code class="run">.cropAlign(300, 300, 'center left')</code>
-					<code class="run">.cropAlign(300, 300, 'center')</code>
-					<code class="run">.cropAlign(300, 300, 'center right')</code>
+					<code class="run">.cropAlign(300, 300, 'left')</code>
+					<code class="run">.cropAlign(300, 300)</code>
+					<code class="run">.cropAlign(300, 300, 'right')</code>
 				</div>
 				<div class="uk-flex uk-flex-wrap uk-flex-around">
 					<code class="run">.cropAlign(300, 300, 'bottom left')</code>
-					<code class="run">.cropAlign(300, 300, 'bottom center')</code>
+					<code class="run">.cropAlign(300, 300, 'bottom')</code>
 					<code class="run">.cropAlign(300, 300, 'bottom right')</code>
 				</div>
 				<hr/>
@@ -142,19 +152,19 @@
 					<code class="run">.scaleMax(200, 200)</code>
 				</div>
 				<hr/>
-				<h2 id="scaleCrop">scaleCrop</h2>
+				<h2 id="cropScale">cropScale</h2>
 				<div class="uk-flex uk-flex-wrap uk-flex-around uk-flex-middle">
 					<div class="uk-flex uk-flex-column">
-						<code class="run">.scaleCrop(200, 200)</code>
-						<code class="run">.scaleCrop(200, 200, 'top left')</code>
+						<code class="run">.cropScale(200, 200)</code>
+						<code class="run">.cropScale(200, 200, 'top left')</code>
 					</div>
 					<div class="uk-flex uk-flex-column">
-						<code class="run">.scaleCrop(300, 100)</code>
-						<code class="run">.scaleCrop(300, 100, 'top left')</code>
+						<code class="run">.cropScale(300, 100)</code>
+						<code class="run">.cropScale(300, 100, 'top left')</code>
 					</div>
 					<div class="uk-flex">
-						<code class="run">.scaleCrop(100, 300)</code>
-						<code class="run">.scaleCrop(100, 300, 'top left')</code>
+						<code class="run">.cropScale(100, 300)</code>
+						<code class="run">.cropScale(100, 300, 'top left')</code>
 					</div>
 				</div>
 				<hr/>
