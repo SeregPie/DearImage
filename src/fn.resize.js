@@ -12,10 +12,8 @@
 		if (!isNaN(sizeY)) {
 			sizeY = Math.abs(sizeY);
 		}
-		var ctx = this.ctx;
-		var canvas = ctx.canvas;
-		var currSizeX = canvas.width;
-		var currSizeY = canvas.height;
+		var currSizeX = this.getWidth();
+		var currSizeY = this.getHeight();
 		if (isNaN(sizeX)) {
 			if (currSizeY === 0) {
 				return this.constructor.blank(0, sizeY);
@@ -44,29 +42,30 @@
 			smoothing = Infinity;
 		}
 		var finished;
-		var _getNextSize = function(currSize, finalSize) {
-			if (currSize < finalSize) {
-				currSize = Math.min(Math.round(currSize * smoothing), finalSize);
+		var _getNextSize = function(currSize, lastSize) {
+			if (currSize < lastSize) {
+				currSize = Math.min(Math.round(currSize * smoothing), lastSize);
 			} else
-			if (currSize > finalSize) {
-				currSize = Math.max(Math.round(currSize / smoothing), finalSize);
+			if (currSize > lastSize) {
+				currSize = Math.max(Math.round(currSize / smoothing), lastSize);
 			} else {
-				return finalSize;
+				return lastSize;
 			}
 			finished = false;
 			return currSize;
 		};
+		var canvas = this.toCanvas();
 		for (var i = 64; i--;) {
 			finished = true;
 			currSizeX = _getNextSize(currSizeX, sizeX);
 			currSizeY = _getNextSize(currSizeY, sizeY);
 			if (finished) break;
-			ctx = this.constructor.blankContext(currSizeX, currSizeY);
+			var ctx = this.constructor.blankContext(currSizeX, currSizeY);
 			ctx.scale(currSizeX / canvas.width, currSizeY / canvas.height);
 			ctx.drawImage(canvas, 0, 0);
 			canvas = ctx.canvas;
 		}
-		return new this.constructor(ctx);
+		return this.constructor.from(canvas);
 	};
 
 }).call(this, PaperDuck);

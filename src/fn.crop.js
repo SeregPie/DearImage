@@ -5,9 +5,8 @@
 		offsetY = parseInt(offsetY);
 		sizeX = parseInt(sizeX);
 		sizeY = parseInt(sizeY);
-		var ctx = this.ctx;
-		var currSizeX = ctx.canvas.width;
-		var currSizeY = ctx.canvas.height;
+		var currSizeX = this.getWidth();
+		var currSizeY = this.getHeight();
 		if (isNaN(offsetX)) {
 			offsetX = 0;
 		} else if (offsetX < 0) {
@@ -44,12 +43,9 @@
 		if (sizeX === 0 || sizeY === 0) {
 			return this.constructor.blank(sizeX, sizeY);
 		}
-		var canvas = ctx.canvas;
-		ctx = document.createElement('canvas').getContext('2d');
-		ctx.canvas.width = sizeX;
-		ctx.canvas.height = sizeY;
-		ctx.drawImage(canvas, offsetX, offsetY, sizeX, sizeY, 0, 0, sizeX, sizeY);
-		return new this.constructor(ctx);
+		var ctx = this.constructor.blankContext(sizeX, sizeY);
+		ctx.drawImage(this.toCanvas(), offsetX, offsetY, sizeX, sizeY, 0, 0, sizeX, sizeY);
+		return this.constructor.from(ctx);
 	};
 
 }).call(this, PaperDuck);

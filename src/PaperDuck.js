@@ -1,23 +1,7 @@
 (function() {
 
-	var PaperDuck = function(source) {
-		if (!(this instanceof PaperDuck)) {
-			if (source) {
-				if (source instanceof PaperDuck) {
-					return source;
-				}
-				if (source.canvas instanceof HTMLCanvasElement) {
-					source = source.canvas;
-				}
-				var sizeX = source.naturalWidth || source.width;
-				var sizeY = source.naturalHeight || source.height;
-				var ctx =  PaperDuck.blankContext(sizeX, sizeY);
-				ctx.drawImage(source, 0, 0);
-				return new PaperDuck(ctx);
-			}
-			return PaperDuck.blank();
-		}
-		this.ctx = source;
+	var PaperDuck = function(canvas) {
+		this.canvas = canvas
 	};
 
 	PaperDuck.blankContext = function(sizeX, sizeY) {
@@ -39,24 +23,45 @@
 		return ctx;
 	};
 
+	PaperDuck.from = (function() {
+		var fromCanvasImageSource = function(source) {
+			var sizeX = source.naturalWidth || source.width;
+			var sizeY = source.naturalHeight || source.height;
+			var ctx =  this.blankContext(sizeX, sizeY);
+			ctx.drawImage(source, 0, 0);
+			var canvas = ctx.canvas;
+			return new this(canvas);
+		};
+
+		return function(value) {
+			if (value instanceof this) {
+				return value;
+			}
+			try {
+				if (value.canvas instanceof HTMLCanvasElement) {
+					return fromCanvasImageSource.call(this, value.canvas);
+				}
+				return fromCanvasImageSource.call(this, value);
+			} catch (e) {
+				return this.blank();
+			}
+		};
+	})();
+
 	PaperDuck.blank = function(sizeX, sizeY) {
-		var ctx = this.blankContext(sizeX, sizeY);
-		return new this(ctx);
+		var canvas = this.blankContext(sizeX, sizeY).canvas;
+		return new this(canvas);
 	};
 
 	PaperDuck.fn = PaperDuck.prototype = {
 		constructor: PaperDuck,
 
 		getWidth: function() {
-			return this.ctx.canvas.width;
+			return this.canvas.width;
 		},
 
 		getHeight: function() {
-			return this.ctx.canvas.height;
-		},
-
-		drawImage: function(image, offsetX, offsetY) {
-			// ??
+			return this.canvas.height;
 		},
 
 		toImage: function() {
@@ -74,15 +79,13 @@
 		},
 
 		toContext: function() {
-			var canvas = this.ctx.canvas;
-			var ctx = this.constructor.blankContext(canvas.width, canvas.height);
-			ctx.drawImage(canvas, 0, 0);
+			var ctx = this.constructor.blankContext(this.canvas.width, this.canvas.height);
+			ctx.drawImage(this.canvas, 0, 0);
 			return ctx;
 		},
 
 		toDataURL: function() {
-			var canvas = this.ctx.canvas;
-			return canvas.toDataURL.apply(canvas, arguments);
+			return this.canvas.toDataURL.apply(this.canvas, arguments);
 		},
 	};
 
