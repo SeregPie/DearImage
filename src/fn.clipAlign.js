@@ -1,6 +1,6 @@
 (function(PaperDuck) {
 
-	PaperDuck.fn.cropAlign = function(sizeX, sizeY, align) {
+	PaperDuck.fn.clipAlign = function(sizeX, sizeY, align) {
 		sizeX = parseInt(sizeX);
 		sizeY = parseInt(sizeY);
 		var currSizeX = this.getWidth();
@@ -9,13 +9,11 @@
 			sizeX = currSizeX;
 		} else {
 			sizeX = Math.abs(sizeX);
-			sizeX = Math.min(sizeX, currSizeX);
 		}
 		if (isNaN(sizeY)) {
 			sizeY = currSizeY;
 		} else {
 			sizeY = Math.abs(sizeY);
-			sizeY = Math.min(sizeY, currSizeY);
 		}
 		if (sizeX === currSizeX && sizeY === currSizeY) {
 			return this;
@@ -45,23 +43,23 @@
 			.join(' ');
 		switch (align) {
 			case 'left top':
-				return this.crop(0, 0, sizeX, sizeY);
+				return this.clip(0, 0, sizeX, sizeY);
 			case 'right top':
-				return this.crop(-sizeX, 0, Infinity, sizeY);
+				return this.clip(-sizeX, 0, sizeX, sizeY);
 			case 'bottom left':
-				return this.crop(0, -sizeY, sizeX, Infinity);
+				return this.clip(0, -sizeY, sizeX, sizeY);
 			case 'bottom right':
-				return this.crop(-sizeX, -sizeY, Infinity, Infinity);
+				return this.clip(-sizeX, -sizeY, sizeX, sizeY);
 			case 'left':
-				return this.crop(0, Math.max((currSizeY - sizeY) / 2, 0), sizeX, sizeY);
+				return this.clip(0, (currSizeY + sizeY) / 2, sizeX, -sizeY);
 			case 'right':
-				return this.crop(-sizeX, Math.max((currSizeY - sizeY) / 2, 0), Infinity, sizeY);
+				return this.clip(-sizeX, (currSizeY + sizeY) / 2, sizeX, -sizeY);
 			case 'top':
-				return this.crop(Math.max((currSizeX - sizeX) / 2, 0), 0, sizeX, sizeY);
+				return this.clip((currSizeX + sizeX) / 2, 0, -sizeX, sizeY);
 			case 'bottom':
-				return this.crop(Math.max((currSizeX - sizeX) / 2, 0), -sizeY, sizeX, Infinity);
+				return this.clip((currSizeX + sizeX) / 2, -sizeY, -sizeX, sizeY);
 		}
-		return this.crop(Math.max((currSizeX - sizeX) / 2, 0), Math.max((currSizeY - sizeY) / 2, 0), sizeX, sizeY);
+		return this.clip((currSizeX + sizeX) / 2, (currSizeY + sizeY) / 2, -sizeX, -sizeY);
 	};
 
 }).call(this, PaperDuck);

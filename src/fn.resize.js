@@ -57,12 +57,14 @@
 		var canvas = this.toCanvas();
 		for (var i = 64; i--;) {
 			finished = true;
-			currSizeX = _getNextSize(currSizeX, sizeX);
-			currSizeY = _getNextSize(currSizeY, sizeY);
+			var nextSizeX = _getNextSize(currSizeX, sizeX);
+			var nextSizeY = _getNextSize(currSizeY, sizeY);
 			if (finished) break;
-			var ctx = this.constructor.blankContext(currSizeX, currSizeY);
-			ctx.scale(currSizeX / canvas.width, currSizeY / canvas.height);
+			var ctx = this.constructor.blankContext(nextSizeX, nextSizeY);
+			ctx.scale(nextSizeX / currSizeX, nextSizeY / currSizeY);
 			ctx.drawImage(canvas, 0, 0);
+			currSizeX = nextSizeX;
+			currSizeY = nextSizeY;
 			canvas = ctx.canvas;
 		}
 		return this.constructor.from(canvas);

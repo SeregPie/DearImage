@@ -1,34 +1,43 @@
 (function(PaperDuck) {
 
 	PaperDuck.fn.clip = function(offsetX, offsetY, sizeX, sizeY) {
-		sizeX = parseInt(sizeX);
-		sizeY = parseInt(sizeY);
-		if (sizeX === 0 || sizeY === 0) {
-			//return this.constructor.empty(sizeX, sizeY);
-		}
 		offsetX = parseInt(offsetX);
 		offsetY = parseInt(offsetY);
-		var ctx = this.ctx;
-		var canvas = ctx.canvas;
-		var currSizeX = canvas.width;
-		var currSizeY = canvas.height;
-		if (sizeX < 0) {
-			offsetX += sizeX;
+		sizeX = parseInt(sizeX);
+		sizeY = parseInt(sizeY);
+		var currSizeX = this.getWidth();
+		var currSizeY = this.getHeight();
+		if (isNaN(offsetX)) {
+			offsetX = 0;
+		} else if (offsetX < 0) {
+			offsetX += currSizeX;
+		}
+		if (isNaN(offsetY)) {
+			offsetY = 0;
+		} else if (offsetY < 0) {
+			offsetY += currSizeY;
+		}
+		if (isNaN(sizeX)) {
+			sizeX = currSizeX;
+		} else if (sizeX < 0) {
 			sizeX = -sizeX;
+			offsetX -= sizeX;
 		}
-		if (sizeY < 0) {
-			offsetY += sizeY;
+		if (isNaN(sizeY)) {
+			sizeY = currSizeY;
+		} else if (sizeY < 0) {
 			sizeY = -sizeY;
+			offsetY -= sizeY;
 		}
-		if (offsetX === 0 && sizeX === currSizeX && offsetY === 0 && sizeY === currSizeY) {
+		if (offsetX === 0 && offsetY === 0 && sizeX === currSizeX && sizeY === currSizeY) {
 			return this;
 		}
-		ctx = document.createElement('canvas').getContext('2d');
-		ctx.canvas.width = sizeX;
-		ctx.canvas.height = sizeY;
-		console.log('clip', -offsetX, -offsetY, currSizeX, currSizeY);
-		ctx.drawImage(canvas, -offsetX, -offsetY, currSizeX, currSizeY);
-		return new this.constructor(ctx);
+		if (sizeX === 0 || sizeY === 0) {
+			return this.constructor.blank(sizeX, sizeY);
+		}
+		var ctx = this.constructor.blankContext(sizeX, sizeY);
+		ctx.drawImage(this.toCanvas(), -offsetX, -offsetY);
+		return this.constructor.from(ctx);
 	};
 
 }).call(this, PaperDuck);

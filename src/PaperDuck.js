@@ -1,6 +1,9 @@
 (function() {
 
 	var PaperDuck = function(canvas) {
+		if (!(this instanceof PaperDuck)) {
+			return PaperDuck.from.apply(PaperDuck, arguments);
+		}
 		this.canvas = canvas
 	};
 
@@ -23,8 +26,13 @@
 		return ctx;
 	};
 
+	PaperDuck.blank = function(sizeX, sizeY) {
+		var canvas = this.blankContext(sizeX, sizeY).canvas;
+		return new this(canvas);
+	};
+
 	PaperDuck.from = (function() {
-		var fromCanvasImageSource = function(source) {
+		var fromImageSource = function(source) {
 			var sizeX = source.naturalWidth || source.width;
 			var sizeY = source.naturalHeight || source.height;
 			var ctx =  this.blankContext(sizeX, sizeY);
@@ -34,26 +42,21 @@
 		};
 
 		return function(value) {
-			if (value instanceof this) {
-				return value;
-			}
 			try {
-				if (value.canvas instanceof HTMLCanvasElement) {
-					return fromCanvasImageSource.call(this, value.canvas);
+				if (value instanceof this) {
+					return value;
 				}
-				return fromCanvasImageSource.call(this, value);
-			} catch (e) {
+				if (value.canvas instanceof HTMLCanvasElement) {
+					return fromImageSource.call(this, value.canvas);
+				}
+				return fromImageSource.call(this, value);
+			} catch (error) {
 				return this.blank();
 			}
 		};
 	})();
 
-	PaperDuck.blank = function(sizeX, sizeY) {
-		var canvas = this.blankContext(sizeX, sizeY).canvas;
-		return new this(canvas);
-	};
-
-	PaperDuck.fn = PaperDuck.prototype = {
+	PaperDuck.prototype = {
 		constructor: PaperDuck,
 
 		getWidth: function() {
@@ -88,6 +91,8 @@
 			return this.canvas.toDataURL.apply(this.canvas, arguments);
 		},
 	};
+
+	PaperDuck.fn = PaperDuck.prototype;
 
 	this.PaperDuck = PaperDuck;
 

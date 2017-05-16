@@ -1,19 +1,20 @@
 (function(PaperDuck) {
-	
+
 	//var URL = this.URL || this.webkitURL;
-	
+
 	var _isArrayLike = function(value) {
 		return value && typeof value.length === 'number' && (value.length - 1) in value
 	};
-	
-	
+
+
+
 	var loadArrayLike = function(array) {
 		if (array.length > 0) {
 			return this.load(array[0]);
 		}
 		return this.blank();
 	};
-	
+
 	var loadImage = function(image) {
 		if (image.complete) {
 			return this.from(image);
@@ -26,20 +27,20 @@
 					reject(image);
 				}
 			}.bind(this));
-			
+
 			image.addEventListener('error', function() {
 				reject(image);
 			});
 		}.bind(this));
 	};
-	
+
 	var loadString = function(string) {
 		var image = new Image();
 		image.crossOrigin = 'anonymous';
 		image.src = string;
 		return loadImage.call(this, image);
 	};
-	
+
 	var loadInputElement = function(element) {
 		if (element.type === 'file') {
 			return loadArrayLike.call(this, element.files);
@@ -59,13 +60,13 @@
 					reject(reader);
 				}
 			}.bind(this));
-			
+
 			reader.addEventListener('error', function() {
 				reject(reader);
 			});
 		}.bind(this));
 	};
-	
+
 	var loadFile = function(file) {
 		var reader  = new FileReader();
 		reader.readAsDataURL(file);
@@ -73,7 +74,7 @@
 	};
 
 	PaperDuck.load = function(source) {
-		return Promise.resolve().then(function() {			
+		return Promise.resolve().then(function() {
 			if (typeof source === 'string') {
 				return loadString.call(this, source);
 			}

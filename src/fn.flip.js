@@ -4,7 +4,10 @@
 		var sizeX = this.getWidth();
 		var sizeY = this.getHeight();
 		if (sizeX === 0 || sizeY === 0) {
-			return this;
+			if (sizeX === sizeY) {
+				return this;
+			}
+			return this.constructor.blank(sizeX, sizeY);
 		}
 		var ctx = this.constructor.blankContext(sizeX, sizeY);
 		ctx.translate(_x ? sizeX : 0, _y ? sizeY : 0);
