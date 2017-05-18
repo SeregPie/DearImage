@@ -18,7 +18,7 @@ Is a shortcut for `.from()`.
 
 `.from(source)`
 
-Creates an instance of `PaperDuck` from the given image source. If the source is an instance of `PaperDuck`, returns it.
+Creates an instance of `PaperDuck` from the given source. If the source is an instance of `PaperDuck`, returns it.
 
 | argument | description |
 | ---: | :--- |
@@ -207,7 +207,7 @@ Returns a new instance of `PaperDuck`. Can also return the same instance, if no 
 ```javascript
 let canvas = document.getElementById('demo');
 let instance = PaperDuck(canvas);
-let enlargedCanvas = instance.scale(5).toCanvas();
+let enlargedCanvas = instance.scale(3).toCanvas();
 let reducedCanvas = instance.scale(1/3).toCanvas();
 ```
 ---
@@ -278,7 +278,7 @@ let canvas = PaperDuck(source).rotate180().toCanvas();
 
 `.fn.rotate270()`
 
-Rotates the image by 270 degrees clockwise.
+Rotates the image by 90 degrees counterclockwise.
 
 Returns a new instance of `PaperDuck`. Can also return the same instance, if no changes were made.
 
