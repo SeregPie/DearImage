@@ -119,7 +119,13 @@ let canvas = PaperDuck(source).resize('', 512, 5/2).toCanvas();
 
 ---
 
-`.fn.crop(x = 0, y = 0, w = ∞, h = ∞)`
+`.fn.clip(x = 0, y = 0, w = 'same', h = 'same')`
+
+Positions and clips the image to the given size.
+
+---
+
+`.fn.crop(x = 0, y = 0, w = 'same', h = 'same')`
 
 Positions and crops the image to the given size.
 
@@ -138,7 +144,13 @@ let canvas = PaperDuck(source).crop(128, -512, '', 256).toCanvas();
 
 ---
 
-`.fn.cropAlign(w = ∞, h = ∞, align = 'center')`
+`.fn.clipAlign(w = 'same', h = 'same', align = 'center')`
+
+Aligns and clips the image to the given size.
+
+---
+
+`.fn.cropAlign(w = 'same', h = 'same', align = 'center')`
 
 Aligns and crops the image to the given size.
 
@@ -173,6 +185,29 @@ let instance = PaperDuck(canvas);
 let enlargedCanvas = instance.scale(5).toCanvas();
 let reducedCanvas = instance.scale(1/3).toCanvas();
 ```
+---
+
+`.fn.scaleMin(w = 'same', h = 'same', smoothing = 2)`
+
+---
+
+`.fn.scaleMax(w = 'same', h = 'same', smoothing = 2)`
+
+---
+
+`.fn.clipScale(w = 'same', h = 'same', align = 'center', smoothing = 2)`
+
+---
+
+`.fn.cropScale(w = 'same', h = 'same', align = 'center', smoothing = 2)`
+
+---
+
+`.fn.drawForeground(image, align = 'center')`
+
+---
+
+`.fn.drawBackground(image, align = 'center')`
 
 ---
 
