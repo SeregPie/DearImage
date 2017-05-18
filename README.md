@@ -123,6 +123,19 @@ let canvas = PaperDuck(source).resize('', 512, 5/2).toCanvas();
 
 Positions and clips the image to the given size.
 
+| argument | description |
+| ---: | :--- |
+| `x` | The left offset of the clipping. A negative value is a right offset. |
+| `y` | The top offset of the clipping. A negative value is a bottom offset. |
+| `w` | The width of the clipped image. A negative value (starts clipping from the right offset and goes to the left). |
+| `h` | The height of the clipped image. A negative value (starts clipping from the bottom offset and goes to the top). |
+
+Returns a new instance of `PaperDuck`. Can also return the same instance, if no changes were made.
+
+```javascript
+let canvas = PaperDuck(source).clip(128, -512, '', 256).toCanvas();
+```
+
 ---
 
 `.fn.crop(x = 0, y = 0, w = 'same', h = 'same')`
@@ -133,8 +146,8 @@ Positions and crops the image to the given size.
 | ---: | :--- |
 | `x` | The left offset of the cropping. A negative value is a right offset. |
 | `y` | The top offset of the cropping. A negative value is a bottom offset. |
-| `w` | The width of the cropped image. A negative value starts cropping from the right offset and goes to the left. |
-| `h` | The height of the cropped image. A negative value starts cropping from the bottom offset and goes to the top. |
+| `w` | The width of the cropped image. ??? |
+| `h` | The height of the cropped image. ??? |
 
 Returns a new instance of `PaperDuck`. Can also return the same instance, if no changes were made.
 
@@ -147,6 +160,18 @@ let canvas = PaperDuck(source).crop(128, -512, '', 256).toCanvas();
 `.fn.clipAlign(w = 'same', h = 'same', align = 'center')`
 
 Aligns and clips the image to the given size.
+
+| argument | description |
+| ---: | :--- |
+| `w` | The width of the clipped image. |
+| `h` | The height of the clipped image. |
+| `align` | The alignment of the clipping. Possible values are `'top left'`, `'top'`, `'top right'`, `'left'`, `'center'`, `'right'`, `'bottom left'`, `'bottom'` and `'bottom right'`. The order of words does not matter. |
+
+Returns a new instance of `PaperDuck`. Can also return the same instance, if no changes were made.
+
+```javascript
+let canvas = PaperDuck(source).clipAlign(128, 256, 'right top').toCanvas();
+```
 
 ---
 
@@ -200,14 +225,6 @@ let reducedCanvas = instance.scale(1/3).toCanvas();
 ---
 
 `.fn.cropScale(w = 'same', h = 'same', align = 'center', smoothing = 2)`
-
----
-
-`.fn.drawForeground(image, align = 'center')`
-
----
-
-`.fn.drawBackground(image, align = 'center')`
 
 ---
 
@@ -268,6 +285,14 @@ Returns a new instance of `PaperDuck`. Can also return the same instance, if no 
 ```javascript
 let canvas = PaperDuck(source).rotate270().toCanvas();
 ```
+
+---
+
+`.fn.drawForeground(image, align = 'center')`
+
+---
+
+`.fn.drawBackground(image, align = 'center')`
 
 ---
 
