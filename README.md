@@ -45,23 +45,26 @@ console.log(instance instanceof PaperDuck); // => true
 Returns a promise that is resolved once the image has been loaded.
 
 ```javascript
-PaperDuck.load('/img/tree.jpg').then(instance => {
-  let canvas = instance.resize(200, '').toCanvas();
+PaperDuck.load('/path/to/image.jpg').then(instance => {
+  let canvas = instance.cropScale(256, 256).toCanvas();
   document.body.appendChild(canvas);
 });
 ```
 
 ```javascript
-object.addEventListener('change', function() {
+let input = document.createElement('input');
+input.type = 'file';
+input.addEventListener('change', function() {
   PaperDuck.load(this)
     .then(instance => {
-      let canvas = instance.resize(200, '').toCanvas();
+      let canvas = instance.cropScale(256, 256).toCanvas();
       document.body.appendChild(canvas);
     })
-    .catch(reason => {
-      alert('Ups!'):
+    .catch(() => {
+      alert('Ups!');
     });
 });
+input.click();
 ```
 
 ---
