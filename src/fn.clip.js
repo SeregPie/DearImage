@@ -37,6 +37,7 @@
 		}
 		var ctx = this.constructor.blankContext(sizeX, sizeY);
 		ctx.drawImage(this.toCanvas(), -offsetX, -offsetY);
+		//ctx.drawImage(this.toCanvas(), offsetX, offsetY, sizeX, sizeY, 0, 0, sizeX, sizeY);
 		return this.constructor.from(ctx);
 	};
 
