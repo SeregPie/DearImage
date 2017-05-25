@@ -8,10 +8,7 @@
 		var sizeX = this.getWidth();
 		var sizeY = this.getHeight();
 		if (sizeX === 0 || sizeY === 0) {
-			if (sizeX === sizeY) {
-				return this;
-			}
-			return this.constructor.blank(sizeX, sizeY);
+			return this;
 		}
 		var groundCanvas = this.constructor
 			.from(ground)
