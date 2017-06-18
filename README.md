@@ -2,7 +2,9 @@
 
 Manipulates images in the browser via native functions of `CanvasRenderingContext2D`.
 
-Try out the [demo](https://seregpie.github.io/PaperDuck/)!
+## demo
+
+[Try it out!](https://seregpie.github.io/PaperDuck/)
 
 ## dependencies
 
