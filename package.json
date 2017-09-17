@@ -1,0 +1,33 @@
+{
+	"name": "paperduck",
+	"version": "17.9.17",
+	"description": "Manipulates images in the browser via native functions of CanvasRenderingContext2D.",
+	"main": "PaperDuck.min.js",
+	"repository": {
+	"type": "git",
+		"url": "git+https://github.com/SeregPie/PaperDuck.git"
+	},
+	"keywords": [
+		"image",
+		"canvas",
+		"edit",
+		"rotate",
+		"clip",
+		"crop",
+		"scale",
+		"cover",
+		"contain",
+		"flip",
+		"flop",
+		"resize",
+		"load",
+		"url",
+		"fit"
+	],
+	"author": "Sergej Sintschilin",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/SeregPie/PaperDuck/issues"
+	},
+	"homepage": "https://github.com/SeregPie/PaperDuck#readme"
+}

@@ -10,6 +10,26 @@ Manipulates images in the browser via native functions of `CanvasRenderingContex
 
 *no dependencies*
 
+## setup
+
+Install the [package](https://www.npmjs.com/package/three.paperduck) via npm.
+
+```sh
+
+npm install three.paperduck
+
+```
+
+---
+
+Include the code in your page via a CDN.
+
+```html
+
+<script src="https://unpkg.com/paperduck"></script>
+
+```
+
 ## members
 
 `PaperDuck(...args)`
@@ -59,13 +79,13 @@ let input = document.createElement('input');
 input.type = 'file';
 input.addEventListener('change', function() {
   PaperDuck.load(this)
-    .then(instance => {
-      let canvas = instance.cropScale(256, 256).toCanvas();
-      document.body.appendChild(canvas);
-    })
-    .catch(() => {
-      alert('Ups!');
-    });
+	.then(instance => {
+	  let canvas = instance.cropScale(256, 256).toCanvas();
+	  document.body.appendChild(canvas);
+	})
+	.catch(() => {
+	  alert('Ups!');
+	});
 });
 input.click();
 ```

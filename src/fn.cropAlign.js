@@ -20,4 +20,4 @@
 		return this.clipAlign(sizeX, sizeY, align);
 	};
 
-}).call(this, PaperDuck);
+})(PaperDuck);

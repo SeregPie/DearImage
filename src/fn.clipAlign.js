@@ -62,4 +62,4 @@
 		return this.clip((currSizeX + sizeX) / 2, (currSizeY + sizeY) / 2, -sizeX, -sizeY);
 	};
 
-}).call(this, PaperDuck);
+})(PaperDuck);

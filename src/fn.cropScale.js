@@ -4,4 +4,4 @@
 		return this.scaleMax(sizeX, sizeY, smoothing).cropAlign(sizeX, sizeY, align);
 	};
 
-}).call(this, PaperDuck);
+})(PaperDuck);

@@ -4,4 +4,4 @@
 		return this.scaleMin(sizeX, sizeY, smoothing).clipAlign(sizeX, sizeY, align);
 	};
 
-}).call(this, PaperDuck);
+})(PaperDuck);

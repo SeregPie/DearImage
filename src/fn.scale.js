@@ -9,4 +9,4 @@
 		return this.resize(this.getWidth() * factor, this.getHeight() * factor, smoothing);
 	};
 
-}).call(this, PaperDuck);
+})(PaperDuck);

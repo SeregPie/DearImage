@@ -1,6 +1,6 @@
 (function(PaperDuck) {
 
-	var f = function(_cw) {
+	var f = function(cw) {
 		var sizeX = this.getHeight();
 		var sizeY = this.getWidth();
 		if (sizeX === 0 || sizeY === 0) {
@@ -11,7 +11,7 @@
 		}
 		var ctx = this.constructor.blankContext(sizeX, sizeY);
 		ctx.translate(sizeX / 2, sizeY / 2);
-		ctx.rotate(Math.PI / (_cw ? 2 : -2));
+		ctx.rotate(Math.PI / (cw ? 2 : -2));
 		ctx.drawImage(this.toCanvas(), sizeY / -2, sizeX / -2);
 		return this.constructor.from(ctx);
 	};
@@ -24,4 +24,4 @@
 		return f.call(this, false);
 	};
 
-}).call(this, PaperDuck);
+})(PaperDuck);

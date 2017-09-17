@@ -35,4 +35,4 @@
 		return f.apply(this, [false].concat(args));
 	};
 
-}).call(this, PaperDuck);
+})(PaperDuck);

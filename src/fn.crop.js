@@ -44,4 +44,4 @@
 		return this.clip(offsetX, offsetY, sizeX, sizeY);
 	};
 
-}).call(this, PaperDuck);
+})(PaperDuck);

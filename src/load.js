@@ -103,7 +103,7 @@
 		}.bind(this));
 	};
 
-}).call(this, PaperDuck);
+})(PaperDuck);
 
 /*
 if (source instanceof Uint8Array) {

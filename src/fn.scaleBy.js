@@ -49,4 +49,4 @@
 		};
 	})();
 
-}).call(this, PaperDuck);
+})(PaperDuck);

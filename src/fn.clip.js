@@ -41,4 +41,4 @@
 		return this.constructor.from(ctx);
 	};
 
-}).call(this, PaperDuck);
+})(PaperDuck);

@@ -70,4 +70,4 @@
 		return this.constructor.from(canvas);
 	};
 
-}).call(this, PaperDuck);
+})(PaperDuck);
