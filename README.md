@@ -12,11 +12,11 @@ Manipulates images in the browser via native functions of `CanvasRenderingContex
 
 ## setup
 
-Install the [package](https://www.npmjs.com/package/three.paperduck) via npm.
+Install the [package](https://www.npmjs.com/package/paperduck) via npm.
 
 ```sh
 
-npm install three.paperduck
+npm install paperduck
 
 ```
 
