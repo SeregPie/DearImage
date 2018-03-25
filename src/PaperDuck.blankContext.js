@@ -1,5 +1,5 @@
-import PaperDuck from './PaperDuck';
+import PaperDuck_blankCanvas from './PaperDuck.blankCanvas';
 
-PaperDuck.blankContext = function(sizeX, sizeY) {
-	return this.blankCanvas(sizeX, sizeY).getContext('2d');
-};
+export default function(sizeX, sizeY) {
+	return PaperDuck_blankCanvas(sizeX, sizeY).getContext('2d');
+}

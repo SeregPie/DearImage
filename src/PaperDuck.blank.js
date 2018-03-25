@@ -1,5 +1,6 @@
 import PaperDuck from './PaperDuck';
+import PaperDuck_blankContext from './PaperDuck.blankContext';
 
-PaperDuck.blank = function(sizeX, sizeY) {
-	return new this(this.blankContext(sizeX, sizeY));
-};
+export default function(sizeX, sizeY) {
+	return new PaperDuck(PaperDuck_blankContext(sizeX, sizeY));
+}

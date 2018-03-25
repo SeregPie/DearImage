@@ -1,1 +1,260 @@
-!function(t,n){"object"==typeof exports&&"undefined"!=typeof module?module.exports=n():"function"==typeof define&&define.amd?define(n):t.PaperDuck=n()}(this,function(){"use strict";var t=function(t){this.context=t},n={canvas:{configurable:!0},width:{configurable:!0},height:{configurable:!0}};function e(){return document.createElement("canvas")}function r(t){return new Promise(function(n){n(t())})}function i(t){var n=this;return r(function(){return t.readyState>1?n.load(t.result):new Promise(function(n,i){e=n,r=i,t.addEventListener("load",e),t.addEventListener("error",r)}).finally(function(){t.removeEventListener("load",e),t.removeEventListener("error",r)}).then(function(){return n.load(t.result)});var e,r})}function a(t){var n=this;return r(function(){var e=new FileReader;return e.readAsDataURL(t),i.call(n,e)})}function o(t){var n=this;return r(function(){return t.complete?n.from(t):new Promise(function(n,i){e=n,r=i,t.addEventListener("load",e),t.addEventListener("error",r)}).finally(function(){t.removeEventListener("load",e),t.removeEventListener("error",r)}).then(function(){return n.from(t)});var e,r})}function u(t){for(var n=[],e=arguments.length-1;e-- >0;)n[e]=arguments[e+1];return function(){for(var e=[],r=arguments.length;r--;)e[r]=arguments[r];return t.call.apply(t,[this].concat(n,e))}}function s(t,n){var e=this.width,r=this.height;if(0===e||0===r)return this;var i=this.constructor.blankContext(e,r);return i.save(),i.translate(t?e:0,n?r:0),i.scale(t?-1:1,n?-1:1),i.drawImage(this.canvas,0,0),i.restore(),new this.constructor(i)}function c(t){var n=this.height,e=this.width;if(0===n||0===e)return n===e?this:this.constructor.blank(n,e);var r=this.constructor.blankContext(n,e);return r.save(),r.translate(n/2,e/2),r.rotate(Math.PI/(t?-2:2)),r.drawImage(this.canvas,e/-2,n/-2),r.restore(),new this.constructor(r)}return n.canvas.get=function(){return this.context.canvas},n.width.get=function(){return this.canvas.width},n.height.get=function(){return this.canvas.height},Object.defineProperties(t.prototype,n),t.blank=function(t,n){return new this(this.blankContext(t,n))},t.blankContext=function(t,n){return this.blankCanvas(t,n).getContext("2d")},t.from=function(t){return function(t){var n=t.naturalWidth||t.width,e=t.naturalHeight||t.height,r=this.blankContext(n,e);return r.drawImage(t,0,0),new this(r)}.call(this,t)},t.load=function(t){var n=this;return r(function(){return function(t){return"string"==typeof t}(t)?function(t){var n=this;return r(function(){var e=new Image;return e.crossOrigin="anonymous",e.src=t,o.call(n,e)})}.call(n,t):t instanceof HTMLImageElement?o.call(n,t):t instanceof HTMLInputElement?function(t){var n=this;return r(function(){return"file"===t.type?a.call(n,t.files[0]):n.load(t.value)})}.call(n,t):t instanceof File?a.call(n,t):t instanceof FileReader?i.call(n,t):n.from(t)})},t.prototype.flop=u(s,!0,!1),t.prototype.flip=u(s,!1,!0),t.prototype.rotate180=u(s,!0,!0),t.prototype.resize=function(t,n,e){if(t=Number.parseInt(t),n=Number.parseInt(n),!Number.isFinite(t)&&!Number.isFinite(n))return this;Number.isFinite(t)&&(t=Math.abs(t)),Number.isFinite(n)&&(n=Math.abs(n));var r,i=this.width,a=this.height;if(Number.isFinite(t)){if(!Number.isFinite(n)){if(0===i)return this.constructor.blank(t,0);n=Math.round(a*t/i)}}else{if(0===a)return this.constructor.blank(0,n);t=Math.round(i*n/a)}if(t===i&&n===a)return this;if(0===i||0===a||0===t||0===n)return this.constructor.blank(t,n);e=Number.parseFloat(e),Number.isFinite(e)?e>1?e/=e-1:e=1/0:e=2;for(var o=function(t,n){if(t<n)t=Math.min(Math.round(t*e),n);else{if(!(t>n))return n;t=Math.max(Math.round(t/e),n)}return r=!1,t},u=this.toCanvas(),s=64;s--;){r=!0;var c=o(i,t),f=o(a,n);if(r)break;var h=this.constructor.blankContext(c,f);h.scale(c/i,f/a),h.drawImage(u,0,0),i=c,a=f,u=h.canvas}return this.constructor.from(u)},t.prototype.rotate90=u(c,!1),t.prototype.rotate270=u(c,!0),Object.assign(t,{createCanvas:e,blankCanvas:function(t,n){void 0===t&&(t=0),void 0===n&&(n=0);var r=e();return r.width=t,r.height=n,r}}),t});
+(function (global, factory) {
+	typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
+	typeof define === 'function' && define.amd ? define(factory) :
+	(global.PaperDuck = factory());
+}(this, (function () { 'use strict';
+
+	var defaultExport = function defaultExport(context) {
+		this.context = context;
+	};
+
+	var prototypeAccessors = { canvas: { configurable: true },width: { configurable: true },height: { configurable: true } };
+
+	prototypeAccessors.canvas.get = function () {
+		return this.context.canvas;
+	};
+
+	prototypeAccessors.width.get = function () {
+		return this.canvas.width;
+	};
+
+	prototypeAccessors.height.get = function () {
+		return this.canvas.height;
+	};
+
+	Object.defineProperties( defaultExport.prototype, prototypeAccessors );
+
+	function PaperDuck_createCanvas() {
+		return document.createElement('canvas');
+	}
+
+	function PaperDuck_blankCanvas(sizeX, sizeY) {
+		if ( sizeX === void 0 ) sizeX = 0;
+		if ( sizeY === void 0 ) sizeY = 0;
+
+		var canvas  = PaperDuck_createCanvas();
+		canvas.width = sizeX;
+		canvas.height = sizeY;
+		return canvas;
+	}
+
+	function PaperDuck_blankContext(sizeX, sizeY) {
+		return PaperDuck_blankCanvas(sizeX, sizeY).getContext('2d');
+	}
+
+	function PaperDuck_blank(sizeX, sizeY) {
+		return new defaultExport(PaperDuck_blankContext(sizeX, sizeY));
+	}
+
+	function fromImageSource(source) {
+		var sizeX = source.naturalWidth || source.width;
+		var sizeY = source.naturalHeight || source.height;
+		var ctx = this.blankContext(sizeX, sizeY);
+		ctx.drawImage(source, 0, 0);
+		return new this(ctx);
+	}
+
+	defaultExport.from = function(value) {
+		return fromImageSource.call(this, value);
+	};
+
+	function Promise_try(func) {
+		return new Promise(function (resolve) {
+			resolve(func());
+		});
+	}
+
+	function String_isString(value) {
+		return typeof value === 'string';
+	}
+
+	function loadFileReader(reader) {
+		var this$1 = this;
+
+		return Promise_try(function () {
+			if (reader.readyState > 1) {
+				return this$1.load(reader.result);
+			}
+			var loadHandler;
+			var errorHandler;
+			return new Promise(function (resolve, reject) {
+				loadHandler = resolve;
+				errorHandler = reject;
+				reader.addEventListener('load', loadHandler);
+				reader.addEventListener('error', errorHandler);
+			}).finally(function () {
+				reader.removeEventListener('load', loadHandler);
+				reader.removeEventListener('error', errorHandler);
+			}).then(function () {
+				return this$1.load(reader.result);
+			});
+		});
+	}
+
+	function loadFile(file) {
+		var this$1 = this;
+
+		return Promise_try(function () {
+			var reader = new FileReader();
+			reader.readAsDataURL(file);
+			return loadFileReader.call(this$1, reader);
+		});
+	}
+
+	function loadImage(image) {
+		var this$1 = this;
+
+		return Promise_try(function () {
+			if (image.complete) {
+				return this$1.from(image);
+			}
+			var loadHandler;
+			var errorHandler;
+			return new Promise(function (resolve, reject) {
+				loadHandler = resolve;
+				errorHandler = reject;
+				image.addEventListener('load', loadHandler);
+				image.addEventListener('error', errorHandler);
+			}).finally(function () {
+				image.removeEventListener('load', loadHandler);
+				image.removeEventListener('error', errorHandler);
+			}).then(function () {
+				return this$1.from(image);
+			});
+		});
+	}
+
+	function loadInputElement(element) {
+		var this$1 = this;
+
+		return Promise_try(function () {
+			if (element.type === 'file') {
+				return loadFile.call(this$1, element.files[0]);
+			}
+			return this$1.load(element.value);
+		});
+	}
+
+	function loadString(string) {
+		var this$1 = this;
+
+		return Promise_try(function () {
+			var image = new Image();
+			image.crossOrigin = 'anonymous';
+			image.src = string;
+			return loadImage.call(this$1, image);
+		});
+	}
+
+	defaultExport.load = function(value) {
+		var this$1 = this;
+
+		return Promise_try(function () {
+			if (String_isString(value)) {
+				return loadString.call(this$1, value);
+			}
+			if (value instanceof HTMLImageElement) {
+				return loadImage.call(this$1, value);
+			}
+			if (value instanceof HTMLInputElement) {
+				return loadInputElement.call(this$1, value);
+			}
+			if (value instanceof File) {
+				return loadFile.call(this$1, value);
+			}
+			if (value instanceof FileReader) {
+				return loadFileReader.call(this$1, value);
+			}
+			return this$1.from(value);
+		});
+	};
+
+	function func(instance, flipX, flipY) {
+		var sizeX = instance.width;
+		var sizeY = instance.height;
+		if (sizeX === 0 || sizeY === 0) {
+			return instance;
+		}
+		var ctx = PaperDuck_blankContext(sizeX, sizeY);
+		ctx.save();
+		ctx.translate(
+			flipX ? sizeX : 0,
+			flipY ? sizeY : 0
+		);
+		ctx.scale(
+			flipX ? -1 : 1,
+			flipY ? -1 : 1
+		);
+		ctx.drawImage(instance.canvas, 0, 0);
+		ctx.restore();
+		return new defaultExport(ctx);
+	}
+
+	function PaperDuck_flip(instance) {
+		return func(instance, false, true);
+	}
+
+	function PaperDuck_flop(instance) {
+		return func(instance, true, false);
+	}
+
+	function PaperDuck_rotate180(instance) {
+		return func(instance, true, true);
+	}
+
+	function Function_partial(func) {
+		var partials = [], len = arguments.length - 1;
+		while ( len-- > 0 ) partials[ len ] = arguments[ len + 1 ];
+
+		return function() {
+			var args = [], len = arguments.length;
+			while ( len-- ) args[ len ] = arguments[ len ];
+
+			return func.call.apply(func, [ this ].concat( partials, args ));
+		};
+	}
+
+	function func$1(counterclockwise) {
+		var sizeX = this.height;
+		var sizeY = this.width;
+		if (sizeX === 0 || sizeY === 0) {
+			if (sizeX === sizeY) {
+				return this;
+			}
+			return this.constructor.blank(sizeX, sizeY);
+		}
+		var ctx = this.constructor.blankContext(sizeX, sizeY);
+		ctx.save();
+		ctx.translate(sizeX / 2, sizeY / 2);
+		ctx.rotate(Math.PI / (counterclockwise ? -2 : 2));
+		ctx.drawImage(this.canvas, sizeY / -2, sizeX / -2);
+		ctx.restore();
+		return new this.constructor(ctx);
+	}
+
+	defaultExport.prototype.rotate90 = Function_partial(func$1, false);
+	defaultExport.prototype.rotate270 = Function_partial(func$1, true);
+
+	var aaa = function(func) {
+		return function() {
+			var args = [], len = arguments.length;
+			while ( len-- ) args[ len ] = arguments[ len ];
+
+			return func.apply(void 0, [ this ].concat( args ));
+		};
+	};
+	Object.assign(defaultExport, {
+		blank: PaperDuck_blank,
+		blankCanvas: PaperDuck_blankCanvas,
+		blankContext: PaperDuck_blankContext,
+		createCanvas: PaperDuck_createCanvas,
+	});
+	Object.assign(defaultExport.prototype, {
+		flip: aaa(PaperDuck_flip),
+		flop: aaa(PaperDuck_flop),
+		rotate180: aaa(PaperDuck_rotate180),
+	});
+
+	return defaultExport;
+
+})));
