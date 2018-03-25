@@ -21,6 +21,23 @@
 		},
 
 		methods: {
+			loadFromFileInput: function() {
+				var input = document.createElement('input');
+				input.type = 'file';
+				input.addEventListener('change', function() {
+					PaperDuck
+						.load(input)
+						.then(function(instance) {
+							this.canvas = instance.canvas;
+						}.bind(this))
+						.catch(function(error) {
+							console.log(error);
+							// pass
+						}.bind(this));
+				}.bind(this));
+				input.click();
+			},
+
 			flop: function() {
 				this.canvas = PaperDuck.from(this.canvas).flop().canvas;
 			},

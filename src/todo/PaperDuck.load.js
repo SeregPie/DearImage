@@ -15,60 +15,7 @@ let loadArrayLike = function(array) {
 	return this.blank();
 };
 
-let loadImage = function(image) {
-	if (image.complete) {
-		return this.from(image);
-	}
-	return new Promise(function(resolve, reject) {
-		image.addEventListener('load', function() {
-			try {
-				resolve(this.from(image));
-			} catch (error) {
-				reject(image);
-			}
-		}.bind(this));
 
-		image.addEventListener('error', function() {
-			reject(image);
-		});
-	}.bind(this));
-};
-
-let loadString = function(string) {
-	let image = new Image();
-	image.crossOrigin = 'anonymous';
-	image.src = string;
-	return loadImage.call(this, image);
-};
-
-let loadInputElement = function(element) {
-	if (element.type === 'file') {
-		return loadArrayLike.call(this, element.files);
-	}
-	return this.load(element.value);
-};
-
-let loadFileReader = function(reader) {
-	if (reader.readyState > 1) {
-		return this.load(reader.result);
-	}
-	return new Promise((resolve, reject) => {
-		reader.addEventListener('load', function() {
-			try {
-				this.load(reader.result).then(resolve, reject);
-			} catch (error) {
-				reject(reader);
-			}
-		}.bind(this));
-		reader.addEventListener('error', Function_partial(reject, reader));
-	});
-};
-
-let loadFile = function(file) {
-	let reader  = new FileReader();
-	reader.readAsDataURL(file);
-	return loadFileReader.call(this, reader);
-};
 
 PaperDuck.load = function(source) {
 	return Promise.resolve().then(() => {

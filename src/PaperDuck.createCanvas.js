@@ -1,5 +1,3 @@
-import PaperDuck from './PaperDuck';
-
-PaperDuck.createCanvas = function() {
+export default function() {
 	return document.createElement('canvas');
-};
+}

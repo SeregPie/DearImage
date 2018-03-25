@@ -1,17 +1,22 @@
+import Promise_try from 'x/src/Promise/try';
+
 export default function(image) {
-	return new Promise((resolve, reject) => {
+	return Promise_try(() => {
 		if (image.complete) {
-			resolve(this.from(image));
+			return this.from(image);
 		}
-		image.addEventListener('load', () => {
-			try {
-				resolve(this.from(image));
-			} catch (error) {
-				reject(image);
-			}
-		});
-		image.addEventListener('error', () => {
-			reject(image);
+		let loadHandler;
+		let errorHandler;
+		return new Promise((resolve, reject) => {
+			loadHandler = resolve;
+			errorHandler = reject;
+			image.addEventListener('load', loadHandler);
+			image.addEventListener('error', errorHandler);
+		}).finally(() => {
+			image.removeEventListener('load', loadHandler);
+			image.removeEventListener('error', errorHandler);
+		}).then(() => {
+			return this.from(image);
 		});
 	});
 }

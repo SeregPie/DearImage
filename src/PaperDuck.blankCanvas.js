@@ -1,8 +1,8 @@
-import PaperDuck from './PaperDuck';
+import PaperDuck_createCanvas from './PaperDuck.createCanvas';
 
-PaperDuck.blankCanvas = function(sizeX = 0, sizeY = 0) {
-	let canvas  = this.createCanvas();
+export default function(sizeX = 0, sizeY = 0) {
+	let canvas  = PaperDuck_createCanvas();
 	canvas.width = sizeX;
 	canvas.height = sizeY;
 	return canvas;
-};
+}
