@@ -1,225 +1,109 @@
 <!DOCTYPE html>
 <html>
 	<head>
+		<meta charset="utf-8"/>
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+		/>
 		<title>PaperDuck</title>
-		<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0"/>
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.22/css/uikit.min.css"/>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.22/js/uikit.min.js"></script>
-		<script src="src/PaperDuck.js"></script>
-		<script src="src/load.js"></script>
-		<script src="src/fn.clip.js"></script>
-		<script src="src/fn.clipAlign.js"></script>
-		<script src="src/fn.clipScale.js"></script>
-		<script src="src/fn.crop.js"></script>
-		<script src="src/fn.cropAlign.js"></script>
-		<script src="src/fn.cropScale.js"></script>
-		<script src="src/fn.flip.js"></script>
-		<script src="src/fn.resize.js"></script>
-		<script src="src/fn.rotate90.js"></script>
-		<script src="src/fn.scale.js"></script>
-		<script src="src/fn.scaleBy.js"></script>
-		<link rel="stylesheet" href="demo/demo.css"/>
-		<script src="demo/demo.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/6.26.0/polyfill.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.16/vue.min.js"></script>
+		<style>
+			[v-cloak] {
+				display: none;
+			}
+		</style>
+		<script src="PaperDuck.js"></script>
+		<link
+			rel="stylesheet"
+			href="https://use.fontawesome.com/releases/v5.0.8/css/all.css"
+		/>
+		<link
+			rel="stylesheet"
+			href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons"
+		/>
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/vuetify/1.0.8/vuetify.min.css"
+		/>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/vuetify/1.0.8/vuetify.min.js"></script>
 	</head>
 	<body>
-		<nav class="uk-navbar-container" uk-navbar>
-			<div class="uk-navbar-left">
-				<a class="uk-navbar-item uk-logo" href="">PaperDuck</a>
-			</div>
-			<div class="uk-navbar-right">
-				<ul class="uk-navbar-nav">
-					<li><a href="https://github.com/SeregPie/PaperDuck"><i class="fa fa-github"></i>&ensp;GitHub</a></li>
-				</ul>
-			</div>
-		</nav>
-		<div class="uk-margin-top"></div>
-		<div class="uk-position-relative">
-			<div class="uk-visible@xl uk-position-medium uk-position-top-right uk-width-small">
-				<div uk-sticky="offset: 200">
-					<ul class="uk-nav uk-nav-default" uk-scrollspy-nav="closest: li; scroll: true">
-						<li><a href="#load">load</a></li>
-						<li class="uk-nav-divider"></li>
-						<li><a href="#crop">crop</a></li>
-						<li><a href="#clip">clip</a></li>
-						<li><a href="#resize">resize</a></li>
-						<li><a href="#cropAlign">cropAlign</a></li>
-						<li><a href="#clipAlign">clipAlign</a></li>
-						<li><a href="#scale">scale</a></li>
-						<li><a href="#scaleMin_scaleMax">scaleMin &amp; scaleMax</a></li>
-						<li><a href="#cropScale">cropScale</a></li>
-						<li><a href="#clipScale">clipScale</a></li>
-						<li><a href="#flip_flop">flip &amp; flop</a></li>
-						<li><a href="#rotate">rotate</a></li>
-					</ul>
-				</div>
-			</div>
-			<div class="uk-container">
-				<p>This is a demonstration page for <strong>PaperDuck</strong> library. Documentation and source code are available on <a href="https://github.com/SeregPie/PaperDuck">GitHub</a>.</p>
-				<hr/>
-				<h2 id="load">load</h2>
-				<p>Upload an image via <a class="runFromURL">URL</a> or from your local <a class="runFromFile">file</a> system or just click on one of the images below.</p>
-				<div class="uk-flex uk-flex-between">
-					<div>
-						<div class="uk-inline-clip uk-transition-toggle" style="cursor: pointer;">
-							<img class="uk-height-medium uk-transition-scale-up uk-transition-opaque runFromImage" src="demo/example-1.jpg"/>
-							<div class="uk-transition-slide-bottom uk-position-bottom uk-overlay uk-overlay-primary uk-padding-remove uk-text-center"></div>
-						</div>
+		<v-app
+			v-cloak
+			id="App"
+		>
+			<v-navigation-drawer
+				clipped
+				v-model="drawer"
+				app
+			>
+				<v-list>
+					<v-list-tile @click="flop">
+						<v-list-tile-content>
+							<v-list-tile-title>flop</v-list-tile-title>
+						</v-list-tile-content>
+					</v-list-tile>
+					<v-list-tile @click="flip">
+						<v-list-tile-content>
+							<v-list-tile-title>flip</v-list-tile-title>
+						</v-list-tile-content>
+					</v-list-tile>
+					<v-list-tile @click="rotate90">
+						<v-list-tile-content>
+							<v-list-tile-title>rotate90</v-list-tile-title>
+						</v-list-tile-content>
+					</v-list-tile>
+					<v-list-tile @click="rotate180">
+						<v-list-tile-content>
+							<v-list-tile-title>rotate180</v-list-tile-title>
+						</v-list-tile-content>
+					</v-list-tile>
+					<v-list-tile @click="rotate270">
+						<v-list-tile-content>
+							<v-list-tile-title>rotate270</v-list-tile-title>
+						</v-list-tile-content>
+					</v-list-tile>
+				</v-list>
+			</v-navigation-drawer>
+			<v-toolbar
+				color="red darken-3"
+				dark
+				clipped-left
+				app
+			>
+				<v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
+				<v-toolbar-title>PaperDuck</v-toolbar-title>
+				<v-spacer></v-spacer>
+				<v-btn
+					icon
+					href="https://github.com/SeregPie/PaperDuck"
+					target="_blank"
+				>
+					<v-icon>fab fa-github</v-icon>
+				</v-btn>
+			</v-toolbar>
+			<v-content>
+				<v-container
+					fluid
+					fill-height
+				>
+					<div
+					 	style="
+							width: 100%;
+							height: 100%;
+							overflow: auto;
+							display: flex;
+							justify-content: center;
+							align-items: center;
+						"
+					>
+						<div ref="canvasContainer"></div>
 					</div>
-					<div>
-						<div class="uk-inline-clip uk-transition-toggle" style="cursor: pointer;">
-							<img class="uk-height-medium uk-transition-scale-up uk-transition-opaque runFromImage" src="demo/example-2.jpg"/>
-							<div class="uk-transition-slide-bottom uk-position-bottom uk-overlay uk-overlay-primary uk-padding-remove uk-text-center"></div>
-						</div>
-					</div>
-					<div>
-						<div class="uk-inline-clip uk-transition-toggle" style="cursor: pointer;">
-							<img class="uk-height-medium uk-transition-scale-up uk-transition-opaque runFromImage" src="demo/example-3.png"/>
-							<div class="uk-transition-slide-bottom uk-position-bottom uk-overlay uk-overlay-primary uk-padding-remove uk-text-center"></div>
-						</div>
-					</div>
-				</div>
-				<hr/>
-				<h2 id="crop">crop</h2>
-				<div class="uk-flex uk-flex-between uk-flex-top">
-					<code class="run">.crop(0, 200, 300, 200)</code>
-					<code class="run">.crop(200, 0, 200, '')</code>
-					<code class="run">.crop(300, -200, 400, -400)</code>
-				</div>
-				<hr/>
-				<h2 id="clip">clip</h2>
-				<div class="uk-flex uk-flex-between uk-flex-top">
-					<code class="run">.clip(0, 200, 300, 200)</code>
-					<code class="run">.clip(200, -100, -300, -400)</code>
-					<code class="run">.clip(-200, -200, 300, 300)</code>
-				</div>
-				<hr/>
-				<h2 id="resize">resize</h2>
-				<div class="uk-flex uk-flex-around">
-					<code class="run">.resize(100, 400, 1)</code>
-					<code class="run">.resize(100, 400, 2)</code>
-					<code class="run">.resize('', 400, 2)</code>
-				</div>
-				<div class="uk-flex uk-flex-column uk-flex-around">
-					<code class="run">.resize(400, 100, 1)</code>
-					<code class="run">.resize(400, 100, 2)</code>
-					<code class="run">.resize(400, '', 2)</code>
-				</div>
-				<hr/>
-				<h2 id="cropAlign">cropAlign</h2>
-				<div class="uk-flex uk-flex-wrap uk-flex-around">
-					<code class="run">.cropAlign(300, 300, 'top left')</code>
-					<code class="run">.cropAlign(300, 300, 'top')</code>
-					<code class="run">.cropAlign(300, 300, 'top right')</code>
-				</div>
-				<div class="uk-flex uk-flex-wrap uk-flex-around">
-					<code class="run">.cropAlign(300, 300, 'left')</code>
-					<code class="run">.cropAlign(300, 300)</code>
-					<code class="run">.cropAlign(300, 300, 'right')</code>
-				</div>
-				<div class="uk-flex uk-flex-wrap uk-flex-around">
-					<code class="run">.cropAlign(300, 300, 'bottom left')</code>
-					<code class="run">.cropAlign(300, 300, 'bottom')</code>
-					<code class="run">.cropAlign(300, 300, 'bottom right')</code>
-				</div>
-				<hr/>
-				<h2 id="clipAlign">clipAlign</h2>
-				<div class="uk-flex uk-flex-wrap uk-flex-around uk-flex-top">
-					<code class="run">.resize(200, '')</code>
-					<code class="run"><span hidden>.resize(200, '')</span>.clipAlign(400, 400)</code>
-					<code class="run"><span hidden>.resize(200, '')</span>.clipAlign(400, 400, 'bottom right')</code>
-				</div>
-				<hr/>
-				<h2 id="scale">scale</h2>
-				<div class="uk-flex uk-flex-wrap uk-flex-around">
-					<div class="uk-flex uk-flex-column uk-flex-around">
-						<code class="run">.scale(1/5, 1)</code>
-						<code class="run">.scale(1/5, 2)</code>
-					</div>
-					<div class="uk-flex uk-flex-column uk-flex-around">
-						<code class="run">.scale(1/10, 1)</code>
-						<code class="run">.scale(1/10, 2)</code>
-					</div>
-					<div class="uk-flex uk-flex-column uk-flex-around">
-						<code class="run">.scale(1/20, 1)</code>
-						<code class="run">.scale(1/20, 2)</code>
-					</div>
-				</div>
-				<hr/>
-				<div class="uk-flex uk-flex-wrap uk-flex-around uk-flex-top">
-					<div>
-						<code class="run">.resize(100, '')</code>
-					</div>
-					<div class="uk-flex uk-flex-column">
-						<code class="run"><span hidden>.resize(100, '')</span>.scale(3, 1)</code>
-						<code class="run"><span hidden>.resize(100, '')</span>.scale(3, 2)</code>
-						<code class="run"><span hidden>.resize(100, '')</span>.scale(3, 9)</code>
-					</div>
-					<div class="uk-flex uk-flex-column">
-						<code class="run"><span hidden>.resize(100, '')</span>.scale(6, 1)</code>
-						<code class="run"><span hidden>.resize(100, '')</span>.scale(6, 2)</code>
-						<code class="run"><span hidden>.resize(100, '')</span>.scale(6, 9)</code>
-					</div>
-				</div>
-				<hr/>
-				<h2 id="scaleMin_scaleMax">scaleMin &amp; scaleMax</h2>
-				<div class="uk-flex uk-flex-wrap uk-flex-around">
-					<code class="run">.scaleMin(100, 100)</code>
-					<code class="run">.scaleMax(100, 100)</code>
-					<code class="run">.scaleMin(200, 200)</code>
-					<code class="run">.scaleMax(200, 200)</code>
-				</div>
-				<hr/>
-				<h2 id="cropScale">cropScale</h2>
-				<div class="uk-flex uk-flex-wrap uk-flex-around uk-flex-middle">
-					<div class="uk-flex uk-flex-column">
-						<code class="run">.cropScale(200, 200)</code>
-						<code class="run">.cropScale(200, 200, 'top left')</code>
-					</div>
-					<div class="uk-flex uk-flex-column">
-						<code class="run">.cropScale(300, 100)</code>
-						<code class="run">.cropScale(300, 100, 'top left')</code>
-					</div>
-					<div class="uk-flex">
-						<code class="run">.cropScale(100, 300)</code>
-						<code class="run">.cropScale(100, 300, 'top left')</code>
-					</div>
-				</div>
-				<hr/>
-				<h2 id="clipScale">clipScale</h2>
-				<div class="uk-flex uk-flex-wrap uk-flex-around uk-flex-middle">
-					<div class="uk-flex uk-flex-column">
-						<code class="run">.clipScale(200, 200)</code>
-						<code class="run">.clipScale(200, 200, 'bottom right')</code>
-					</div>
-					<div class="uk-flex uk-flex-column">
-						<code class="run">.clipScale(300, 100)</code>
-						<code class="run">.clipScale(300, 100, 'bottom right')</code>
-					</div>
-					<div class="uk-flex">
-						<code class="run">.clipScale(100, 300)</code>
-						<code class="run">.clipScale(100, 300, 'bottom right')</code>
-					</div>
-				</div>
-				<hr/>
-				<h2 id="flip_flop">flip &amp; flop</h2>
-				<div class="uk-flex uk-flex-wrap uk-flex-around">
-					<code class="run">.scaleMin(200, 200)</code>
-					<code class="run"><span hidden>.scaleMin(200, 200)</span>.flip()</code>
-					<code class="run"><span hidden>.scaleMin(200, 200)</span>.flop()</code>
-					<code class="run"><span hidden>.scaleMin(200, 200)</span>.flip().flop()</code>
-				</div>
-				<hr/>
-				<h2 id="rotate">rotate</h2>
-				<div class="uk-flex uk-flex-wrap uk-flex-around">
-					<code class="run">.scaleMin(200, 200)</code>
-					<code class="run"><span hidden>.scaleMin(200, 200)</span>.rotate90()</code>
-					<code class="run"><span hidden>.scaleMin(200, 200)</span>.rotate180()</code>
-					<code class="run"><span hidden>.scaleMin(200, 200)</span>.rotate270()</code>
-				</div>
-				<div class="uk-height-medium"></div>
-			</div>
-		</div>
+				</v-container>
+			</v-content>
+		</v-app>
+		<script src="demo/index.js"></script>
 	</body>
 </html>

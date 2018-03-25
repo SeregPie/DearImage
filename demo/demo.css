@@ -1,7 +1,0 @@
-.o-transparency-grid {
-	background-size: 16px 16px;
-	background-position: 0 0, 8px 8px;
-	background-image:
-		linear-gradient(45deg, LightGrey  25%, transparent 25%, transparent 75%, LightGrey  75%, LightGrey ),
-		linear-gradient(45deg, LightGrey  25%, transparent 25%, transparent 75%, LightGrey  75%, LightGrey );
-}

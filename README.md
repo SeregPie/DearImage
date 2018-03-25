@@ -12,39 +12,33 @@ Manipulates images in the browser via native functions of `CanvasRenderingContex
 
 ## setup
 
-Install the [package](https://www.npmjs.com/package/paperduck) via npm.
+### npm
 
-```sh
-
+```shell
 npm install paperduck
-
 ```
 
----
-
-Include the code in your page via a CDN.
+### browser
 
 ```html
-
 <script src="https://unpkg.com/paperduck"></script>
-
 ```
 
 ## members
 
-`PaperDuck(...args)`
+`.constructor(context)`
 
-Is a shortcut for `.from()`.
+...
 
 ---
 
-`.from(source)`
+`.from(value)`
 
-Creates an instance of `PaperDuck` from the given source.
+Creates an instance of `PaperDuck` from the given value.
 
 | argument | description |
 | ---: | :--- |
-| `source` |  If the source is an instance of `PaperDuck`, returns it. An element to draw into the context. The value can be any canvas image source, such as an `HTMLImageElement`, an `HTMLVideoElement`, an `HTMLCanvasElement` or an `ImageBitmap`. |
+| `value` |  ... |
 
 Returns the created instance.
 
@@ -52,20 +46,19 @@ Returns the created instance.
 let canvas = document.getElementById('demo');
 let instance = PaperDuck.from(canvas);
 console.log(instance instanceof PaperDuck); // => true
-console.log(PaperDuck.from(instance) === instance); // => true
 ```
 
 ---
 
-`.load(source)`
+`.load(value)`
 
 ...
 
 | argument | description |
 | ---: | :--- |
-| `source` | The source to load from. In addition to the type, that is accepted by `.from()`, the value can also be a string, an array-like object or an instance of `HTMLImageElement`, `HTMLInputElement`, `File` or `FileReader`. |
+| `value` | ... |
 
-Returns a promise that is resolved once the image has been loaded.
+...
 
 ```javascript
 PaperDuck.load('/path/to/image.jpg').then(instance => {
