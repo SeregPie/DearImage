@@ -1,4 +1,4 @@
-let aaa = function(func) {
+let Function_contextWithFirstArg = function(func) {
 	return function(...args) {
 		return func(this, ...args);
 	};
@@ -19,15 +19,20 @@ Object.assign(PaperDuck, {
 	createCanvas: PaperDuck_createCanvas,
 });
 
+import PaperDuck_clip from './PaperDuck.clip';
 import PaperDuck_flip from './PaperDuck.flip';
 import PaperDuck_flop from './PaperDuck.flop';
 import PaperDuck_rotate180 from './PaperDuck.rotate180';
+import PaperDuck_rotate270 from './PaperDuck.rotate270';
+import PaperDuck_rotate90 from './PaperDuck.rotate90';
 //import './PaperDuck.resize';
-import './PaperDuck.prototype.rotate90_rotate270';
 Object.assign(PaperDuck.prototype, {
-	flip: aaa(PaperDuck_flip),
-	flop: aaa(PaperDuck_flop),
-	rotate180: aaa(PaperDuck_rotate180),
+	clip: Function_contextWithFirstArg(PaperDuck_clip),
+	flip: Function_contextWithFirstArg(PaperDuck_flip),
+	flop: Function_contextWithFirstArg(PaperDuck_flop),
+	rotate180: Function_contextWithFirstArg(PaperDuck_rotate180),
+	rotate270: Function_contextWithFirstArg(PaperDuck_rotate270),
+	rotate90: Function_contextWithFirstArg(PaperDuck_rotate90),
 });
 
 export default PaperDuck;

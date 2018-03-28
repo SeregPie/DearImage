@@ -5,8 +5,6 @@
 
 		data: {
 			canvas: null,
-
-			drawer: true,
 		},
 
 		watch: {

@@ -169,6 +169,47 @@
 		});
 	};
 
+	function Lang_isUndefined(value) {
+		return value === undefined;
+	}
+
+	function PaperDuck_clip(instance, offsetX, offsetY, sizeX, sizeY) {
+		if ( offsetX === void 0 ) offsetX = 0;
+		if ( offsetY === void 0 ) offsetY = 0;
+
+		sizeX = Number.parseInt(sizeX);
+		sizeY = Number.parseInt(sizeY);
+		var currSizeX = instance.width;
+		var currSizeY = instance.height;
+		if (offsetX < 0) {
+			offsetX += currSizeX;
+		}
+		if (offsetY < 0) {
+			offsetY += currSizeY;
+		}
+		if (Lang_isUndefined(sizeX)) {
+			sizeX = currSizeX;
+		} else if (sizeX < 0) {
+			sizeX = -sizeX;
+			offsetX -= sizeX;
+		}
+		if (Lang_isUndefined(sizeY)) {
+			sizeY = currSizeY;
+		} else if (sizeY < 0) {
+			sizeY = -sizeY;
+			offsetY -= sizeY;
+		}
+		if (offsetX === 0 && offsetY === 0 && sizeX === currSizeX && sizeY === currSizeY) {
+			return instance;
+		}
+		if (sizeX === 0 || sizeY === 0) {
+			return PaperDuck_blank(sizeX, sizeY);
+		}
+		var ctx = PaperDuck_blankContext(sizeX, sizeY);
+		ctx.drawImage(instance.canvas, -offsetX, -offsetY);
+		return new defaultExport(ctx);
+	}
+
 	function func(instance, flipX, flipY) {
 		var sizeX = instance.width;
 		var sizeY = instance.height;
@@ -202,40 +243,33 @@
 		return func(instance, true, true);
 	}
 
-	function Function_partial(func) {
-		var partials = [], len = arguments.length - 1;
-		while ( len-- > 0 ) partials[ len ] = arguments[ len + 1 ];
-
-		return function() {
-			var args = [], len = arguments.length;
-			while ( len-- ) args[ len ] = arguments[ len ];
-
-			return func.call.apply(func, [ this ].concat( partials, args ));
-		};
-	}
-
-	function func$1(counterclockwise) {
-		var sizeX = this.height;
-		var sizeY = this.width;
+	function func$1(instance, counterclockwise) {
+		var sizeX = instance.height;
+		var sizeY = instance.width;
 		if (sizeX === 0 || sizeY === 0) {
 			if (sizeX === sizeY) {
 				return this;
 			}
-			return this.constructor.blank(sizeX, sizeY);
+			return PaperDuck_blank(sizeX, sizeY);
 		}
-		var ctx = this.constructor.blankContext(sizeX, sizeY);
+		var ctx = PaperDuck_blankContext(sizeX, sizeY);
 		ctx.save();
 		ctx.translate(sizeX / 2, sizeY / 2);
 		ctx.rotate(Math.PI / (counterclockwise ? -2 : 2));
-		ctx.drawImage(this.canvas, sizeY / -2, sizeX / -2);
+		ctx.drawImage(instance.canvas, sizeY / -2, sizeX / -2);
 		ctx.restore();
-		return new this.constructor(ctx);
+		return new defaultExport(ctx);
 	}
 
-	defaultExport.prototype.rotate90 = Function_partial(func$1, false);
-	defaultExport.prototype.rotate270 = Function_partial(func$1, true);
+	function PaperDuck_rotate270(instance) {
+		return func$1(instance, true);
+	}
 
-	var aaa = function(func) {
+	function PaperDuck_rotate90(instance) {
+		return func$1(instance, false);
+	}
+
+	var Function_contextWithFirstArg = function(func) {
 		return function() {
 			var args = [], len = arguments.length;
 			while ( len-- ) args[ len ] = arguments[ len ];
@@ -249,10 +283,14 @@
 		blankContext: PaperDuck_blankContext,
 		createCanvas: PaperDuck_createCanvas,
 	});
+	//import './PaperDuck.resize';
 	Object.assign(defaultExport.prototype, {
-		flip: aaa(PaperDuck_flip),
-		flop: aaa(PaperDuck_flop),
-		rotate180: aaa(PaperDuck_rotate180),
+		clip: Function_contextWithFirstArg(PaperDuck_clip),
+		flip: Function_contextWithFirstArg(PaperDuck_flip),
+		flop: Function_contextWithFirstArg(PaperDuck_flop),
+		rotate180: Function_contextWithFirstArg(PaperDuck_rotate180),
+		rotate270: Function_contextWithFirstArg(PaperDuck_rotate270),
+		rotate90: Function_contextWithFirstArg(PaperDuck_rotate90),
 	});
 
 	return defaultExport;

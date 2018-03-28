@@ -25,63 +25,21 @@
 		/>
 		<link
 			rel="stylesheet"
-			href="https://cdnjs.cloudflare.com/ajax/libs/vuetify/1.0.8/vuetify.min.css"
+			href="https://cdnjs.cloudflare.com/ajax/libs/vuetify/1.0.11/vuetify.min.css"
 		/>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/vuetify/1.0.8/vuetify.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/vuetify/1.0.11/vuetify.min.js"></script>
 	</head>
 	<body>
 		<v-app
 			v-cloak
 			id="App"
 		>
-			<v-navigation-drawer
-				clipped
-				v-model="drawer"
-				app
-			>
-				<v-list>
-					<v-list-tile @click="loadFromFileInput">
-						<v-list-tile-content>
-							<v-list-tile-title>load</v-list-tile-title>
-						</v-list-tile-content>
-					</v-list-tile>
-				</v-list>
-				<v-divider></v-divider>
-				<v-list>
-					<v-list-tile @click="flop">
-						<v-list-tile-content>
-							<v-list-tile-title>flop</v-list-tile-title>
-						</v-list-tile-content>
-					</v-list-tile>
-					<v-list-tile @click="flip">
-						<v-list-tile-content>
-							<v-list-tile-title>flip</v-list-tile-title>
-						</v-list-tile-content>
-					</v-list-tile>
-					<v-list-tile @click="rotate90">
-						<v-list-tile-content>
-							<v-list-tile-title>rotate90</v-list-tile-title>
-						</v-list-tile-content>
-					</v-list-tile>
-					<v-list-tile @click="rotate180">
-						<v-list-tile-content>
-							<v-list-tile-title>rotate180</v-list-tile-title>
-						</v-list-tile-content>
-					</v-list-tile>
-					<v-list-tile @click="rotate270">
-						<v-list-tile-content>
-							<v-list-tile-title>rotate270</v-list-tile-title>
-						</v-list-tile-content>
-					</v-list-tile>
-				</v-list>
-			</v-navigation-drawer>
 			<v-toolbar
 				color="red darken-3"
 				dark
 				clipped-left
 				app
 			>
-				<v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
 				<v-toolbar-title>PaperDuck</v-toolbar-title>
 				<v-spacer></v-spacer>
 				<v-btn
@@ -92,7 +50,7 @@
 					<v-icon>fab fa-github</v-icon>
 				</v-btn>
 			</v-toolbar>
-			<v-content>
+			<v-content style="position: relative;">
 				<v-container fill-height>
 					<div
 					 	style="
@@ -118,6 +76,78 @@
 						</div>
 					</div>
 				</v-container>
+				<div
+					style="
+						position: absolute;
+						z-index: 1;
+						left: 16px;
+						top: 50%;
+						transform: translateY(-50%);
+						display: flex;
+						flex-direction: column;
+					"
+				>
+					<v-tooltip right>
+						<v-btn
+							slot="activator"
+							fab
+							dark
+							color="red lighten-1"
+							@click="flop"
+						>
+							<v-icon>flip</v-icon>
+						</v-btn>
+						<span>flop</span>
+					</v-tooltip>
+					<v-tooltip right>
+						<v-btn
+							slot="activator"
+							fab
+							dark
+							color="red lighten-1"
+							@click="flip"
+						>
+							<v-icon style="transform: rotate(90deg);">flip</v-icon>
+						</v-btn>
+						<span>flip</span>
+					</v-tooltip>
+					<v-tooltip right>
+						<v-btn
+							slot="activator"
+							fab
+							dark
+							color="red lighten-1"
+							@click="rotate90"
+						>
+							<v-icon>rotate_right</v-icon>
+						</v-btn>
+						<span>rotate90</span>
+					</v-tooltip>
+					<v-tooltip right>
+						<v-btn
+							slot="activator"
+							fab
+							dark
+							color="red lighten-1"
+							@click="rotate180"
+						>
+							<v-icon>loop</v-icon>
+						</v-btn>
+						<span>rotate180</span>
+					</v-tooltip>
+					<v-tooltip right>
+						<v-btn
+							slot="activator"
+							fab
+							dark
+							color="red lighten-1"
+							@click="rotate270"
+						>
+							<v-icon>rotate_left</v-icon>
+						</v-btn>
+						<span>rotate270</span>
+					</v-tooltip>
+				</v-speed-dial>
 			</v-content>
 		</v-app>
 		<script src="demo/index.js"></script>
