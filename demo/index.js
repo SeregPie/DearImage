@@ -5,15 +5,59 @@
 
 		data: {
 			canvas: null,
+
+			clipDialog: false,
+			clipInputX: undefined,
+			clipInputY: undefined,
+		},
+
+		computed: {
+			clipCanvas: function() {
+				var dialog = this.clipDialog;
+				var canvas = this.canvas;
+				var x = Number.parseInt(this.clipInputX);
+				var y = Number.parseInt(this.clipInputY);
+
+				if (dialog && canvas) {
+					return PaperDuck.from(canvas).clip(x, y).canvas;
+				}
+				return null;
+			},
 		},
 
 		watch: {
 			canvas: function(newCanvas, oldCanvas) {
-				if (oldCanvas) {
-					this.$refs.canvasContainer.removeChild(oldCanvas);
+				if (this.$refs.canvasContainer) {
+					if (oldCanvas) {
+						if (this.$refs.canvasContainer === oldCanvas.parentNode) {
+							this.$refs.canvasContainer.removeChild(oldCanvas);
+						}
+					}
+					if (newCanvas) {
+						this.$refs.canvasContainer.appendChild(newCanvas);
+					}
 				}
-				if (newCanvas) {
-					this.$refs.canvasContainer.appendChild(newCanvas);
+
+			},
+
+			clipDialog: {
+				handler: function() {
+					this.clipInputX = 0;
+					this.clipInputY = 0;
+				},
+				immediate: true,
+			},
+
+			clipCanvas: function(newCanvas, oldCanvas) {
+				if (this.$refs.clipCanvasContainer) {
+					if (oldCanvas) {
+						if (this.$refs.clipCanvasContainer === oldCanvas.parentNode) {
+							this.$refs.clipCanvasContainer.removeChild(oldCanvas);
+						}
+					}
+					if (newCanvas) {
+						this.$refs.clipCanvasContainer.appendChild(newCanvas);
+					}
 				}
 			},
 		},
@@ -54,6 +98,11 @@
 
 			rotate270: function() {
 				this.canvas = PaperDuck.from(this.canvas).rotate270().canvas;
+			},
+
+			applyClip: function() {
+				this.canvas = this.clipCanvas;
+				this.clipDialog = false;
 			},
 		},
 	});

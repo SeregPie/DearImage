@@ -177,8 +177,6 @@
 		if ( offsetX === void 0 ) offsetX = 0;
 		if ( offsetY === void 0 ) offsetY = 0;
 
-		sizeX = Number.parseInt(sizeX);
-		sizeY = Number.parseInt(sizeY);
 		var currSizeX = instance.width;
 		var currSizeY = instance.height;
 		if (offsetX < 0) {

@@ -28,6 +28,29 @@
 			href="https://cdnjs.cloudflare.com/ajax/libs/vuetify/1.0.11/vuetify.min.css"
 		/>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/vuetify/1.0.11/vuetify.min.js"></script>
+		<style>
+			.canvasWrapper {
+				position: absolute;
+				top: 0;
+				right: 0;
+				bottom: 0;
+				left: 0;
+				overflow: auto;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+			}
+
+			.canvasWrapper > :first-child {
+				background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="2" height="2" fill-opacity="0.15"><rect x="1" width="1" height="1"/><rect y="1" width="1" height="1"/></svg>');
+				background-size: 16px 16px;
+				background-repeat: repeat;
+			}
+
+			.canvasWrapper > :first-child > canvas {
+				display: block;
+			}
+		</style>
 	</head>
 	<body>
 		<v-app
@@ -50,8 +73,11 @@
 					<v-icon>fab fa-github</v-icon>
 				</v-btn>
 			</v-toolbar>
-			<v-content style="position: relative;">
-				<v-container fill-height>
+			<v-content>
+				<v-container
+					style="position: relative;"
+					fill-height
+				>
 					<div
 					 	style="
 							position: relative;
@@ -59,95 +85,210 @@
 							height: 100%;
 						"
 					>
-						<div
-							style="
-								position: absolute;
-								top: 0;
-								right: 0;
-								bottom: 0;
-								left: 0;
-								overflow: auto;
-								display: flex;
-								justify-content: center;
-								align-items: center;
-							"
-						>
+						<div class="canvasWrapper">
 							<div ref="canvasContainer"></div>
 						</div>
 					</div>
+					<div
+						style="
+							position: absolute;
+							z-index: 1;
+							left: 16px;
+							top: 50%;
+							transform: translateY(-50%);
+							max-height: 100%;
+							overflow-y: auto;
+							display: flex;
+							flex-direction: column;
+						"
+					>
+						<v-tooltip right>
+							<v-btn
+								slot="activator"
+								fab
+								dark
+								color="red"
+								@click="flop"
+							>
+								<v-icon>flip</v-icon>
+							</v-btn>
+							<span>flop</span>
+						</v-tooltip>
+						<v-tooltip right>
+							<v-btn
+								slot="activator"
+								fab
+								dark
+								color="red"
+								@click="flip"
+							>
+								<v-icon style="transform: rotate(90deg);">flip</v-icon>
+							</v-btn>
+							<span>flip</span>
+						</v-tooltip>
+						<v-tooltip right>
+							<v-btn
+								slot="activator"
+								fab
+								dark
+								color="red"
+								@click="rotate90"
+							>
+								<v-icon>rotate_right</v-icon>
+							</v-btn>
+							<span>rotate90</span>
+						</v-tooltip>
+						<v-tooltip right>
+							<v-btn
+								slot="activator"
+								fab
+								dark
+								color="red"
+								@click="rotate180"
+							>
+								<v-icon>loop</v-icon>
+							</v-btn>
+							<span>rotate180</span>
+						</v-tooltip>
+						<v-tooltip right>
+							<v-btn
+								slot="activator"
+								fab
+								dark
+								color="red"
+								@click="rotate270"
+							>
+								<v-icon>rotate_left</v-icon>
+							</v-btn>
+							<span>rotate270</span>
+						</v-tooltip>
+					</div>
+					<div
+						style="
+							position: absolute;
+							z-index: 1;
+							right: 16px;
+							top: 50%;
+							transform: translateY(-50%);
+						"
+					>
+						<v-menu
+							offset-x
+							left
+							bottom
+						>
+							<v-btn
+								slot="activator"
+								fab
+								dark
+								color="red"
+							>
+								<v-icon>more_vert</v-icon>
+							</v-btn>
+							<v-list>
+								<v-dialog
+									style="display: block;"
+									v-model="clipDialog"
+									fullscreen
+									scrollable
+								>
+									<v-list-tile
+										slot="activator"
+										@click=""
+									>
+										<v-list-tile-title>
+											clip
+										</v-list-tile-title>
+									</v-list-tile>
+									<v-card tile>
+										<v-toolbar
+											card
+											dark
+											color="red darken-3"
+										>
+											<v-btn
+												icon
+												dark
+												@click="clipDialog = false"
+											>
+												<v-icon>close</v-icon>
+											</v-btn>
+											<v-toolbar-title>clip</v-toolbar-title>
+											<v-spacer></v-spacer>
+											<v-toolbar-items>
+												<v-btn
+													flat
+													dark
+													@click="applyClip"
+												>
+													apply
+												</v-btn>
+											</v-toolbar-items>
+										</v-toolbar>
+										<v-card-text
+											style="
+												height: 100%;
+												display: flex;
+												flex-direction: column;
+											"
+										>
+											<div>
+												<v-text-field
+													label="x"
+													v-model.number="clipInputX"
+												></v-text-field>
+												<v-text-field
+													label="y"
+													v-model.number="clipInputY"
+												></v-text-field>
+											</div>
+											<div
+												style="
+													position: relative;
+													flex: 1;
+												"
+											>
+												<div class="canvasWrapper">
+													<div ref="clipCanvasContainer"></div>
+												</div>
+											</div>
+										</v-card-text>
+									</v-card>
+								</v-dialog>
+							</v-list>
+							<v-list>
+								<v-bottom-sheet style="display: block;">
+									<v-list-tile
+										slot="activator"
+										@click=""
+									>
+										<v-list-tile-title>
+											crop
+										</v-list-tile-title>
+									</v-list-tile>
+									<v-card tile>
+										hallo
+									</v-card>
+								</v-bottom-sheet>
+							</v-list>
+							<v-list>
+								<v-bottom-sheet style="display: block;">
+									<v-list-tile
+										slot="activator"
+										@click=""
+									>
+										<v-list-tile-title>
+											cropAlign
+										</v-list-tile-title>
+									</v-list-tile>
+									<v-card tile>
+										hallo
+									</v-card>
+								</v-bottom-sheet>
+							</v-list>
+						</v-menu>
+					</div>
 				</v-container>
-				<div
-					style="
-						position: absolute;
-						z-index: 1;
-						left: 16px;
-						top: 50%;
-						transform: translateY(-50%);
-						display: flex;
-						flex-direction: column;
-					"
-				>
-					<v-tooltip right>
-						<v-btn
-							slot="activator"
-							fab
-							dark
-							color="red lighten-1"
-							@click="flop"
-						>
-							<v-icon>flip</v-icon>
-						</v-btn>
-						<span>flop</span>
-					</v-tooltip>
-					<v-tooltip right>
-						<v-btn
-							slot="activator"
-							fab
-							dark
-							color="red lighten-1"
-							@click="flip"
-						>
-							<v-icon style="transform: rotate(90deg);">flip</v-icon>
-						</v-btn>
-						<span>flip</span>
-					</v-tooltip>
-					<v-tooltip right>
-						<v-btn
-							slot="activator"
-							fab
-							dark
-							color="red lighten-1"
-							@click="rotate90"
-						>
-							<v-icon>rotate_right</v-icon>
-						</v-btn>
-						<span>rotate90</span>
-					</v-tooltip>
-					<v-tooltip right>
-						<v-btn
-							slot="activator"
-							fab
-							dark
-							color="red lighten-1"
-							@click="rotate180"
-						>
-							<v-icon>loop</v-icon>
-						</v-btn>
-						<span>rotate180</span>
-					</v-tooltip>
-					<v-tooltip right>
-						<v-btn
-							slot="activator"
-							fab
-							dark
-							color="red lighten-1"
-							@click="rotate270"
-						>
-							<v-icon>rotate_left</v-icon>
-						</v-btn>
-						<span>rotate270</span>
-					</v-tooltip>
-				</v-speed-dial>
 			</v-content>
 		</v-app>
 		<script src="demo/index.js"></script>

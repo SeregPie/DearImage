@@ -5,8 +5,6 @@ import PaperDuck_blank from './PaperDuck.blank';
 import PaperDuck_blankContext from './PaperDuck.blankContext';
 
 export default function(instance, offsetX = 0, offsetY = 0, sizeX, sizeY) {
-	sizeX = Number.parseInt(sizeX);
-	sizeY = Number.parseInt(sizeY);
 	let currSizeX = instance.width;
 	let currSizeY = instance.height;
 	if (offsetX < 0) {
