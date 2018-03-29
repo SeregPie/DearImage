@@ -85,9 +85,7 @@
 							height: 100%;
 						"
 					>
-						<div class="canvasWrapper">
-							<div ref="canvasContainer"></div>
-						</div>
+						<my-canvas-wrapper :canvas="canvas"></my-canvas-wrapper>
 					</div>
 					<div
 						style="
@@ -248,9 +246,7 @@
 													flex: 1;
 												"
 											>
-												<div class="canvasWrapper">
-													<div ref="clipCanvasContainer"></div>
-												</div>
+												<my-canvas-wrapper :canvas="clipCanvas"></my-canvas-wrapper>
 											</div>
 										</v-card-text>
 									</v-card>
