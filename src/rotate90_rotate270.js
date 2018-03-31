@@ -1,6 +1,6 @@
 import PaperDuck from './PaperDuck';
-import PaperDuck_blank from './PaperDuck.blank';
-import PaperDuck_blankContext from './PaperDuck.blankContext';
+import PaperDuck_blank from './blank';
+import PaperDuck_blankContext from './blankContext';
 
 export default function(instance, counterclockwise) {
 	let sizeX = instance.height;

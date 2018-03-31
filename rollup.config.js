@@ -14,6 +14,6 @@ export default {
 	plugins: [
 		nodeResolve(),
 		buble(),
-		//uglify(),
+		uglify(),
 	],
 };

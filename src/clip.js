@@ -1,8 +1,8 @@
 import Lang_isUndefined from 'x/src/Lang/isUndefined';
 
 import PaperDuck from './PaperDuck';
-import PaperDuck_blank from './PaperDuck.blank';
-import PaperDuck_blankContext from './PaperDuck.blankContext';
+import PaperDuck_blank from './blank';
+import PaperDuck_blankContext from './blankContext';
 
 export default function(instance, offsetX = 0, offsetY = 0, sizeX, sizeY) {
 	let currSizeX = instance.width;

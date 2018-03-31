@@ -1,6 +1,10 @@
-import PaperDuck from './PaperDuck';
+import Lang_isUndefined from 'x/src/Lang/isUndefined';
 
-PaperDuck.prototype.resize = function(sizeX, sizeY, smoothing) {
+import PaperDuck from './PaperDuck';
+import PaperDuck_blank from './blank';
+import PaperDuck_blankContext from './blankContext';
+
+export default function(instance, sizeX, sizeY, smoothing = 2) {
 	sizeX = Number.parseInt(sizeX);
 	sizeY = Number.parseInt(sizeY);
 	if (!Number.isFinite(sizeX) && !Number.isFinite(sizeY)) {
@@ -12,25 +16,25 @@ PaperDuck.prototype.resize = function(sizeX, sizeY, smoothing) {
 	if (Number.isFinite(sizeY)) {
 		sizeY = Math.abs(sizeY);
 	}
-	let currSizeX = this.width;
-	let currSizeY = this.height;
+	let currSizeX = instance.width;
+	let currSizeY = instance.height;
 	if (!Number.isFinite(sizeX)) {
 		if (currSizeY === 0) {
-			return this.constructor.blank(0, sizeY);
+			return PaperDuck_blank(0, sizeY);
 		}
 		sizeX = Math.round(currSizeX * sizeY / currSizeY);
 	} else
 	if (!Number.isFinite(sizeY)) {
 		if (currSizeX === 0) {
-			return this.constructor.blank(sizeX, 0);
+			return PaperDuck_blank(sizeX, 0);
 		}
 		sizeY = Math.round(currSizeY * sizeX / currSizeX);
 	}
 	if (sizeX === currSizeX && sizeY === currSizeY) {
-		return this;
+		return instance;
 	}
 	if (currSizeX === 0 || currSizeY === 0 || sizeX === 0 || sizeY === 0) {
-		return this.constructor.blank(sizeX, sizeY);
+		return PaperDuck_blank(sizeX, sizeY);
 	}
 	smoothing = Number.parseFloat(smoothing);
 	if (!Number.isFinite(smoothing)) {
@@ -54,7 +58,7 @@ PaperDuck.prototype.resize = function(sizeX, sizeY, smoothing) {
 		finished = false;
 		return currSize;
 	};
-	let canvas = this.toCanvas();
+	let canvas = instance.canvas;
 	for (let i = 64; i--;) {
 		finished = true;
 		let nextSizeX = _getNextSize(currSizeX, sizeX);
@@ -67,5 +71,5 @@ PaperDuck.prototype.resize = function(sizeX, sizeY, smoothing) {
 		currSizeY = nextSizeY;
 		canvas = ctx.canvas;
 	}
-	return this.constructor.from(canvas);
-};
+	return new PaperDuck(canvas);
+}

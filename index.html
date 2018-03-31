@@ -28,29 +28,7 @@
 			href="https://cdnjs.cloudflare.com/ajax/libs/vuetify/1.0.11/vuetify.min.css"
 		/>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/vuetify/1.0.11/vuetify.min.js"></script>
-		<style>
-			.canvasWrapper {
-				position: absolute;
-				top: 0;
-				right: 0;
-				bottom: 0;
-				left: 0;
-				overflow: auto;
-				display: flex;
-				justify-content: center;
-				align-items: center;
-			}
-
-			.canvasWrapper > :first-child {
-				background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="2" height="2" fill-opacity="0.15"><rect x="1" width="1" height="1"/><rect y="1" width="1" height="1"/></svg>');
-				background-size: 16px 16px;
-				background-repeat: repeat;
-			}
-
-			.canvasWrapper > :first-child > canvas {
-				display: block;
-			}
-		</style>
+		<script src="https://unpkg.com/@seregpie/vueflex@18.3.5"></script>
 	</head>
 	<body>
 		<v-app
@@ -85,7 +63,7 @@
 							height: 100%;
 						"
 					>
-						<my-canvas-wrapper :canvas="canvas"></my-canvas-wrapper>
+						<base-canvas-wrapper :canvas="canvas"></base-canvas-wrapper>
 					</div>
 					<div
 						style="
@@ -184,75 +162,90 @@
 								<v-icon>more_vert</v-icon>
 							</v-btn>
 							<v-list>
-								<v-dialog
-									style="display: block;"
-									v-model="clipDialog"
-									fullscreen
-									scrollable
+								<base-canvas-dialog
+									title="resize"
+									:canvas="resizeCanvas"
+									:dialog.sync="resizeDialog"
+									@apply="applyResize"
 								>
-									<v-list-tile
-										slot="activator"
-										@click=""
+									<vue-flex-box
+										wrap
+										justify-content="center"
+										align-items="center"
+										:spacing="8"
 									>
-										<v-list-tile-title>
-											clip
-										</v-list-tile-title>
-									</v-list-tile>
-									<v-card tile>
-										<v-toolbar
-											card
-											dark
-											color="red darken-3"
-										>
-											<v-btn
-												icon
-												dark
-												@click="clipDialog = false"
-											>
-												<v-icon>close</v-icon>
-											</v-btn>
-											<v-toolbar-title>clip</v-toolbar-title>
-											<v-spacer></v-spacer>
-											<v-toolbar-items>
-												<v-btn
-													flat
-													dark
-													@click="applyClip"
-												>
-													apply
-												</v-btn>
-											</v-toolbar-items>
-										</v-toolbar>
-										<v-card-text
-											style="
-												height: 100%;
-												display: flex;
-												flex-direction: column;
-											"
-										>
-											<div>
-												<v-text-field
-													label="x"
-													v-model.number="clipInputX"
-												></v-text-field>
-												<v-text-field
-													label="y"
-													v-model.number="clipInputY"
-												></v-text-field>
-											</div>
-											<div
-												style="
-													position: relative;
-													flex: 1;
-												"
-											>
-												<my-canvas-wrapper :canvas="clipCanvas"></my-canvas-wrapper>
-											</div>
-										</v-card-text>
-									</v-card>
-								</v-dialog>
-							</v-list>
-							<v-list>
+										<vue-flex-item style="max-width: 100px;">
+											<v-text-field
+												label="width"
+												type="number"
+												v-model="resizeInputWidth"
+												hide-details
+											></v-text-field>
+										</vue-flex-item>
+										<vue-flex-item style="max-width: 100px;">
+											<v-text-field
+												label="height"
+												type="number"
+												v-model="resizeInputHeight"
+												hide-details
+											></v-text-field>
+										</vue-flex-item>
+										<vue-flex-item style="max-width: 100px;">
+											<v-text-field
+												label="smoothing"
+												type="number"
+												v-model="resizeInputSmoothing"
+												hide-details
+											></v-text-field>
+										</vue-flex-item>
+									</vue-flex-box>
+								</base-canvas-dialog>
+								<base-canvas-dialog
+									title="clip"
+									:canvas="clipCanvas"
+									:dialog.sync="clipDialog"
+									@apply="applyClip"
+								>
+									<vue-flex-box
+										wrap
+										justify-content="center"
+										align-items="center"
+										:spacing="8"
+									>
+										<vue-flex-item style="max-width: 100px;">
+											<v-text-field
+												label="left"
+												type="number"
+												v-model="clipInputLeft"
+												hide-details
+											></v-text-field>
+										</vue-flex-item>
+										<vue-flex-item style="max-width: 100px;">
+											<v-text-field
+												label="top"
+												type="number"
+												v-model="clipInputTop"
+												hide-details
+											></v-text-field>
+										</vue-flex-item>
+										<vue-flex-item style="max-width: 100px;">
+											<v-text-field
+												label="width"
+												type="number"
+												v-model="clipInputWidth"
+												hide-details
+											></v-text-field>
+										</vue-flex-item>
+										<vue-flex-item style="max-width: 100px;">
+											<v-text-field
+												label="height"
+												type="number"
+												v-model="clipInputHeight"
+												hide-details
+											></v-text-field>
+										</vue-flex-item>
+									</vue-flex-box>
+								</base-canvas-dialog>
 								<v-bottom-sheet style="display: block;">
 									<v-list-tile
 										slot="activator"
@@ -266,8 +259,6 @@
 										hallo
 									</v-card>
 								</v-bottom-sheet>
-							</v-list>
-							<v-list>
 								<v-bottom-sheet style="display: block;">
 									<v-list-tile
 										slot="activator"
@@ -287,6 +278,70 @@
 				</v-container>
 			</v-content>
 		</v-app>
+		<template id="BaseCanvasDialog">
+			<v-dialog
+				style="display: block;"
+				v-model="dialog"
+				fullscreen
+				scrollable
+			>
+				<v-list-tile
+					slot="activator"
+					@click=""
+				>
+					<v-list-tile-title>
+						{{ title }}
+					</v-list-tile-title>
+				</v-list-tile>
+				<v-card tile>
+					<v-toolbar
+						card
+						dark
+						color="red darken-3"
+					>
+						<v-btn
+							icon
+							dark
+							@click="dialog = false"
+						>
+							<v-icon>close</v-icon>
+						</v-btn>
+						<v-toolbar-title>
+							{{ title }}
+						</v-toolbar-title>
+						<v-spacer></v-spacer>
+						<v-toolbar-items>
+							<v-btn
+								flat
+								dark
+								@click="apply"
+							>
+								apply
+							</v-btn>
+						</v-toolbar-items>
+					</v-toolbar>
+					<v-card-text
+						style="
+							height: 100%;
+							display: flex;
+							flex-direction: column;
+						"
+					>
+						<div>
+							<slot></slot>
+						</div>
+						<div
+							style="
+								position: relative;
+								flex: 1;
+							"
+						>
+							<base-canvas-wrapper :canvas="canvas"></base-canvas-wrapper>
+						</div>
+					</v-card-text>
+				</v-card>
+			</v-dialog>
+		</template>
 		<script src="demo/index.js"></script>
 	</body>
 </html>

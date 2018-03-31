@@ -1,9 +1,11 @@
 import Promise_try from 'x/src/Promise/try';
 
+import PaperDuck_load from './load';
+
 export default function(reader) {
 	return Promise_try(() => {
 		if (reader.readyState > 1) {
-			return this.load(reader.result);
+			return PaperDuck_load(reader.result);
 		}
 		let loadHandler;
 		let errorHandler;
@@ -16,7 +18,7 @@ export default function(reader) {
 			reader.removeEventListener('load', loadHandler);
 			reader.removeEventListener('error', errorHandler);
 		}).then(() => {
-			return this.load(reader.result);
+			return PaperDuck_load(reader.result);
 		});
 	});
 }

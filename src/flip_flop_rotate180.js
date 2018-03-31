@@ -1,5 +1,5 @@
 import PaperDuck from './PaperDuck';
-import PaperDuck_blankContext from './PaperDuck.blankContext';
+import PaperDuck_blankContext from './blankContext';
 
 export default function(instance, flipX, flipY) {
 	let sizeX = instance.width;
