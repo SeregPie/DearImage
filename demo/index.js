@@ -1,20 +1,52 @@
 (function() {
 
+	var parseInt = function(n) {
+		n = Number.parseInt(n);
+		if (Number.isFinite(n)) {
+			return n;
+		}
+	};
+
+	var parseFloat = function(n) {
+		n = Number.parseFloat(n);
+		if (Number.isFinite(n)) {
+			return n;
+		}
+	};
+
+	var CanvasData = {
+		data: function() {
+			return {
+				frozenCanvas: Object.freeze([null]),
+			};
+		},
+
+		computed: {
+			canvas: {
+				get: function() {
+					return this.frozenCanvas[0];
+				},
+
+				set: function(value) {
+					this.frozenCanvas = Object.freeze([value]);
+				},
+			},
+		},
+	};
+
 	var BaseCanvasWrapper = {
 		props: {
 			canvas: {},
 		},
 
 		computed: {
-			backgroundImage: function() {
-				var svg = '\
-					<svg xmlns="http://www.w3.org/2000/svg" width="2" height="2" fill-opacity="0.15">\
-						<rect x="1" width="1" height="1"/>\
-						<rect y="1" width="1" height="1"/>\
-					</svg>\
-				';
-				return 'url(data:image/svg+xml;base64,'+btoa(svg)+')';
-			},
+			backgroundImage: (function() {
+				var svg = '<svg xmlns="http://www.w3.org/2000/svg" width="2" height="2" fill-opacity="0.15"><rect x="1" width="1" height="1"/><rect y="1" width="1" height="1"/></svg>';
+				var image = 'url(data:image/svg+xml;base64,'+btoa(svg)+')';
+				return function() {
+					return image;
+				};
+			})(),
 		},
 
 		watch: {
@@ -73,10 +105,8 @@
 		},
 	};
 
-	var BaseCanvasDialog = {
-		components: {
-			BaseCanvasWrapper: BaseCanvasWrapper,
-		},
+	var BaseCanvasDialogListTile = {
+		template: '#BaseCanvasDialogListTile',
 
 		props: {
 			title: {},
@@ -105,48 +135,77 @@
 			},
 		},
 
-		template: '#BaseCanvasDialog',
+		components: {
+			BaseCanvasWrapper: BaseCanvasWrapper,
+		},
 	};
 
-	var vm = new Vue({
-		el: '#App',
+	var MyClipCanvasDialogListTile = {
+		props: {
+			value: {},
+		},
 
-		data: {
-			canvas: null,
+		data: function() {
+			return {
+				dialog: false,
 
-			clipDialog: undefined,
-			clipInputX: undefined,
-			clipInputY: undefined,
-			clipInputW: undefined,
-			clipInputH: undefined,
+				inputX: 0,
+				inputY: 0,
+				inputW: undefined,
+				inputH: undefined,
+			};
 		},
 
 		computed: {
-			clipCanvas: function() {
-				var canvas = this.canvas;
-				var x = Number.parseInt(this.clipInputX) || undefined;
-				var y = Number.parseInt(this.clipInputY) || undefined;
-				var w = Number.parseInt(this.clipInputW) || undefined;
-				var h = Number.parseInt(this.clipInputH) || undefined;
+			getCanvas: function() {
+				var x = parseInt(this.inputX);
+				var y = parseInt(this.inputY);
+				var w = parseInt(this.inputW);
+				var h = parseInt(this.inputH);
 
-				if (canvas) {
+				return function(canvas) {
 					return PaperDuck.from(canvas).clip(x, y, w, h).canvas;
-				}
-				return null;
+				};
 			},
 		},
 
-		watch: {
-			clipDialog: function() {
-				this.clipInputX = 0;
-				this.clipInputY = 0;
-				this.clipInputW = undefined;
-				this.clipInputH = undefined;
-			},
+		created: function() {
+			var id;
+			this.$watch(function() {
+				clearTimeout(id);
+
+				var dialog = this.dialog;
+				var canvas = this.value;
+
+				if (dialog && canvas) {
+					var getCanvas = this.getCanvas;
+
+					id = setTimeout(function() {
+						this.canvas = getCanvas(canvas);
+					}.bind(this), 1000);
+				}
+			});
 		},
 
 		methods: {
-			loadFromFileInput: function() {
+			apply: function() {
+				this.$input('input', this.canvas);
+				Object.assign(this, this.$options.data());
+			},
+		},
+
+		components: {
+			BaseCanvasDialogListTile: BaseCanvasDialogListTile,
+		},
+	};
+
+	var app = new Vue({
+		el: '#App',
+
+		mixins: [CanvasData],
+
+		methods: {
+			loadFromFile: function() {
 				var input = document.createElement('input');
 				input.type = 'file';
 				input.addEventListener('change', function() {
@@ -182,22 +241,78 @@
 			rotate270: function() {
 				this.canvas = PaperDuck.from(this.canvas).rotate270().canvas;
 			},
-
-			applyClip: function() {
-				this.canvas = this.clipCanvas;
-			},
 		},
 
 		components: {
 			BaseCanvasWrapper: BaseCanvasWrapper,
-			BaseCanvasDialog: BaseCanvasDialog,
+
+			MyClipCanvasDialogListTile: {
+				template: '#App-MyClipCanvasDialogListTile',
+
+				props: {
+					value: {},
+				},
+
+				data: function() {
+					return {
+						dialog: false,
+
+						inputX: 0,
+						inputY: 0,
+						inputW: undefined,
+						inputH: undefined,
+					};
+				},
+
+				computed: {
+					getCanvas: function() {
+						var x = parseInt(this.inputX);
+						var y = parseInt(this.inputY);
+						var w = parseInt(this.inputW);
+						var h = parseInt(this.inputH);
+
+						return function(canvas) {
+							return PaperDuck.from(canvas).clip(x, y, w, h).canvas;
+						};
+					},
+				},
+
+				created: function() {
+					var id;
+					this.$watch(function() {
+						clearTimeout(id);
+
+						var dialog = this.dialog;
+						var canvas = this.value;
+
+						if (dialog && canvas) {
+							var getCanvas = this.getCanvas;
+
+							id = setTimeout(function() {
+								this.canvas = getCanvas(canvas);
+							}.bind(this), 1000);
+						}
+					});
+				},
+
+				methods: {
+					apply: function() {
+						this.$input('input', this.canvas);
+						Object.assign(this, this.$options.data());
+					},
+				},
+
+				components: {
+					BaseCanvasDialogListTile: BaseCanvasDialogListTile,
+				},
+			}
 		},
 	});
 
 	PaperDuck
 		.load('https://i.imgur.com/JkNyq4P.jpg')
 		.then(function(instance) {
-			vm.canvas = instance.canvas;
+			app.canvas = instance.canvas;
 		});
 
 })();

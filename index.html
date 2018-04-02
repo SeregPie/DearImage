@@ -84,73 +84,15 @@
 								fab
 								dark
 								color="red"
-								@click="flop"
+								@click="loadFromFile"
 							>
-								<v-icon>flip</v-icon>
+								<v-icon>folder</v-icon>
 							</v-btn>
-							<span>flop</span>
+							<span>load</span>
 						</v-tooltip>
-						<v-tooltip right>
-							<v-btn
-								slot="activator"
-								fab
-								dark
-								color="red"
-								@click="flip"
-							>
-								<v-icon style="transform: rotate(90deg);">flip</v-icon>
-							</v-btn>
-							<span>flip</span>
-						</v-tooltip>
-						<v-tooltip right>
-							<v-btn
-								slot="activator"
-								fab
-								dark
-								color="red"
-								@click="rotate90"
-							>
-								<v-icon>rotate_right</v-icon>
-							</v-btn>
-							<span>rotate90</span>
-						</v-tooltip>
-						<v-tooltip right>
-							<v-btn
-								slot="activator"
-								fab
-								dark
-								color="red"
-								@click="rotate180"
-							>
-								<v-icon>loop</v-icon>
-							</v-btn>
-							<span>rotate180</span>
-						</v-tooltip>
-						<v-tooltip right>
-							<v-btn
-								slot="activator"
-								fab
-								dark
-								color="red"
-								@click="rotate270"
-							>
-								<v-icon>rotate_left</v-icon>
-							</v-btn>
-							<span>rotate270</span>
-						</v-tooltip>
-					</div>
-					<div
-						style="
-							position: absolute;
-							z-index: 1;
-							right: 16px;
-							top: 50%;
-							transform: translateY(-50%);
-						"
-					>
 						<v-menu
 							offset-x
-							left
+							right
 							bottom
 						>
 							<v-btn
@@ -162,90 +104,9 @@
 								<v-icon>more_vert</v-icon>
 							</v-btn>
 							<v-list>
-								<base-canvas-dialog
-									title="resize"
-									:canvas="resizeCanvas"
-									:dialog.sync="resizeDialog"
-									@apply="applyResize"
-								>
-									<vue-flex-box
-										wrap
-										justify-content="center"
-										align-items="center"
-										:spacing="8"
-									>
-										<vue-flex-item style="max-width: 100px;">
-											<v-text-field
-												label="width"
-												type="number"
-												v-model="resizeInputWidth"
-												hide-details
-											></v-text-field>
-										</vue-flex-item>
-										<vue-flex-item style="max-width: 100px;">
-											<v-text-field
-												label="height"
-												type="number"
-												v-model="resizeInputHeight"
-												hide-details
-											></v-text-field>
-										</vue-flex-item>
-										<vue-flex-item style="max-width: 100px;">
-											<v-text-field
-												label="smoothing"
-												type="number"
-												v-model="resizeInputSmoothing"
-												hide-details
-											></v-text-field>
-										</vue-flex-item>
-									</vue-flex-box>
-								</base-canvas-dialog>
-								<base-canvas-dialog
-									title="clip"
-									:canvas="clipCanvas"
-									:dialog.sync="clipDialog"
-									@apply="applyClip"
-								>
-									<vue-flex-box
-										wrap
-										justify-content="center"
-										align-items="center"
-										:spacing="8"
-									>
-										<vue-flex-item style="max-width: 100px;">
-											<v-text-field
-												label="left"
-												type="number"
-												v-model="clipInputLeft"
-												hide-details
-											></v-text-field>
-										</vue-flex-item>
-										<vue-flex-item style="max-width: 100px;">
-											<v-text-field
-												label="top"
-												type="number"
-												v-model="clipInputTop"
-												hide-details
-											></v-text-field>
-										</vue-flex-item>
-										<vue-flex-item style="max-width: 100px;">
-											<v-text-field
-												label="width"
-												type="number"
-												v-model="clipInputWidth"
-												hide-details
-											></v-text-field>
-										</vue-flex-item>
-										<vue-flex-item style="max-width: 100px;">
-											<v-text-field
-												label="height"
-												type="number"
-												v-model="clipInputHeight"
-												hide-details
-											></v-text-field>
-										</vue-flex-item>
-									</vue-flex-box>
-								</base-canvas-dialog>
+								<my-clip-canvas-dialog-list-tile v-model="canvas"></my-clip-canvas-dialog-list-tile>
+
+
 								<v-bottom-sheet style="display: block;">
 									<v-list-tile
 										slot="activator"
@@ -275,10 +136,84 @@
 							</v-list>
 						</v-menu>
 					</div>
+					<div
+						style="
+							position: absolute;
+							z-index: 1;
+							right: 16px;
+							top: 50%;
+							transform: translateY(-50%);
+							max-height: 100%;
+							overflow-y: auto;
+							display: flex;
+							flex-direction: column;
+						"
+					>
+						<v-tooltip left>
+							<v-btn
+								slot="activator"
+								fab
+								dark
+								color="red"
+								@click="flop"
+							>
+								<v-icon>flip</v-icon>
+							</v-btn>
+							<span>flop</span>
+						</v-tooltip>
+						<v-tooltip left>
+							<v-btn
+								slot="activator"
+								fab
+								dark
+								color="red"
+								@click="flip"
+							>
+								<v-icon style="transform: rotate(90deg);">flip</v-icon>
+							</v-btn>
+							<span>flip</span>
+						</v-tooltip>
+						<v-tooltip left>
+							<v-btn
+								slot="activator"
+								fab
+								dark
+								color="red"
+								@click="rotate90"
+							>
+								<v-icon>rotate_right</v-icon>
+							</v-btn>
+							<span>rotate90</span>
+						</v-tooltip>
+						<v-tooltip left>
+							<v-btn
+								slot="activator"
+								fab
+								dark
+								color="red"
+								@click="rotate180"
+							>
+								<v-icon>loop</v-icon>
+							</v-btn>
+							<span>rotate180</span>
+						</v-tooltip>
+						<v-tooltip left>
+							<v-btn
+								slot="activator"
+								fab
+								dark
+								color="red"
+								@click="rotate270"
+							>
+								<v-icon>rotate_left</v-icon>
+							</v-btn>
+							<span>rotate270</span>
+						</v-tooltip>
+					</div>
 				</v-container>
 			</v-content>
 		</v-app>
-		<template id="BaseCanvasDialog">
+		<template id="BaseCanvasDialogListTile">
 			<v-dialog
 				style="display: block;"
 				v-model="dialog"
@@ -341,6 +276,94 @@
 					</v-card-text>
 				</v-card>
 			</v-dialog>
+		</template>
+		<template>
+			<base-canvas-dialog
+				title="resize"
+				:canvas="resizeCanvas"
+				:dialog.sync="resizeDialog"
+				@apply="applyResize"
+			>
+				<vue-flex-box
+					wrap
+					justify-content="center"
+					align-items="center"
+					:spacing="8"
+				>
+					<vue-flex-item style="max-width: 100px;">
+						<v-text-field
+							label="width"
+							type="number"
+							v-model="resizeInputWidth"
+							hide-details
+						></v-text-field>
+					</vue-flex-item>
+					<vue-flex-item style="max-width: 100px;">
+						<v-text-field
+							label="height"
+							type="number"
+							v-model="resizeInputHeight"
+							hide-details
+						></v-text-field>
+					</vue-flex-item>
+					<vue-flex-item style="max-width: 100px;">
+						<v-text-field
+							label="smoothing"
+							type="number"
+							v-model="resizeInputSmoothing"
+							hide-details
+						></v-text-field>
+					</vue-flex-item>
+				</vue-flex-box>
+			</base-canvas-dialog>
+		</template>
+		<template id="App-MyClipCanvasDialogListTile">
+			<base-canvas-dialog
+				title="clip"
+				:canvas="clipCanvas"
+				:dialog.sync="clipDialog"
+				@apply="applyClip"
+			>
+				<vue-flex-box
+					wrap
+					justify-content="center"
+					align-items="center"
+					:spacing="8"
+				>
+					<vue-flex-item style="max-width: 100px;">
+						<v-text-field
+							label="left"
+							type="number"
+							v-model="clipInputLeft"
+							hide-details
+						></v-text-field>
+					</vue-flex-item>
+					<vue-flex-item style="max-width: 100px;">
+						<v-text-field
+							label="top"
+							type="number"
+							v-model="clipInputTop"
+							hide-details
+						></v-text-field>
+					</vue-flex-item>
+					<vue-flex-item style="max-width: 100px;">
+						<v-text-field
+							label="width"
+							type="number"
+							v-model="clipInputWidth"
+							hide-details
+						></v-text-field>
+					</vue-flex-item>
+					<vue-flex-item style="max-width: 100px;">
+						<v-text-field
+							label="height"
+							type="number"
+							v-model="clipInputHeight"
+							hide-details
+						></v-text-field>
+					</vue-flex-item>
+				</vue-flex-box>
+			</base-canvas-dialog>
 		</template>
 		<script src="demo/index.js"></script>
 	</body>

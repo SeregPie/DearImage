@@ -2,10 +2,11 @@ import Promise_try from 'x/src/Promise/try';
 import String_isString from 'x/src/String/isString';
 
 import PaperDuck from './PaperDuck';
+import PaperDuck_from from './from';
 import PaperDuck_loadFile from './loadFile';
 import PaperDuck_loadFileReader from './loadFileReader';
 import PaperDuck_loadImage from './loadImage';
-import PaperDuck_loadInputElement from './loadInputElement';
+import PaperDuck_loadInput from './loadInput';
 import PaperDuck_loadString from './loadString';
 
 export default function(value) {
@@ -17,7 +18,7 @@ export default function(value) {
 			return PaperDuck_loadImage(value);
 		}
 		if (value instanceof HTMLInputElement) {
-			return PaperDuck_loadInputElement(value);
+			return PaperDuck_loadInput(value);
 		}
 		if (value instanceof File) {
 			return PaperDuck_loadFile(value);
@@ -25,6 +26,6 @@ export default function(value) {
 		if (value instanceof FileReader) {
 			return PaperDuck_loadFileReader(value);
 		}
-		return this.from(value);
+		return PaperDuck_from(value);
 	});
 }

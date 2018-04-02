@@ -1,9 +1,4 @@
 import Object_mapValues from 'x/src/Object/mapValues';
-let Function_withContextAsFirstArg = function(func) {
-	return function(...args) {
-		return func(this, ...args);
-	};
-};
 
 import PaperDuck from './PaperDuck';
 
@@ -37,6 +32,8 @@ Object.assign(PaperDuck.prototype, Object_mapValues({
 	rotate180: PaperDuck_rotate180,
 	rotate270: PaperDuck_rotate270,
 	rotate90: PaperDuck_rotate90,
-}, Function_withContextAsFirstArg));
+}, func => function(...args) {
+	return func(this, ...args);
+}));
 
 export default PaperDuck;
