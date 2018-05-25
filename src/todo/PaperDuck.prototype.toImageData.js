@@ -1,1 +1,0 @@
-import PaperDuck from '../PaperDuck';

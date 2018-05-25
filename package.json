@@ -5,13 +5,9 @@
 	"main": "PaperDuck.js",
 	"scripts": {
 		"build": "rollup -c",
-		"dev": "rollup -c -w",
 		"prepublishOnly": "npm run build"
 	},
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/SeregPie/PaperDuck.git"
-	},
+	"repository": "https://github.com/SeregPie/PaperDuck.git",
 	"keywords": [
 		"canvas",
 		"clip",
@@ -30,17 +26,12 @@
 		"scale",
 		"url"
 	],
-	"author": "Sergej Sintschilin",
+	"author": "Sergej Sintschilin <seregpie@gmail.com>",
 	"license": "MIT",
-	"bugs": {
-		"url": "https://github.com/SeregPie/PaperDuck/issues"
-	},
-	"homepage": "https://github.com/SeregPie/PaperDuck#readme",
 	"devDependencies": {
-		"rollup": "^0.57.1",
+		"@seregpie/rollup-plugin-resolve": "^18.5.25",
+		"rollup": "^0.59.3",
 		"rollup-plugin-buble": "^0.19.2",
-		"rollup-plugin-node-resolve": "^3.3.0",
-		"rollup-plugin-uglify": "^3.0.0",
-		"x": "github:SeregPie/MyJavaScriptHelpers"
+		"rollup-plugin-uglify": "^4.0.0"
 	}
 }
