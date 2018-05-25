@@ -1,10 +1,6 @@
 # PaperDuck
 
-Manipulates images in the browser via native functions of `CanvasRenderingContext2D`.
-
-## demo
-
-[Try it out!](https://seregpie.github.io/PaperDuck/)
+Manipulates images in the browser via native functions of the 2D rendering context.
 
 ## dependencies
 
@@ -18,6 +14,12 @@ Manipulates images in the browser via native functions of `CanvasRenderingContex
 npm install paperduck
 ```
 
+### ES module
+
+```javascript
+import PaperDuck from 'paperduck';
+```
+
 ### browser
 
 ```html
@@ -28,7 +30,16 @@ npm install paperduck
 
 `.constructor(context)`
 
-...
+| argument | description |
+| ---: | :--- |
+| `context` |  The 2D rendering context. |
+
+```javascript
+let canvas = document.createElement('canvas');
+let context = canvas.getContext('2d');
+let instance = new PaperDuck(context);
+console.log(canvas === instance.canvas); // => true
+```
 
 ---
 
@@ -40,12 +51,10 @@ Creates an instance of `PaperDuck` from the given value.
 | ---: | :--- |
 | `value` |  ... |
 
-Returns the created instance.
-
 ```javascript
 let canvas = document.getElementById('demo');
 let instance = PaperDuck.from(canvas);
-console.log(instance instanceof PaperDuck); // => true
+console.log(canvas === instance.canvas); // => false
 ```
 
 ---
