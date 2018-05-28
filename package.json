@@ -5,6 +5,7 @@
 	"main": "PaperDuck.js",
 	"scripts": {
 		"build": "rollup -c",
+		"dev": "rollup -c -w",
 		"prepublishOnly": "npm run build"
 	},
 	"repository": "https://github.com/SeregPie/PaperDuck.git",
