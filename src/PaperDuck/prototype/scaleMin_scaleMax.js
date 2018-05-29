@@ -4,28 +4,21 @@ import Lang_isUndefined from '/utils/Number/isNumber';
 import PaperDuck from '../index';
 
 let f = function(by, sizeX, sizeY, smoothing) {
-	let currSizeX = this.width;
-	let currSizeY = this.height;
-	if (isNaN(sizeX)) {
-		sizeX = currSizeX;
-	} else {
-		sizeX = Math.abs(sizeX);
-	}
-	if (isNaN(sizeY)) {
-		sizeY = currSizeY;
-	} else {
-		sizeY = Math.abs(sizeY);
-	}
-	if (sizeX === currSizeX && sizeY === currSizeY) {
-		return this;
-	}
-	if (currSizeX === 0 || currSizeY === 0 || sizeX === 0 || sizeY === 0) {
+	let currentSizeX = this.width;
+	let currentSizeY = this.height;
+	if (currentSizeX === 0 || currentSizeY === 0) {
 		return this.constructor.blank(sizeX, sizeY);
 	}
-	let scaleFactorX = sizeX / currSizeX;
-	let scaleFactorY = sizeY / currSizeY;
-	let scaleFactor = by(scaleFactorX, scaleFactorY);
-	return this.scale(scaleFactor, smoothing);
+	if (Lang_isUndefined(sizeX)) {
+		sizeX = currentSizeX;
+	}
+	if (Lang_isUndefined(sizeY)) {
+		sizeY = currentSizeY;
+	}
+	let factorX = sizeX / currentSizeX;
+	let factorY = sizeY / currentSizeY;
+	let factor = by(factorX, factorY);
+	return this.scale(factor, smoothing);
 };
 
 PaperDuck.prototype.scaleMin = Function_partial(f, Math.min);

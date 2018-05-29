@@ -15,6 +15,7 @@ import './PaperDuck/prototype/cropScale';
 import './PaperDuck/prototype/flop_flip_rotate180';
 import './PaperDuck/prototype/rotate90_rotate270';
 import './PaperDuck/prototype/scale';
+import './PaperDuck/prototype/drawForeground_drawBackground';
 
 import './PaperDuck/from';
 import './PaperDuck/load';
