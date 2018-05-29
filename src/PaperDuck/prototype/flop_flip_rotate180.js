@@ -9,15 +9,11 @@ let f = function(flop, flip) {
 		return this;
 	}
 	let context = this.constructor.blankContext(sizeX, sizeY);
-	context.translate(
-		flop ? sizeX : 0,
-		flip ? sizeY : 0,
-	);
-	context.scale(
-		flop ? -1 : 1,
-		flip ? -1 : 1,
-	);
+	context.save();
+	context.translate(flop ? sizeX : 0, flip ? sizeY : 0);
+	context.scale(flop ? -1 : 1, flip ? -1 : 1);
 	context.drawImage(this.canvas, 0, 0);
+	context.restore();
 	return new this.constructor(context);
 };
 

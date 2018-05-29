@@ -30,25 +30,28 @@ PaperDuck.prototype.resize = function(sizeX, sizeY, smoothing = 2) {
 	} else {
 		smoothing = Infinity;
 	}
+	let i = 64;
 	let finished;
-	let _getNextSize = function(currentSize, finalSize) {
-		if (currentSize < finalSize) {
-			currentSize = Math.min(Math.round(currentSize * smoothing), finalSize);
+	let _getNextSize = function(currentSize, size) {
+		if (currentSize < size) {
+			currentSize = Math.min(Math.round(currentSize * smoothing), size);
 		} else
-		if (currentSize > finalSize) {
-			currentSize = Math.max(Math.round(currentSize / smoothing), finalSize);
+		if (currentSize > size) {
+			currentSize = Math.max(Math.round(currentSize / smoothing), size);
 		} else {
-			return finalSize;
+			return size;
 		}
 		finished = false;
 		return currentSize;
 	};
 	let currentContext = this.context;
-	for (let i = 64; i--;) {
+	while (i--) {
 		finished = true;
 		let nextSizeX = _getNextSize(currentSizeX, sizeX);
 		let nextSizeY = _getNextSize(currentSizeY, sizeY);
-		if (finished) break;
+		if (finished) {
+			break;
+		}
 		let nextContext = this.constructor.blankContext(nextSizeX, nextSizeY);
 		nextContext.scale(nextSizeX / currentSizeX, nextSizeY / currentSizeY);
 		nextContext.drawImage(currentContext.canvas, 0, 0);
