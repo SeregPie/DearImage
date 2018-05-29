@@ -45,7 +45,7 @@ console.log(canvas === instance.canvas); // => true
 
 `.from(value)`
 
-Creates an instance of `PaperDuck` from the given value.
+Creates an instance from the given value.
 
 | argument | description |
 | ---: | :--- |
@@ -65,7 +65,7 @@ console.log(otherInstance === instance); // => false
 
 `.load(value)`
 
-Loads an instance of `PaperDuck` from the given value.
+Loads an instance from the given value.
 
 | argument | description |
 | ---: | :--- |
@@ -92,7 +92,7 @@ input.click();
 
 `.blank(width = 0, height = 0)`
 
-Creates an instance of `PaperDuck` with a blank transparent canvas of the given size.
+Creates an instance with a blank transparent canvas of the given size.
 
 | argument | description |
 | ---: | :--- |
@@ -150,7 +150,7 @@ Resizes the canvas to the given size.
 Returns a new instance of `PaperDuck`. Can also return the same instance if no changes were made.
 
 ```javascript
-let canvas = PaperDuck(source).resize('', 512, 5/2).toCanvas();
+let canvas = PaperDuck.from(image).resize('', 512, 5/2).canvas;
 ```
 
 ---
@@ -169,7 +169,7 @@ Positions and clips the canvas to the given size.
 Returns a new instance of `PaperDuck`. Can also return the same instance if no changes were made.
 
 ```javascript
-let canvas = PaperDuck(source).clip(128, -512, '', 256).toCanvas();
+let canvas = PaperDuck.from(image).clip(128, -512, '', 256).canvas;
 ```
 
 ---
@@ -188,7 +188,7 @@ Positions and crops the canvas to the given size.
 Returns a new instance of `PaperDuck`. Can also return the same instance if no changes were made.
 
 ```javascript
-let canvas = PaperDuck(source).crop(128, -512, '', 256).toCanvas();
+let canvas = PaperDuck.from(image).crop(128, -512, '', 256).canvas;
 ```
 
 ---
@@ -206,7 +206,7 @@ Aligns and clips the canvas to the given size.
 Returns a new instance of `PaperDuck`. Can also return the same instance if no changes were made.
 
 ```javascript
-let canvas = PaperDuck(source).clipAlign(128, 256, 'right top').toCanvas();
+let canvas = PaperDuck.from(image).clipAlign(128, 256, 'right top').canvas;
 ```
 
 ---
@@ -224,7 +224,7 @@ Aligns and crops the canvas to the given size.
 Returns a new instance of `PaperDuck`. Can also return the same instance if no changes were made.
 
 ```javascript
-let canvas = PaperDuck(source).cropAlign(256, 128, 'left bottom').toCanvas();
+let canvas = PaperDuck.from(image).cropAlign(256, 128, 'left bottom').canvas;
 ```
 
 ---
@@ -241,50 +241,41 @@ Resizes the canvas proportionally by the given factor.
 Returns a new instance of `PaperDuck`. Can also return the same instance if no changes were made.
 
 ```javascript
-let canvas = document.getElementById('demo');
-let instance = PaperDuck(canvas);
-let enlargedCanvas = instance.scale(3).toCanvas();
-let reducedCanvas = instance.scale(1/3).toCanvas();
+let instance = PaperDuck.from(image);
+let enlargedCanvas = instance.scale(3).canvas;
+let reducedCanvas = instance.scale(1/3).canvas;
 ```
 ---
 
-`.prototype.scaleMin(w = 'same', h = 'same', smoothing = 2)`
+`.prototype.scaleMin(width, height, smoothing = 2)`
 
 ---
 
-`.prototype.scaleMax(w = 'same', h = 'same', smoothing = 2)`
+`.prototype.scaleMax(width, height, smoothing = 2)`
 
 ---
 
-`.prototype.clipScale(w = 'same', h = 'same', align = 'center', smoothing = 2)`
+`.prototype.clipScale(width, height, align = 'center', smoothing = 2)`
+
+*alias* `contain`
 
 ---
 
-`.prototype.cropScale(w = 'same', h = 'same', align = 'center', smoothing = 2)`
+`.prototype.cropScale(width, height, align = 'center', smoothing = 2)`
+
+*alias* `cover`
 
 ---
 
 `.prototype.flip()`
 
-Flips the canvas vertically.
-
-Returns a new instance of `PaperDuck`. Can also return the same instance if no changes were made.
-
-```javascript
-let canvas = PaperDuck(source).flip().toCanvas();
-```
+Mirrors the canvas vertically.
 
 ---
 
 `.prototype.flop()`
 
-Flops the canvas horizontally.
-
-Returns a new instance of `PaperDuck`. Can also return the same instance if no changes were made.
-
-```javascript
-let canvas = PaperDuck(source).flop().toCanvas();
-```
+Mirrors the canvas horizontally.
 
 ---
 
@@ -292,23 +283,11 @@ let canvas = PaperDuck(source).flop().toCanvas();
 
 Rotates the canvas by 90 degrees clockwise.
 
-Returns a new instance of `PaperDuck`. Can also return the same instance if no changes were made.
-
-```javascript
-let canvas = PaperDuck(source).rotate90().toCanvas();
-```
-
 ---
 
 `.prototype.rotate180()`
 
 Rotates the canvas by 180 degrees.
-
-Returns a new instance of `PaperDuck`. Can also return the same instance if no changes were made.
-
-```javascript
-let canvas = PaperDuck(source).rotate180().toCanvas();
-```
 
 ---
 
@@ -316,46 +295,27 @@ let canvas = PaperDuck(source).rotate180().toCanvas();
 
 Rotates the canvas by 90 degrees counterclockwise.
 
-Returns a new instance of `PaperDuck`. Can also return the same instance if no changes were made.
+---
 
-```javascript
-let canvas = PaperDuck(source).rotate270().toCanvas();
-```
+`.prototype.drawForeground(foreground, align = 'center')`
+
+Draws an image before the canvas.
+
+| argument | description |
+| ---: | :--- |
+| `foreground` | An instance of `PaperDuck` to draw before. |
+| `align` | The alignment of the drawing. |
 
 ---
 
-`.prototype.drawForeground(canvas, align = 'center')`
+`.prototype.drawBackground(background, align = 'center')`
 
----
+Draws an image behind the canvas.
 
-`.prototype.drawBackground(canvas, align = 'center')`
-
----
-
-`.prototype.toCanvas()`
-
-```javascript
-let canvas = PaperDuck(source)
-  .cropAlign(256, 256)
-  .rotate180()
-  .toCanvas();
-document.body.appendChild(canvas);
-```
-
----
-
-`.prototype.toContext()`
-
-Returns a 2D rendering context for a canvas.
-
-```javascript
-let instance = PaperDuck(source);
-// ...
-let ctx = instance.toContext();
-ctx.font = '32px serif';
-ctx.fillText('Carpe Diem', 32, 64);
-instance = PaperDuck(ctx);
-```
+| argument | description |
+| ---: | :--- |
+| `background` | An instance of `PaperDuck` to draw behind. |
+| `align` | The alignment of the drawing. |
 
 ---
 
@@ -368,7 +328,7 @@ Returns a data URL containing a representation of the canvas.
 | `args` | Any number of arguments to be passed to the function [`.toDataURL()`](https://developer.mozilla.org/docs/Web/API/HTMLCanvasElement/toDataURL) of the canvas element. |
 
 ```javascript
-let dataURL = PaperDuck(source)
+let dataURL = PaperDuck.from(image)
   .cropAlign(256, 256)
   .rotate180()
   .toDataURL('canvas/jpeg', 1/2);
@@ -391,16 +351,3 @@ let canvas = PaperDuck(canvas)
 canvas.style.border = '1px solid BlueViolet';
 document.body.appendChild(canvas);
 ```
-
----
-
-`.blankContext(w = 0, h = 0)`
-
-Creates a new instance of `CanvasRenderingContext2D` of the given size.
-
-| argument | description |
-| ---: | :--- |
-| `w` | The width of the context. |
-| `h` | The height of the context. |
-
-Returns the created instance.
