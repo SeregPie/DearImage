@@ -8,17 +8,17 @@ let f = function(flop, flip) {
 	if (sizeX === 0 || sizeY === 0) {
 		return this;
 	}
-	let ctx = this.constructor.blankContext(sizeX, sizeY);
-	ctx.translate(
+	let context = this.constructor.blankContext(sizeX, sizeY);
+	context.translate(
 		flop ? sizeX : 0,
 		flip ? sizeY : 0,
 	);
-	ctx.scale(
+	context.scale(
 		flop ? -1 : 1,
 		flip ? -1 : 1,
 	);
-	ctx.drawImage(this.canvas, 0, 0);
-	return new this.constructor(ctx);
+	context.drawImage(this.canvas, 0, 0);
+	return new this.constructor(context);
 };
 
 PaperDuck.prototype.flop = Function_partial(f, true, false);

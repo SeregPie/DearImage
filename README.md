@@ -51,6 +51,8 @@ Creates an instance of `PaperDuck` from the given value.
 | ---: | :--- |
 | `value` |  ... |
 
+Returns the created instance.
+
 ```javascript
 let canvas = document.getElementById('demo');
 let instance = PaperDuck.from(canvas);
@@ -61,19 +63,18 @@ console.log(canvas === instance.canvas); // => false
 
 `.load(value)`
 
-...
+Loads an instance of `PaperDuck` from the given value.
 
 | argument | description |
 | ---: | :--- |
 | `value` | ... |
 
-...
+Returns the promised instance.
 
 ```javascript
-PaperDuck.load('/path/to/image.jpg').then(instance => {
-  let canvas = instance.cropScale(256, 256).toCanvas();
-  document.body.appendChild(canvas);
-});
+let instance = await PaperDuck.load('/path/to/image.jpg');
+let canvas = instance.cropScale(256, 256).canvas;
+document.body.appendChild(canvas);
 ```
 
 ```javascript

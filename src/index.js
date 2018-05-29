@@ -14,5 +14,6 @@ import './PaperDuck/loadInput';
 import './PaperDuck/loadString';
 import './PaperDuck/prototype/flop_flip_rotate180';
 import './PaperDuck/prototype/resize';
+import './PaperDuck/prototype/scale';
 
 export default PaperDuck;
