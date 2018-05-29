@@ -3,19 +3,20 @@ import Function_partial from '/utils/Function/partial';
 import PaperDuck from '../index';
 
 let f = function(counterclockwise) {
-	let sizeX = this.height;
-	let sizeY = this.width;
-	if (sizeX === 0 || sizeY === 0) {
-		if (sizeX === sizeY) {
+	let width = this.height;
+	let height = this.width;
+	if (width === 0 || height === 0) {
+		if (width === height) {
 			return this;
 		}
-		return this.constructor.blank(sizeX, sizeY);
+		return this.constructor.blank(width, height);
 	}
-	let context = this.constructor.blankContext(sizeX, sizeY);
+	let currentCanvas = this.canvas;
+	let context = this.constructor.blankContext(width, height);
 	context.save();
-	context.translate(sizeX / 2, sizeY / 2);
+	context.translate(width / 2, height / 2);
 	context.rotate(Math.PI / (counterclockwise ? -2 : 2));
-	context.drawImage(this.canvas, sizeY / -2, sizeX / -2);
+	context.drawImage(currentCanvas, height / -2, width / -2);
 	context.restore();
 	return new this.constructor(context);
 };

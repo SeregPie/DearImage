@@ -3,16 +3,17 @@ import Function_partial from '/utils/Function/partial';
 import PaperDuck from '../index';
 
 let f = function(flop, flip) {
-	let sizeX = this.width;
-	let sizeY = this.height;
-	if (sizeX === 0 || sizeY === 0) {
+	let width = this.width;
+	let height = this.height;
+	if (width === 0 || height === 0) {
 		return this;
 	}
-	let context = this.constructor.blankContext(sizeX, sizeY);
+	let currentCanvas = this.canvas;
+	let context = this.constructor.blankContext(width, height);
 	context.save();
-	context.translate(flop ? sizeX : 0, flip ? sizeY : 0);
+	context.translate(flop ? width : 0, flip ? height : 0);
 	context.scale(flop ? -1 : 1, flip ? -1 : 1);
-	context.drawImage(this.canvas, 0, 0);
+	context.drawImage(currentCanvas, 0, 0);
 	context.restore();
 	return new this.constructor(context);
 };

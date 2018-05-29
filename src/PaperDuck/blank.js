@@ -1,5 +1,5 @@
 import PaperDuck from './index';
 
-PaperDuck.blank = function(sizeX, sizeY) {
-	return new this(this.blankContext(sizeX, sizeY));
+PaperDuck.blank = function(width, height) {
+	return new this(this.blankContext(width, height));
 };

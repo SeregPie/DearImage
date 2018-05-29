@@ -3,21 +3,21 @@ import Lang_isUndefined from '/utils/Number/isNumber';
 
 import PaperDuck from '../index';
 
-let f = function(by, sizeX, sizeY, smoothing) {
-	let currentSizeX = this.width;
-	let currentSizeY = this.height;
-	if (currentSizeX === 0 || currentSizeY === 0) {
-		return this.constructor.blank(sizeX, sizeY);
+let f = function(getFactor, width, height, smoothing) {
+	let currentWidth = this.width;
+	let currentHeight = this.height;
+	if (currentWidth === 0 || currentHeight === 0) {
+		return this.constructor.blank(width, height);
 	}
-	if (Lang_isUndefined(sizeX)) {
-		sizeX = currentSizeX;
+	if (Lang_isUndefined(width)) {
+		width = currentWidth;
 	}
-	if (Lang_isUndefined(sizeY)) {
-		sizeY = currentSizeY;
+	if (Lang_isUndefined(height)) {
+		height = currentHeight;
 	}
-	let factorX = sizeX / currentSizeX;
-	let factorY = sizeY / currentSizeY;
-	let factor = by(factorX, factorY);
+	let factorWidth = width / currentWidth;
+	let factorHeight = height / currentHeight;
+	let factor = getFactor(factorWidth, factorHeight);
 	return this.scale(factor, smoothing);
 };
 

@@ -1,5 +1,5 @@
 import PaperDuck from './index';
 
-PaperDuck.blankContext = function(sizeX, sizeY) {
-	return this.blankCanvas(sizeX, sizeY).getContext('2d');
+PaperDuck.blankContext = function(width, height) {
+	return this.blankCanvas(width, height).getContext('2d');
 };

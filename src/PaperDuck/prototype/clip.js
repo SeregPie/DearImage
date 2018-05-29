@@ -2,34 +2,35 @@ import Lang_isUndefined from '/utils/Lang/isUndefined';
 
 import PaperDuck from '../index';
 
-PaperDuck.prototype.clip = function(offsetX = 0, offsetY = 0, sizeX, sizeY) {
-	let currentSizeX = this.width;
-	let currentSizeY = this.height;
-	if (offsetX < 0) {
-		offsetX += currentSizeX;
+PaperDuck.prototype.clip = function(left = 0, top = 0, width, height) {
+	let currentWidth = this.width;
+	let currentHeight = this.height;
+	if (left < 0) {
+		left += currentWidth;
 	}
-	if (offsetY < 0) {
-		offsetY += currentSizeY;
+	if (top < 0) {
+		top += currentHeight;
 	}
-	if (Lang_isUndefined(sizeX)) {
-		sizeX = currentSizeX;
-	} else if (sizeX < 0) {
-		sizeX = -sizeX;
-		offsetX -= sizeX;
+	if (Lang_isUndefined(width)) {
+		width = currentWidth;
+	} else if (width < 0) {
+		width = -width;
+		left -= width;
 	}
-	if (Lang_isUndefined(sizeY)) {
-		sizeY = currentSizeY;
-	} else if (sizeY < 0) {
-		sizeY = -sizeY;
-		offsetY -= sizeY;
+	if (Lang_isUndefined(height)) {
+		height = currentHeight;
+	} else if (height < 0) {
+		height = -height;
+		top -= height;
 	}
-	if (offsetX === 0 && offsetY === 0 && sizeX === currentSizeX && sizeY === currentSizeY) {
+	if (left === 0 && top === 0 && width === currentWidth && height === currentHeight) {
 		return this;
 	}
-	if (sizeX === 0 || sizeY === 0) {
-		return this.constructor.blank(sizeX, sizeY);
+	if (width === 0 || height === 0) {
+		return this.constructor.blank(width, height);
 	}
-	let context = this.constructor.blankContext(sizeX, sizeY);
-	context.drawImage(this.canvas, -offsetX, -offsetY);
+	let currentCanvas = this.canvas;
+	let context = this.constructor.blankContext(width, height);
+	context.drawImage(currentCanvas, -left, -top);
 	return new this.constructor(context);
 };

@@ -1,8 +1,8 @@
 import PaperDuck from './index';
 
-PaperDuck.blankCanvas = function(sizeX = 0, sizeY = 0) {
+PaperDuck.blankCanvas = function(width = 0, height = 0) {
 	let canvas  = this.createCanvas();
-	canvas.width = sizeX;
-	canvas.height = sizeY;
+	canvas.width = width;
+	canvas.height = height;
 	return canvas;
 };

@@ -2,18 +2,18 @@ import Lang_isUndefined from '/utils/Lang/isUndefined';
 
 import PaperDuck from '../index';
 
-PaperDuck.prototype.cropAlign = function(sizeX, sizeY, align) {
-	let currentSizeX = this.getWidth();
-	let currentSizeY = this.getHeight();
-	if (Lang_isUndefined(sizeX)) {
-		sizeX = currentSizeX;
+PaperDuck.prototype.cropAlign = function(width, height, align) {
+	let currentWidth = this.getWidth();
+	let currentHeight = this.getHeight();
+	if (Lang_isUndefined(width)) {
+		width = currentWidth;
 	} else {
-		sizeX = Math.min(sizeX, currentSizeX);
+		width = Math.min(width, currentWidth);
 	}
-	if (Lang_isUndefined(sizeY)) {
-		sizeY = currentSizeY;
+	if (Lang_isUndefined(height)) {
+		height = currentHeight;
 	} else {
-		sizeY = Math.min(sizeY, currentSizeY);
+		height = Math.min(height, currentHeight);
 	}
-	return this.clipAlign(sizeX, sizeY, align);
+	return this.clipAlign(width, height, align);
 };

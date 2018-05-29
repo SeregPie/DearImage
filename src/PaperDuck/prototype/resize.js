@@ -2,24 +2,24 @@ import Number_isNumber from '/utils/Number/isNumber';
 
 import PaperDuck from '../index';
 
-PaperDuck.prototype.resize = function(sizeX, sizeY, smoothing = 2) {
-	let currentSizeX = this.width;
-	let currentSizeY = this.height;
-	if (currentSizeX === 0 || currentSizeY === 0 || sizeX === 0 || sizeY === 0) {
-		return this.constructor.blank(sizeX, sizeY);
+PaperDuck.prototype.resize = function(width, height, smoothing = 2) {
+	let currentWidth = this.width;
+	let currentHeight = this.height;
+	if (currentWidth === 0 || currentHeight === 0 || width === 0 || height === 0) {
+		return this.constructor.blank(width, height);
 	}
-	if (Number_isNumber(sizeX) && Number_isNumber(sizeY)) {
+	if (Number_isNumber(width) && Number_isNumber(height)) {
 		// pass
 	} else
-	if (Number_isNumber(sizeX)) {
-		sizeY = Math.round(currentSizeY * sizeX / currentSizeX);
+	if (Number_isNumber(width)) {
+		height = Math.round(currentHeight * width / currentWidth);
 	} else
-	if (Number_isNumber(sizeY)) {
-		sizeX = Math.round(currentSizeX * sizeY / currentSizeY);
+	if (Number_isNumber(height)) {
+		width = Math.round(currentWidth * height / currentHeight);
 	} else {
 		return this;
 	}
-	if (sizeX === currentSizeX && sizeY === currentSizeY) {
+	if (width === currentWidth && height === currentHeight) {
 		return this;
 	}
 	if (smoothing < 1) {
@@ -47,16 +47,16 @@ PaperDuck.prototype.resize = function(sizeX, sizeY, smoothing = 2) {
 	let currentContext = this.context;
 	while (i--) {
 		finished = true;
-		let nextSizeX = _getNextSize(currentSizeX, sizeX);
-		let nextSizeY = _getNextSize(currentSizeY, sizeY);
+		let nextwidth = _getNextSize(currentWidth, width);
+		let nextHeight = _getNextSize(currentHeight, height);
 		if (finished) {
 			break;
 		}
-		let nextContext = this.constructor.blankContext(nextSizeX, nextSizeY);
-		nextContext.scale(nextSizeX / currentSizeX, nextSizeY / currentSizeY);
+		let nextContext = this.constructor.blankContext(nextwidth, nextHeight);
+		nextContext.scale(nextwidth / currentWidth, nextHeight / currentHeight);
 		nextContext.drawImage(currentContext.canvas, 0, 0);
-		currentSizeX = nextSizeX;
-		currentSizeY = nextSizeY;
+		currentWidth = nextwidth;
+		currentHeight = nextHeight;
 		currentContext = nextContext;
 	}
 	return new this.constructor(currentContext);

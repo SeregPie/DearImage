@@ -1,5 +1,5 @@
 import PaperDuck from '../index';
 
-PaperDuck.prototype.cropScale = function(sizeX, sizeY, align, smoothing) {
-	return this.scaleMax(sizeX, sizeY, smoothing).cropAlign(sizeX, sizeY, align);
+PaperDuck.prototype.cropScale = function(width, height, align, smoothing) {
+	return this.scaleMax(width, height, smoothing).cropAlign(width, height, align);
 };
