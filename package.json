@@ -1,7 +1,7 @@
 {
 	"name": "paperduck",
 	"version": "18.1.21",
-	"description": "Manipulates images in the browser via native functions of the 2D rendering context.",
+	"description": "Manipulates canvas in the browser via native functions of the 2D rendering context.",
 	"main": "PaperDuck.js",
 	"scripts": {
 		"build": "rollup -c",

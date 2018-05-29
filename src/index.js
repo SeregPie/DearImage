@@ -27,4 +27,7 @@ import './PaperDuck/prototype/cropAlign';
 import './PaperDuck/prototype/resize';
 import './PaperDuck/prototype/scaleMin_scaleMax';
 
+PaperDuck.prototype.cover = PaperDuck.prototype.cropScale;
+PaperDuck.prototype.contain = PaperDuck.prototype.clipScale;
+
 export default PaperDuck;
