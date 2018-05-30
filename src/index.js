@@ -20,12 +20,12 @@ import './PaperDuck/prototype/drawForeground_drawBackground';
 import './PaperDuck/prototype/flop_flip_rotate180';
 import './PaperDuck/prototype/rotate90_rotate270';
 import './PaperDuck/prototype/scale';
+import './PaperDuck/prototype/scaleMin_scaleMax';
 
 import './PaperDuck/prototype/clip';
 import './PaperDuck/prototype/crop';
 import './PaperDuck/prototype/cropAlign';
 import './PaperDuck/prototype/resize';
-import './PaperDuck/prototype/scaleMin_scaleMax';
 
 PaperDuck.prototype.contain = PaperDuck.prototype.clipScale;
 PaperDuck.prototype.cover = PaperDuck.prototype.cropScale;

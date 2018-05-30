@@ -249,9 +249,13 @@ let reducedCanvas = instance.scale(1/3).canvas;
 
 `.prototype.scaleMin(width, height, smoothing = 2)`
 
+Scales the canvas proportionally to the minimum of the given size.
+
 ---
 
 `.prototype.scaleMax(width, height, smoothing = 2)`
+
+Scales the canvas proportionally to the maximum of the given size.
 
 ---
 

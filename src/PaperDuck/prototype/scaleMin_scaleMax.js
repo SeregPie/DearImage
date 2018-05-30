@@ -6,14 +6,17 @@ import PaperDuck from '../index';
 let f = function(getFactor, width, height, smoothing) {
 	let currentWidth = this.width;
 	let currentHeight = this.height;
-	if (currentWidth === 0 || currentHeight === 0) {
-		return this.constructor.blank(width, height);
-	}
 	if (Lang_isUndefined(width)) {
 		width = currentWidth;
 	}
 	if (Lang_isUndefined(height)) {
 		height = currentHeight;
+	}
+	if (width === currentWidth && height === currentHeight) {
+		return this;
+	}
+	if (currentWidth === 0 || currentHeight === 0) {
+		return this.constructor.blank(width, height);
 	}
 	let factorWidth = width / currentWidth;
 	let factorHeight = height / currentHeight;
