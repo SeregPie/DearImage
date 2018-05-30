@@ -19,11 +19,11 @@ import './PaperDuck/prototype/cropMax';
 import './PaperDuck/prototype/cropMin';
 import './PaperDuck/prototype/drawForeground_drawBackground';
 import './PaperDuck/prototype/flop_flip_rotate180';
+import './PaperDuck/prototype/resize';
 import './PaperDuck/prototype/rotate90_rotate270';
 import './PaperDuck/prototype/scale';
 import './PaperDuck/prototype/scaleMin_scaleMax';
-
-import './PaperDuck/prototype/resize';
+import './PaperDuck/prototype/toImage';
 
 PaperDuck.prototype.contain = PaperDuck.prototype.cropMin;
 PaperDuck.prototype.cover = PaperDuck.prototype.cropMax;
