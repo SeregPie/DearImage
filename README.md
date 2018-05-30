@@ -1,6 +1,6 @@
 # PaperDuck
 
-Manipulates canvas in the browser via native functions of the 2D rendering context.
+Manipulates canvas in the browser via native functions of a 2D rendering context.
 
 ## dependencies
 
@@ -51,8 +51,6 @@ Creates an instance from the given value.
 | ---: | :--- |
 | `value` |  The value to create from. |
 
-Returns a new instance of `PaperDuck`.
-
 ```javascript
 let canvas = document.getElementById('demo');
 let instance = PaperDuck.from(canvas);
@@ -70,8 +68,6 @@ Loads an instance from the given value.
 | argument | description |
 | ---: | :--- |
 | `value` | The value to load from. |
-
-Returns a promised instance.
 
 ```javascript
 let instance = (await PaperDuck.load('/path/to/image.jpg')).cover(256, 256);
@@ -98,8 +94,6 @@ Creates an instance with a blank transparent canvas of the given size.
 | ---: | :--- |
 | `width` | The width of the canvas. |
 | `height` | The height of the canvas. |
-
-Returns a new instance of `PaperDuck`.
 
 ---
 
@@ -143,31 +137,12 @@ Resizes the canvas to the given size.
 
 | argument | description |
 | ---: | :--- |
-| `width` | The width of the resized canvas. If the value is undefined, the width scales proportionally to the height. |
-| `height` | The height of the resized canvas. If the value is undefined, the height scales proportionally to the width. |
-| `smoothing` | The smoothing factor. The value must be is greater than or equal to 1. 1 means no smoothing. |
-
-Returns a new instance of `PaperDuck`. Can also return the same instance if no changes were made.
+| `width` | The width of the resized canvas. If the value is undefined, the value will be set proportionally to the height. |
+| `height` | The height of the resized canvas. If the value is undefined, the value will be set proportionally to the width. |
+| `smoothing` | The smoothing factor. |
 
 ```javascript
-let canvas = PaperDuck.from(source).resize('', 512, 5/2).canvas;
-```
-
----
-
-`.prototype.clip(left = 0, top = 0, width, height)`
-
-Positions and clips the canvas to the given size.
-
-| argument | description |
-| ---: | :--- |
-| `left` | The left offset of the clipping. A negative value is a right offset. |
-| `top` | The top offset of the clipping. A negative value is a bottom offset. |
-| `width` | The width of the clipped canvas. A negative value (starts clipping from the right offset and goes to the left). |
-| `height` | The height of the clipped canvas. A negative value (starts clipping from the bottom offset and goes to the top). |
-
-```javascript
-let canvas = PaperDuck.from(source).clip(128, -512, '', 256).canvas;
+let instance = PaperDuck.from(source).resize(undefined, 512, 2.5);
 ```
 
 ---
@@ -178,13 +153,13 @@ Positions and crops the canvas to the given size.
 
 | argument | description |
 | ---: | :--- |
-| `x` | The left offset of the cropping. A negative value is a right offset. |
-| `y` | The top offset of the cropping. A negative value is a bottom offset. |
-| `w` | The width of the cropped canvas. ??? |
-| `h` | The height of the cropped canvas. ??? |
+| `left` | The left offset of the clipping. A negative value is a right offset. |
+| `top` | The top offset of the clipping. A negative value is a bottom offset. |
+| `width` | The width of the clipped canvas. A negative value reverses the direction. If the value is undefined, the value will be set to the width of the canvas. |
+| `height` | The height of the clipped canvas. A negative value reverses the direction. If the value is undefined, the value will be set to the height of the canvas. |
 
 ```javascript
-let canvas = PaperDuck.from(image).crop(128, -512, '', 256).canvas;
+let instance = PaperDuck.from(source).crop(128, -512, undefined, 256);
 ```
 
 ---
@@ -195,12 +170,12 @@ Aligns and crops the canvas to the given size.
 
 | argument | description |
 | ---: | :--- |
-| `w` | The width of the cropped canvas. |
-| `h` | The height of the cropped canvas. |
-| `align` | The alignment of the cropping. Possible values are `'top left'`, `'top'`, `'top right'`, `'left'`, `'center'`, `'right'`, `'bottom left'`, `'bottom'` and `'bottom right'`. The order of words does not matter. |
+| `width` | The width of the cropped canvas. If the value is undefined, the value will be set to the width of the canvas. |
+| `height` | The height of the cropped canvas. If the value is undefined, the value will be set to the height of the canvas. |
+| `align` | The alignment of the cropping. Possible values are `'left top'`, `'left center'`, `'left bottom'`, `'right top'`, `'right center'`, `'right bottom'`, `'center top'`, `'center center'` and `'center bottom'`. |
 
 ```javascript
-let canvas = PaperDuck.from(image).cropAlign(256, 128, 'left bottom').canvas;
+let instance = PaperDuck.from(source).cropAlign(256, 128, 'left bottom');
 ```
 
 ---
@@ -211,11 +186,11 @@ Resizes the canvas proportionally by the given factor.
 
 | argument | description |
 | ---: | :--- |
-| `factor` | The scale factor. If the value is greater than 1, the canvas is an enlargement. If the value is between 0 and 1, the canvas is a reduction. |
-| `smoothing` | The smoothing factor. The value must be is greater than or equal to 1. 1 means no smoothing. |
+| `factor` | The scale factor. If the value is greater than 1, the scale is an enlargement. If the value is less than 1, the scale is a reduction. |
+| `smoothing` | The smoothing factor. |
 
 ```javascript
-let instance = PaperDuck.from(image);
+let instance = PaperDuck.from(source);
 let enlargedCanvas = instance.scale(3).canvas;
 let reducedCanvas = instance.scale(1/3).canvas;
 ```
@@ -225,11 +200,23 @@ let reducedCanvas = instance.scale(1/3).canvas;
 
 Scales the canvas proportionally to the minimum of the given size.
 
+| argument | description |
+| ---: | :--- |
+| `width` | The minimum width of the scaled canvas. If the value is undefined, the value will be set to the width of the canvas. |
+| `height` | The minimum height of the scaled canvas. If the value is undefined, the value will be set to the height of the canvas. |
+| `smoothing` | The smoothing factor. |
+
 ---
 
 `.prototype.scaleMax(width, height, smoothing)`
 
 Scales the canvas proportionally to the maximum of the given size.
+
+| argument | description |
+| ---: | :--- |
+| `width` | The maximum width of the scaled canvas. If the value is undefined, the value will be set to the width of the canvas. |
+| `height` | The maximum height of the scaled canvas. If the value is undefined, the value will be set to the height of the canvas. |
+| `smoothing` | The smoothing factor. |
 
 ---
 
@@ -237,11 +224,15 @@ Scales the canvas proportionally to the maximum of the given size.
 
 *alias* `contain`
 
+A shortcut for `this.scaleMax(width, height, smoothing).cropAlign(width, height, align)`.
+
 ---
 
 `.prototype.cropMax(width, height, align, smoothing)`
 
 *alias* `cover`
+
+A shortcut for `this.scaleMin(width, height, smoothing).cropAlign(width, height, align)`.
 
 ---
 
@@ -299,13 +290,13 @@ Draws an image behind the canvas.
 
 `.prototype.toDataURL(...args)`
 
-A shortcut for `.prototype.canvas.toDataURL()`.
+A shortcut for `this.canvas.toDataURL(...args)`.
 
 ---
 
 `.prototype.toImage(...args)`
 
-Creates an instance with a blank transparent canvas of the given size.
+Creates an image with the content from `.toDataURL()`.
 
 ```javascript
 let image = PaperDuck.from(source).cover(64, 64).rotate180().toImage('image/jpeg', 1/2);
