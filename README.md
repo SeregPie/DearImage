@@ -150,7 +150,7 @@ Resizes the canvas to the given size.
 Returns a new instance of `PaperDuck`. Can also return the same instance if no changes were made.
 
 ```javascript
-let canvas = PaperDuck.from(image).resize('', 512, 5/2).canvas;
+let canvas = PaperDuck.from(source).resize('', 512, 5/2).canvas;
 ```
 
 ---
@@ -166,10 +166,8 @@ Positions and clips the canvas to the given size.
 | `width` | The width of the clipped canvas. A negative value (starts clipping from the right offset and goes to the left). |
 | `height` | The height of the clipped canvas. A negative value (starts clipping from the bottom offset and goes to the top). |
 
-Returns a new instance of `PaperDuck`. Can also return the same instance if no changes were made.
-
 ```javascript
-let canvas = PaperDuck.from(image).clip(128, -512, '', 256).canvas;
+let canvas = PaperDuck.from(source).clip(128, -512, '', 256).canvas;
 ```
 
 ---
@@ -184,8 +182,6 @@ Positions and crops the canvas to the given size.
 | `y` | The top offset of the cropping. A negative value is a bottom offset. |
 | `w` | The width of the cropped canvas. ??? |
 | `h` | The height of the cropped canvas. ??? |
-
-Returns a new instance of `PaperDuck`. Can also return the same instance if no changes were made.
 
 ```javascript
 let canvas = PaperDuck.from(image).crop(128, -512, '', 256).canvas;
@@ -203,8 +199,6 @@ Aligns and clips the canvas to the given size.
 | `h` | The height of the clipped canvas. |
 | `align` | The alignment of the clipping. Possible values are `'top left'`, `'top'`, `'top right'`, `'left'`, `'center'`, `'right'`, `'bottom left'`, `'bottom'` and `'bottom right'`. The order of words does not matter. |
 
-Returns a new instance of `PaperDuck`. Can also return the same instance if no changes were made.
-
 ```javascript
 let canvas = PaperDuck.from(image).clipAlign(128, 256, 'right top').canvas;
 ```
@@ -221,8 +215,6 @@ Aligns and crops the canvas to the given size.
 | `h` | The height of the cropped canvas. |
 | `align` | The alignment of the cropping. Possible values are `'top left'`, `'top'`, `'top right'`, `'left'`, `'center'`, `'right'`, `'bottom left'`, `'bottom'` and `'bottom right'`. The order of words does not matter. |
 
-Returns a new instance of `PaperDuck`. Can also return the same instance if no changes were made.
-
 ```javascript
 let canvas = PaperDuck.from(image).cropAlign(256, 128, 'left bottom').canvas;
 ```
@@ -237,8 +229,6 @@ Resizes the canvas proportionally by the given factor.
 | ---: | :--- |
 | `factor` | The scale factor. If the value is greater than 1, the canvas is an enlargement. If the value is between 0 and 1, the canvas is a reduction. |
 | `smoothing` | The smoothing factor. The value must be is greater than or equal to 1. 1 means no smoothing. |
-
-Returns a new instance of `PaperDuck`. Can also return the same instance if no changes were made.
 
 ```javascript
 let instance = PaperDuck.from(image);
@@ -325,33 +315,16 @@ Draws an image behind the canvas.
 
 `.prototype.toDataURL(...args)`
 
-Returns a data URL containing a representation of the canvas.
-
-| argument | description |
-| ---: | :--- |
-| `args` | Any number of arguments to be passed to the function [`.toDataURL()`](https://developer.mozilla.org/docs/Web/API/HTMLCanvasElement/toDataURL) of the canvas element. |
-
-```javascript
-let dataURL = PaperDuck.from(image)
-  .cropAlign(256, 256)
-  .rotate180()
-  .toDataURL('canvas/jpeg', 1/2);
-// => data:canvas/jpeg;base64,...
-```
+A shortcut for `.prototype.canvas.toDataURL()`.
 
 ---
 
 `.prototype.toImage(...args)`
 
-| argument | description |
-| ---: | :--- |
-| `args` | Any number of arguments to be passed to the function [`.toDataURL()`](https://developer.mozilla.org/docs/Web/API/HTMLCanvasElement/toDataURL) of the canvas element. |
+Creates an instance with a blank transparent canvas of the given size.
 
 ```javascript
-let canvas = PaperDuck(canvas)
-  .cropAlign(256, 256)
-  .rotate180()
-  .toImage();
-canvas.style.border = '1px solid BlueViolet';
-document.body.appendChild(canvas);
+let image = PaperDuck.from(source).cover(64, 64).rotate180().toImage('image/jpeg', 1/2);
+image.style.border = '1px solid BlueViolet';
+document.body.appendChild(image);
 ```
