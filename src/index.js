@@ -14,6 +14,7 @@ import './PaperDuck/loadImage';
 import './PaperDuck/loadInput';
 import './PaperDuck/loadString';
 import './PaperDuck/prototype/crop';
+import './PaperDuck/prototype/cropAlign';
 import './PaperDuck/prototype/cropMax';
 import './PaperDuck/prototype/cropMin';
 import './PaperDuck/prototype/drawForeground_drawBackground';
@@ -22,7 +23,6 @@ import './PaperDuck/prototype/rotate90_rotate270';
 import './PaperDuck/prototype/scale';
 import './PaperDuck/prototype/scaleMin_scaleMax';
 
-import './PaperDuck/prototype/cropAlign';
 import './PaperDuck/prototype/resize';
 
 PaperDuck.prototype.contain = PaperDuck.prototype.cropMin;

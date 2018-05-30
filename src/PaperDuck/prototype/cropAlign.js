@@ -17,24 +17,23 @@ PaperDuck.prototype.cropAlign = function(width, height, align = '') {
 	if (currentWidth === 0 || currentHeight === 0 || width === 0 || height === 0) {
 		return this.constructor.blank(width, height);
 	}
-	align = Array.from(new Set(align.toLowerCase().split(/\s+/).filter(s => s))).sort();
 	switch (align) {
-		case 'bottom':
-			return this.clip((currentWidth + width) / 2, -height, -width, height);
-		case 'bottom left':
-			return this.clip(0, -height, width, height);
-		case 'bottom right':
-			return this.clip(-width, -height, width, height);
-		case 'left':
-			return this.clip(0, (currentHeight + height) / 2, width, -height);
 		case 'left top':
-			return this.clip(0, 0, width, height);
-		case 'right':
-			return this.clip(-width, (currentHeight + height) / 2, width, -height);
+			return this.crop(0, 0, width, height);
+		case 'left bottom':
+			return this.crop(0, -height, width, height);
+		case 'left center':
+			return this.crop(0, (currentHeight + height) / 2, width, -height);
 		case 'right top':
-			return this.clip(-width, 0, width, height);
-		case 'top':
-			return this.clip((currentWidth + width) / 2, 0, -width, height);
+			return this.crop(-width, 0, width, height);
+		case 'right bottom':
+			return this.crop(-width, -height, width, height);
+		case 'right center':
+			return this.crop(-width, (currentHeight + height) / 2, width, -height);
+		case 'center top':
+			return this.crop((currentWidth + width) / 2, 0, -width, height);
+		case 'center bottom':
+			return this.crop((currentWidth + width) / 2, -height, -width, height);
 	}
 	return this.crop((currentWidth + width) / 2, (currentHeight + height) / 2, -width, -height);
 };
