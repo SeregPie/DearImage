@@ -15,7 +15,7 @@ let f = function(getFactor, width, height, smoothing) {
 	if (width === currentWidth && height === currentHeight) {
 		return this;
 	}
-	if (currentWidth === 0 || currentHeight === 0) {
+	if (currentWidth === 0 || currentHeight === 0 || width === 0 || height === 0) {
 		return this.constructor.blank(width, height);
 	}
 	let factorWidth = width / currentWidth;

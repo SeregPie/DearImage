@@ -1,45 +1,36 @@
+import Lang_isUndefined from '/utils/Lang/isUndefined';
+
 import PaperDuck from '../index';
 
-PaperDuck.prototype.crop = function(offsetX, offsetY, sizeX, sizeY) {
-	offsetX = parseInt(offsetX);
-	offsetY = parseInt(offsetY);
-	sizeX = parseInt(sizeX);
-	sizeY = parseInt(sizeY);
-	var currSizeX = this.getWidth();
-	var currSizeY = this.getHeight();
-	if (isNaN(offsetX)) {
-		offsetX = 0;
-	} else if (offsetX < 0) {
-		offsetX += currSizeX;
-		offsetX = Math.max(offsetX, 0);
-	} else {
-		offsetX = Math.min(offsetX, currSizeX);
+PaperDuck.prototype.crop = function(left = 0, top = 0, width, height) {
+	let currentWidth = this.width;
+	let currentHeight = this.height;
+	if (left < 0) {
+		left += currentWidth;
 	}
-	if (isNaN(offsetY)) {
-		offsetY = 0;
-	} else if (offsetY < 0) {
-		offsetY += currSizeY;
-		offsetY = Math.max(offsetY, 0);
-	} else {
-		offsetY = Math.min(offsetY, currSizeY);
+	if (top < 0) {
+		top += currentHeight;
 	}
-	if (isNaN(sizeX)) {
-		sizeX = currSizeX - offsetX;
-	} else if (sizeX < 0) {
-		sizeX = -sizeX;
-		sizeX = Math.min(sizeX, offsetX);
-		offsetX -= sizeX;
-	} else {
-		sizeX = Math.min(sizeX, currSizeX - offsetX);
+	if (Lang_isUndefined(width)) {
+		width = currentWidth;
+	} else if (width < 0) {
+		width = -width;
+		left -= width;
 	}
-	if (isNaN(sizeY)) {
-		sizeY = currSizeY - offsetY;
-	} else if (sizeY < 0) {
-		sizeY = -sizeY;
-		sizeY = Math.min(sizeY, offsetY);
-		offsetY -= sizeY;
-	} else {
-		sizeY = Math.min(sizeY, currSizeY - offsetY);
+	if (Lang_isUndefined(height)) {
+		height = currentHeight;
+	} else if (height < 0) {
+		height = -height;
+		top -= height;
 	}
-	return this.clip(offsetX, offsetY, sizeX, sizeY);
+	if (left === 0 && top === 0 && width === currentWidth && height === currentHeight) {
+		return this;
+	}
+	if (width === 0 || height === 0) {
+		return this.constructor.blank(width, height);
+	}
+	let currentCanvas = this.canvas;
+	let context = this.constructor.blankContext(width, height);
+	context.drawImage(currentCanvas, -left, -top);
+	return new this.constructor(context);
 };
