@@ -1,5 +1,5 @@
 import Function_partial from '/utils/Function/partial';
-import Lang_isUndefined from '/utils/Number/isNumber';
+import Lang_isUndefined from '/utils/Lang/isUndefined';
 
 import PaperDuck from '../index';
 

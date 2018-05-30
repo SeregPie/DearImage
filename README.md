@@ -172,7 +172,7 @@ let canvas = PaperDuck.from(source).clip(128, -512, '', 256).canvas;
 
 ---
 
-`.prototype.crop(x = 0, y = 0, w = 'same', h = 'same')`
+`.prototype.crop(left = 0, top = 0, width, height)`
 
 Positions and crops the canvas to the given size.
 
@@ -189,23 +189,7 @@ let canvas = PaperDuck.from(image).crop(128, -512, '', 256).canvas;
 
 ---
 
-`.prototype.clipAlign(w = 'same', h = 'same', align = 'center')`
-
-Aligns and clips the canvas to the given size.
-
-| argument | description |
-| ---: | :--- |
-| `w` | The width of the clipped canvas. |
-| `h` | The height of the clipped canvas. |
-| `align` | The alignment of the clipping. Possible values are `'top left'`, `'top'`, `'top right'`, `'left'`, `'center'`, `'right'`, `'bottom left'`, `'bottom'` and `'bottom right'`. The order of words does not matter. |
-
-```javascript
-let canvas = PaperDuck.from(image).clipAlign(128, 256, 'right top').canvas;
-```
-
----
-
-`.prototype.cropAlign(w = 'same', h = 'same', align = 'center')`
+`.prototype.cropAlign(width, height, align = 'center center')`
 
 Aligns and crops the canvas to the given size.
 
@@ -221,7 +205,7 @@ let canvas = PaperDuck.from(image).cropAlign(256, 128, 'left bottom').canvas;
 
 ---
 
-`.prototype.scale(factor, smoothing = 2)`
+`.prototype.scale(factor, smoothing)`
 
 Resizes the canvas proportionally by the given factor.
 
@@ -237,25 +221,25 @@ let reducedCanvas = instance.scale(1/3).canvas;
 ```
 ---
 
-`.prototype.scaleMin(width, height, smoothing = 2)`
+`.prototype.scaleMin(width, height, smoothing)`
 
 Scales the canvas proportionally to the minimum of the given size.
 
 ---
 
-`.prototype.scaleMax(width, height, smoothing = 2)`
+`.prototype.scaleMax(width, height, smoothing)`
 
 Scales the canvas proportionally to the maximum of the given size.
 
 ---
 
-`.prototype.clipScale(width, height, align = 'center', smoothing = 2)`
+`.prototype.cropMin(width, height, align, smoothing)`
 
 *alias* `contain`
 
 ---
 
-`.prototype.cropScale(width, height, align = 'center', smoothing = 2)`
+`.prototype.cropMax(width, height, align, smoothing)`
 
 *alias* `cover`
 
