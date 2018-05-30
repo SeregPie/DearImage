@@ -1,63 +1,43 @@
+import Lang_isUndefined from '/utils/Number/isNumber';
+
 import PaperDuck from '../index';
 
-PaperDuck.prototype.clipAlign = function(sizeX, sizeY, align) {
-	sizeX = parseInt(sizeX);
-	sizeY = parseInt(sizeY);
-	var currSizeX = this.getWidth();
-	var currSizeY = this.getHeight();
-	if (isNaN(sizeX)) {
-		sizeX = currSizeX;
-	} else {
-		sizeX = Math.abs(sizeX);
+PaperDuck.prototype.clipAlign = function(width, height, align = '') {
+	let currentWidth = this.width;
+	let currentHeight = this.height;
+	if (Lang_isUndefined(width)) {
+		width = currentWidth;
 	}
-	if (isNaN(sizeY)) {
-		sizeY = currSizeY;
-	} else {
-		sizeY = Math.abs(sizeY);
+	if (Lang_isUndefined(height)) {
+		height = currentHeight;
 	}
-	if (sizeX === currSizeX && sizeY === currSizeY) {
+	if (width === currentWidth && height === currentHeight) {
 		return this;
 	}
-	if (sizeX === 0 || sizeY === 0) {
-		if (sizeX === sizeY) {
+	if (width === 0 || height === 0) {
+		if (width === height) {
 			return this;
 		}
-		return this.constructor.blank(sizeX, sizeY);
+		return this.constructor.blank(width, height);
 	}
-	align = (''+align)
-		.toLowerCase()
-		.split(/[^a-z0-9]+/)
-		.sort()
-		.filter((function() {
-			var prevValue = null;
-			return function(value) {
-				return prevValue !== value && (prevValue = value);
-			};
-		})())
-		.filter((function() {
-			var validValues = ['bottom', 'left', 'right', 'top'];
-			return function(value) {
-				return validValues.indexOf(value) >= 0;
-			};
-		})())
-		.join(' ');
+	align = Array.from(new Set(align.toLowerCase().split(/\s+/).filter(s => s))).sort();
 	switch (align) {
-		case 'left top':
-			return this.clip(0, 0, sizeX, sizeY);
-		case 'right top':
-			return this.clip(-sizeX, 0, sizeX, sizeY);
-		case 'bottom left':
-			return this.clip(0, -sizeY, sizeX, sizeY);
-		case 'bottom right':
-			return this.clip(-sizeX, -sizeY, sizeX, sizeY);
-		case 'left':
-			return this.clip(0, (currSizeY + sizeY) / 2, sizeX, -sizeY);
-		case 'right':
-			return this.clip(-sizeX, (currSizeY + sizeY) / 2, sizeX, -sizeY);
-		case 'top':
-			return this.clip((currSizeX + sizeX) / 2, 0, -sizeX, sizeY);
 		case 'bottom':
-			return this.clip((currSizeX + sizeX) / 2, -sizeY, -sizeX, sizeY);
+			return this.clip((currentWidth + width) / 2, -height, -width, height);
+		case 'bottom left':
+			return this.clip(0, -height, width, height);
+		case 'bottom right':
+			return this.clip(-width, -height, width, height);
+		case 'left':
+			return this.clip(0, (currentHeight + height) / 2, width, -height);
+		case 'left top':
+			return this.clip(0, 0, width, height);
+		case 'right':
+			return this.clip(-width, (currentHeight + height) / 2, width, -height);
+		case 'right top':
+			return this.clip(-width, 0, width, height);
+		case 'top':
+			return this.clip((currentWidth + width) / 2, 0, -width, height);
 	}
-	return this.clip((currSizeX + sizeX) / 2, (currSizeY + sizeY) / 2, -sizeX, -sizeY);
+	return this.clip((currentWidth + width) / 2, (currentHeight + height) / 2, -width, -height);
 };
