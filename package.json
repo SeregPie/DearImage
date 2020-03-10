@@ -1,0 +1,51 @@
+{
+	"name": "dear-image",
+	"version": "1.2.1",
+	"description": "A class that represents a graphical image.",
+	"keywords": [
+		"2d",
+		"blob",
+		"browser",
+		"buffer",
+		"canvas",
+		"contain",
+		"context",
+		"cover",
+		"crop",
+		"data",
+		"draw",
+		"edit",
+		"file",
+		"fit",
+		"flip",
+		"font",
+		"frame",
+		"html",
+		"image",
+		"load",
+		"node",
+		"resize",
+		"rotate",
+		"save",
+		"scale",
+		"size",
+		"url"
+	],
+	"license": "MIT",
+	"author": "Sergej Sintschilin <seregpie@gmail.com>",
+	"files": [],
+	"main": "index.js",
+	"repository": "github:SeregPie/DearImage",
+	"scripts": {
+		"build": "rollup -c",
+		"prepublishOnly": "npm run build",
+		"test": "node test/index"
+	},
+	"devDependencies": {
+		"@rollup/plugin-buble": "^0.21.1",
+		"@rollup/plugin-node-resolve": "^7.1.1",
+		"canvas": "^2.6.1",
+		"rollup": "^2.0.3",
+		"rollup-plugin-terser": "^5.3.0"
+	}
+}

@@ -1,0 +1,1 @@
+import './DearImage.prototype.scaleIn';
