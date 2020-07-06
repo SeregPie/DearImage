@@ -2,7 +2,7 @@ export default function(value) {
 	try {
 		let {Canvas} = require('canvas');
 		return value instanceof Canvas;
-	} catch (unused) {
+	} catch {
 		// pass
 	}
 	return false;

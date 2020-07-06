@@ -1,7 +1,7 @@
 export default function() {
 	try {
 		return new OffscreenCanvas();
-	} catch (unused) {
+	} catch {
 		// pass
 	}
 	throw new Error('OffscreenCanvas is not supported.');

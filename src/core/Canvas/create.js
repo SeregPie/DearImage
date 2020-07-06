@@ -5,12 +5,12 @@ import Canvas_createOffscreen from './createOffscreen';
 export default function() {
 	try {
 		return Canvas_createHTMLElement();
-	} catch (unused) {
+	} catch {
 		// pass
 	}
 	try {
 		return Canvas_createOffscreen();
-	} catch (unused) {
+	} catch {
 		// pass
 	}
 	return Canvas_createNode();

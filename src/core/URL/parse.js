@@ -8,7 +8,7 @@ export default function(string) {
 			let origin = document && document.location && document.location.origin;
 			try {
 				return new URL(string, origin);
-			} catch (unused) {
+			} catch {
 				// pass
 			}
 		}

@@ -12,7 +12,6 @@ import Image_create from './core/Image/create';
 import Image_is from './core/Image/is';
 import Image_prototype_load from './core/Image/prototype/load';
 import ImageData_is from './core/ImageData/is';
-import Promise_try from './core/Promise/try';
 import String_is from './core/String/is';
 import URL_is from './core/URL/is';
 
@@ -60,43 +59,44 @@ let DearImage_from = function(value) {
 	throw new Error();
 };
 
-let DearImage_loadFromImage = function(image) {
-	return Image_prototype_load(image).then(() => DearImage_fromImage.call(this, image));
+let DearImage_loadFromImage = async function(image) {
+	await Image_prototype_load(image);
+	return DearImage_fromImage.call(this, image);
 };
 
-let DearImage_loadFromImageSource = function(source) {
+let DearImage_loadFromImageSource = async function(source) {
 	let image = Image_create();
 	image.src = source;
 	return DearImage_loadFromImage.call(this, image);
 };
 
-let DearImage_loadFromBuffer = function(buffer) {
+let DearImage_loadFromBuffer = async function(buffer) {
 	if (Buffer_prototype_isEmpty(buffer)) {
 		return this.blank();
 	}
 	return DearImage_loadFromImageSource.call(this, buffer);
 };
 
-let DearImage_loadFromBlob = function(blob) {
+let DearImage_loadFromBlob = async function(blob) {
 	if (Blob_prototype_isEmpty(blob)) {
 		return this.blank();
 	}
 	let string = URL.createObjectURL(blob);
-	return Promise_try(() => {
+	try {
 		return DearImage_loadFromImageSource.call(this, string);
-	}).finally(() => {
+	} finally {
 		URL.revokeObjectURL(string);
-	});
+	}
 };
 
-let DearImage_loadFromDataURL = function(url) {
+let DearImage_loadFromDataURL = async function(url) {
 	if (url.isEmpty()) {
 		return this.blank();
 	}
 	return DearImage_loadFromImageSource.call(this, `${url}`);
 };
 
-let DearImage_loadFromString = function(string) {
+let DearImage_loadFromString = async function(string) {
 	{
 		let url = DataURL.parse(string);
 		if (url) {
@@ -106,29 +106,27 @@ let DearImage_loadFromString = function(string) {
 	return DearImage_loadFromImageSource.call(this, string);
 };
 
-let DearImage_loadFromURL = function(url) {
+let DearImage_loadFromURL = async function(url) {
 	return DearImage_loadFromImageSource.call(this, `${url}`);
 };
 
-let DearImage_loadFrom = function(value) {
-	return Promise_try(() => {
-		if (String_is(value)) {
-			return DearImage_loadFromString.call(this, value);
-		}
-		if (URL_is(value)) {
-			return DearImage_loadFromURL.call(this, value);
-		}
-		if (Buffer_is(value)) {
-			return DearImage_loadFromBuffer.call(this, value);
-		}
-		if (Blob_is(value)) {
-			return DearImage_loadFromBlob.call(this, value);
-		}
-		if (Image_is(value)) {
-			return DearImage_loadFromImage.call(this, value);
-		}
-		return DearImage_from.call(this, value);
-	});
+let DearImage_loadFrom = async function(value) {
+	if (String_is(value)) {
+		return DearImage_loadFromString.call(this, value);
+	}
+	if (URL_is(value)) {
+		return DearImage_loadFromURL.call(this, value);
+	}
+	if (Buffer_is(value)) {
+		return DearImage_loadFromBuffer.call(this, value);
+	}
+	if (Blob_is(value)) {
+		return DearImage_loadFromBlob.call(this, value);
+	}
+	if (Image_is(value)) {
+		return DearImage_loadFromImage.call(this, value);
+	}
+	return DearImage_from.call(this, value);
 };
 
 Object.assign(DearImage, {
