@@ -1,8 +1,6 @@
-import require from '../require';
-
 export default function() {
 	try {
-		let {Canvas} = require('canvas');
+		let {Canvas} = module.require('canvas');
 		return new Canvas();
 	} catch {
 		// pass

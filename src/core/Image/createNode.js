@@ -1,8 +1,6 @@
-import require from '../require';
-
 export default function() {
 	try {
-		let {Image} = require('canvas');
+		let {Image} = module.require('canvas');
 		return new Image();
 	} catch {
 		// pass

@@ -1,5 +1,3 @@
-import require from '../../require';
-
 import CSS_font from '../../CSS/font';
 import Object_isNullish from '../../Object/isNullish';
 
@@ -23,7 +21,7 @@ export default async function(source) {
 			// pass
 		}
 		try {
-			let {registerFont} = require('canvas');
+			let {registerFont} = module.require('canvas');
 			await registerFont(source, {family, style, variant, weight});
 		} catch {
 			// pass

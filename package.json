@@ -1,6 +1,6 @@
 {
 	"name": "dear-image",
-	"version": "1.2.2",
+	"version": "1.2.3",
 	"description": "A class that represents a graphical image.",
 	"keywords": [
 		"2d",

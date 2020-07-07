@@ -1,8 +1,6 @@
-import require from '../require';
-
 export default function(value) {
 	try {
-		let {Image} = require('canvas');
+		let {Image} = module.require('canvas');
 		return value instanceof Image;
 	} catch {
 		// pass
