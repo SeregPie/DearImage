@@ -1,6 +1,8 @@
+import require from '@seregpie/native-require';
+
 export default function() {
 	try {
-		let {Canvas} = module.require('canvas');
+		let {Canvas} = require('canvas');
 		return new Canvas();
 	} catch {
 		// pass

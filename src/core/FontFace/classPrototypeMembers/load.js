@@ -1,3 +1,5 @@
+import require from '@seregpie/native-require';
+
 import CSS_font from '../../CSS/font';
 import Object_isNullish from '../../Object/isNullish';
 
@@ -21,7 +23,7 @@ export default async function(source) {
 			// pass
 		}
 		try {
-			let {registerFont} = module.require('canvas');
+			let {registerFont} = require('canvas');
 			await registerFont(source, {family, style, variant, weight});
 		} catch {
 			// pass
