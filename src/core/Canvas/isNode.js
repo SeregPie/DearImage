@@ -1,3 +1,5 @@
+import require from '../require';
+
 export default function(value) {
 	try {
 		let {Canvas} = require('canvas');

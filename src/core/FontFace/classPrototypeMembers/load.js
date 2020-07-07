@@ -1,3 +1,5 @@
+import require from '../../require';
+
 import CSS_font from '../../CSS/font';
 import Object_isNullish from '../../Object/isNullish';
 

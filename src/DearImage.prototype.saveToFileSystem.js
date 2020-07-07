@@ -1,3 +1,5 @@
+import require from './core/require';
+
 import './DearImage.prototype.toBuffer';
 import DearImage from './DearImage';
 
