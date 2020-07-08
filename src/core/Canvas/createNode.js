@@ -1,10 +1,11 @@
-import require from '@seregpie/native-require';
+import nativeRequire from '@seregpie/native-require';
 
 export default function() {
 	try {
-		let {Canvas} = require('canvas');
+		let {Canvas} = nativeRequire('canvas');
 		return new Canvas();
-	} catch {
+	} catch (error) {
+		console.log(error);
 		// pass
 	}
 	throw new Error('Canvas is not supported.');

@@ -1,6 +1,6 @@
 {
 	"name": "dear-image",
-	"version": "1.2.4",
+	"version": "1.2.5",
 	"description": "A class that represents a graphical image.",
 	"keywords": [
 		"2d",
@@ -44,11 +44,11 @@
 	"devDependencies": {
 		"@rollup/plugin-commonjs": "^13.0.0",
 		"@rollup/plugin-node-resolve": "^8.1.0",
-		"@seregpie/native-require": "^1.0.0",
+		"@seregpie/native-require": "^1.0.1",
 		"canvas": "^2.6.1",
 		"eslint": "^7.4.0",
 		"eslint-config-seregpie": "^1.0.1",
-		"rollup": "^2.20.0",
+		"rollup": "^2.21.0",
 		"rollup-plugin-terser": "^6.1.0"
 	}
 }

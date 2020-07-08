@@ -1,4 +1,4 @@
-let units = require('./units/index');
+let units = require('./units');
 
 (async () => {
 	for (let unit of units) {
