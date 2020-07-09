@@ -1,3 +1,8 @@
 export default function(string) {
-	return !!this.parse(string);
+	try {
+		this.parse(string);
+		return true;
+	} catch {
+		return false;
+	}
 }

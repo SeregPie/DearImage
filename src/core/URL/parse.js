@@ -13,5 +13,5 @@ export default function(string) {
 			}
 		}
 	}
-	return false;
+	throw new Error('Invalid URL.');
 }

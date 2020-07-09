@@ -42,7 +42,6 @@
 		"test": "node test/index"
 	},
 	"devDependencies": {
-		"@rollup/plugin-commonjs": "^13.0.0",
 		"@rollup/plugin-node-resolve": "^8.1.0",
 		"@seregpie/native-require": "^1.0.1",
 		"canvas": "^2.6.1",

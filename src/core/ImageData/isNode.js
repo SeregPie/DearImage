@@ -1,8 +1,8 @@
-import nativeRequire from '@seregpie/native-require';
+import require from '@seregpie/native-require';
 
 export default function(value) {
 	try {
-		let {ImageData} = nativeRequire('canvas');
+		let {ImageData} = require('canvas');
 		return value instanceof ImageData;
 	} catch {
 		// pass

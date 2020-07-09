@@ -1,3 +1,5 @@
+// todo
+
 export default function(that) {
 	let {length} = that;
 	let array = new Uint8Array(length);

@@ -97,13 +97,12 @@ let DearImage_loadFromDataURL = async function(url) {
 };
 
 let DearImage_loadFromString = async function(string) {
-	{
+	try {
 		let url = DataURL.parse(string);
-		if (url) {
-			return DearImage_loadFromDataURL.call(this, url);
-		}
+		return DearImage_loadFromDataURL.call(this, url);
+	} catch {
+		return DearImage_loadFromImageSource.call(this, string);
 	}
-	return DearImage_loadFromImageSource.call(this, string);
 };
 
 let DearImage_loadFromURL = async function(url) {
