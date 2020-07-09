@@ -198,7 +198,7 @@ Returns the created `TextMetrics` instance.
     variant: 'normal',
     weight: 'normal',
   },
-  padding: 0.3,
+  padding: 0.28,
 })
 ```
 
