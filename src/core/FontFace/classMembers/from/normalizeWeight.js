@@ -14,7 +14,8 @@ export default function(value) {
 		if (validValues.has(value)) {
 			return value;
 		}
-	} else
+		value = Number(value);
+	}
 	if (Number_isBetween(value, 1, 1000, true, true)) {
 		return Math.round(value);
 	}
