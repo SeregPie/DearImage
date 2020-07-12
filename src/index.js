@@ -5,6 +5,7 @@ import './DearImage.from';
 import './DearImage.fromExcept';
 import './DearImage.is';
 import './DearImage.isDearImage';
+import './DearImage.lineLayout';
 import './DearImage.loadFontFace';
 import './DearImage.loadFrom';
 import './DearImage.loadFromExcept';
