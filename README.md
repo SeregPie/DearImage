@@ -252,9 +252,7 @@ Changes the size of the image.
 
 Returns the created `DearImage` instance.
 
-```javascript
-let image = DearImage.from(source).resize(300, 150);
-```
+![](./examples/resize.png)
 
 ---
 
@@ -269,6 +267,8 @@ Changes the width of the image.
 
 Returns the created `DearImage` instance.
 
+![](./examples/resizeX.png)
+
 ---
 
 `.resizeY(size = this.sizeX, proportionally = false)`
@@ -281,6 +281,8 @@ Changes the height of the image.
 | `proportionally` | If `true`, the aspect ratio of the image is preserved. |
 
 Returns the created `DearImage` instance.
+
+![](./examples/resizeY.png)
 
 ---
 
@@ -297,9 +299,7 @@ Selects an area from the image.
 
 Returns the created `DearImage` instance.
 
-```javascript
-let image = DearImage.from(source).crop(100, -200, -50, 150);
-```
+![](./examples/crop.png)
 
 ---
 
@@ -316,10 +316,7 @@ Aligns the image inside an area.
 
 Returns the created `DearImage` instance.
 
-```javascript
-let image = DearImage.from(source).reframe(300, 150, 'start', 'end');
-```
-
+![](./examples/reframe.png)
 ---
 
 `.rescale(scalingX = 1, scalingY = 1)`
@@ -333,9 +330,7 @@ Changes the size of the image factorially.
 
 Returns the created `DearImage` instance.
 
-```javascript
-let image = DearImage.from(source).rescale(3/2, 2/3);
-```
+![](./examples/rescale.png)
 
 ---
 
@@ -349,9 +344,7 @@ Changes the size of the image factorially. The aspect ratio of the image is pres
 
 Returns the created `DearImage` instance.
 
-```javascript
-let image = DearImage.from(source).scale(3/2);
-```
+![](./examples/scale.png)
 
 ---
 
@@ -366,6 +359,8 @@ Scales the image inside an area. The aspect ratio of the image is preserved.
 
 Returns the created `DearImage` instance.
 
+![](./examples/scaleIn.png)
+
 ---
 
 `.scaleOut(sizeX = this.sizeX, sizeY = this.sizeY)`
@@ -378,6 +373,8 @@ Scales the image outside an area. The aspect ratio of the image is preserved.
 | `sizeY` | A number as the height of the area. |
 
 Returns the created `DearImage` instance.
+
+![](./examples/scaleOut.png)
 
 ---
 
@@ -439,6 +436,9 @@ Flips the image horizontally.
 
 Returns the created `DearImage` instance.
 
+![](./examples/flipX.png)
+
+
 ---
 
 `.flipY()`
@@ -446,6 +446,8 @@ Returns the created `DearImage` instance.
 Flips the image vertically.
 
 Returns the created `DearImage` instance.
+
+![](./examples/flipY.png)
 
 ---
 

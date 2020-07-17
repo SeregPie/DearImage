@@ -38,6 +38,7 @@
 	"repository": "github:SeregPie/DearImage",
 	"scripts": {
 		"build": "rollup -c",
+		"generateExamples": "node generateExamples",
 		"prepublishOnly": "npm run build",
 		"test": "node test/index"
 	},
