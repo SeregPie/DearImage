@@ -32,7 +32,7 @@ export default function(value) {
 		variant = normalizeVariant(variant);
 		weight = normalizeWeight(weight);
 	} else {
-		throw new Error('Invalid font face.');
+		throw 0;
 	}
 	return [
 		family,

@@ -1,18 +1,22 @@
-import resolveValue from './resolveValue';
+import expandValue from './expandValue';
 
 export default function(value) {
-	let [
-		family,
-		size,
-		style,
-		variant,
-		weight,
-	] = resolveValue(value);
-	return Object.assign(new this(), {
-		family,
-		size,
-		style,
-		variant,
-		weight,
-	});
+	try {
+		let [
+			family,
+			size,
+			style,
+			variant,
+			weight,
+		] = expandValue(value);
+		return Object.assign(new this(), {
+			family,
+			size,
+			style,
+			variant,
+			weight,
+		});
+	} catch {
+		throw new Error('Invalid font.');
+	}
 }

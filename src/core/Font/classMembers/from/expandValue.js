@@ -14,7 +14,7 @@ export default function(value) {
 		size = normalizeSize(size);
 		face = FontFace.from(face);
 	} else {
-		throw new Error('Invalid font.');
+		throw 0;
 	}
 	let {
 		family,

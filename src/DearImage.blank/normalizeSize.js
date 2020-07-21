@@ -1,5 +1,5 @@
-import normalizeSize from '../DearImage.prototype.resize/normalizeSize';
+import normalize from  '../DearImage.prototype.resize/normalizeSize';
 
 export default function(value) {
-	return normalizeSize(value, 0);
+	return normalize(value, 0);
 }

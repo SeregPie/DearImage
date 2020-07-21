@@ -3,8 +3,8 @@ import DearImage from '../DearImage';
 import defaultFill from './defaultFill';
 import defaultFont from './defaultFont';
 import defaultPadding from './defaultPadding';
+import expandOptions from './expandOptions';
 import normalizeText from './normalizeText';
-import resolveOptions from './resolveOptions';
 
 DearImage.text = function(text, options) {
 	text = normalizeText(text);
@@ -12,7 +12,7 @@ DearImage.text = function(text, options) {
 		fill = defaultFill,
 		font = defaultFont,
 		padding = defaultPadding,
-	] = resolveOptions(options);
+	] = expandOptions(options);
 	padding = Math.ceil(padding * font.size);
 	let image = this.blank(
 		this.measureText(text, font).width + padding * 2,
