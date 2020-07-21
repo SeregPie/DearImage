@@ -465,6 +465,28 @@ Returns the created `DearImage` instance.
 
 ---
 
+`.rotateClockwise()`
+
+Rotates the image clockwise.
+
+Returns the created `DearImage` instance.
+
+![](./examples/rotateClockwise.png)
+
+---
+
+`.rotateCounterClockwise()`
+
+Rotates the image counter clockwise.
+
+Returns the created `DearImage` instance.
+
+![](./examples/rotateCounterClockwise.png)
+
+---
+
+---
+
 `.toDataURL(format, quality)`
 
 Creates a [data URL](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/Data_URIs) string representing the content.

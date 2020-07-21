@@ -9,7 +9,6 @@ let DearImage = require('./index');
 		let example = DearImage.lineLayout('x', [
 			[`image`, image],
 			[`image.resize(160, 120)`, image.resize(160, 120)],
-			[`image.resize(NaN, 120)`, image.resize(NaN, 120)],
 		].map(([label, image]) => {
 			return DearImage.lineLayout('y', [
 				DearImage.text(label, {font}),
@@ -153,6 +152,38 @@ let DearImage = require('./index');
 			gap: 10,
 		});
 		await example.saveToFileSystem('./examples/flipY.png');
+	}
+	{
+		let image = await DearImage.loadFrom('./images/duck.png');
+		let example = DearImage.lineLayout('x', [
+			[`image`, image],
+			[`image.rotateClockwise()`, image.rotateClockwise()],
+		].map(([label, image]) => {
+			return DearImage.lineLayout('y', [
+				DearImage.text(label, {font}),
+				image,
+				DearImage.text(`${image.sizeX}x${image.sizeY}`, {font}),
+			]);
+		}), {
+			gap: 10,
+		});
+		await example.saveToFileSystem('./examples/rotateClockwise.png');
+	}
+	{
+		let image = await DearImage.loadFrom('./images/duck.png');
+		let example = DearImage.lineLayout('x', [
+			[`image`, image],
+			[`image.rotateCounterClockwise()`, image.rotateCounterClockwise()],
+		].map(([label, image]) => {
+			return DearImage.lineLayout('y', [
+				DearImage.text(label, {font}),
+				image,
+				DearImage.text(`${image.sizeX}x${image.sizeY}`, {font}),
+			]);
+		}), {
+			gap: 10,
+		});
+		await example.saveToFileSystem('./examples/rotateCounterClockwise.png');
 	}
 	{
 		let image = await DearImage.loadFrom('./images/frog.png');
