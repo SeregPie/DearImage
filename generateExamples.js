@@ -3,6 +3,12 @@ let DearImage = require('./index');
 (async () => {
 	let fontFace = {family: 'Inconsolata'};
 	await DearImage.loadFontFace(fontFace, './fonts/Inconsolata.ttf');
+	{
+		let font = {...fontFace, size: 32};
+		let image = DearImage.text('Hello World!', {font});
+		let result = image.drawCheckeredBackground();
+		await result.saveToFileSystem('./examples/DearImage.text.png');
+	}
 	let font = {...fontFace, size: 16};
 	{
 		let image = await DearImage.loadFrom('./images/butterfly.png');
@@ -12,13 +18,13 @@ let DearImage = require('./index');
 		].map(([label, image]) => {
 			return DearImage.lineLayout('y', [
 				DearImage.text(label, {font}),
-				image,
+				image.drawCheckeredBackground(),
 				DearImage.text(`${image.sizeX}x${image.sizeY}`, {font}),
 			]);
 		}), {
 			gap: 10,
 		});
-		await result.saveToFileSystem('./examples/resize.png');
+		await result.saveToFileSystem('./examples/DearImage.prototype.resize.png');
 	}
 	{
 		let image = await DearImage.loadFrom('./images/butterfly.png');
@@ -29,13 +35,13 @@ let DearImage = require('./index');
 		].map(([label, image]) => {
 			return DearImage.lineLayout('y', [
 				DearImage.text(label, {font}),
-				image,
+				image.drawCheckeredBackground(),
 				DearImage.text(`${image.sizeX}x${image.sizeY}`, {font}),
 			]);
 		}), {
 			gap: 10,
 		});
-		await result.saveToFileSystem('./examples/resizeX.png');
+		await result.saveToFileSystem('./examples/DearImage.prototype.resizeX.png');
 	}
 	{
 		let image = await DearImage.loadFrom('./images/butterfly.png');
@@ -46,13 +52,13 @@ let DearImage = require('./index');
 		].map(([label, image]) => {
 			return DearImage.lineLayout('y', [
 				DearImage.text(label, {font}),
-				image,
+				image.drawCheckeredBackground(),
 				DearImage.text(`${image.sizeX}x${image.sizeY}`, {font}),
 			]);
 		}), {
 			gap: 10,
 		});
-		await result.saveToFileSystem('./examples/resizeY.png');
+		await result.saveToFileSystem('./examples/DearImage.prototype.resizeY.png');
 	}
 	{
 		let image = await DearImage.loadFrom('./images/fireworks.png');
@@ -63,13 +69,13 @@ let DearImage = require('./index');
 		].map(([label, image]) => {
 			return DearImage.lineLayout('y', [
 				DearImage.text(label, {font}),
-				image,
+				image.drawCheckeredBackground(),
 				DearImage.text(`${image.sizeX}x${image.sizeY}`, {font}),
 			]);
 		}), {
 			gap: 10,
 		});
-		await result.saveToFileSystem('./examples/crop.png');
+		await result.saveToFileSystem('./examples/DearImage.prototype.crop.png');
 	}
 	{
 		let image = await DearImage.loadFrom('./images/meadow.png');
@@ -80,13 +86,13 @@ let DearImage = require('./index');
 		].map(([label, image]) => {
 			return DearImage.lineLayout('y', [
 				DearImage.text(label, {font}),
-				image,
+				image.drawCheckeredBackground(),
 				DearImage.text(`${image.sizeX}x${image.sizeY}`, {font}),
 			]);
 		}), {
 			gap: 10,
 		});
-		await result.saveToFileSystem('./examples/reframe.png');
+		await result.saveToFileSystem('./examples/DearImage.prototype.reframe.png');
 	}
 	{
 		let image = await DearImage.loadFrom('./images/pebbles.png');
@@ -96,13 +102,13 @@ let DearImage = require('./index');
 		].map(([label, image]) => {
 			return DearImage.lineLayout('y', [
 				DearImage.text(label, {font}),
-				image,
+				image.drawCheckeredBackground(),
 				DearImage.text(`${image.sizeX}x${image.sizeY}`, {font}),
 			]);
 		}), {
 			gap: 10,
 		});
-		await result.saveToFileSystem('./examples/rescale.png');
+		await result.saveToFileSystem('./examples/DearImage.prototype.rescale.png');
 	}
 	{
 		let image = await DearImage.loadFrom('./images/pebbles.png');
@@ -113,13 +119,13 @@ let DearImage = require('./index');
 		].map(([label, image]) => {
 			return DearImage.lineLayout('y', [
 				DearImage.text(label, {font}),
-				image,
+				image.drawCheckeredBackground(),
 				DearImage.text(`${image.sizeX}x${image.sizeY}`, {font}),
 			]);
 		}), {
 			gap: 10,
 		});
-		await result.saveToFileSystem('./examples/scale.png');
+		await result.saveToFileSystem('./examples/DearImage.prototype.scale.png');
 	}
 	{
 		let image = await DearImage.loadFrom('./images/duck.png');
@@ -129,13 +135,13 @@ let DearImage = require('./index');
 		].map(([label, image]) => {
 			return DearImage.lineLayout('y', [
 				DearImage.text(label, {font}),
-				image,
+				image.drawCheckeredBackground(),
 				DearImage.text(`${image.sizeX}x${image.sizeY}`, {font}),
 			]);
 		}), {
 			gap: 10,
 		});
-		await result.saveToFileSystem('./examples/flipX.png');
+		await result.saveToFileSystem('./examples/DearImage.prototype.flipX.png');
 	}
 	{
 		let image = await DearImage.loadFrom('./images/duck.png');
@@ -145,13 +151,13 @@ let DearImage = require('./index');
 		].map(([label, image]) => {
 			return DearImage.lineLayout('y', [
 				DearImage.text(label, {font}),
-				image,
+				image.drawCheckeredBackground(),
 				DearImage.text(`${image.sizeX}x${image.sizeY}`, {font}),
 			]);
 		}), {
 			gap: 10,
 		});
-		await result.saveToFileSystem('./examples/flipY.png');
+		await result.saveToFileSystem('./examples/DearImage.prototype.flipY.png');
 	}
 	{
 		let image = await DearImage.loadFrom('./images/duck.png');
@@ -161,13 +167,13 @@ let DearImage = require('./index');
 		].map(([label, image]) => {
 			return DearImage.lineLayout('y', [
 				DearImage.text(label, {font}),
-				image,
+				image.drawCheckeredBackground(),
 				DearImage.text(`${image.sizeX}x${image.sizeY}`, {font}),
 			]);
 		}), {
 			gap: 10,
 		});
-		await result.saveToFileSystem('./examples/rotateClockwise.png');
+		await result.saveToFileSystem('./examples/DearImage.prototype.rotateClockwise.png');
 	}
 	{
 		let image = await DearImage.loadFrom('./images/duck.png');
@@ -177,13 +183,13 @@ let DearImage = require('./index');
 		].map(([label, image]) => {
 			return DearImage.lineLayout('y', [
 				DearImage.text(label, {font}),
-				image,
+				image.drawCheckeredBackground(),
 				DearImage.text(`${image.sizeX}x${image.sizeY}`, {font}),
 			]);
 		}), {
 			gap: 10,
 		});
-		await result.saveToFileSystem('./examples/rotateCounterClockwise.png');
+		await result.saveToFileSystem('./examples/DearImage.prototype.rotateCounterClockwise.png');
 	}
 	{
 		let image = await DearImage.loadFrom('./images/frog.png');
@@ -193,13 +199,13 @@ let DearImage = require('./index');
 		].map(([label, image]) => {
 			return DearImage.lineLayout('y', [
 				DearImage.text(label, {font}),
-				image,
+				image.drawCheckeredBackground(),
 				DearImage.text(`${image.sizeX}x${image.sizeY}`, {font}),
 			]);
 		}), {
 			gap: 10,
 		});
-		await result.saveToFileSystem('./examples/scaleIn.png');
+		await result.saveToFileSystem('./examples/DearImage.prototype.scaleIn.png');
 	}
 	{
 		let image = await DearImage.loadFrom('./images/frog.png');
@@ -209,13 +215,13 @@ let DearImage = require('./index');
 		].map(([label, image]) => {
 			return DearImage.lineLayout('y', [
 				DearImage.text(label, {font}),
-				image,
+				image.drawCheckeredBackground(),
 				DearImage.text(`${image.sizeX}x${image.sizeY}`, {font}),
 			]);
 		}), {
 			gap: 10,
 		});
-		await result.saveToFileSystem('./examples/scaleOut.png');
+		await result.saveToFileSystem('./examples/DearImage.prototype.scaleOut.png');
 	}
 	{
 		let image = await DearImage.loadFrom('./images/sunshine.png');
@@ -227,13 +233,13 @@ let DearImage = require('./index');
 		].map(([label, image]) => {
 			return DearImage.lineLayout('y', [
 				DearImage.text(label, {font}),
-				image,
+				image.drawCheckeredBackground(),
 				DearImage.text(`${image.sizeX}x${image.sizeY}`, {font}),
 			]);
 		}), {
 			gap: 10,
 		});
-		await result.saveToFileSystem('./examples/drawForeground.png');
+		await result.saveToFileSystem('./examples/DearImage.prototype.drawForeground.png');
 	}
 	{
 		let image = await DearImage.loadFrom('./images/triangle.png');
@@ -243,13 +249,13 @@ let DearImage = require('./index');
 		].map(([label, image]) => {
 			return DearImage.lineLayout('y', [
 				DearImage.text(label, {font}),
-				image,
+				image.drawCheckeredBackground(),
 				DearImage.text(`${image.sizeX}x${image.sizeY}`, {font}),
 			]);
 		}), {
 			gap: 10,
 		});
-		await result.saveToFileSystem('./examples/fillForeground.png');
+		await result.saveToFileSystem('./examples/DearImage.prototype.fillForeground.png');
 	}
 	{
 		let image = await DearImage.loadFrom('./images/triangle.png');
@@ -259,13 +265,13 @@ let DearImage = require('./index');
 		].map(([label, image]) => {
 			return DearImage.lineLayout('y', [
 				DearImage.text(label, {font}),
-				image,
+				image.drawCheckeredBackground(),
 				DearImage.text(`${image.sizeX}x${image.sizeY}`, {font}),
 			]);
 		}), {
 			gap: 10,
 		});
-		await result.saveToFileSystem('./examples/fillBackground.png');
+		await result.saveToFileSystem('./examples/DearImage.prototype.fillBackground.png');
 	}
 
 })();

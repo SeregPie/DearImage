@@ -231,6 +231,15 @@ Creates a `DearImage` instance with the drawn text.
 
 Returns the created `DearImage` instance.
 
+```javascript
+let fontFace = {family: 'Inconsolata'};
+await DearImage.loadFontFace(fontFace, './fonts/Inconsolata.ttf');
+let font = {...fontFace, size: 32};
+let image = DearImage.text('Hello World', {font});
+```
+
+![](./examples/DearImage.text.png)
+
 ### properties
 
 `.sizeX`
@@ -266,7 +275,7 @@ Changes the size of the image.
 
 Returns the created `DearImage` instance.
 
-![](./examples/resize.png)
+![](./examples/DearImage.prototype.resize.png)
 
 ---
 
@@ -281,7 +290,7 @@ Changes the width of the image.
 
 Returns the created `DearImage` instance.
 
-![](./examples/resizeX.png)
+![](./examples/DearImage.prototype.resizeX.png)
 
 ---
 
@@ -296,7 +305,7 @@ Changes the height of the image.
 
 Returns the created `DearImage` instance.
 
-![](./examples/resizeY.png)
+![](./examples/DearImage.prototype.resizeY.png)
 
 ---
 
@@ -313,7 +322,7 @@ Selects an area from the image.
 
 Returns the created `DearImage` instance.
 
-![](./examples/crop.png)
+![](./examples/DearImage.prototype.crop.png)
 
 ---
 
@@ -330,7 +339,7 @@ Aligns the image inside an area.
 
 Returns the created `DearImage` instance.
 
-![](./examples/reframe.png)
+![](./examples/DearImage.prototype.reframe.png)
 ---
 
 `.rescale(scalingX = 1, scalingY = 1)`
@@ -344,7 +353,7 @@ Changes the size of the image factorially.
 
 Returns the created `DearImage` instance.
 
-![](./examples/rescale.png)
+![](./examples/DearImage.prototype.rescale.png)
 
 ---
 
@@ -358,7 +367,7 @@ Changes the size of the image factorially. The aspect ratio of the image is pres
 
 Returns the created `DearImage` instance.
 
-![](./examples/scale.png)
+![](./examples/DearImage.prototype.scale.png)
 
 ---
 
@@ -373,7 +382,7 @@ Scales the image inside an area. The aspect ratio of the image is preserved.
 
 Returns the created `DearImage` instance.
 
-![](./examples/scaleIn.png)
+![](./examples/DearImage.prototype.scaleIn.png)
 
 ---
 
@@ -388,7 +397,7 @@ Scales the image outside an area. The aspect ratio of the image is preserved.
 
 Returns the created `DearImage` instance.
 
-![](./examples/scaleOut.png)
+![](./examples/DearImage.prototype.scaleOut.png)
 
 ---
 
@@ -450,7 +459,7 @@ Flips the image horizontally.
 
 Returns the created `DearImage` instance.
 
-![](./examples/flipX.png)
+![](./examples/DearImage.prototype.flipX.png)
 
 
 ---
@@ -461,7 +470,7 @@ Flips the image vertically.
 
 Returns the created `DearImage` instance.
 
-![](./examples/flipY.png)
+![](./examples/DearImage.prototype.flipY.png)
 
 ---
 
@@ -471,7 +480,7 @@ Rotates the image clockwise.
 
 Returns the created `DearImage` instance.
 
-![](./examples/rotateClockwise.png)
+![](./examples/DearImage.prototype.rotateClockwise.png)
 
 ---
 
@@ -481,7 +490,7 @@ Rotates the image counter clockwise.
 
 Returns the created `DearImage` instance.
 
-![](./examples/rotateCounterClockwise.png)
+![](./examples/DearImage.prototype.rotateCounterClockwise.png)
 
 ---
 
@@ -531,7 +540,7 @@ Draws an image above the current image.
 
 Returns the created `DearImage` instance.
 
-![](./examples/fillForeground.png)
+![](./examples/DearImage.prototype.fillForeground.png)
 
 ---
 
@@ -545,7 +554,7 @@ Draws an image below the current image.
 
 Returns the created `DearImage` instance.
 
-![](./examples/fillBackground.png)
+![](./examples/DearImage.prototype.fillBackground.png)
 
 ---
 

@@ -18,13 +18,17 @@ DearImage.text = function(text, options) {
 		this.measureText(text, font).width + padding * 2,
 		font.size + padding * 2,
 	);
-	let {context} = result;
+	let {
+		context,
+		sizeX,
+		sizeY,
+	} = result;
 	context.save();
 	context.font = font.toCSS();
-	context.textBaseline = 'top';
-	context.textAlign = 'left';
+	context.textBaseline = 'middle';
+	context.textAlign = 'center';
 	context.fillStyle = fill;
-	context.fillText(text, padding, padding);
+	context.fillText(text, sizeX / 2, sizeY / 2);
 	context.restore();
 	return result;
 };
