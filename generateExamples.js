@@ -235,5 +235,37 @@ let DearImage = require('./index');
 		});
 		await result.saveToFileSystem('./examples/drawForeground.png');
 	}
+	{
+		let image = await DearImage.loadFrom('./images/triangle.png');
+		let result = DearImage.lineLayout('x', [
+			[`image`, image],
+			[`image.fillForeground('rgba(127, 234, 9, 0.7)')`, image.fillForeground('rgba(127, 234, 9, 0.7)')],
+		].map(([label, image]) => {
+			return DearImage.lineLayout('y', [
+				DearImage.text(label, {font}),
+				image,
+				DearImage.text(`${image.sizeX}x${image.sizeY}`, {font}),
+			]);
+		}), {
+			gap: 10,
+		});
+		await result.saveToFileSystem('./examples/fillForeground.png');
+	}
+	{
+		let image = await DearImage.loadFrom('./images/triangle.png');
+		let result = DearImage.lineLayout('x', [
+			[`image`, image],
+			[`image.fillBackground('rgba(127, 234, 9, 0.7)')`, image.fillBackground('rgba(127, 234, 9, 0.7)')],
+		].map(([label, image]) => {
+			return DearImage.lineLayout('y', [
+				DearImage.text(label, {font}),
+				image,
+				DearImage.text(`${image.sizeX}x${image.sizeY}`, {font}),
+			]);
+		}), {
+			gap: 10,
+		});
+		await result.saveToFileSystem('./examples/fillBackground.png');
+	}
 
 })();

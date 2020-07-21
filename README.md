@@ -521,6 +521,34 @@ let image = DearImage.from(source).drawBackground(otherSource, 'end', 'start');
 
 ---
 
+`.fillForeground(fill)`
+
+Draws an image above the current image.
+
+| argument | description |
+| ---: | :--- |
+| `fill` | A string as the fill color. |
+
+Returns the created `DearImage` instance.
+
+![](./examples/fillForeground.png)
+
+---
+
+`.fillBackground(fill)`
+
+Draws an image below the current image.
+
+| argument | description |
+| ---: | :--- |
+| `fill` | A string as the fill color. |
+
+Returns the created `DearImage` instance.
+
+![](./examples/fillBackground.png)
+
+---
+
 `.toDataURL(format, quality)`
 
 Creates a [data URL](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/Data_URIs) string representing the content.
