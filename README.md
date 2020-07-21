@@ -141,6 +141,20 @@ Returns the created `DearImage` instance.
 
 ---
 
+`.solid(fill = 'rgba(0,0,0,0)', sizeX = 0, sizeY = 0)`
+
+Creates a `DearImage` instance with filled content.
+
+| argument | description |
+| ---: | :--- |
+| `fill` | A string as the fill color. |
+| `sizeX` | A number as the width of the image. |
+| `sizeY` | A number as the height of the image. |
+
+Returns the created `DearImage` instance.
+
+---
+
 ```
 .loadFontFace(fontFace = {
   family: 'sans-serif',
