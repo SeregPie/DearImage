@@ -5,16 +5,16 @@ import Function_prototype_bindPartial from './core/Function/prototype/bindPartia
 
 let f = function(clockwise) {
 	if (this.sizeX || this.sizeY) {
-		let image = this.constructor.blank(this.sizeY, this.sizeX);
+		let result = this.constructor.blank(this.sizeY, this.sizeX);
 		if (this.sizeX && this.sizeY) {
-			let {context} = image;
+			let {context} = result;
 			context.save();
 			context.translate(this.sizeY / 2, this.sizeX / 2);
 			context.rotate(Math.PI / (clockwise ? 2 : -2));
 			context.drawImage(this.canvas, this.sizeX / -2, this.sizeY / -2);
 			context.restore();
 		}
-		return image;
+		return result;
 	}
 	return this;
 };

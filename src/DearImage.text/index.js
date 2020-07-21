@@ -14,11 +14,11 @@ DearImage.text = function(text, options) {
 		padding = defaultPadding,
 	] = expandOptions(options);
 	padding = Math.ceil(padding * font.size);
-	let image = this.blank(
+	let result = this.blank(
 		this.measureText(text, font).width + padding * 2,
 		font.size + padding * 2,
 	);
-	let {context} = image;
+	let {context} = result;
 	context.save();
 	context.font = font.toCSS();
 	context.textBaseline = 'top';
@@ -26,5 +26,5 @@ DearImage.text = function(text, options) {
 	context.fillStyle = fill;
 	context.fillText(text, padding, padding);
 	context.restore();
-	return image;
+	return result;
 };

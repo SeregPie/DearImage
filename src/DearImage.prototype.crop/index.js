@@ -13,11 +13,11 @@ DearImage.prototype.crop = function(startX, startY, sizeX, sizeY) {
 		sizeY,
 	] = computeStartAndSize(startY, sizeY, this.sizeY);
 	if (startX || startY || sizeX !== this.sizeX || sizeY !== this.sizeY) {
-		let image = this.constructor.blank(sizeX, sizeY);
+		let result = this.constructor.blank(sizeX, sizeY);
 		if (sizeX && sizeY && this.sizeX && this.sizeY) {
-			image.context.drawImage(this.canvas, -startX, -startY);
+			result.context.drawImage(this.canvas, -startX, -startY);
 		}
-		return image;
+		return result;
 	}
 	return this;
 };

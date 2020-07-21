@@ -14,6 +14,8 @@ import './DearImage.solid';
 import './DearImage.text';
 
 import './DearImage.prototype.crop';
+import './DearImage.prototype.drawBackground';
+import './DearImage.prototype.drawForeground';
 import './DearImage.prototype.flipX';
 import './DearImage.prototype.flipY';
 import './DearImage.prototype.reframe';

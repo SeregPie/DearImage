@@ -325,8 +325,8 @@ Aligns the image inside an area.
 | ---: | :--- |
 | `sizeX` | A number as the width of the area. |
 | `sizeY` | A number as the height of the area. |
-| `alignmentX` | A number as the horizontal alignment of the image. Possible values are `'start'`, `'center'` and `'end'`. |
-| `alignmentY` | A number as the vertical alignment of the image. Possible values are `'start'`, `'center'` and `'end'`. |
+| `alignmentX` | A string as the horizontal alignment of the image. Possible values are `'start'`, `'center'` and `'end'`. |
+| `alignmentY` | A string as the vertical alignment of the image. Possible values are `'start'`, `'center'` and `'end'`. |
 
 Returns the created `DearImage` instance.
 
@@ -484,6 +484,40 @@ Returns the created `DearImage` instance.
 ![](./examples/rotateCounterClockwise.png)
 
 ---
+
+`.drawForeground(image, alignmentX = 'center', alignmentY = 'center')`
+
+Draws an image above the current image.
+
+| argument | description |
+| ---: | :--- |
+| `image` | Anything the function `.from` supports. |
+| `alignmentX` | A string as the horizontal alignment of the image. Possible values are `'start'`, `'center'` and `'end'`. |
+| `alignmentY` | A string as the vertical alignment of the image. Possible values are `'start'`, `'center'` and `'end'`. |
+
+Returns the created `DearImage` instance.
+
+```javascript
+let image = DearImage.from(source).drawForeground(otherSource, 'end', 'start');
+```
+
+---
+
+`.drawBackground(image, alignmentX = 'center', alignmentY = 'center')`
+
+Draws an image below the current image.
+
+| argument | description |
+| ---: | :--- |
+| `image` | Anything the function `.from` supports. |
+| `alignmentX` | A string as the horizontal alignment of the image. Possible values are `'start'`, `'center'` and `'end'`. |
+| `alignmentY` | A string as the vertical alignment of the image. Possible values are `'start'`, `'center'` and `'end'`. |
+
+Returns the created `DearImage` instance.
+
+```javascript
+let image = DearImage.from(source).drawBackground(otherSource, 'end', 'start');
+```
 
 ---
 

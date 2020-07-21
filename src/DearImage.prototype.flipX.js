@@ -9,14 +9,14 @@ let f = function(flippingX, flippingY) {
 		sizeY,
 	} = this;
 	if (sizeX && sizeY) {
-		let image = this.constructor.blank(sizeX, sizeY);
-		let {context} = image;
+		let result = this.constructor.blank(sizeX, sizeY);
+		let {context} = result;
 		context.save();
 		context.translate(flippingX ? sizeX : 0, flippingY ? sizeY : 0);
 		context.scale(flippingX ? -1 : 1, flippingY ? -1 : 1);
 		context.drawImage(this.canvas, 0, 0);
 		context.restore();
-		return image;
+		return result;
 	}
 	return this;
 };
