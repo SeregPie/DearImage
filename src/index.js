@@ -1,8 +1,10 @@
 import DearImage from './DearImage';
 
 import './DearImage.blank';
+import './DearImage.flexLayout';
 import './DearImage.from';
 import './DearImage.fromExcept';
+import './DearImage.gridLayout';
 import './DearImage.is';
 import './DearImage.isDearImage';
 import './DearImage.lineLayout';
@@ -26,6 +28,7 @@ import './DearImage.prototype.rescale';
 import './DearImage.prototype.resize';
 import './DearImage.prototype.resizeX';
 import './DearImage.prototype.resizeY';
+import './DearImage.prototype.rotate';
 import './DearImage.prototype.rotateClockwise';
 import './DearImage.prototype.rotateCounterClockwise';
 import './DearImage.prototype.saveToFileSystem';
