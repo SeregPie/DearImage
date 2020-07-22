@@ -510,7 +510,8 @@ Returns the created `DearImage` instance.
 
 ---
 
-`.drawForeground(image, options = {
+```
+.drawForeground(image, options = {
   alignment: {
     x: 'center',
     y: 'center',
@@ -519,7 +520,8 @@ Returns the created `DearImage` instance.
     x: false,
     y: false,
   },
-})`
+})
+```
 
 Draws an image above the current image.
 
@@ -544,7 +546,8 @@ let image = DearImage.from(source).drawForeground(otherSource, {
 
 ---
 
-`.drawBackground(image, options = {
+```
+.drawBackground(image, options = {
   alignment: {
     x: 'center',
     y: 'center',
@@ -553,7 +556,8 @@ let image = DearImage.from(source).drawForeground(otherSource, {
     x: false,
     y: false,
   },
-})`
+})
+```
 
 Draws an image below the current image.
 
