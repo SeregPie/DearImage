@@ -7,16 +7,20 @@ import Function_prototype_bindPartial from '../core/Function/prototype/bindParti
 
 import normalizeSize from './normalizeSize';
 
-let f = function(pickScaling, sizeX, sizeY) {
-	sizeX = normalizeSize(sizeX, this.sizeX);
-	sizeY = normalizeSize(sizeY, this.sizeY);
+let f = function(pickScaling, newSizeX, newSizeY) {
+	let {
+		sizeX: oldSizeX,
+		sizeY: oldSizeY,
+	} = this;
+	newSizeX = normalizeSize(newSizeX, oldSizeX);
+	newSizeY = normalizeSize(newSizeY, oldSizeY);
 	let scalings = [];
-	if (sizeX && this.sizeX) {
-		let scalingX = sizeX / this.sizeX;
+	if (newSizeX && oldSizeX) {
+		let scalingX = newSizeX / oldSizeX;
 		scalings.push(scalingX);
 	}
-	if (sizeY && this.sizeY) {
-		let scalingY = sizeY / this.sizeY;
+	if (newSizeY && oldSizeY) {
+		let scalingY = newSizeY / oldSizeY;
 		scalings.push(scalingY);
 	}
 	if (scalings.length) {

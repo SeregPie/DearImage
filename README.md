@@ -164,6 +164,8 @@ Returns the created `DearImage` instance.
 }, source)
 ```
 
+Loads a font face.
+
 | argument | description |
 | ---: | :--- |
 | `fontFace` | Either a string as the font family or an object with the font face options. |
@@ -474,6 +476,20 @@ Returns the created `DearImage` instance.
 
 ---
 
+`.rotate(angle)`
+
+Rotates the image.
+
+| argument | description |
+| ---: | :--- |
+| `angle` | A number as the angle of the rotation in radians. |
+
+Returns the created `DearImage` instance.
+
+![](./examples/DearImage.prototype.rotate.png)
+
+---
+
 `.rotateClockwise()`
 
 Rotates the image clockwise.
@@ -494,38 +510,70 @@ Returns the created `DearImage` instance.
 
 ---
 
-`.drawForeground(image, alignmentX = 'center', alignmentY = 'center')`
+`.drawForeground(image, options = {
+  alignment: {
+    x: 'center',
+    y: 'center',
+  },
+  repeat: {
+    x: false,
+    y: false,
+  },
+})`
 
 Draws an image above the current image.
 
 | argument | description |
 | ---: | :--- |
 | `image` | Anything the function `.from` supports. |
-| `alignmentX` | A string as the horizontal alignment of the image. Possible values are `'start'`, `'center'` and `'end'`. |
-| `alignmentY` | A string as the vertical alignment of the image. Possible values are `'start'`, `'center'` and `'end'`. |
+| `options.alignment.x` | A string as the horizontal alignment of the image. Possible values are `'start'`, `'center'` and `'end'`. |
+| `options.alignment.y` | A string as the vertical alignment of the image. Possible values are `'start'`, `'center'` and `'end'`. |
+| `options.repeat.x` | If `true`, repeats the image horizontally. |
+| `options.repeat.y` | If `true`, repeats the image vertically. |
 
 Returns the created `DearImage` instance.
 
 ```javascript
-let image = DearImage.from(source).drawForeground(otherSource, 'end', 'start');
+let image = DearImage.from(source).drawForeground(otherSource, {
+  alignment: 'start',
+  repeat: {
+    y: true,
+  },
+});
 ```
 
 ---
 
-`.drawBackground(image, alignmentX = 'center', alignmentY = 'center')`
+`.drawBackground(image, options = {
+  alignment: {
+    x: 'center',
+    y: 'center',
+  },
+  repeat: {
+    x: false,
+    y: false,
+  },
+})`
 
 Draws an image below the current image.
 
 | argument | description |
 | ---: | :--- |
 | `image` | Anything the function `.from` supports. |
-| `alignmentX` | A string as the horizontal alignment of the image. Possible values are `'start'`, `'center'` and `'end'`. |
-| `alignmentY` | A string as the vertical alignment of the image. Possible values are `'start'`, `'center'` and `'end'`. |
+| `options.alignment.x` | A string as the horizontal alignment of the image. Possible values are `'start'`, `'center'` and `'end'`. |
+| `options.alignment.y` | A string as the vertical alignment of the image. Possible values are `'start'`, `'center'` and `'end'`. |
+| `options.repeat.x` | If `true`, repeats the image horizontally. |
+| `options.repeat.y` | If `true`, repeats the image vertically. |
 
 Returns the created `DearImage` instance.
 
 ```javascript
-let image = DearImage.from(source).drawBackground(otherSource, 'end', 'start');
+let image = DearImage.from(source).drawBackground(otherSource, {
+  alignment: {
+    x: 'center',
+  },
+  repeat: true,
+});
 ```
 
 ---

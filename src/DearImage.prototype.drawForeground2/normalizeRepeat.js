@@ -2,9 +2,10 @@
 
 import Object_isUndefined from '../core/Object/isUndefined';
 
-export default function(value, defaultValue) {
+export default function(value) {
 	if (Object_isUndefined(value)) {
-		return defaultValue;
+		// pass
+	} else {
+		return !!value;
 	}
-	return value;
 }

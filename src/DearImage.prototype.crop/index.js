@@ -3,19 +3,24 @@ import DearImage from '../DearImage';
 
 import computeStartAndSize from './computeStartAndSize';
 
-DearImage.prototype.crop = function(startX, startY, sizeX, sizeY) {
+DearImage.prototype.crop = function(startX, startY, newSizeX, newSizeY) {
+	let {
+		canvas,
+		sizeX: oldSizeX,
+		sizeY: oldSizeY,
+	} = this;
 	[
 		startX,
-		sizeX,
-	] = computeStartAndSize(startX, sizeX, this.sizeX);
+		newSizeX,
+	] = computeStartAndSize(startX, newSizeX, oldSizeX);
 	[
 		startY,
-		sizeY,
-	] = computeStartAndSize(startY, sizeY, this.sizeY);
-	if (startX || startY || sizeX !== this.sizeX || sizeY !== this.sizeY) {
-		let result = this.constructor.blank(sizeX, sizeY);
-		if (sizeX && sizeY && this.sizeX && this.sizeY) {
-			result.context.drawImage(this.canvas, -startX, -startY);
+		newSizeY,
+	] = computeStartAndSize(startY, newSizeY, oldSizeY);
+	if (startX || startY || newSizeX !== oldSizeX || newSizeY !== oldSizeY) {
+		let result = this.constructor.blank(newSizeX, newSizeY);
+		if (newSizeX && newSizeY && oldSizeX && oldSizeY) {
+			result.context.drawImage(canvas, -startX, -startY);
 		}
 		return result;
 	}

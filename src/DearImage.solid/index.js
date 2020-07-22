@@ -1,3 +1,5 @@
+// todo
+
 import '../DearImage.blank';
 import DearImage from '../DearImage';
 
@@ -9,7 +11,7 @@ DearImage.solid = function(fill, sizeX, sizeY) {
 	let {context} = result;
 	context.save();
 	context.fillStyle = fill;
-	context.fillRect(0, 0, result.sizeX, result.sizeY);
+	context.fillRect(0, 0, sizeX, sizeY);
 	context.restore();
 	return result;
 };

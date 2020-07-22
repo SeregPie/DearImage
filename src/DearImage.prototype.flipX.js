@@ -3,8 +3,9 @@ import DearImage from './DearImage';
 
 import Function_prototype_bindPartial from './core/Function/prototype/bindPartial';
 
-let f = function(flippingX, flippingY) {
+let f = function(x, y) {
 	let {
+		canvas,
 		sizeX,
 		sizeY,
 	} = this;
@@ -12,9 +13,9 @@ let f = function(flippingX, flippingY) {
 		let result = this.constructor.blank(sizeX, sizeY);
 		let {context} = result;
 		context.save();
-		context.translate(flippingX ? sizeX : 0, flippingY ? sizeY : 0);
-		context.scale(flippingX ? -1 : 1, flippingY ? -1 : 1);
-		context.drawImage(this.canvas, 0, 0);
+		context.translate(x ? sizeX : 0, y ? sizeY : 0);
+		context.scale(x ? -1 : +1, y ? -1 : +1);
+		context.drawImage(canvas, 0, 0);
 		context.restore();
 		return result;
 	}

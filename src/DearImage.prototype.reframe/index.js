@@ -1,18 +1,17 @@
 import '../DearImage.prototype.crop';
 import DearImage from '../DearImage';
 
-import computeStartAndSize from './computeStartAndSize';
+import computeStart from './computeStart';
+import normalizeSize from './normalizeSize';
 
-DearImage.prototype.reframe = function(sizeX, sizeY, alignmentX, alignmentY) {
-	let startX;
-	[
-		startX,
-		sizeX,
-	] = computeStartAndSize(alignmentX, sizeX, this.sizeX);
-	let startY;
-	[
-		startY,
-		sizeY,
-	] = computeStartAndSize(alignmentY, sizeY, this.sizeY);
-	return this.crop(startX, startY, sizeX, sizeY);
+DearImage.prototype.reframe = function(newSizeX, newSizeY, alignmentX, alignmentY) {
+	let {
+		sizeX: oldSizeX,
+		sizeY: oldSizeY,
+	} = this;
+	newSizeX = normalizeSize(newSizeX, oldSizeX);
+	newSizeY = normalizeSize(newSizeY, oldSizeY);
+	let startX = computeStart(alignmentX, newSizeX, oldSizeX);
+	let startY = computeStart(alignmentY, newSizeY, oldSizeY);
+	return this.crop(startX, startY, newSizeX, newSizeY);
 };

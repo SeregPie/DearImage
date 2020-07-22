@@ -9,6 +9,7 @@ module.exports = [
 	require('./DearImage.prototype.resize'),
 	require('./DearImage.prototype.resizeX'),
 	require('./DearImage.prototype.resizeY'),
+	require('./DearImage.prototype.rotate'),
 	require('./DearImage.prototype.scale'),
 	require('./DearImage.prototype.scaleDownIn'),
 	require('./DearImage.prototype.scaleDownOut'),

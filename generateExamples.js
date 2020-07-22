@@ -179,6 +179,22 @@ let DearImage = require('./index');
 		let image = await DearImage.loadFrom('./images/duck.png');
 		let result = DearImage.lineLayout('x', [
 			[`image`, image],
+			[`image.rotate(Math.PI/4)`, image.rotate(Math.PI/4)],
+		].map(([label, image]) => {
+			return DearImage.lineLayout('y', [
+				DearImage.text(label, {font}),
+				image.drawCheckeredBackground(),
+				DearImage.text(`${image.sizeX}x${image.sizeY}`, {font}),
+			]);
+		}), {
+			gap: 10,
+		});
+		await result.saveToFileSystem('./examples/DearImage.prototype.rotate.png');
+	}
+	{
+		let image = await DearImage.loadFrom('./images/duck.png');
+		let result = DearImage.lineLayout('x', [
+			[`image`, image],
 			[`image.rotateCounterClockwise()`, image.rotateCounterClockwise()],
 		].map(([label, image]) => {
 			return DearImage.lineLayout('y', [
