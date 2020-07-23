@@ -1,6 +1,8 @@
 import DearImage from './DearImage';
 
 import './DearImage.blank';
+import './DearImage.drawer';
+import './DearImage.filled';
 import './DearImage.flexLayout';
 import './DearImage.from';
 import './DearImage.fromExcept';
@@ -12,7 +14,6 @@ import './DearImage.loadFontFace';
 import './DearImage.loadFrom';
 import './DearImage.loadFromExcept';
 import './DearImage.measureText';
-import './DearImage.solid';
 import './DearImage.text';
 
 import './DearImage.prototype.crop';
@@ -24,6 +25,8 @@ import './DearImage.prototype.fillForeground';
 import './DearImage.prototype.flipX';
 import './DearImage.prototype.flipY';
 import './DearImage.prototype.reframe';
+import './DearImage.prototype.reframeScaleIn';
+import './DearImage.prototype.reframeSscaleOut';
 import './DearImage.prototype.rescale';
 import './DearImage.prototype.resize';
 import './DearImage.prototype.resizeX';

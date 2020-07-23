@@ -12,6 +12,7 @@ import Image_create from './core/Image/create';
 import Image_is from './core/Image/is';
 import Image_prototype_load from './core/Image/prototype/load';
 import ImageData_is from './core/ImageData/is';
+import RenderingContext_is from './core/RenderingContext/is';
 import String_is from './core/String/is';
 import URL_is from './core/URL/is';
 
@@ -35,6 +36,10 @@ let DearImage_fromCanvas = function(canvas) {
 	return DearImage_fromCanvasImageSource.call(this, canvas, canvas.width, canvas.height);
 };
 
+let DearImage_fromRenderingContext = function(context) {
+	return DearImage_fromCanvas.call(this, context.canvas);
+};
+
 let DearImage_fromImage = function(image) {
 	return DearImage_fromCanvasImageSource.call(this, image, image.naturalWidth, image.naturalHeight);
 };
@@ -53,9 +58,13 @@ let DearImage_from = function(value) {
 	if (Canvas_is(value)) {
 		return DearImage_fromCanvas.call(this, value);
 	}
+	if (RenderingContext_is(value)) {
+		return DearImage_fromRenderingContext.call(this, value);
+	}
 	if (Image_is(value)) {
 		return DearImage_fromImage.call(this, value);
 	}
+	// todo
 	throw new Error();
 };
 
