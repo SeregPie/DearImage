@@ -1,5 +1,3 @@
-// todo
-
 import '../DearImage.blank';
 import DearImage from '../DearImage';
 

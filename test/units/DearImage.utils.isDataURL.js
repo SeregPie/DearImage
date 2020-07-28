@@ -1,6 +1,6 @@
 let assert = require('assert').strict;
 
-let DearImage = require('../../index');
+let DearImage = require('../../');
 
 module.exports = function() {
 	assert(DearImage.utils.isDataURL('data:image/png;base64,R0lGODdh'));

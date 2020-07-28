@@ -5,6 +5,8 @@ module.exports = [
 	require('./DearImage.prototype.flipX'),
 	require('./DearImage.prototype.flipY'),
 	require('./DearImage.prototype.reframe'),
+	require('./DearImage.prototype.reframeScaleIn'),
+	require('./DearImage.prototype.reframeScaleOut'),
 	require('./DearImage.prototype.rescale'),
 	require('./DearImage.prototype.resize'),
 	require('./DearImage.prototype.resizeX'),

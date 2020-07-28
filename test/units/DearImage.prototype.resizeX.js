@@ -1,6 +1,6 @@
 let assert = require('assert').strict;
 
-let DearImage = require('../../index');
+let DearImage = require('../../');
 
 module.exports = function() {
 	for (let image of [
