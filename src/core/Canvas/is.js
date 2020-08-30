@@ -1,13 +1,13 @@
-import Canvas_isHTMLElement from './isHTMLElement';
-import Canvas_isNode from './isNode';
-import Canvas_isOffscreen from './isOffscreen';
+import Canvas_isInNode from './isInNode';
+import HTMLCanvasElement_is from '../HTMLCanvasElement/is';
+import OffscreenCanvas_is from '../OffscreenCanvas/is';
 
 export default function(value) {
 	return (
-		Canvas_isHTMLElement(value)
+		HTMLCanvasElement_is(value)
 		||
-		Canvas_isOffscreen(value)
+		OffscreenCanvas_is(value)
 		||
-		Canvas_isNode(value)
+		Canvas_isInNode(value)
 	);
 }

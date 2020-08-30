@@ -31,9 +31,5 @@ module.exports = function() {
 			let otherImage = image.crop(image.sizeX, image.sizeY, -image.sizeX, -image.sizeY);
 			assert.equal(otherImage, image);
 		}
-		for (let v of [null, Infinity, NaN, {}]) {
-			let otherImage = image.crop(v, v, v, v);
-			assert.equal(otherImage, image);
-		}
 	}
 };

@@ -42,15 +42,4 @@ module.exports = function() {
 		let otherImage = image.scale(0);
 		assert.equal(otherImage, image);
 	}
-	for (let image of [
-		DearImage.blank(300, 150),
-		DearImage.blank(0, 100),
-		DearImage.blank(100, 0),
-		DearImage.blank(),
-	]) {
-		for (let v of [null, -7, Infinity, NaN, {}]) {
-			let otherImage = image.scale(v);
-			assert.equal(otherImage, image);
-		}
-	}
 };

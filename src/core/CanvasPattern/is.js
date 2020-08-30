@@ -1,6 +1,10 @@
-import CanvasPattern_isNode from './isNode';
+import CanvasPattern_isInNode from './isInNode';
 
 export default function(value) {
 	let {CanvasPattern} = globalThis;
-	return (!!CanvasPattern && value instanceof CanvasPattern) || CanvasPattern_isNode(value);
+	return (
+		(!!CanvasPattern && value instanceof CanvasPattern)
+		||
+		CanvasPattern_isInNode(value)
+	);
 }

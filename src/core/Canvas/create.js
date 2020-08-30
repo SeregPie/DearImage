@@ -1,17 +1,17 @@
-import Canvas_createHTMLElement from './createHTMLElement';
-import Canvas_createNode from './createNode';
-import Canvas_createOffscreen from './createOffscreen';
+import Canvas_createInNode from './createInNode';
+import HTMLCanvasElement_create from '../HTMLCanvasElement/create';
+import OffscreenCanvas_create from '../OffscreenCanvas/create';
 
-export default function() {
+export default function(...args) {
 	try {
-		return Canvas_createHTMLElement();
+		return HTMLCanvasElement_create(...args);
 	} catch {
 		// pass
 	}
 	try {
-		return Canvas_createOffscreen();
+		return OffscreenCanvas_create(...args);
 	} catch {
 		// pass
 	}
-	return Canvas_createNode();
+	return Canvas_createInNode(...args);
 }

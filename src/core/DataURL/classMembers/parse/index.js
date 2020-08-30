@@ -7,10 +7,11 @@ export default function(string) {
 		let matches = regex.exec(string);
 		if (matches) {
 			let type = matches[1];
-			//let encoded = matches[2];
+			let encoded = matches[2];
 			let data = matches[3];
 			return Object.assign(new this(), {
 				type,
+				encoded,
 				data,
 				toString() {
 					return string;

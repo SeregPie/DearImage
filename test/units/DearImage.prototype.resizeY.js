@@ -19,10 +19,6 @@ module.exports = function() {
 			let otherImage = image.resizeY(image.sizeY);
 			assert.equal(otherImage, image);
 		}
-		for (let v of [null, -7, Infinity, NaN, {}]) {
-			let otherImage = image.resizeY(v);
-			assert.equal(otherImage, image);
-		}
 	}
 	for (let image of [
 		DearImage.blank(300, 150),
@@ -57,10 +53,6 @@ module.exports = function() {
 	]) {
 		{
 			let otherImage = image.resizeY(image.sizeY, true);
-			assert.equal(otherImage, image);
-		}
-		for (let v of [null, -7, Infinity, NaN, {}]) {
-			let otherImage = image.resizeY(v, true);
 			assert.equal(otherImage, image);
 		}
 	}

@@ -1,19 +1,16 @@
-import RenderingContext_is2D from './is2D';
-import RenderingContext_isImageBitmap from './isImageBitmap';
-import RenderingContext_isNode from './isNode';
-import RenderingContext_isWebGL from './isWebGL';
-import RenderingContext_isWebGL2 from './isWebGL2';
+import CanvasRenderingContext2D_is from '../CanvasRenderingContext2D/is';
+import ImageBitmapRenderingContext_is from '../ImageBitmapRenderingContext/is';
+import WebGL2RenderingContext_is from '../WebGL2RenderingContext/is';
+import WebGLRenderingContext_is from '../WebGLRenderingContext/is';
 
 export default function(value) {
 	return (
-		RenderingContext_is2D(value)
+		CanvasRenderingContext2D_is(value)
 		||
-		RenderingContext_isWebGL(value)
+		WebGL2RenderingContext_is(value)
 		||
-		RenderingContext_isWebGL2(value)
+		WebGLRenderingContext_is(value)
 		||
-		RenderingContext_isImageBitmap(value)
-		||
-		RenderingContext_isNode(value)
+		ImageBitmapRenderingContext_is(value)
 	);
 }

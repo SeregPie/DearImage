@@ -20,23 +20,5 @@ module.exports = function() {
 			let otherImage = image.reframe(image.sizeX, image.sizeY);
 			assert.equal(otherImage, image);
 		}
-		for (let v of [null, -7, Infinity, NaN, {}]) {
-			{
-				let otherImage = image.reframe(v, v);
-				assert.equal(otherImage, image);
-			}
-			{
-				let sizeY = 200;
-				let otherImage = image.reframe(v, sizeY);
-				assert.equal(otherImage.sizeX, image.sizeX);
-				assert.equal(otherImage.sizeY, sizeY);
-			}
-			{
-				let sizeX = 200;
-				let otherImage = image.reframe(sizeX, v);
-				assert.equal(otherImage.sizeX, sizeX);
-				assert.equal(otherImage.sizeY, image.sizeY);
-			}
-		}
 	}
 };

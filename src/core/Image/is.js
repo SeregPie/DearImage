@@ -1,10 +1,10 @@
-import Image_isHTMLElement from './isHTMLElement';
-import Image_isNode from './isNode';
+import HTMLImageElement_is from '../HTMLImageElement/is';
+import Image_isInNode from './isInNode';
 
 export default function(value) {
 	return (
-		Image_isHTMLElement(value)
+		HTMLImageElement_is(value)
 		||
-		Image_isNode(value)
+		Image_isInNode(value)
 	);
 }
