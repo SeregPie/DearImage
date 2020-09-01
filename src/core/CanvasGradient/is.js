@@ -1,10 +1,6 @@
-import CanvasGradient_isInNode from './isInNode';
+import CanvasGradient_isNode from './isNode';
 
 export default function(value) {
 	let {CanvasGradient} = globalThis;
-	return (
-		(!!CanvasGradient && value instanceof CanvasGradient)
-		||
-		CanvasGradient_isInNode(value)
-	);
+	return (!!CanvasGradient && value instanceof CanvasGradient) || CanvasGradient_isNode(value);
 }

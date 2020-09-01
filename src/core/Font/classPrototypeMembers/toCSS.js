@@ -1,3 +1,5 @@
+import CSS_font from '../../CSS/font';
+
 export default function() {
 	let {
 		family,
@@ -6,5 +8,5 @@ export default function() {
 		variant,
 		weight,
 	} = this;
-	return [style, variant, weight, `${size}px`, family].join(' ');
+	return CSS_font(family, size, style, variant, weight);
 }

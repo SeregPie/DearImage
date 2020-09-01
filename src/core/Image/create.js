@@ -1,11 +1,11 @@
-import HTMLImageElement_create from '../HTMLImageElement/create';
-import Image_createInNode from './createInNode';
+import Image_createHTMLElement from './createHTMLElement';
+import Image_createNode from './createNode';
 
-export default function(...args) {
+export default function() {
 	try {
-		return HTMLImageElement_create(...args);
+		return Image_createHTMLElement();
 	} catch {
 		// pass
 	}
-	return Image_createInNode(...args);
+	return Image_createNode();
 }

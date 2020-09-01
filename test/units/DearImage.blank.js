@@ -15,4 +15,23 @@ module.exports = function() {
 		assert.equal(image.sizeX, sizeX);
 		assert.equal(image.sizeY, sizeY);
 	}
+	for (let v of [null, -7, Infinity, NaN, {}]) {
+		{
+			let image = DearImage.blank(v, v);
+			assert.equal(image.sizeX, 0);
+			assert.equal(image.sizeY, 0);
+		}
+		{
+			let sizeY = 200;
+			let image = DearImage.blank(v, sizeY);
+			assert.equal(image.sizeX, 0);
+			assert.equal(image.sizeY, sizeY);
+		}
+		{
+			let sizeX = 200;
+			let image = DearImage.blank(sizeX, v);
+			assert.equal(image.sizeX, sizeX);
+			assert.equal(image.sizeY, 0);
+		}
+	}
 };

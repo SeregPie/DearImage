@@ -60,14 +60,33 @@ Creates a `DearImage` instance from the given value.
 
 | argument | description |
 | ---: | :--- |
-| `value` | The value to create from. Supported value types are [`ImageData`](https://developer.mozilla.org/en-US/docs/Web/API/ImageData), [`HTMLCanvasElement`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement), [`OffscreenCanvas`](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvas), [`HTMLImageElement`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement), [`RenderingContext`](https://developer.mozilla.org/en-US/docs/Web/API/RenderingContext) and `DearImage`. |
+| `value` | The value to create from. Supported value types are [`ImageData`](https://developer.mozilla.org/en-US/docs/Web/API/ImageData), [`HTMLCanvasElement`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement), [`OffscreenCanvas`](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvas), [`HTMLImageElement`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement) and `DearImage`. |
 
 Returns the created `DearImage` instance.
 
 ```javascript
-let element = document.getElementById('myCanvas');
+let element = document.getElementById('my-image');
 let image = DearImage.from(element);
 document.body.appendChild(image.toHTMLCanvasElement());
+```
+
+---
+
+`.fromExcept(value)`
+
+Creates a `DearImage` instance from the given value if it's not one.
+
+| argument | description |
+| ---: | :--- |
+| `value` | The value to create from. |
+
+Returns the same or created `DearImage` instance.
+
+```javascript
+let element = document.getElementById('my-image');
+let image = DearImage.fromExcept(element);
+let otherImage = DearImage.fromExcept(image);
+console.log(otherImage === image); // => true
 ```
 
 ---
@@ -78,7 +97,7 @@ Asynchronously loads a `DearImage` instance from the given value.
 
 | argument | description |
 | ---: | :--- |
-| `value` | The value to load from. Supported value types are `String`, [`URL`](https://developer.mozilla.org/en-US/docs/Web/API/URL), [`Buffer`](https://nodejs.org/api/buffer.html), [`Blob`](https://developer.mozilla.org/en-US/docs/Web/API/Blob), [`HTMLImageElement`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement) and everything the function `DearImage.from` supports. |
+| `value` | The value to load from. Supported value types are `String`, [`URL`](https://developer.mozilla.org/en-US/docs/Web/API/URL), [`Buffer`](https://nodejs.org/api/buffer.html), [`Blob`](https://developer.mozilla.org/en-US/docs/Web/API/Blob), [`HTMLImageElement`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement) and everything the function `.from` supports. |
 
 Returns a promise that resolves to the created `DearImage` instance.
 
@@ -90,9 +109,28 @@ document.body.appendChild(image.toHTMLCanvasElement());
 
 ---
 
+`.loadFromExcept(value)`
+
+Asynchronously loads a `DearImage` instance from the given value if it's not one.
+
+| argument | description |
+| ---: | :--- |
+| `value` | The value to load from. |
+
+Returns a promise that resolves to the same or created `DearImage` instance.
+
+```javascript
+let url = '/path/to/image.jpg';
+let image = await DearImage.loadFrom(url);
+let otherImage = await DearImage.loadFromExcept(image);
+console.log(otherImage === image); // => true
+```
+
+---
+
 `.blank(sizeX = 0, sizeY = 0)`
 
-Creates a `DearImage` instance without the content.
+Creates a `DearImage` instance without content.
 
 | argument | description |
 | ---: | :--- |
@@ -103,46 +141,15 @@ Returns the created `DearImage` instance.
 
 ---
 
-`.filled(style, sizeX = 0, sizeY = 0)`
+`.solid(fill = 'rgba(0,0,0,0)', sizeX = 0, sizeY = 0)`
 
-Creates a `DearImage` instance with the filled content.
-
-| argument | description |
-| ---: | :--- |
-| `style` | TODO: A string as the color or an instance of [`CanvasGradient`](https://developer.mozilla.org/en-US/docs/Web/API/CanvasGradient) or [`CanvasPattern`](https://developer.mozilla.org/en-US/docs/Web/API/CanvasPattern). |
-| `sizeX` | A number as the width of the image. |
-| `sizeY` | A number as the height of the image. |
-
-Returns the created `DearImage` instance.
-
----
-
-```
-.drawed(image, sizeX = 0, sizeY = 0, options = {
-  alignment: {
-    x: 'center',
-    y: 'center',
-  },
-  repeat: {
-    x: false,
-    y: false,
-  },
-})`
-```
-
-Creates a `DearImage` instance with the drawed content.
+Creates a `DearImage` instance with filled content.
 
 | argument | description |
 | ---: | :--- |
-| `image` | Anything the function `DearImage.from` supports. |
+| `fill` | A string as the fill color. |
 | `sizeX` | A number as the width of the image. |
 | `sizeY` | A number as the height of the image. |
-| `options.alignment` | An object with further options or a value. |
-| `options.alignment.x` | A string as the horizontal alignment of the image. Possible values are `'start'`, `'center'` and `'end'`. |
-| `options.alignment.y` | A string as the vertical alignment of the image. Possible values are `'start'`, `'center'` and `'end'`. |
-| `options.repeat` | An object with further options or a value. |
-| `options.repeat.x` | If `true`, repeats the image horizontally. |
-| `options.repeat.y` | If `true`, repeats the image vertically. |
 
 Returns the created `DearImage` instance.
 
@@ -161,19 +168,19 @@ Loads a font face.
 
 | argument | description |
 | ---: | :--- |
-| `fontFace` | Either a string as the font family or an object with further options. |
+| `fontFace` | Either a string as the font family or an object with the font face options. |
 | `fontFace.family` | A string as the font family. |
 | `fontFace.style` | A string as the font style. |
 | `fontFace.variant` | A string as the font variant. |
 | `fontFace.weight` | A number or a string as the font weight. |
-| `source` | TODO. A string as the source path to load from. The argument is required in Node and is optional in browser. |
+| `source` | A string as the source path to load from. |
 
 Returns a promise.
 
 ---
 
 ```
-.measureText(text = '', font = {
+.measureText(text, font = {
   family: 'sans-serif',
   size: 10,
   style: 'normal',
@@ -198,9 +205,8 @@ Returns the created `TextMetrics` instance.
 ---
 
 ```
-.text(text = '', options = {
-  alignment: 'center',
-  fillStyle: '#000',
+.text(text, options = {
+  fill: '#000',
   font: {
     family: 'sans-serif',
     size: 10,
@@ -208,10 +214,7 @@ Returns the created `TextMetrics` instance.
     variant: 'normal',
     weight: 'normal',
   },
-  lineGap: 0.14,  
   padding: 0.28,
-  strokeStyle: '#000',
-  strokeWidth: 0,
 })
 ```
 
@@ -220,37 +223,21 @@ Creates a `DearImage` instance with the drawn text.
 | argument | description |
 | ---: | :--- |
 | `text` | A string as the text. |
-| `options.alignment` | TODO. |
-| `options.fillStyle` | TODO: A string as the color or an instance of [`CanvasGradient`](https://developer.mozilla.org/en-US/docs/Web/API/CanvasGradient) or [`CanvasPattern`](https://developer.mozilla.org/en-US/docs/Web/API/CanvasPattern). |
-| `options.fontFamily` | A string as the font family. |
-| `options.fontSize` | A string as the font size. |
-| `options.fontStyle` | A string as the font style. |
-| `options.fontVariant` | A string as the font variant. |
-| `options.fontWeight` | A number or a string as the font weight. |
-| `options.lineGap` | A number as the gap between the text lines. The value is relative to the font size. |
-| `options.padding` | A number as the space around the content. The value is relative to the font size. |
-| `options.strokeStyle` | TODO: A string as the color or an instance of [`CanvasGradient`](https://developer.mozilla.org/en-US/docs/Web/API/CanvasGradient) or [`CanvasPattern`](https://developer.mozilla.org/en-US/docs/Web/API/CanvasPattern). |
-| `options.strokeWidth` | A number as the width of the stroke. The value is relative to the font size. |
+| `options.fill` | A string as the fill color. |
+| `options.font.family` | A string as the font family. |
+| `options.font.size` | A string as the font size. |
+| `options.font.style` | A string as the font style. |
+| `options.font.variant` | A string as the font variant. |
+| `options.font.weight` | A number or a string as the font weight. |
+| `options.padding` | A number as the space around the text. The value is relative to the font size. |
 
 Returns the created `DearImage` instance.
 
 ```javascript
-let fontFamily = 'Inconsolata';
-await DearImage.loadFontFace(fontFamily, './fonts/Inconsolata.ttf');
-let text = [
-  'Twinkle, twinkle, little star,',
-  'How I wonder what you are!',
-  'Up above the world so high,',
-  'Like a diamond in the sky.',
-].join('\n');
-let image = DearImage.text(text, {
-  alignment: 'start',
-  fillStyle: '#000',
-  fontFamily,
-  fontSize: 32,
-  strokeStyle: '#000',
-  strokeWidth: 4,
-});
+let fontFace = {family: 'Inconsolata'};
+await DearImage.loadFontFace(fontFace, './fonts/Inconsolata.ttf');
+let font = {...fontFace, size: 32};
+let image = DearImage.text('Hello World', {font});
 ```
 
 ![](./examples/DearImage.text.png)
@@ -278,19 +265,6 @@ console.log(image.sizeY); // => 150
 ```
 
 ### methods
-
-`.isBlank()`
-
-Checks if the image is blank.
-
-Returns `true` if the image is blank. Otherwise, `false`.
-
-```javascript
-let image = DearImage.blank(300, 150);
-console.log(image.isBlank()); // => true
-```
-
----
 
 `.resize(sizeX = this.sizeX, sizeY = this.sizeY)`
 
@@ -481,40 +455,6 @@ Returns the created `DearImage` instance.
 
 ---
 
-`.reframeScaleIn(sizeX = this.sizeX, sizeY = this.sizeY, alignmentX = 'center', alignmentY = 'center')`
-
-Scales the image inside an area and reframes.
-
-| argument | description |
-| ---: | :--- |
-| `sizeX` | A number as the width of the area. |
-| `sizeY` | A number as the height of the area. |
-| `alignmentX` | A string as the horizontal alignment of the image. Possible values are `'start'`, `'center'` and `'end'`. |
-| `alignmentY` | A string as the vertical alignment of the image. Possible values are `'start'`, `'center'` and `'end'`. |
-
-Returns the created `DearImage` instance.
-
-![](./examples/DearImage.prototype.reframeScaleIn.png)
-
----
-
-`.reframeScaleOut(sizeX = this.sizeX, sizeY = this.sizeY, alignmentX = 'center', alignmentY = 'center')`
-
-Scales the image outside an area. The aspect ratio of the image is preserved.
-
-| argument | description |
-| ---: | :--- |
-| `sizeX` | A number as the width of the area. |
-| `sizeY` | A number as the height of the area. |
-| `alignmentX` | A string as the horizontal alignment of the image. Possible values are `'start'`, `'center'` and `'end'`. |
-| `alignmentY` | A string as the vertical alignment of the image. Possible values are `'start'`, `'center'` and `'end'`. |
-
-Returns the created `DearImage` instance.
-
-![](./examples/DearImage.prototype.reframeScaleOut.png)
-
----
-
 `.flipX()`
 
 Flips the image horizontally.
@@ -536,7 +476,7 @@ Returns the created `DearImage` instance.
 
 ---
 
-`.rotate(angle = 0)`
+`.rotate(angle)`
 
 Rotates the image.
 
@@ -587,11 +527,9 @@ Draws an image above the current image.
 
 | argument | description |
 | ---: | :--- |
-| `image` | Anything the function `DearImage.from` supports. |
-| `options.alignment` | An object with further options or a value. |
+| `image` | Anything the function `.from` supports. |
 | `options.alignment.x` | A string as the horizontal alignment of the image. Possible values are `'start'`, `'center'` and `'end'`. |
 | `options.alignment.y` | A string as the vertical alignment of the image. Possible values are `'start'`, `'center'` and `'end'`. |
-| `options.repeat` | An object with further options or a value. |
 | `options.repeat.x` | If `true`, repeats the image horizontally. |
 | `options.repeat.y` | If `true`, repeats the image vertically. |
 
@@ -625,7 +563,7 @@ Draws an image below the current image.
 
 | argument | description |
 | ---: | :--- |
-| `image` | Anything the function `DearImage.from` supports. |
+| `image` | Anything the function `.from` supports. |
 | `options.alignment.x` | A string as the horizontal alignment of the image. Possible values are `'start'`, `'center'` and `'end'`. |
 | `options.alignment.y` | A string as the vertical alignment of the image. Possible values are `'start'`, `'center'` and `'end'`. |
 | `options.repeat.x` | If `true`, repeats the image horizontally. |
@@ -636,7 +574,7 @@ Returns the created `DearImage` instance.
 ```javascript
 let image = DearImage.from(source).drawBackground(otherSource, {
   alignment: {
-    x: 'end',
+    x: 'center',
   },
   repeat: true,
 });
@@ -644,13 +582,13 @@ let image = DearImage.from(source).drawBackground(otherSource, {
 
 ---
 
-`.fillForeground(style)`
+`.fillForeground(fill)`
 
 Draws an image above the current image.
 
 | argument | description |
 | ---: | :--- |
-| `style` | TODO: A string as the color or an instance of [`CanvasGradient`](https://developer.mozilla.org/en-US/docs/Web/API/CanvasGradient) or [`CanvasPattern`](https://developer.mozilla.org/en-US/docs/Web/API/CanvasPattern). |
+| `fill` | A string as the fill color. |
 
 Returns the created `DearImage` instance.
 
@@ -658,13 +596,13 @@ Returns the created `DearImage` instance.
 
 ---
 
-`.fillBackground(style)`
+`.fillBackground(fill)`
 
 Draws an image below the current image.
 
 | argument | description |
 | ---: | :--- |
-| `style` | TODO: A string as the color or an instance of [`CanvasGradient`](https://developer.mozilla.org/en-US/docs/Web/API/CanvasGradient) or [`CanvasPattern`](https://developer.mozilla.org/en-US/docs/Web/API/CanvasPattern). |
+| `fill` | A string as the fill color. |
 
 Returns the created `DearImage` instance.
 
@@ -701,7 +639,7 @@ Returns the created `Blob` instance.
 
 `.toBuffer(format, quality)`
 
-*Node only*
+*node only*
 
 Creates a [`Buffer`](https://nodejs.org/api/buffer.html) instance representing the content.
 
@@ -748,7 +686,7 @@ document.body.appendChild(element);
 
 `.saveToFileSystem(target, format, quality)`
 
-*Node only*
+*node only*
 
 Asynchronously saves the content to the file system.
 

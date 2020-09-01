@@ -1,10 +1,6 @@
-import ImageData_isInNode from './isInNode';
+import ImageData_isNode from './isNode';
 
 export default function(value) {
 	let {ImageData} = globalThis;
-	return (
-		(!!ImageData && value instanceof ImageData)
-		||
-		ImageData_isInNode(value)
-	);
+	return (!!ImageData && value instanceof ImageData) || ImageData_isNode(value);
 }
