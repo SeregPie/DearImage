@@ -7,9 +7,9 @@ DearImage.prototype.toHTMLCanvasElement = function() {
 		sizeX,
 		sizeY,
 	} = this;
-	let element = HTMLCanvasElement_create(sizeX, sizeY);
+	let result = HTMLCanvasElement_create(sizeX, sizeY);
 	if (sizeX && sizeY) {
-		element.getContext('2d').drawImage(canvas, 0, 0);
+		result.getContext('2d').drawImage(canvas, 0, 0);
 	}
-	return element;
+	return result;
 };

@@ -46,9 +46,9 @@
 		"@rollup/plugin-node-resolve": "^9.0.0",
 		"@seregpie/native-require": "^1.0.1",
 		"canvas": "^2.6.1",
-		"eslint": "^7.7.0",
+		"eslint": "^7.9.0",
 		"eslint-config-seregpie": "^1.0.1",
-		"rollup": "^2.26.6",
-		"rollup-plugin-terser": "^7.0.0"
+		"rollup": "^2.27.1",
+		"rollup-plugin-terser": "^7.0.2"
 	}
 }

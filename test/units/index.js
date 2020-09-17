@@ -4,7 +4,7 @@ module.exports = [
 	require('./DearImage.prototype.crop'),
 	require('./DearImage.prototype.flipX'),
 	require('./DearImage.prototype.flipY'),
-	require('./DearImage.prototype.isBlank'),
+	//require('./DearImage.prototype.isBlank'),
 	require('./DearImage.prototype.reframe'),
 	require('./DearImage.prototype.reframeScaleIn'),
 	require('./DearImage.prototype.reframeScaleOut'),

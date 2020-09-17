@@ -3,12 +3,13 @@ import OffscreenCanvas_create from '../core/OffscreenCanvas/create';
 
 DearImage.prototype.toOffscreenCanvas = function() {
 	let {
+		canvas,
 		sizeX,
 		sizeY,
 	} = this;
-	let canvas = OffscreenCanvas_create(sizeX, sizeY);
+	let result = OffscreenCanvas_create(sizeX, sizeY);
 	if (sizeX && sizeY) {
-		canvas.getContext('2d').drawImage(this.canvas, 0, 0);
+		result.getContext('2d').drawImage(canvas, 0, 0);
 	}
-	return canvas;
+	return result;
 };
