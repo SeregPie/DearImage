@@ -1,9 +1,9 @@
 import './DearImage.blank';
 //import './DearImage.drawed';
-//import './DearImage.filled';
-//import './DearImage.flexLayout';
+import './DearImage.filled';
+import './DearImage.flexLayout';
 import './DearImage.from';
-//import './DearImage.gridLayout';
+import './DearImage.gridLayout';
 import './DearImage.isDearImage';
 /*import './DearImage.lineLayout';
 import './DearImage.loadFontFace';*/
@@ -13,7 +13,7 @@ import './DearImage.text';*/
 
 import './DearImage.prototype.crop';
 //import './DearImage.prototype.drawBackground';
-//import './DearImage.prototype.drawCheckeredBackground';
+import './DearImage.prototype.drawCheckeredBackground';
 //import './DearImage.prototype.drawForeground';
 //import './DearImage.prototype.fillBackground';
 //import './DearImage.prototype.fillForeground';
