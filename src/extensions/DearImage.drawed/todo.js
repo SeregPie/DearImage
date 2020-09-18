@@ -1,17 +1,12 @@
 import '../DearImage.blank';
 import '../DearImage.filled';
-import './DearImage.prototype.reframe';
+import '../DearImage.prototype.reframe';
 
 import DearImage from '../../core/DearImage';
 import Math_ceilDivisible from '../../core/Math/ceilDivisible';
 
-let normalizeImage = function(value) {
-	try {
-		return DearImage.from(value);
-	} catch {
-		// pass
-	}
-};
+import normalizeAlignment from './normalizeAlignment';
+import normalizeImage from './normalizeImage';
 
 DearImage.drawed = function(image, sizeX, sizeY, options) {
 	image = normalizeImage(image);
@@ -28,10 +23,10 @@ DearImage.drawed = function(image, sizeX, sizeY, options) {
 		if (Object_is(value)) {
 			(value => {
 				if (Object_is(value)) {
-					alignmentX = value.x;
-					alignmentY = value.y;
+					alignmentX = normalizeAlignment(value.x);
+					alignmentY = normalizeAlignment(value.y);
 				} else {
-					alignmentX = alignmentY = value;
+					alignmentX = alignmentY = normalizeAlignment(value);
 				}
 			})(value.alignment);
 			(value => {
@@ -66,6 +61,12 @@ DearImage.drawed = function(image, sizeX, sizeY, options) {
 		);
 		let {context} = result;
 		context.drawImage(canvas, 0, 0);
+
+		let {context} = result;
+		context.save();
+		context.fillStyle = style;
+		context.fillRect(0, 0, sizeX, sizeY);
+		context.restore();
 	}
 	return result;
 };
@@ -74,31 +75,31 @@ DearImage.drawed = function(image, sizeX, sizeY, options) {
 
 DearImage.drawed = function(image, sizeX, sizeY, options) {
 	image = normalizeImage(image);
+	let alignmentX;
+	let alignmentY;
+	let repeatX;
+	let repeatY;
+	(value => {
+		if (Object_is(value)) {
+			(value => {
+				if (Object_is(value)) {
+					alignmentX = value.x;
+					alignmentY = value.y;
+				} else {
+					alignmentX = alignmentY = value;
+				}
+			})(value.alignment);
+			(value => {
+				if (Object_is(value)) {
+					repeatX = value.x;
+					repeatY = value.y;
+				} else {
+					repeatX = repeatY = value;
+				}
+			})(value.repeat);
+		}
+	})(options);
 	if (image) {
-		let alignmentX;
-		let alignmentY;
-		let repeatX;
-		let repeatY;
-		(value => {
-			if (Object_is(value)) {
-				(value => {
-					if (Object_is(value)) {
-						alignmentX = value.x;
-						alignmentY = value.y;
-					} else {
-						alignmentX = alignmentY = value;
-					}
-				})(value.alignment);
-				(value => {
-					if (Object_is(value)) {
-						repeatX = value.x;
-						repeatY = value.y;
-					} else {
-						repeatX = repeatY = value;
-					}
-				})(value.repeat);
-			}
-		})(options);
 		let style = context.createPattern(image.canvas, (() => {
 			if (repeatX && repeatY) {
 				return 'repeat';
@@ -111,7 +112,7 @@ DearImage.drawed = function(image, sizeX, sizeY, options) {
 			}
 			return 'no-repeat';
 		})());
-		return this.filled(style, sizeX, sizeY)
+		return this.filled(style, sizeX, sizeY);
 	}
 	return this.blank(sizeX, sizeY);
 };

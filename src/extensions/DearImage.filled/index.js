@@ -1,20 +1,8 @@
-import './DearImage.blank';
+import '../DearImage.blank';
 
-import CanvasGradient_is from '../../core/CanvasGradient/is';
-import CanvasPattern_is from '../../core/CanvasPattern/is';
-import CSS_color_sanitize from '../../core/CSS/color/sanitize';
 import DearImage from '../../core/DearImage';
 
-let normalizeStyle = function(value) {
-	if (
-		CanvasGradient_is(value)
-		||
-		CanvasPattern_is(value)
-	) {
-		return value;
-	}
-	return CSS_color_sanitize(String(value));
-};
+import normalizeStyle from './normalizeStyle';
 
 DearImage.filled = function(style, sizeX, sizeY) {
 	style = normalizeStyle(style);

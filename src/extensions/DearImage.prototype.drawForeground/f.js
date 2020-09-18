@@ -1,10 +1,9 @@
-import './DearImage.blank';
-import './DearImage.drawed';
+import '../DearImage.blank';
+import '../DearImage.drawed';
 
 import DearImage from '../../core/DearImage';
-import Function_prototype_bindPartial from '../../core/Function/prototype/bindPartial';
 
-let f = function(b, image, options) {
+export default function(b, image, options) {
 	let {
 		canvas: currentCanvas,
 		sizeX,
@@ -24,9 +23,4 @@ let f = function(b, image, options) {
 		return result;
 	}
 	return this;
-};
-
-Object.assign(DearImage.prototype, {
-	drawBackground: Function_prototype_bindPartial(f, false),
-	drawForeground: Function_prototype_bindPartial(f, true),
-});
+}

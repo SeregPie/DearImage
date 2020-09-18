@@ -2,6 +2,6 @@
 
 import DearImage from '../../core/DearImage';
 
-DearImage.flexLayout = function() {
+DearImage.lineLayout = function() {
 	return this.blank();
 };
