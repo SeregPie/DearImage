@@ -6,12 +6,12 @@ import normalizeStyle from './normalizeStyle';
 
 DearImage.filled = function(style, sizeX, sizeY) {
 	let result = this.blank(sizeX, sizeY);
+	({
+		sizeX,
+		sizeY,
+	} = result);
 	{
 		style = normalizeStyle(style);
-		({
-			sizeX,
-			sizeY,
-		} = result);
 	}
 	if (style && sizeX && sizeY) {
 		let {context} = result;

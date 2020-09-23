@@ -1,8 +1,9 @@
-import defaultStyle from '../CSS/fontStyle/default';
-import defaultVariant from '../CSS/fontVariant/default';
-import defaultWeight from '../CSS/fontWeight/default';
+// todo
 
 export default class {
+	static is(value) {
+		return value instanceof this;
+	}
 	constructor(family, size, {
 		style = defaultStyle,
 		variant = defaultVariant,
@@ -15,5 +16,15 @@ export default class {
 			variant,
 			weight,
 		});
+	}
+	toCSS() {
+		let {
+			family,
+			size,
+			style,
+			variant,
+			weight,
+		} = this;
+		return [style, variant, weight, `${size}px`, family].join(' ');
 	}
 }

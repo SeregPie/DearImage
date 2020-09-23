@@ -115,6 +115,21 @@ Creates a `DearImage` instance with the filled content.
 
 Returns the created `DearImage` instance.
 
+```
+.drawed(image, sizeX = 0, sizeY = 0, options = {
+  alignment: {
+    x: 'center',
+    y: 'center',
+  },
+  repeat: {
+    x: false,
+    y: false,
+  },
+})`
+```
+
+![](./examples/DearImage.filled.png)
+
 ---
 
 ```
@@ -145,6 +160,21 @@ Creates a `DearImage` instance with the drawed content.
 | `options.repeat.y` | If `true`, repeats the image vertically. |
 
 Returns the created `DearImage` instance.
+
+```
+let image = DearImage.drawed(image, sizeX = 0, sizeY = 0, {
+  alignment: {
+    x: 'center',
+    y: 'center',
+  },
+  repeat: {
+    x: false,
+    y: false,
+  },
+})`
+```
+
+![](./examples/DearImage.drawed.png)
 
 ---
 
@@ -200,18 +230,20 @@ Returns the created `TextMetrics` instance.
 ```
 .text(text = '', options = {
   alignment: 'center',
-  fillStyle: '#000',
+  style: '#000',
   font: {
     family: 'sans-serif',
-    size: 10,
+    size: 16,
     style: 'normal',
     variant: 'normal',
     weight: 'normal',
   },
-  lineGap: 0.14,  
-  padding: 0.28,
-  strokeStyle: '#000',
-  strokeWidth: 0,
+  lineGap: 0.5,
+  padding: 1.0,
+  stroke: {
+    style: '#000',
+    width: 0,
+  },
 })
 ```
 
@@ -259,7 +291,7 @@ let image = DearImage.text(text, {
 
 `.sizeX`
 
-The size of the image along the x-axis.
+The width of the image.
 
 ```javascript
 let image = DearImage.blank(300, 150);
@@ -270,7 +302,7 @@ console.log(image.sizeX); // => 300
 
 `.sizeY`
 
-The size of the image along the y-axis.
+The height of the image.
 
 ```javascript
 let image = DearImage.blank(300, 150);
@@ -283,11 +315,16 @@ console.log(image.sizeY); // => 150
 
 Checks if the image is blank.
 
-Returns `true` if the image is blank. Otherwise, `false`.
+Returns `true` if the image is blank. Otherwise, `false`. todo
 
 ```javascript
 let image = DearImage.blank(300, 150);
 console.log(image.isBlank()); // => true
+```
+
+```javascript
+let image = DearImage.filled('todo', 300, 150);
+console.log(image.isBlank()); // => false
 ```
 
 ---
@@ -343,10 +380,10 @@ Selects an area from the image.
 
 | argument | description |
 | ---: | :--- |
-| `startX` | A number as the horizontal offset of the area. A positive value indicates the offset from the left of the image. A negative value indicates the offset from the right of the image. |
-| `startY` | A number as the vertical offset of the area. A positive value indicates the offset from the top of the image. A negative value indicates the offset from the bottom of the image. |
-| `sizeX` | A number as the width of the area. A positive value selects an area from left to right. A negative value selects an area from right to left. |
-| `sizeY` | A number as the height of the area. A positive value selects an area from top to bottom. A negative value selects an area from bottom to top. |
+| `startX` | todo: A number as the horizontal offset of the area. A positive value indicates the offset from the left of the image. A negative value indicates the offset from the right of the image. |
+| `startY` | todo: A number as the vertical offset of the area. A positive value indicates the offset from the top of the image. A negative value indicates the offset from the bottom of the image. |
+| `sizeX` | todo: A number as the width of the area. A positive value selects an area from left to right. A negative value selects an area from right to left. |
+| `sizeY` | todo: A number as the height of the area. A positive value selects an area from top to bottom. A negative value selects an area from bottom to top. |
 
 Returns the created `DearImage` instance.
 
@@ -368,6 +405,7 @@ Aligns the image inside an area.
 Returns the created `DearImage` instance.
 
 ![](./examples/DearImage.prototype.reframe.png)
+
 ---
 
 `.rescale(scalingX = 1, scalingY = 1)`
@@ -483,7 +521,7 @@ Returns the created `DearImage` instance.
 
 `.reframeScaleIn(sizeX = this.sizeX, sizeY = this.sizeY, alignmentX = 'center', alignmentY = 'center')`
 
-Scales the image inside an area and reframes.
+todo: Scales the image inside an area and reframes.
 
 | argument | description |
 | ---: | :--- |
@@ -500,7 +538,7 @@ Returns the created `DearImage` instance.
 
 `.reframeScaleOut(sizeX = this.sizeX, sizeY = this.sizeY, alignmentX = 'center', alignmentY = 'center')`
 
-Scales the image outside an area. The aspect ratio of the image is preserved.
+todo: Scales the image outside an area. The aspect ratio of the image is preserved.
 
 | argument | description |
 | ---: | :--- |
@@ -606,6 +644,8 @@ let image = DearImage.from(source).drawForeground(otherSource, {
 });
 ```
 
+![](./examples/DearImage.prototype.drawForeground.png)
+
 ---
 
 ```
@@ -641,6 +681,8 @@ let image = DearImage.from(source).drawBackground(otherSource, {
   repeat: true,
 });
 ```
+
+![](./examples/DearImage.prototype.drawBackground.png)
 
 ---
 

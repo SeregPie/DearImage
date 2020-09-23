@@ -1,6 +1,7 @@
 import './DearImage.measureText';
 
 import DearImage from '../../core/DearImage';
+import Object_is from '../../core/Object/is';
 
 import defaultLineGap from './defaultLineGap';
 import defaultPadding from './defaultPadding';
@@ -28,17 +29,17 @@ DearImage.text = function(text, options) {
 		text = normalizeText(text);
 		(value => {
 			if (Object_is(value)) {
-				({font} = value);
 				alignment = normalizeAlignment(value.alignment);
 				lineGap = normalizeLineGap(value.lineGap);
 				padding = normalizePadding(value.padding);
-				style = normalizeStyle(value.style);
+				font = value.font;
 				(value => {
 					if (Object_is(value)) {
 						strokeStyle = normalizeStrokeStyle(value.style);
 						strokeWidth = normalizeStrokeWidth(value.width);
 					}
 				})(value.stroke);
+				style = normalizeStyle(value.style);
 			}
 		})(options);
 		[
@@ -71,6 +72,10 @@ DearImage.text = function(text, options) {
 	let x;
 	let y = offset + fontSize / 2;
 	let result = this.blank(sizeX, sizeY);
+	({
+		sizeX,
+		sizeY,
+	} = result);
 	let {context} = result;
 	context.save();
 	Object.assign(context, {

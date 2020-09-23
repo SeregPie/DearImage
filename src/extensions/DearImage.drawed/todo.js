@@ -4,12 +4,12 @@ import '../DearImage.prototype.reframe';
 
 import DearImage from '../../core/DearImage';
 import Math_ceilDivisible from '../../core/Math/ceilDivisible';
+import Object_is from '../../core/Object/is';
 
 import normalizeAlignment from './normalizeAlignment';
 import normalizeImage from './normalizeImage';
 
 DearImage.drawed = function(image, sizeX, sizeY, options) {
-	image = normalizeImage(image);
 	let result = this.blank(sizeX, sizeY);
 	({
 		sizeX,
@@ -19,26 +19,29 @@ DearImage.drawed = function(image, sizeX, sizeY, options) {
 	let alignmentY;
 	let repeatX;
 	let repeatY;
-	(value => {
-		if (Object_is(value)) {
-			(value => {
-				if (Object_is(value)) {
-					alignmentX = normalizeAlignment(value.x);
-					alignmentY = normalizeAlignment(value.y);
-				} else {
-					alignmentX = alignmentY = normalizeAlignment(value);
-				}
-			})(value.alignment);
-			(value => {
-				if (Object_is(value)) {
-					repeatX = value.x;
-					repeatY = value.y;
-				} else {
-					repeatX = repeatY = value;
-				}
-			})(value.repeat);
-		}
-	})(options);
+	{
+		image = normalizeImage(image);
+		(value => {
+			if (Object_is(value)) {
+				(value => {
+					if (Object_is(value)) {
+						alignmentX = normalizeAlignment(value.x);
+						alignmentY = normalizeAlignment(value.y);
+					} else {
+						alignmentX = alignmentY = normalizeAlignment(value);
+					}
+				})(value.alignment);
+				(value => {
+					if (Object_is(value)) {
+						repeatX = value.x;
+						repeatY = value.y;
+					} else {
+						repeatX = repeatY = value;
+					}
+				})(value.repeat);
+			}
+		})(options);
+	}
 	if (image && sizeX && sizeY) {
 		let {canvas} = (DearImage
 			.filled(
