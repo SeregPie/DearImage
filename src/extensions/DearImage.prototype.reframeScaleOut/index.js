@@ -10,12 +10,9 @@ DearImage.prototype.reframeScaleOut = function(sizeX, sizeY, alignmentX, alignme
 		sizeX: currentSizeX,
 		sizeY: currentSizeY,
 	} = this;
-	[
-		sizeX = currentSizeX,
-		sizeY = currentSizeY,
-	] = [
-		normalizeSize(sizeX),
-		normalizeSize(sizeY),
-	];
+	{
+		sizeX = normalizeSize(sizeX, currentSizeX);
+		sizeY = normalizeSize(sizeY, currentSizeY);
+	}
 	return this.scaleOut(sizeX, sizeY).reframe(sizeX, sizeY, alignmentX, alignmentY);
 };

@@ -7,13 +7,10 @@ export default function(aggregateScalings, sizeX, sizeY) {
 		sizeX: currentSizeX,
 		sizeY: currentSizeY,
 	} = this;
-	[
-		sizeX = currentSizeX,
-		sizeY = currentSizeY,
-	] = [
-		normalizeSize(sizeX),
-		normalizeSize(sizeY),
-	];
+	{
+		sizeX = normalizeSize(sizeX, currentSizeX);
+		sizeY = normalizeSize(sizeY, currentSizeY);
+	}
 	let scalings = [];
 	if (sizeX && currentSizeX) {
 		let scalingX = sizeX / currentSizeX;

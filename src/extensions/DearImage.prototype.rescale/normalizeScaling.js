@@ -5,4 +5,5 @@ export default function(value) {
 	if (Number_isNonNegativeFinite(value)) {
 		return value;
 	}
+	return 1;
 }

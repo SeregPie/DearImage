@@ -1,8 +1,5 @@
-import Number_isNonNegativeFinite from '../../core/Number/isNonNegativeFinite';
+import normalize from '../DearImage.prototype.resize/normalizeSize';
 
 export default function(value) {
-	value = Number(value);
-	if (Number_isNonNegativeFinite(value)) {
-		return Math.round(value);
-	}
+	return normalize(value, 0);
 }

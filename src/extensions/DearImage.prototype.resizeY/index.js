@@ -10,7 +10,9 @@ DearImage.prototype.resizeY = function(sizeY, proportionally) {
 		sizeX: currentSizeX,
 		sizeY: currentSizeY,
 	} = this;
-	[sizeY = currentSizeY] = [normalizeSize(sizeY)];
+	{
+		sizeY = normalizeSize(sizeY, currentSizeY);
+	}
 	if (proportionally) {
 		let scaling = sizeY / currentSizeY;
 		return this.scale(scaling);
