@@ -1,5 +1,3 @@
-// todo
-
 import '../DearImage.prototype.toDataURL';
 
 import DataURL from '../../core/DataURL';

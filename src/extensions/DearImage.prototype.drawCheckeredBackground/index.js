@@ -2,6 +2,6 @@
 
 import DearImage from '../../core/DearImage';
 
-DearImage.prototype.drawCheckeredBackgroun = function() {
+DearImage.prototype.drawCheckeredBackground = function() {
 	return this;
 };
