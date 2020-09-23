@@ -9,8 +9,7 @@ DearImage.measureText = function(text, font) {
 		text = normalizeText(text);
 		font = normalizeFont(font);
 	}
-	font = font.toCSS();
 	let context = CanvasRenderingContext2D_create(0, 0);
-	context.font = font;
+	context.font = font.toCSS();
 	return context.measureText(text);
 };
