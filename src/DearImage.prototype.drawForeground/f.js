@@ -1,7 +1,7 @@
+import DearImage from '../@core/DearImage';
+
 import '../DearImage.blank';
 import '../DearImage.drawed';
-
-import DearImage from '../@core/DearImage';
 
 export default function(b, image, options) {
 	let {

@@ -1,6 +1,6 @@
-import '../DearImage.blank';
-
 import DearImage from '../@core/DearImage';
+
+import '../DearImage.blank';
 
 import normalizeStyle from './normalizeStyle';
 

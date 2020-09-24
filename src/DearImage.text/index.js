@@ -1,7 +1,7 @@
-import './DearImage.measureText';
-
 import DearImage from '../@core/DearImage';
 import Object_is from '../@core/Object/is';
+
+import './DearImage.measureText';
 
 import defaultLineGap from './defaultLineGap';
 import defaultPadding from './defaultPadding';

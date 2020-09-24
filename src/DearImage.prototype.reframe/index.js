@@ -1,6 +1,6 @@
-import '../DearImage.prototype.crop';
-
 import DearImage from '../@core/DearImage';
+
+import '../DearImage.prototype.crop';
 
 import normalizeEnum from './normalizeEnum';
 import normalizeSize from './normalizeSize';

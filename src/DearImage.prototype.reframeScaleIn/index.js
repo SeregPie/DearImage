@@ -1,7 +1,7 @@
+import DearImage from '../@core/DearImage';
+
 import '../DearImage.prototype.reframe';
 import '../DearImage.prototype.scaleIn';
-
-import DearImage from '../@core/DearImage';
 
 import normalizeSize from './normalizeSize';
 

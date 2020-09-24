@@ -1,6 +1,6 @@
-import '../DearImage.prototype.rotate';
-
 import DearImage from '../@core/DearImage';
+
+import '../DearImage.prototype.rotate';
 
 import delta from './delta';
 

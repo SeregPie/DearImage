@@ -1,6 +1,6 @@
-import '../DearImage.prototype.toImageData';
-
 import DearImage from '../@core/DearImage';
+
+import '../DearImage.prototype.toImageData';
 
 DearImage.prototype.isBlank = function() {
 	let {

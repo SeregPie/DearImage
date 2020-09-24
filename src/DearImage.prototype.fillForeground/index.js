@@ -1,7 +1,7 @@
+import DearImage from '../@core/DearImage';
+
 import '../DearImage.filled';
 import '../DearImage.prototype.drawForeground';
-
-import DearImage from '../@core/DearImage';
 
 DearImage.prototype.fillForeground = function(style) {
 	let {

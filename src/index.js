@@ -33,7 +33,7 @@ import './DearImage.prototype.rotateCounterClockwise';
 import './DearImage.prototype.saveToFileSystem';
 import './DearImage.prototype.scale';
 import './DearImage.prototype.scaleDownIn';
-import './DearImage.prototype.scaleDownIn';
+import './DearImage.prototype.scaleDownOut';
 import './DearImage.prototype.scaleIn';
 import './DearImage.prototype.scaleOut';
 import './DearImage.prototype.scaleUpIn';

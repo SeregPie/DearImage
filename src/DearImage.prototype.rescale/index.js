@@ -1,6 +1,6 @@
-import '../DearImage.prototype.resize';
-
 import DearImage from '../@core/DearImage';
+
+import '../DearImage.prototype.resize';
 
 import normalizeScaling from './normalizeScaling';
 

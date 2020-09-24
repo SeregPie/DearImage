@@ -1,6 +1,6 @@
-import '../DearImage.from';
-
 import DearImage from '../@core/DearImage';
+
+import '../DearImage.from';
 
 export default function(value) {
 	try {

@@ -1,8 +1,8 @@
+import DearImage from '../@core/DearImage';
+
 import require from '@seregpie/native-require';
 
 import '../DearImage.prototype.toBuffer';
-
-import DearImage from '../@core/DearImage';
 
 DearImage.prototype.saveToFileSystem = function(target, ...args) {
 	return new Promise((resolve, reject) => {
