@@ -1,5 +1,6 @@
 import CanvasRenderingContext2D_is from '../CanvasRenderingContext2D/is';
 import ImageBitmapRenderingContext_is from '../ImageBitmapRenderingContext/is';
+import OffscreenCanvasRenderingContext2D_is from '../OffscreenCanvasRenderingContext2D/is';
 import WebGL2RenderingContext_is from '../WebGL2RenderingContext/is';
 import WebGLRenderingContext_is from '../WebGLRenderingContext/is';
 
@@ -12,5 +13,7 @@ export default function(value) {
 		WebGLRenderingContext_is(value)
 		||
 		ImageBitmapRenderingContext_is(value)
+		||
+		OffscreenCanvasRenderingContext2D_is(value)
 	);
 }
