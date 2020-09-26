@@ -2,7 +2,7 @@ import DearImage from '../@core/DearImage';
 
 import '../DearImage.prototype.crop';
 
-import normalizeEnum from './normalizeEnum';
+import normalizeAlignment from './normalizeAlignment';
 import normalizeSize from './normalizeSize';
 
 DearImage.prototype.reframe = function(sizeX, sizeY, alignmentX, alignmentY) {
@@ -13,8 +13,8 @@ DearImage.prototype.reframe = function(sizeX, sizeY, alignmentX, alignmentY) {
 	{
 		sizeX = normalizeSize(sizeX, currentSizeX);
 		sizeY = normalizeSize(sizeY, currentSizeY);
-		alignmentX = normalizeEnum(alignmentX);
-		alignmentY = normalizeEnum(alignmentY);
+		alignmentX = normalizeAlignment(alignmentX);
+		alignmentY = normalizeAlignment(alignmentY);
 	}
 	let startX = (() => {
 		switch (alignmentX) {

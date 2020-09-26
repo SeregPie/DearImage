@@ -1,14 +1,11 @@
-// todo
+import DearImage from '../@core/DearImage';
+import Math_ceilDivisible from '../@core/Math/ceilDivisible';
+import Object_is from '../@core/Object/is';
 
 import '../DearImage.blank';
 import '../DearImage.filled';
 import '../DearImage.prototype.reframe';
 
-import DearImage from '../@core/DearImage';
-import Math_ceilDivisible from '../@core/Math/ceilDivisible';
-import Object_is from '../@core/Object/is';
-
-import normalizeAlignment from './normalizeAlignment';
 import normalizeImage from './normalizeImage';
 
 DearImage.drawed = function(image, sizeX, sizeY, options) {
@@ -27,10 +24,10 @@ DearImage.drawed = function(image, sizeX, sizeY, options) {
 			if (Object_is(value)) {
 				(value => {
 					if (Object_is(value)) {
-						alignmentX = normalizeAlignment(value.x);
-						alignmentY = normalizeAlignment(value.y);
+						alignmentX = value.x;
+						alignmentY = value.y;
 					} else {
-						alignmentX = alignmentY = normalizeAlignment(value);
+						alignmentX = alignmentY = value;
 					}
 				})(value.alignment);
 				(value => {
@@ -66,12 +63,6 @@ DearImage.drawed = function(image, sizeX, sizeY, options) {
 		);
 		let {context} = result;
 		context.drawImage(canvas, 0, 0);
-
-		let {context} = result;
-		context.save();
-		context.fillStyle = style;
-		context.fillRect(0, 0, sizeX, sizeY);
-		context.restore();
 	}
 	return result;
 };
