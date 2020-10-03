@@ -1,8 +1,7 @@
-import Number_isNonNegativeFinite from '../@core/Number/isNonNegativeFinite';
+import FreeInput_toNonNegativeFiniteNumber from '../@core/FreeInput/toNonNegativeFiniteNumber';
+
+import defaultValue from './defaultFontSize';
 
 export default function(value) {
-	value = Number(value);
-	if (Number_isNonNegativeFinite(value)) {
-		return value;
-	}
+	return FreeInput_toNonNegativeFiniteNumber(value, defaultValue);
 }

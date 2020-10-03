@@ -1,8 +1,6 @@
 import Font from '../@core/Font';
 import Object_is from '../@core/Object/is';
 
-import defaultFamily from './defaultFontFamily';
-import defaultSize from './defaultFontSize';
 import normalizeFamily from './normalizeFontFamily';
 import normalizeSize from './normalizeFontSize';
 import normalizeStyle from './normalizeFontStyle';
@@ -19,19 +17,17 @@ export default function(value) {
 	let variant;
 	let weight;
 	if (Object_is(value)) {
-		family = normalizeFamily(value.family);
-		size = normalizeSize(value.size);
-		style = normalizeStyle(value.style);
-		variant = normalizeVariant(value.variant);
-		weight = normalizeWeight(value.weight);
+		family = value.family;
+		size = value.size;
+		style = value.style;
+		variant = value.variant;
+		weight = value.weight;
 	}
-	[
-		family = defaultFamily,
-		size = defaultSize,
-	] = [
-		family,
-		size,
-	];
+	family = normalizeFamily(family);
+	size = normalizeSize(size);
+	style = normalizeStyle(style);
+	variant = normalizeVariant(variant);
+	weight = normalizeWeight(weight);
 	return new Font(family, size, {
 		style,
 		variant,

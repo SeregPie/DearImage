@@ -1,1 +1,1 @@
-export {default} from './normalizeStart';
+export {default} from '../@core/FreeInput/toIntegerNumber';

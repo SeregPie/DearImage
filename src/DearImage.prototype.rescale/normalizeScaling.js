@@ -1,9 +1,5 @@
-import Number_isNonNegativeFinite from '../@core/Number/isNonNegativeFinite';
+import FreeInput_toNonNegativeFiniteNumber from '../@core/FreeInput/toNonNegativeFiniteNumber';
 
 export default function(value) {
-	value = Number(value);
-	if (Number_isNonNegativeFinite(value)) {
-		return value;
-	}
-	return 1;
+	return FreeInput_toNonNegativeFiniteNumber(value, 1);
 }

@@ -1,1 +1,1 @@
-export {default} from './normalizeAlignment';
+export {default} from '../@core/FreeInput/toEnum';

@@ -1,7 +1,5 @@
+import FreeInput_toFiniteNumber from '../@core/FreeInput/toFiniteNumber';
+
 export default function(value) {
-	value = Number(value);
-	if (Number.isFinite(value)) {
-		return value % (Math.PI*2);
-	}
-	return 0;
+	return FreeInput_toFiniteNumber(value, 0) % (Math.PI*2);
 }

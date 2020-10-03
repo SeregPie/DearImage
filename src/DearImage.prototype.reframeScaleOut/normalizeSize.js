@@ -1,1 +1,1 @@
-export {default} from '../DearImage.prototype.resize/normalizeSize';
+export {default} from '../DearImage.prototype.reframe/normalizeSize';

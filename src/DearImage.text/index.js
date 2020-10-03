@@ -3,11 +3,6 @@ import Object_is from '../@core/Object/is';
 
 import './DearImage.measureText';
 
-import defaultLineGap from './defaultLineGap';
-import defaultPadding from './defaultPadding';
-import defaultStrokeStyle from './defaultStrokeStyle';
-import defaultStrokeWidth from './defaultStrokeWidth';
-import defaultStyle from './defaultStyle';
 import normalizeAlignment from './normalizeAlignment';
 import normalizeFont from './normalizeFont';
 import normalizeLineGap from './normalizeLineGap';
@@ -27,35 +22,24 @@ DearImage.text = function(text, options) {
 	let style;
 	{
 		text = normalizeText(text);
-		(value => {
-			if (Object_is(value)) {
-				alignment = normalizeAlignment(value.alignment);
-				lineGap = normalizeLineGap(value.lineGap);
-				padding = normalizePadding(value.padding);
-				font = value.font;
-				(value => {
-					if (Object_is(value)) {
-						strokeStyle = normalizeStrokeStyle(value.style);
-						strokeWidth = normalizeStrokeWidth(value.width);
-					}
-				})(value.stroke);
-				style = normalizeStyle(value.style);
+		if (Object_is(options)) {
+			alignment = options.alignment;
+			font = options.font;
+			lineGap = options.lineGap;
+			padding = options.padding;
+			if (Object_is(options.stroke)) {
+				strokeStyle = options.stroke.style;
+				strokeWidth = options.stroke.width;
 			}
-		})(options);
-		[
-			lineGap = defaultLineGap,
-			padding = defaultPadding,
-			strokeStyle = defaultStrokeStyle,
-			strokeWidth = defaultStrokeWidth,
-			style = defaultStyle,
-		] = [
-			lineGap,
-			padding,
-			strokeStyle,
-			strokeWidth,
-			style,
-		];
+			style = options.style;
+		}
+		alignment = normalizeAlignment(alignment);
 		font = normalizeFont(font);
+		lineGap = normalizeLineGap(lineGap);
+		padding = normalizePadding(padding);
+		strokeStyle = normalizeStrokeStyle(strokeStyle);
+		strokeWidth = normalizeStrokeWidth(strokeWidth);
+		style = normalizeStyle(style);
 	}
 	let {size: fontSize} = font;
 	padding *= fontSize;

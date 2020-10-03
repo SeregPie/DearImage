@@ -11,17 +11,10 @@ DearImage.prototype.crop = function(startX, startY, sizeX, sizeY) {
 		sizeX: currentSizeX,
 		sizeY: currentSizeY,
 	} = this;
-	[
-		sizeX = currentSizeX,
-		sizeY = currentSizeY,
-		startX = 0,
-		startY = 0,
-	] = [
-		normalizeSize(sizeX),
-		normalizeSize(sizeY),
-		normalizeStart(startX),
-		normalizeStart(startY),
-	];
+	startX = normalizeStart(startX);
+	startY = normalizeStart(startY);
+	sizeX = normalizeSize(sizeX, currentSizeX);
+	sizeY = normalizeSize(sizeY, currentSizeY);
 	if (startY < 0) {
 		startY += currentSizeY;
 	}

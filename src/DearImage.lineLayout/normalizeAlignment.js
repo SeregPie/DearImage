@@ -1,1 +1,1 @@
-export {default} from '../DearImage.prototype.reframe/normalizeAlignment.js';
+export {default} from '../@core/FreeInput/toEnum';
