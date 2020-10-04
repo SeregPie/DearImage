@@ -1,11 +1,10 @@
-import '../DearImage.blank';
-//import './DearImage.drawed';
+import './DearImage.blank';
+import './DearImage.drawed';
 import './DearImage.filled';
 import './DearImage.flexLayout';
 import './DearImage.from';
 import './DearImage.gridLayout';
 import './DearImage.isDearImage';
-//import './DearImage.lineLayout';
 import './DearImage.loadFontFace';
 import './DearImage.loadFrom';
 import './DearImage.measureText';
