@@ -1,5 +1,7 @@
-import FreeInput_toNonNegativeFiniteNumber from '../@core/FreeInput/toNonNegativeFiniteNumber';
-
-export default function(value) {
-	return FreeInput_toNonNegativeFiniteNumber(value, 1);
+export function normalize(value) {
+	if (value != null) {
+		// todo
+		return value;
+	}
+	return 1;
 }

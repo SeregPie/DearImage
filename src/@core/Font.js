@@ -20,6 +20,7 @@ export default class {
 		});
 	}
 	toCSS() {
+		// todo
 		let {
 			family,
 			size,
@@ -27,6 +28,6 @@ export default class {
 			variant,
 			weight,
 		} = this;
-		return [style, variant, weight, `${size}px`, family].join(' ');
+		return [style, variant, weight, size, family].join(' ');
 	}
 }

@@ -1,7 +1,11 @@
-import FreeInput_toCanvasStyle from '../@core/FreeInput/toCanvasStyle';
+import {defaultValue} from './normalizeStyle';
 
-import defaultValue from './defaultStrokeStyle';
+export {defaultValue};
 
 export default function(value) {
-	return FreeInput_toCanvasStyle(value, defaultValue);
+	if (value != null) {
+		// todo
+		return value;
+	}
+	return defaultValue;
 }

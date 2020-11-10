@@ -1,7 +1,9 @@
-import FreeInput_toNonNegativeFiniteNumber from '../@core/FreeInput/toNonNegativeFiniteNumber';
-
-import defaultValue from './defaultStrokeWidth';
+export const defaultValue = 0;
 
 export default function(value) {
-	return FreeInput_toNonNegativeFiniteNumber(value, defaultValue);
+	if (value != null) {
+		// todo
+		return value;
+	}
+	return defaultValue;
 }

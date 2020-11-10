@@ -1,7 +1,9 @@
-import FreeInput_toCanvasStyle from '../@core/FreeInput/toCanvasStyle';
-
-import defaultValue from './defaultStyle';
+export const defaultValue = '#000';
 
 export default function(value) {
-	return FreeInput_toCanvasStyle(value, defaultValue);
+	if (value != null) {
+		// todo
+		return value;
+	}
+	return defaultValue;
 }

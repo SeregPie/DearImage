@@ -1,10 +1,13 @@
+import CSS_font_combine from '../@core/CSS/font/combine';
 import DearImage from '../@core/DearImage';
 import Object_is from '../@core/Object/is';
 
-import './DearImage.measureText';
-
 import normalizeAlignment from './normalizeAlignment';
-import normalizeFont from './normalizeFont';
+import normalizeFontFamily from './normalizeFontFamily';
+import normalizeFontSize from './normalizeFontSize';
+import normalizeFontStyle from './normalizeFontStyle';
+import normalizeFontVariant from './normalizeFontVariant';
+import normalizeFontWeight from './normalizeFontWeight';
 import normalizeLineGap from './normalizeLineGap';
 import normalizePadding from './normalizePadding';
 import normalizeStrokeStyle from './normalizeStrokeStyle';
@@ -14,7 +17,11 @@ import normalizeText from './normalizeText';
 
 DearImage.text = function(text, options) {
 	let alignment;
-	let font;
+	let fontFamily;
+	let fontSize;
+	let fontStyle;
+	let fontVariant;
+	let fontWeight;
 	let lineGap;
 	let padding;
 	let strokeStyle;
@@ -24,7 +31,13 @@ DearImage.text = function(text, options) {
 		text = normalizeText(text);
 		if (Object_is(options)) {
 			alignment = options.alignment;
-			font = options.font;
+			if (Object_is(options.font)) {
+				fontFamily = options.font.family;
+				fontSize = options.font.size;
+				fontStyle = options.font.style;
+				fontVariant = options.font.variant;
+				fontWeight = options.font.weight;
+			}
 			lineGap = options.lineGap;
 			padding = options.padding;
 			if (Object_is(options.stroke)) {
@@ -34,27 +47,42 @@ DearImage.text = function(text, options) {
 			style = options.style;
 		}
 		alignment = normalizeAlignment(alignment);
-		font = normalizeFont(font);
+		fontFamily = normalizeFontFamily(family);
+		fontSize = normalizeFontSize(size);
+		fontStyle = normalizeFontStyle(style);
+		fontVariant = normalizeFontVariant(variant);
+		fontWeight = normalizeFontWeight(weight);
 		lineGap = normalizeLineGap(lineGap);
 		padding = normalizePadding(padding);
 		strokeStyle = normalizeStrokeStyle(strokeStyle);
 		strokeWidth = normalizeStrokeWidth(strokeWidth);
 		style = normalizeStyle(style);
 	}
-	let {size: fontSize} = font;
 	padding *= fontSize;
 	lineGap *= fontSize;
 	strokeWidth *= fontSize;
+	let font = CSS_font_combine(fontFamily, `${fontSize}px`, fontStyle, fontVariant, fontWeight);
 	let lines = text ? text.split('\n') : [];
-	let {length: linesCount} = lines;
-	let lineOffset = lineGap + fontSize;
-	let textSizeX = linesCount ? Math.max(...lines.map(text => DearImage.measureText(text, font).width)) : 0;
-	let textSizeY = linesCount ? (fontSize + lineOffset * (linesCount - 1)) : 0;
-	let offset = padding + strokeWidth / 2;
-	let sizeX = textSizeX + offset * 2;
-	let sizeY = textSizeY + offset * 2;
+	let linesCount = lines.length;
+	let lineOffset = fontSize + lineGap;
+	let contentSizeX = (linesCount
+		? (() => {
+			let canvas = document.createElement('canvas');
+			let ctx = canvas.getContext('2d');
+			ctx.font = font;
+			return Math.max(...lines.map(text => ctx.measureText(text).width));
+		})()
+		: 0
+	);
+	let contentSizeY = (linesCount
+		? (fontSize + lineOffset * (linesCount - 1))
+		: 0
+	);
+	let contentOffset = padding + strokeWidth / 2;
+	let sizeX = contentSizeX + contentOffset * 2;
+	let sizeY = contentSizeY + contentOffset * 2;
 	let x;
-	let y = offset + fontSize / 2;
+	let y = contentOffset + fontSize / 2;
 	let result = this.blank(sizeX, sizeY);
 	({
 		sizeX,
@@ -71,10 +99,10 @@ DearImage.text = function(text, options) {
 		textAlign: (() => {
 			switch (alignment) {
 				case 'start':
-					x = offset;
+					x = contentOffset;
 					return 'left';
 				case 'end':
-					x = sizeX - offset;
+					x = sizeX - contentOffset;
 					return 'right';
 			}
 			x = sizeX / 2;

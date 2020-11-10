@@ -1,7 +1,9 @@
-import FreeInput_toNonNegativeFiniteNumber from '../@core/FreeInput/toNonNegativeFiniteNumber';
-
-import defaultValue from './defaultPadding';
+export const defaultValue = 1/2;
 
 export default function(value) {
-	return FreeInput_toNonNegativeFiniteNumber(value, defaultValue);
+	if (value != null) {
+		// todo
+		return value;
+	}
+	return defaultValue;
 }

@@ -1,1 +1,5 @@
-export {default} from '../@core/FreeInput/toEnum';
+// todo
+
+export default function(value) {
+	return value;
+}

@@ -1,1 +1,7 @@
-export {default} from '../@core/FreeInput/toIntegerNumber';
+export function normalize(value, defaultValue) {
+	if (value != null) {
+		// todo
+		return value;
+	}
+	return defaultValue;
+}

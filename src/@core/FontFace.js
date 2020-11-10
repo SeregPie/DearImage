@@ -46,7 +46,7 @@ export default class {
 			}
 		}
 		try {
-			let font = new Font(family, 1, {style, variant, weight});
+			let font = new Font(family, '8px', {style, variant, weight});
 			await document.fonts.load(font.toCSS());
 		} catch {
 			// pass

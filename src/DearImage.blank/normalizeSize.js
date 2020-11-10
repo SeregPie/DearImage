@@ -1,5 +1,7 @@
-import FreeInput_toNonNegativeIntegerNumber from '../@core/FreeInput/toNonNegativeIntegerNumber';
-
 export default function(value) {
-	return FreeInput_toNonNegativeIntegerNumber(value, 0);
+	if (value != null) {
+		// todo
+		return value;
+	}
+	return 0;
 }

@@ -1,1 +1,7 @@
-export {default} from '../@core/FreeInput/toNonNegativeIntegerNumber';
+export default function(value, defaultValue) {
+	if (value != null) {
+		// todo
+		return value;
+	}
+	return defaultValue;
+}
