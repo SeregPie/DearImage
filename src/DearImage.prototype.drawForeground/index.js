@@ -4,7 +4,7 @@ import Function_prototype_bindPartial from '../@core/Function/prototype/bindPart
 import '../DearImage.blank';
 import '../DearImage.drawed';
 
-export default function(b, image, options) {
+function f(b, image, options) {
 	let {
 		canvas: currentCanvas,
 		sizeX,
