@@ -8,23 +8,21 @@ A class that represents a graphical image.
 
 ```shell
 npm i dear-image
+
+npm i canvas # to support Node
 ```
 
 ---
 
-Install optionally to support Node.
-
-```shell
-npm i canvas
-```
-
-### ES module
+Import inside an ES module.
 
 ```javascript
 import DearImage from 'dear-image';
 ```
 
-### Node
+*or*
+
+Import inside a CommonJS module.
 
 ```javascript
 let DearImage = require('dear-image');
@@ -36,7 +34,7 @@ let DearImage = require('dear-image');
 <script src="https://unpkg.com/dear-image"></script>
 ```
 
-The module is globally available as `DearImage`.
+The class is globally available as `DearImage`.
 
 ## members
 
@@ -65,7 +63,7 @@ Creates a `DearImage` instance from the given value.
 Returns the created `DearImage` instance.
 
 ```javascript
-let element = document.getElementById('myCanvas');
+let element = document.getElementById('MyCanvas');
 let image = DearImage.from(element);
 document.body.appendChild(image.toHTMLCanvasElement());
 ```
@@ -74,11 +72,11 @@ document.body.appendChild(image.toHTMLCanvasElement());
 
 `.loadFrom(value)`
 
-Asynchronously loads a `DearImage` instance from the given value.
+Asynchronously creates a `DearImage` instance from the given value.
 
 | argument | description |
 | ---: | :--- |
-| `value` | The value to load from. Supported value types are `String`, [`URL`](https://developer.mozilla.org/en-US/docs/Web/API/URL), [`Buffer`](https://nodejs.org/api/buffer.html), [`Blob`](https://developer.mozilla.org/en-US/docs/Web/API/Blob), [`HTMLImageElement`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement) and everything the function `DearImage.from` supports. |
+| `value` | The value to create from. Supported value types are `String`, [`URL`](https://developer.mozilla.org/en-US/docs/Web/API/URL), [`Buffer`](https://nodejs.org/api/buffer.html), [`Blob`](https://developer.mozilla.org/en-US/docs/Web/API/Blob), [`HTMLImageElement`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement) and everything the function `DearImage.from` supports. |
 
 Returns a promise that resolves to the created `DearImage` instance.
 
@@ -115,17 +113,8 @@ Creates a `DearImage` instance with the filled content.
 
 Returns the created `DearImage` instance.
 
-```
-.drawed(image, sizeX = 0, sizeY = 0, options = {
-  alignment: {
-    x: 'center',
-    y: 'center',
-  },
-  repeat: {
-    x: false,
-    y: false,
-  },
-})`
+```javascript
+.filled(style, sizeX = 0, sizeY = 0)
 ```
 
 ![](./examples/DearImage.filled.png)
@@ -161,7 +150,8 @@ Creates a `DearImage` instance with the drawed content.
 
 Returns the created `DearImage` instance.
 
-```
+```javascript
+// todo
 let image = DearImage.drawed(image, sizeX = 0, sizeY = 0, {
   alignment: {
     x: 'center',
@@ -205,7 +195,7 @@ Returns a promise.
 ```
 .measureText(text = '', font = {
   family: 'sans-serif',
-  size: 10,
+  size: 16,
   style: 'normal',
   variant: 'normal',
   weight: 'normal',
@@ -230,7 +220,6 @@ Returns the created `TextMetrics` instance.
 ```
 .text(text = '', options = {
   alignment: 'center',
-  style: '#000',
   font: {
     family: 'sans-serif',
     size: 16,
@@ -238,12 +227,13 @@ Returns the created `TextMetrics` instance.
     variant: 'normal',
     weight: 'normal',
   },
-  lineGap: 0.5,
-  padding: 1.0,
+  lineGap: 0.25,
+  padding: 0.5,
   stroke: {
     style: '#000',
     width: 0,
   },
+  style: '#000',
 })
 ```
 
@@ -252,23 +242,23 @@ Creates a `DearImage` instance with the drawn text.
 | argument | description |
 | ---: | :--- |
 | `text` | A string as the text. |
-| `options.alignment` | TODO. |
-| `options.fillStyle` | TODO: A string as the color or an instance of [`CanvasGradient`](https://developer.mozilla.org/en-US/docs/Web/API/CanvasGradient) or [`CanvasPattern`](https://developer.mozilla.org/en-US/docs/Web/API/CanvasPattern). |
-| `options.fontFamily` | A string as the font family. |
-| `options.fontSize` | A string as the font size. |
-| `options.fontStyle` | A string as the font style. |
-| `options.fontVariant` | A string as the font variant. |
-| `options.fontWeight` | A number or a string as the font weight. |
+| `options.alignment` | A string as the horizontal alignment of the text lines. Possible values are `'start'`, `'center'` and `'end'`. |
+| `options.font.family` | A string as the font family. |
+| `options.font.size` | A string as the font size. |
+| `options.font.style` | A string as the font style. |
+| `options.font.variant` | A string as the font variant. |
+| `options.font.weight` | A number or a string as the font weight. |
 | `options.lineGap` | A number as the gap between the text lines. The value is relative to the font size. |
 | `options.padding` | A number as the space around the content. The value is relative to the font size. |
-| `options.strokeStyle` | TODO: A string as the color or an instance of [`CanvasGradient`](https://developer.mozilla.org/en-US/docs/Web/API/CanvasGradient) or [`CanvasPattern`](https://developer.mozilla.org/en-US/docs/Web/API/CanvasPattern). |
-| `options.strokeWidth` | A number as the width of the stroke. The value is relative to the font size. |
+| `options.stroke.style` | TODO: A string as the color or an instance of [`CanvasGradient`](https://developer.mozilla.org/en-US/docs/Web/API/CanvasGradient) or [`CanvasPattern`](https://developer.mozilla.org/en-US/docs/Web/API/CanvasPattern). |
+| `options.stroke.width` | A number as the width of the stroke. The value is relative to the font size. |
+| `options.style` | TODO: A string as the color or an instance of [`CanvasGradient`](https://developer.mozilla.org/en-US/docs/Web/API/CanvasGradient) or [`CanvasPattern`](https://developer.mozilla.org/en-US/docs/Web/API/CanvasPattern). |
 
 Returns the created `DearImage` instance.
 
 ```javascript
-let fontFamily = 'Inconsolata';
-await DearImage.loadFontFace(fontFamily, './fonts/Inconsolata.ttf');
+let fontFace = 'Inconsolata';
+await DearImage.loadFontFace(fontFace, './fonts/Inconsolata.ttf');
 let text = [
   'Twinkle, twinkle, little star,',
   'How I wonder what you are!',
@@ -277,11 +267,15 @@ let text = [
 ].join('\n');
 let image = DearImage.text(text, {
   alignment: 'start',
-  fillStyle: '#000',
-  fontFamily,
-  fontSize: 32,
-  strokeStyle: '#000',
-  strokeWidth: 4,
+  font: {
+    ...fontFace,
+    size: 32,
+  },
+  stroke: {
+    style: '#todo',
+    width: 4,
+  },
+  style: '#todo',
 });
 ```
 
@@ -323,7 +317,7 @@ console.log(image.isBlank()); // => true
 ```
 
 ```javascript
-let image = DearImage.filled('todo', 300, 150);
+let image = DearImage.filled('DarkOrchid', 300, 150);
 console.log(image.isBlank()); // => false
 ```
 
@@ -636,6 +630,7 @@ Draws an image above the current image.
 Returns the created `DearImage` instance.
 
 ```javascript
+// todo
 let image = DearImage.from(source).drawForeground(otherSource, {
   alignment: 'start',
   repeat: {
@@ -674,6 +669,7 @@ Draws an image below the current image.
 Returns the created `DearImage` instance.
 
 ```javascript
+// todo
 let image = DearImage.from(source).drawBackground(otherSource, {
   alignment: {
     x: 'end',
