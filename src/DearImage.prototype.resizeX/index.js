@@ -14,8 +14,11 @@ DearImage.prototype.resizeX = function(sizeX, proportionally) {
 		sizeX = normalizeSize(sizeX, currentSizeX);
 	}
 	if (proportionally) {
-		let scaling = sizeX / currentSizeX;
-		return this.scale(scaling);
+		if (currentSizeX) {
+			let scaling = sizeX / currentSizeX;
+			return this.scale(scaling);
+		}
+		return this;
 	}
 	return this.resize(sizeX, currentSizeY);
 };

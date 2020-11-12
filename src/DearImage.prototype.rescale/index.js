@@ -13,7 +13,7 @@ DearImage.prototype.rescale = function(scalingX, scalingY) {
 		scalingX = normalizeScaling(scalingX);
 		scalingY = normalizeScaling(scalingY);
 	}
-	let sizeX = currentSizeX * scalingX;
-	let sizeY = currentSizeY * scalingY;
+	let sizeX = Math.round(currentSizeX * scalingX);
+	let sizeY = Math.round(currentSizeY * scalingY);
 	return this.resize(sizeX, sizeY);
 };
