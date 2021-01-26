@@ -1,9 +1,7 @@
-export const defaultValue = '#000';
+import toCanvasStyle from '../@core/CustomInput/toCanvasStyle';
+
+import defaultValue from './defaultStyle';
 
 export default function(value) {
-	if (value != null) {
-		// todo
-		return value;
-	}
-	return defaultValue;
+	return toCanvasStyle(value, defaultValue);
 }

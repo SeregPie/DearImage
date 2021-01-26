@@ -1,9 +1,7 @@
-export const defaultValue = 1/2;
+import toNonNegativeFinite from '../@core/CustomInput/toNonNegativeFinite';
+
+import defaultValue from './defaultPadding';
 
 export default function(value) {
-	if (value != null) {
-		// todo
-		return value;
-	}
-	return defaultValue;
+	return toNonNegativeFinite(value, defaultValue);
 }

@@ -1,9 +1,7 @@
-export const defaultValue = 0;
+import toNonNegativeFinite from '../@core/CustomInput/toNonNegativeFinite';
+
+import defaultValue from './defaultStrokeWidth';
 
 export default function(value) {
-	if (value != null) {
-		// todo
-		return value;
-	}
-	return defaultValue;
+	return toNonNegativeFinite(value, defaultValue);
 }

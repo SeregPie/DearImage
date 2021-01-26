@@ -1,5 +1,3 @@
-// todo
+import toEnum from '../@core/CustomInput/toEnum';
 
-export default function(value) {
-	return value;
-}
+export default toEnum;

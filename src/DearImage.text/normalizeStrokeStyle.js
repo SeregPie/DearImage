@@ -1,11 +1,7 @@
-import {defaultValue} from './normalizeStyle';
+import toCanvasStyle from '../@core/CustomInput/toCanvasStyle';
 
-export {defaultValue};
+import defaultValue from './defaultStrokeStyle';
 
 export default function(value) {
-	if (value != null) {
-		// todo
-		return value;
-	}
-	return defaultValue;
+	return toCanvasStyle(value, defaultValue);
 }

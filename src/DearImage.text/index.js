@@ -2,6 +2,7 @@
 
 import CSS_font_combine from '../@core/CSS/font/combine';
 import DearImage from '../@core/DearImage';
+import Font from '../@core/Font';
 import Object_is from '../@core/Object/is';
 
 import normalizeAlignment from './normalizeAlignment';
@@ -49,11 +50,11 @@ DearImage.text = function(text, options) {
 			style = options.style;
 		}
 		alignment = normalizeAlignment(alignment);
-		fontFamily = normalizeFontFamily(family);
-		fontSize = normalizeFontSize(size);
-		fontStyle = normalizeFontStyle(style);
-		fontVariant = normalizeFontVariant(variant);
-		fontWeight = normalizeFontWeight(weight);
+		fontFamily = normalizeFontFamily(fontFamily);
+		fontSize = normalizeFontSize(fontSize);
+		fontStyle = normalizeFontStyle(fontStyle);
+		fontVariant = normalizeFontVariant(fontVariant);
+		fontWeight = normalizeFontWeight(fontWeight);
 		lineGap = normalizeLineGap(lineGap);
 		padding = normalizePadding(padding);
 		strokeStyle = normalizeStrokeStyle(strokeStyle);

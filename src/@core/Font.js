@@ -1,15 +1,11 @@
-import defaultStyle from './CSS/fontStyle/default';
-import defaultVariant from './CSS/fontVariant/default';
-import defaultWeight from './CSS/fontWeight/default';
-
 export default class {
 	static is(value) {
 		return value instanceof this;
 	}
 	constructor(family, size, {
-		style = defaultStyle,
-		variant = defaultVariant,
-		weight = defaultWeight,
+		style,
+		variant,
+		weight,
 	} = {}) {
 		Object.assign(this, {
 			family,
@@ -20,7 +16,6 @@ export default class {
 		});
 	}
 	toCSS() {
-		// todo
 		let {
 			family,
 			size,
@@ -28,6 +23,16 @@ export default class {
 			variant,
 			weight,
 		} = this;
-		return [style, variant, weight, size, family].join(' ');
+		let props = [size, family];
+		if (weight !== undefined) {
+			props.unshift(weight);
+		}
+		if (variant !== undefined) {
+			props.unshift(variant);
+		}
+		if (style !== undefined) {
+			props.unshift(style);
+		}
+		return props.join(' ');
 	}
 }
