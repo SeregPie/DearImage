@@ -14,9 +14,4 @@ export default {
 		format: 'umd',
 		name: 'DearImage',
 	},
-	onwarn(warning, warn) {
-		if (warning.code !== 'EVAL') {
-			warn(warning);
-		}
-	},
 };
