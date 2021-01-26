@@ -4,7 +4,7 @@ export default class {
 	static is(value) {
 		return value instanceof this;
 	}
-	static isString(value) {
+	static isValid(value) {
 		try {
 			this.parse(value);
 			return true;
@@ -19,10 +19,14 @@ export default class {
 				let type = matches[1];
 				let encoded = matches[2];
 				let data = matches[3];
+				let empty = !data;
 				return Object.assign(new this(), {
 					type,
 					encoded,
 					data,
+					isEmpty() {
+						return empty;
+					},
 					toString() {
 						return string;
 					},
@@ -30,8 +34,5 @@ export default class {
 			}
 		}
 		throw new Error('Invalid data URL.');
-	}
-	isEmpty() {
-		return !this.data;
 	}
 }

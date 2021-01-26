@@ -1,35 +1,32 @@
-import FontFace from '../@core/FontFace';
+import Font from '../@core/Font';
 import Object_is from '../@core/Object/is';
-import String_is from '../@core/String/is';
 
-import defaultValue from './defaultFontFace';
+import defaultValue from './defaultFont';
 import normalizeFamily from './normalizeFontFamily';
+import normalizeSize from './normalizeFontSize';
 import normalizeStyle from './normalizeFontStyle';
 import normalizeVariant from './normalizeFontVariant';
 import normalizeWeight from './normalizeFontWeight';
 
 export default function(value) {
 	if (value != null) {
-		if (FontFace.is(value)) {
+		if (Font.is(value)) {
 			return value;
-		}
-		if (String_is(value)) {
-			let family = value;
-			family = normalizeFamily(family);
-			return new FontFace(family);
 		}
 		if (Object_is(value)) {
 			let {
 				family,
+				size,
 				style,
 				variant,
 				weight,
 			} = value;
 			family = normalizeFamily(family);
+			size = normalizeSize(size);
 			style = normalizeStyle(style);
 			variant = normalizeVariant(variant);
 			weight = normalizeWeight(weight);
-			return new FontFace(family, {
+			return new Font(family, size, {
 				style,
 				variant,
 				weight,

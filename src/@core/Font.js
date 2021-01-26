@@ -1,3 +1,5 @@
+import CanvasRenderingContext2D_create from '../CanvasRenderingContext2D/create';
+
 export default class {
 	static is(value) {
 		return value instanceof this;
@@ -7,32 +9,34 @@ export default class {
 		variant,
 		weight,
 	} = {}) {
+		let string;
+		{
+			let array = [`${size}px`, family];
+			if (weight !== undefined) {
+				array.unshift(weight);
+			}
+			if (variant !== undefined) {
+				array.unshift(variant);
+			}
+			if (style !== undefined) {
+				array.unshift(style);
+			}
+			string = array.join(' ');
+		}
 		Object.assign(this, {
 			family,
 			size,
 			style,
 			variant,
 			weight,
+			measureText(text) {
+				let context = CanvasRenderingContext2D_create(0, 0);
+				context.font = string;
+				return context.measureText(text);
+			},
+			toString() {
+				return string;
+			},
 		});
-	}
-	toCSS() {
-		let {
-			family,
-			size,
-			style,
-			variant,
-			weight,
-		} = this;
-		let props = [size, family];
-		if (weight !== undefined) {
-			props.unshift(weight);
-		}
-		if (variant !== undefined) {
-			props.unshift(variant);
-		}
-		if (style !== undefined) {
-			props.unshift(style);
-		}
-		return props.join(' ');
 	}
 }

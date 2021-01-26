@@ -5,10 +5,10 @@ import './DearImage.fill';
 import './DearImage.from';
 //import './DearImage.gridLayout';
 import './DearImage.isDearImage';
-//import './DearImage.loadFontFace';
+import './DearImage.loadFontFace';
 import './DearImage.loadFrom';
-//import './DearImage.measureText';
-//import './DearImage.text';
+import './DearImage.measureText';
+import './DearImage.text';
 
 import './DearImage.prototype.crop';
 import './DearImage.prototype.drawBackground';

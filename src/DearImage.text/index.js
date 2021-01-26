@@ -5,12 +5,14 @@ import DearImage from '../@core/DearImage';
 import Font from '../@core/Font';
 import Object_is from '../@core/Object/is';
 
+import defaultFont from './defaultFont';
+import defaultLineGap from './defaultLineGap';
+import defaultPadding from './defaultPadding';
+import defaultStrokeStyle from './defaultStrokeStyle';
+import defaultStrokeWidth from './defaultStrokeWidth';
+import defaultStyle from './defaultStyle';
 import normalizeAlignment from './normalizeAlignment';
-import normalizeFontFamily from './normalizeFontFamily';
-import normalizeFontSize from './normalizeFontSize';
-import normalizeFontStyle from './normalizeFontStyle';
-import normalizeFontVariant from './normalizeFontVariant';
-import normalizeFontWeight from './normalizeFontWeight';
+import normalizeFont from './normalizeFont';
 import normalizeLineGap from './normalizeLineGap';
 import normalizePadding from './normalizePadding';
 import normalizeStrokeStyle from './normalizeStrokeStyle';
@@ -20,11 +22,7 @@ import normalizeText from './normalizeText';
 
 DearImage.text = function(text, options) {
 	let alignment;
-	let fontFamily;
-	let fontSize;
-	let fontStyle;
-	let fontVariant;
-	let fontWeight;
+	let font;
 	let lineGap;
 	let padding;
 	let strokeStyle;
@@ -32,49 +30,36 @@ DearImage.text = function(text, options) {
 	let style;
 	{
 		text = normalizeText(text);
-		if (Object_is(options)) {
-			alignment = options.alignment;
-			if (Object_is(options.font)) {
-				fontFamily = options.font.family;
-				fontSize = options.font.size;
-				fontStyle = options.font.style;
-				fontVariant = options.font.variant;
-				fontWeight = options.font.weight;
+		(value => {
+			if (Object_is(value)) {
+				({
+					alignment,
+					font,
+					lineGap,
+					padding,
+					strokeStyle,
+					strokeWidth,
+					style,
+				} = value);
 			}
-			lineGap = options.lineGap;
-			padding = options.padding;
-			if (Object_is(options.stroke)) {
-				strokeStyle = options.stroke.style;
-				strokeWidth = options.stroke.width;
-			}
-			style = options.style;
-		}
+		})(options);
 		alignment = normalizeAlignment(alignment);
-		fontFamily = normalizeFontFamily(fontFamily);
-		fontSize = normalizeFontSize(fontSize);
-		fontStyle = normalizeFontStyle(fontStyle);
-		fontVariant = normalizeFontVariant(fontVariant);
-		fontWeight = normalizeFontWeight(fontWeight);
+		font = normalizeFont(font);
 		lineGap = normalizeLineGap(lineGap);
 		padding = normalizePadding(padding);
 		strokeStyle = normalizeStrokeStyle(strokeStyle);
 		strokeWidth = normalizeStrokeWidth(strokeWidth);
 		style = normalizeStyle(style);
 	}
+	let {size: fontSize} = font;
 	padding *= fontSize;
 	lineGap *= fontSize;
 	strokeWidth *= fontSize;
-	let font = CSS_font_combine(fontFamily, `${fontSize}px`, fontStyle, fontVariant, fontWeight);
 	let lines = text ? text.split('\n') : [];
 	let linesCount = lines.length;
 	let lineOffset = fontSize + lineGap;
 	let contentSizeX = (linesCount
-		? (() => {
-			let canvas = document.createElement('canvas');
-			let ctx = canvas.getContext('2d');
-			ctx.font = font;
-			return Math.max(...lines.map(text => ctx.measureText(text).width));
-		})()
+		? Math.max(...lines.map(text => this.constructor.measureText(text, font).width))
 		: 0
 	);
 	let contentSizeY = (linesCount
@@ -95,7 +80,7 @@ DearImage.text = function(text, options) {
 	context.save();
 	Object.assign(context, {
 		fillStyle: style,
-		font: font.toCSS(),
+		font: `${font}`,
 		lineWidth: strokeWidth,
 		miterLimit: 1,
 		strokeStyle: strokeStyle,

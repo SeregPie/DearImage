@@ -4,5 +4,5 @@ import DearImage from '../@core/DearImage';
 import '../DearImage.utils';
 
 DearImage.utils.isDataURL = function(value) {
-	return DataURL.isString(value);
+	return DataURL.isValid(value);
 };
