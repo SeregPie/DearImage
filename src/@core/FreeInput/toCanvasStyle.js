@@ -1,6 +1,6 @@
 import CanvasGradient_is from '../CanvasGradient/is';
 import CanvasPattern_is from '../CanvasPattern/is';
-import CustomInput_toColor from './toColor';
+import FreeInput_toColor from './toColor';
 
 export default function(value, defaultValue) {
 	if (value != null) {
@@ -11,7 +11,7 @@ export default function(value, defaultValue) {
 		) {
 			return value;
 		}
-		return CustomInput_toColor(value, defaultValue);
+		return FreeInput_toColor(value, defaultValue);
 	}
 	return defaultValue;
 }

@@ -1,3 +1,3 @@
-import toEnum from '../@core/CustomInput/toEnum';
+import toEnum from '../@core/FreeInput/toEnum';
 
 export default toEnum;

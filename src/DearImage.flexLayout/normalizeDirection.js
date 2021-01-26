@@ -1,1 +1,3 @@
-export {default} from '../@core/FreeInput/toEnum';
+import toEnum from '../@core/FreeInput/toEnum';
+
+export default toEnum;

@@ -1,7 +1,3 @@
-import FreeInput_toNonNegativeIntegerNumber from '../@core/FreeInput/toNonNegativeIntegerNumber';
+import toNonNegativeInteger from '../@core/FreeInput/toNonNegativeInteger';
 
-import defaultValue from './defaultGap';
-
-export default function(value) {
-	return FreeInput_toNonNegativeIntegerNumber(value, defaultValue);
-}
+export default toNonNegativeInteger;

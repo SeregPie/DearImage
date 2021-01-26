@@ -1,3 +1,3 @@
-import toNonNegativeInteger from '../@core/CustomInput/toNonNegativeInteger';
+import toNonNegativeInteger from '../@core/FreeInput/toNonNegativeInteger';
 
 export default toNonNegativeInteger;
