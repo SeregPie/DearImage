@@ -1,4 +1,4 @@
-import CanvasRenderingContext2D_create from '../CanvasRenderingContext2D/create';
+import CanvasRenderingContext2D_create from './CanvasRenderingContext2D/create';
 
 export default class {
 	static is(value) {

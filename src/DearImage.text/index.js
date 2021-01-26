@@ -1,56 +1,19 @@
-// todo
-
-import CSS_font_combine from '../@core/CSS/font/combine';
 import DearImage from '../@core/DearImage';
-import Font from '../@core/Font';
-import Object_is from '../@core/Object/is';
 
-import defaultFont from './defaultFont';
-import defaultLineGap from './defaultLineGap';
-import defaultPadding from './defaultPadding';
-import defaultStrokeStyle from './defaultStrokeStyle';
-import defaultStrokeWidth from './defaultStrokeWidth';
-import defaultStyle from './defaultStyle';
-import normalizeAlignment from './normalizeAlignment';
-import normalizeFont from './normalizeFont';
-import normalizeLineGap from './normalizeLineGap';
-import normalizePadding from './normalizePadding';
-import normalizeStrokeStyle from './normalizeStrokeStyle';
-import normalizeStrokeWidth from './normalizeStrokeWidth';
-import normalizeStyle from './normalizeStyle';
+import normalizeOptions from './normalizeOptions';
 import normalizeText from './normalizeText';
 
 DearImage.text = function(text, options) {
-	let alignment;
-	let font;
-	let lineGap;
-	let padding;
-	let strokeStyle;
-	let strokeWidth;
-	let style;
-	{
-		text = normalizeText(text);
-		(value => {
-			if (Object_is(value)) {
-				({
-					alignment,
-					font,
-					lineGap,
-					padding,
-					strokeStyle,
-					strokeWidth,
-					style,
-				} = value);
-			}
-		})(options);
-		alignment = normalizeAlignment(alignment);
-		font = normalizeFont(font);
-		lineGap = normalizeLineGap(lineGap);
-		padding = normalizePadding(padding);
-		strokeStyle = normalizeStrokeStyle(strokeStyle);
-		strokeWidth = normalizeStrokeWidth(strokeWidth);
-		style = normalizeStyle(style);
-	}
+	text = normalizeText(text);
+	let {
+		alignment,
+		font,
+		lineGap,
+		padding,
+		strokeStyle,
+		strokeWidth,
+		style,
+	} = normalizeOptions(options);
 	let {size: fontSize} = font;
 	padding *= fontSize;
 	lineGap *= fontSize;

@@ -10,10 +10,8 @@ function f(aggregateScalings, sizeX, sizeY) {
 		sizeX: currentSizeX,
 		sizeY: currentSizeY,
 	} = this;
-	{
-		sizeX = normalizeSize(sizeX, currentSizeX);
-		sizeY = normalizeSize(sizeY, currentSizeY);
-	}
+	sizeX = normalizeSize(sizeX, currentSizeX);
+	sizeY = normalizeSize(sizeY, currentSizeY);
 	let scalings = [];
 	if (sizeX && currentSizeX) {
 		let scalingX = sizeX / currentSizeX;

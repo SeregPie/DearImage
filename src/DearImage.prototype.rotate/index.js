@@ -10,9 +10,7 @@ DearImage.prototype.rotate = function(angle) {
 		sizeX: currentSizeX,
 		sizeY: currentSizeY,
 	} = this;
-	{
-		angle = normalizeAngle(angle);
-	}
+	angle = normalizeAngle(angle);
 	if (angle && currentSizeX && currentSizeY) {
 		let cosA = Math.abs(Math.cos(angle));
 		let sinA = Math.abs(Math.sin(angle));

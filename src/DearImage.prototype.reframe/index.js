@@ -10,12 +10,10 @@ DearImage.prototype.reframe = function(sizeX, sizeY, alignmentX, alignmentY) {
 		sizeX: currentSizeX,
 		sizeY: currentSizeY,
 	} = this;
-	{
-		sizeX = normalizeSize(sizeX, currentSizeX);
-		sizeY = normalizeSize(sizeY, currentSizeY);
-		alignmentX = normalizeAlignment(alignmentX);
-		alignmentY = normalizeAlignment(alignmentY);
-	}
+	sizeX = normalizeSize(sizeX, currentSizeX);
+	sizeY = normalizeSize(sizeY, currentSizeY);
+	alignmentX = normalizeAlignment(alignmentX);
+	alignmentY = normalizeAlignment(alignmentY);
 	let startX = -(() => {
 		switch (alignmentX) {
 			case 'start':

@@ -1,59 +1,70 @@
+import Object_is from '../@core/Object/is';
+
+import defaultLineGap from './defaultLineGap';
+import defaultPadding from './defaultPadding';
+import defaultStrokeStyle from './defaultStrokeStyle';
+import defaultStrokeWidth from './defaultStrokeWidth';
+import defaultStyle from './defaultStyle';
+import normalizeAlignment from './normalizeAlignment';
+import normalizeFont from './normalizeFont';
+import normalizeLineGap from './normalizeLineGap';
+import normalizePadding from './normalizePadding';
+import normalizeStrokeStyle from './normalizeStrokeStyle';
+import normalizeStrokeWidth from './normalizeStrokeWidth';
+import normalizeStyle from './normalizeStyle';
+
 export default function(value) {
-	let sizeXMax;
-	let sizeXMin;
-	let sizeYMax;
-	let sizeYMin;
-	if (value == null) {
-		// pass
-	} else
+	let alignment;
+	let font;
+	let lineGap;
+	let padding;
+	let strokeStyle;
+	let strokeWidth;
+	let style;
 	if (Object_is(value)) {
+		({
+			alignment,
+			font,
+			lineGap,
+			padding,
+			style,
+		} = value);
+		alignment = normalizeAlignment(alignment);
+		lineGap = normalizeLineGap(lineGap);
+		padding = normalizePadding(padding);
+		style = normalizeStyle(style);
 		(value => {
-			if (value == null) {
-				// pass
-			} else
 			if (Object_is(value)) {
-				(value => {
-					if (value == null) {
-						// pass
-					} else
-					if (Object_is(value)) {
-						alignmentX = value.x;
-						alignmentY = value.y;
-					} else {
-						alignmentX = alignmentY = value;
-					}
-				})(value.x);
-				(value => {
-					if (value == null) {
-						// pass
-					} else
-					if (Object_is(value)) {
-						alignmentX = value.x;
-						alignmentY = value.y;
-					} else {
-						alignmentX = alignmentY = value;
-					}
-				})(value.y);
-			} else {
-				sizeXMin = sizeXMax = sizeYMin = sizeYMax = normalizeSizeMin(value);
+				({
+					style: strokeStyle,
+					width: strokeWidth,
+				} = value);
+				strokeStyle = normalizeStrokeStyle(strokeStyle);
+				strokeWidth = normalizeStrokeWidth(strokeWidth);
 			}
-		})(value.size);
+		})(value.stroke);
 	}
+	font = normalizeFont(font);
 	({
-		sizeXMax = defaultSizeMax,
-		sizeXMin = defaultSizeMin,
-		sizeYMax = defaultSizeMax,
-		sizeYMin = defaultSizeMin,
+		lineGap = defaultLineGap,
+		padding = defaultPadding,
+		strokeStyle = defaultStrokeStyle,
+		strokeWidth = defaultStrokeWidth,
+		style = defaultStyle,
 	} = {
-		sizeXMax,
-		sizeXMin,
-		sizeYMax,
-		sizeYMin,
+		lineGap,
+		padding,
+		strokeStyle,
+		strokeWidth,
+		style,
 	});
 	return {
-		sizeXMax,
-		sizeXMin,
-		sizeYMax,
-		sizeYMin,
+		alignment,
+		font,
+		lineGap,
+		padding,
+		strokeStyle,
+		strokeWidth,
+		style,
 	};
 }

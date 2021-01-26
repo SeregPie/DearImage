@@ -5,14 +5,12 @@ import '../DearImage.blank';
 import normalizeStyle from './normalizeStyle';
 
 DearImage.fill = function(style, sizeX, sizeY) {
+	style = normalizeStyle(style);
 	let result = this.blank(sizeX, sizeY);
 	({
 		sizeX,
 		sizeY,
 	} = result);
-	{
-		style = normalizeStyle(style);
-	}
 	if (style && sizeX && sizeY) {
 		let {context} = result;
 		context.save();

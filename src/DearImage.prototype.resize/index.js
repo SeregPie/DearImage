@@ -10,10 +10,8 @@ DearImage.prototype.resize = function(sizeX, sizeY) {
 		sizeX: currentSizeX,
 		sizeY: currentSizeY,
 	} = this;
-	{
-		sizeX = normalizeSize(sizeX, currentSizeX);
-		sizeY = normalizeSize(sizeY, currentSizeY);
-	}
+	sizeX = normalizeSize(sizeX, currentSizeX);
+	sizeY = normalizeSize(sizeY, currentSizeY);
 	if (sizeX !== currentSizeX || sizeY !== currentSizeY) {
 		let result = this.constructor.blank(sizeX, sizeY);
 		if (sizeX && sizeY && currentSizeX && currentSizeY) {
