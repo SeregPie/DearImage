@@ -1,7 +1,3 @@
-export default function(value, defaultValue) {
-	if (value != null) {
-		// todo
-		return value;
-	}
-	return defaultValue;
-}
+import toNonNegativeInteger from '../@core/CustomInput/toNonNegativeInteger';
+
+export default toNonNegativeInteger;

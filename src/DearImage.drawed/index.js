@@ -1,5 +1,3 @@
-// todo
-
 import DearImage from '../@core/DearImage';
 import Math_ceilDivisible from '../@core/Math/ceilDivisible';
 import Object_is from '../@core/Object/is';

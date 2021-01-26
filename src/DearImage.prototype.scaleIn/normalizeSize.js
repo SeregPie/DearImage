@@ -1,1 +1,3 @@
-export {default} from '../DearImage.prototype.resize/normalizeSize';
+import toNonNegativeInteger from '../@core/CustomInput/toNonNegativeInteger';
+
+export default toNonNegativeInteger;

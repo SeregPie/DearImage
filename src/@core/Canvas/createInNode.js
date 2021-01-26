@@ -1,5 +1,3 @@
-import require from '@seregpie/native-require';
-
 export default function(width, height) {
 	try {
 		let {Canvas} = require('canvas');

@@ -16,23 +16,23 @@ DearImage.prototype.reframe = function(sizeX, sizeY, alignmentX, alignmentY) {
 		alignmentX = normalizeAlignment(alignmentX);
 		alignmentY = normalizeAlignment(alignmentY);
 	}
-	let startX = (() => {
+	let startX = -(() => {
 		switch (alignmentX) {
 			case 'start':
 				return 0;
 			case 'end':
-				return -sizeX;
+				return sizeX;
 		}
-		return (currentSizeX + sizeX) / -2;
+		return (currentSizeX + sizeX) / 2;
 	})();
-	let startY = (() => {
+	let startY = -(() => {
 		switch (alignmentY) {
 			case 'start':
 				return 0;
 			case 'end':
-				return -sizeY;
+				return sizeY;
 		}
-		return (currentSizeY + sizeY) / -2;
+		return (currentSizeY + sizeY) / 2;
 	})();
 	return this.crop(startX, startY, sizeX, sizeY);
 };

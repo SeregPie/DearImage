@@ -1,7 +1,5 @@
 import Font from './Font';
 
-import require from '@seregpie/native-require';
-
 import defaultStyle from './CSS/fontStyle/default';
 import defaultVariant from './CSS/fontVariant/default';
 import defaultWeight from './CSS/fontWeight/default';

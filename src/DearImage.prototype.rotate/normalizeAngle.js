@@ -1,7 +1,5 @@
+import toFinite from '../@core/CustomInput/toFinite';
+
 export default function(value) {
-	if (value != null) {
-		// todo
-		return value % (Math.PI*2);
-	}
-	return 0;
+	return toFinite(value, 0) % (Math.PI*2);
 }

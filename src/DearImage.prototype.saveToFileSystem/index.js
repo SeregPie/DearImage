@@ -1,7 +1,5 @@
 import DearImage from '../@core/DearImage';
 
-import require from '@seregpie/native-require';
-
 import '../DearImage.prototype.toBuffer';
 
 DearImage.prototype.saveToFileSystem = function(target, ...args) {

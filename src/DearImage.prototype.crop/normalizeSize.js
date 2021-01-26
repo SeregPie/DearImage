@@ -1,7 +1,3 @@
-export default function(value, defaultValue) {
-	if (value != null) {
-		// todo
-		return value;
-	}
-	return defaultValue;
-}
+import toInteger from '../@core/CustomInput/toInteger';
+
+export default toInteger;

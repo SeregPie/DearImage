@@ -1,7 +1,5 @@
+import toNonNegativeInteger from '../@core/CustomInput/toNonNegativeInteger';
+
 export default function(value) {
-	if (value != null) {
-		// todo
-		return value;
-	}
-	return 0;
+	return toNonNegativeInteger(value, 0);
 }
