@@ -1,3 +1,3 @@
 // todo
 
-export {default} from '../DearImage.drawed/normalizeImage';
+export {default} from '../DearImage.draw/normalizeImage';

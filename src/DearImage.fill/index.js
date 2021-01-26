@@ -4,7 +4,7 @@ import '../DearImage.blank';
 
 import normalizeStyle from './normalizeStyle';
 
-DearImage.filled = function(style, sizeX, sizeY) {
+DearImage.fill = function(style, sizeX, sizeY) {
 	let result = this.blank(sizeX, sizeY);
 	({
 		sizeX,

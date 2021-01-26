@@ -2,7 +2,7 @@ import DearImage from '../@core/DearImage';
 import Function_prototype_bindPartial from '../@core/Function/prototype/bindPartial';
 
 import '../DearImage.blank';
-import '../DearImage.drawed';
+import '../DearImage.draw';
 
 function f(b, image, options) {
 	let {
@@ -12,7 +12,7 @@ function f(b, image, options) {
 	} = this;
 	if (sizeX && sizeY) {
 		let result = this.constructor.blank(sizeX, sizeY);
-		let {canvas} = DearImage.drawed(image, sizeX, sizeY, options);
+		let {canvas} = DearImage.draw(image, sizeX, sizeY, options);
 		let {context} = result;
 		if (b) {
 			context.drawImage(currentCanvas, 0, 0);

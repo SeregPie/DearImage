@@ -1,14 +1,16 @@
+// todo?
+
 import DearImage from '../@core/DearImage';
 import Math_ceilDivisible from '../@core/Math/ceilDivisible';
 import Object_is from '../@core/Object/is';
 
 import '../DearImage.blank';
-import '../DearImage.filled';
+import '../DearImage.fill';
 import '../DearImage.prototype.reframe';
 
 import normalizeImage from './normalizeImage';
 
-DearImage.drawed = function(image, sizeX, sizeY, options) {
+DearImage.draw = function(image, sizeX, sizeY, options) {
 	let result = this.blank(sizeX, sizeY);
 	({
 		sizeX,
@@ -43,7 +45,7 @@ DearImage.drawed = function(image, sizeX, sizeY, options) {
 	}
 	if (image && sizeX && sizeY) {
 		let {canvas} = (DearImage
-			.filled(
+			.fill(
 				context.createPattern(image.canvas, (() => {
 					if (repeatX && repeatY) {
 						return 'repeat';

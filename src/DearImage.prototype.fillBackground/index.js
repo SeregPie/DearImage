@@ -1,6 +1,6 @@
 import DearImage from '../@core/DearImage';
 
-import '../DearImage.filled';
+import '../DearImage.fill';
 import '../DearImage.prototype.drawBackground';
 
 DearImage.prototype.fillBackground = function(style) {
@@ -8,5 +8,5 @@ DearImage.prototype.fillBackground = function(style) {
 		sizeX,
 		sizeY,
 	} = this;
-	return this.drawBackground(this.constructor.filled(style, sizeX, sizeY));
+	return this.drawBackground(this.constructor.fill(style, sizeX, sizeY));
 };

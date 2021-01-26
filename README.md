@@ -101,7 +101,7 @@ Returns the created `DearImage` instance.
 
 ---
 
-`.filled(style, sizeX = 0, sizeY = 0)`
+`.fill(style, sizeX = 0, sizeY = 0)`
 
 Creates a `DearImage` instance with the filled content.
 
@@ -113,16 +113,18 @@ Creates a `DearImage` instance with the filled content.
 
 Returns the created `DearImage` instance.
 
+TODO
+
 ```javascript
-.filled(style, sizeX = 0, sizeY = 0)
+.fill(style, sizeX = 0, sizeY = 0)
 ```
 
-![](./examples/DearImage.filled.png)
+![](./examples/DearImage.fill.png)
 
 ---
 
 ```
-.drawed(image, sizeX = 0, sizeY = 0, options = {
+.draw(image, sizeX = 0, sizeY = 0, options = {
   alignment: {
     x: 'center',
     y: 'center',
@@ -134,25 +136,27 @@ Returns the created `DearImage` instance.
 })`
 ```
 
-Creates a `DearImage` instance with the drawed content.
+Creates a `DearImage` instance with the drawn content.
 
 | argument | description |
 | ---: | :--- |
 | `image` | Anything the function `DearImage.from` supports. |
 | `sizeX` | A number as the width of the image. |
 | `sizeY` | A number as the height of the image. |
-| `options.alignment` | An object with further options or a value. |
+| `options.alignment` | TODO: An object with further options or a value. |
 | `options.alignment.x` | A string as the horizontal alignment of the image. Possible values are `'start'`, `'center'` and `'end'`. |
 | `options.alignment.y` | A string as the vertical alignment of the image. Possible values are `'start'`, `'center'` and `'end'`. |
-| `options.repeat` | An object with further options or a value. |
+| `options.repeat` | TODO: An object with further options or a value. |
 | `options.repeat.x` | If `true`, repeats the image horizontally. |
 | `options.repeat.y` | If `true`, repeats the image vertically. |
 
 Returns the created `DearImage` instance.
 
+TODO
+
 ```javascript
 // todo
-let image = DearImage.drawed(image, sizeX = 0, sizeY = 0, {
+let image = DearImage.draw(image, sizeX = 0, sizeY = 0, {
   alignment: {
     x: 'center',
     y: 'center',
@@ -164,9 +168,11 @@ let image = DearImage.drawed(image, sizeX = 0, sizeY = 0, {
 })`
 ```
 
-![](./examples/DearImage.drawed.png)
+![](./examples/DearImage.draw.png)
 
 ---
+
+TODO
 
 ```
 .loadFontFace(fontFace = {
@@ -192,6 +198,8 @@ Returns a promise.
 
 ---
 
+TODO
+
 ```
 .measureText(text = '', font = {
   family: 'sans-serif',
@@ -216,6 +224,8 @@ Creates a [`TextMetrics`](https://developer.mozilla.org/en-US/docs/Web/API/TextM
 Returns the created `TextMetrics` instance.
 
 ---
+
+TODO
 
 ```
 .text(text = '', options = {
@@ -309,7 +319,7 @@ console.log(image.sizeY); // => 150
 
 Checks if the image is blank.
 
-Returns `true` if the image is blank. Otherwise, `false`. todo
+Returns `true` if the image is blank, otherwise `false`.
 
 ```javascript
 let image = DearImage.blank(300, 150);
@@ -317,7 +327,7 @@ console.log(image.isBlank()); // => true
 ```
 
 ```javascript
-let image = DearImage.filled('DarkOrchid', 300, 150);
+let image = DearImage.fill('DarkOrchid', 300, 150);
 console.log(image.isBlank()); // => false
 ```
 
@@ -620,10 +630,10 @@ Draws an image above the current image.
 | argument | description |
 | ---: | :--- |
 | `image` | Anything the function `DearImage.from` supports. |
-| `options.alignment` | An object with further options or a value. |
+| `options.alignment` | TODO: An object with further options or a value. |
 | `options.alignment.x` | A string as the horizontal alignment of the image. Possible values are `'start'`, `'center'` and `'end'`. |
 | `options.alignment.y` | A string as the vertical alignment of the image. Possible values are `'start'`, `'center'` and `'end'`. |
-| `options.repeat` | An object with further options or a value. |
+| `options.repeat` | TODO: An object with further options or a value. |
 | `options.repeat.x` | If `true`, repeats the image horizontally. |
 | `options.repeat.y` | If `true`, repeats the image vertically. |
 
@@ -682,6 +692,8 @@ let image = DearImage.from(source).drawBackground(otherSource, {
 
 ---
 
+TODO
+
 `.fillForeground(style)`
 
 Draws an image above the current image.
@@ -695,6 +707,8 @@ Returns the created `DearImage` instance.
 ![](./examples/DearImage.prototype.fillForeground.png)
 
 ---
+
+TODO
 
 `.fillBackground(style)`
 
