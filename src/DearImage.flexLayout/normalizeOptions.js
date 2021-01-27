@@ -80,6 +80,12 @@ export default function(value) {
 		sizeYMax,
 		sizeYMin,
 	});
+	if (sizeXMin > sizeXMax) {
+		// todo
+	}
+	if (sizeYMin > sizeYMax) {
+		// todo
+	}
 	return {
 		gapX,
 		gapY,
