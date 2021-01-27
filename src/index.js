@@ -1,7 +1,7 @@
 import './DearImage.blank';
 import './DearImage.draw';
 import './DearImage.fill';
-//import './DearImage.flexLayout';
+import './DearImage.flexLayout';
 import './DearImage.from';
 //import './DearImage.gridLayout';
 import './DearImage.isDearImage';
@@ -12,7 +12,7 @@ import './DearImage.text';
 
 import './DearImage.prototype.crop';
 import './DearImage.prototype.drawBackground';
-//import './DearImage.prototype.drawCheckeredBackground';
+import './DearImage.prototype.drawCheckeredBackground';
 import './DearImage.prototype.drawForeground';
 import './DearImage.prototype.fillBackground';
 import './DearImage.prototype.fillForeground';

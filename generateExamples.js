@@ -2,7 +2,7 @@ let DearImage = require('./index');
 
 (async () => {
 	let fontFace = {family: 'Inconsolata'};
-	//await DearImage.loadFontFace(fontFace, './fonts/Inconsolata.ttf');
+	await DearImage.loadFontFace(fontFace, './fonts/Inconsolata.ttf');
 	let font = {...fontFace, size: 16};
 	{
 		let image = await DearImage.loadFrom('./images/butterfly.png');

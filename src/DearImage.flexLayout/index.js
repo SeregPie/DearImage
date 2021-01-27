@@ -1,39 +1,15 @@
 import DearImage from '../@core/DearImage';
-import Object_is from '../@core/Object/is';
 
-import normalizeAlignment from './normalizeAlignment';
-import normalizeDirection from './normalizeDirection';
-import normalizeGap from './normalizeGap';
-import normalizeImages from './normalizeImages';
-
-DearImage.flexLayout = function(direction, images, options) {
-	let alignment;
-	let gapX;
-	let gapY;
-	{
-		direction = normalizeDirection(direction);
-		images = normalizeImages(images);
-		if (Object_is(options)) {
-			alignment = options.alignment;
-			if (Object_is(options.gap)) {
-				gapX = options.gap.x;
-				gapY = options.gap.y;
-			} else {
-				gapX = gapY = options.gap;
-			}
-		}
-		alignment = normalizeAlignment(alignment);
-		gapX = normalizeGap(gapX);
-		gapY = normalizeGap(gapY);
+DearImage.flexLayout = function(direction, ...args) {
+	switch (direction) {
+		case 'x':
+			return this.flexLayoutX(...args);
+		case 'y':
+			return this.flexLayoutY(...args);
 	}
-	// todo
 };
 
-
-import './DearImage.blank';
-import DearImage from './DearImage';
-
-DearImage.flexX = function(images, {
+DearImage.flexLayoutX = function(images, {
 	alignItems = 'center',
 	gap = 0,
 } = {}) {
@@ -64,7 +40,7 @@ DearImage.flexX = function(images, {
 	return image;
 };
 
-DearImage.flexY = function(images, {
+DearImage.flexLayoutY = function(images, {
 	alignItems = 'center',
 	gap = 0,
 } = {}) {

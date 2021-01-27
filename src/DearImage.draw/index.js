@@ -24,6 +24,7 @@ DearImage.draw = function(image, sizeX, sizeY, options) {
 		sizeY,
 	} = result);
 	if (image && sizeX && sizeY) {
+		let {context} = result;
 		let {canvas} = (DearImage
 			.fill(
 				context.createPattern(image.canvas, (() => {
@@ -43,7 +44,6 @@ DearImage.draw = function(image, sizeX, sizeY, options) {
 			)
 			.reframe(sizeX, sizeY, alignmentX, alignmentY)
 		);
-		let {context} = result;
 		context.drawImage(canvas, 0, 0);
 	}
 	return result;
