@@ -1,7 +1,6 @@
 import FontFace from '../@core/FontFace';
 import Object_is from '../@core/Object/is';
 
-import defaultFamily from './defaultFontFamily';
 import normalizeFamily from './normalizeFontFamily';
 import normalizeStyle from './normalizeFontStyle';
 import normalizeVariant from './normalizeFontVariant';
@@ -22,18 +21,13 @@ export default function(value) {
 			variant,
 			weight,
 		} = value);
-		family = normalizeFamily(family);
-		style = normalizeStyle(style);
-		variant = normalizeVariant(variant);
-		weight = normalizeWeight(weight);
 	} else {
-		family = normalizeFamily(value);
+		family = value;
 	}
-	({
-		family = defaultFamily,
-	} = {
-		family,
-	});
+	family = normalizeFamily(family);
+	style = normalizeStyle(style);
+	variant = normalizeVariant(variant);
+	weight = normalizeWeight(weight);
 	return new FontFace(family, {
 		style,
 		variant,

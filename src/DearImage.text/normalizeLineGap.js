@@ -1,3 +1,7 @@
-import toNonNegativeFinite from '../@core/FreeInput/toNonNegativeFinite';
+import to from '..';
 
-export default toNonNegativeFinite;
+import defaultValue from './defaultLineGap';
+
+export default function(value) {
+	return to(value, defaultValue);
+}

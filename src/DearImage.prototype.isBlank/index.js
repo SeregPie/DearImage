@@ -1,3 +1,5 @@
+// todo: caching?
+
 import DearImage from '../@core/DearImage';
 
 import '../DearImage.prototype.toImageData';

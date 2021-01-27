@@ -1,8 +1,6 @@
 import Font from '../@core/Font';
 import Object_is from '../@core/Object/is';
 
-import defaultFamily from './defaultFontFamily';
-import defaultSize from './defaultFontSize';
 import normalizeFamily from './normalizeFontFamily';
 import normalizeSize from './normalizeFontSize';
 import normalizeStyle from './normalizeFontStyle';
@@ -26,19 +24,12 @@ export default function(value) {
 			variant,
 			weight,
 		} = value);
-		family = normalizeFamily(family);
-		size = normalizeSize(size);
-		style = normalizeStyle(style);
-		variant = normalizeVariant(variant);
-		weight = normalizeWeight(weight);
 	}
-	({
-		family = defaultFamily,
-		size = defaultSize,
-	} = {
-		family,
-		size,
-	});
+	family = normalizeFamily(family);
+	size = normalizeSize(size);
+	style = normalizeStyle(style);
+	variant = normalizeVariant(variant);
+	weight = normalizeWeight(weight);
 	return new Font(family, size, {
 		style,
 		variant,

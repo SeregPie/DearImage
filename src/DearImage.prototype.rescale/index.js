@@ -9,8 +9,10 @@ DearImage.prototype.rescale = function(scalingX, scalingY) {
 		sizeX: currentSizeX,
 		sizeY: currentSizeY,
 	} = this;
-	scalingX = normalizeScaling(scalingX);
-	scalingY = normalizeScaling(scalingY);
+	{
+		scalingX = normalizeScaling(scalingX);
+		scalingY = normalizeScaling(scalingY);
+	}
 	let sizeX = Math.round(currentSizeX * scalingX);
 	let sizeY = Math.round(currentSizeY * scalingY);
 	return this.resize(sizeX, sizeY);

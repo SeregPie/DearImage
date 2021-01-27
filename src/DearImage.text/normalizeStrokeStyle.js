@@ -1,3 +1,7 @@
-import toCanvasStyle from '../@core/FreeInput/toCanvasStyle';
+import to from '..';
 
-export default toCanvasStyle;
+import defaultValue from './defaultStrokeStyle';
+
+export default function(value) {
+	return to(value, defaultValue);
+}
