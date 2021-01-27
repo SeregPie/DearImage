@@ -1,70 +1,93 @@
 import Object_is from '../@core/Object/is';
 
-import defaultLineGap from './defaultLineGap';
+import defaultGap from './defaultGap';
 import defaultPadding from './defaultPadding';
-import defaultStrokeStyle from './defaultStrokeStyle';
-import defaultStrokeWidth from './defaultStrokeWidth';
-import defaultStyle from './defaultStyle';
-import normalizeAlignment from './normalizeAlignment';
-import normalizeFont from './normalizeFont';
-import normalizeLineGap from './normalizeLineGap';
+import defaultSizeMax from './defaultSizeMax';
+import defaultSizeMin from './defaultSizeMin';
+import normalizeGap from './normalizeGap';
 import normalizePadding from './normalizePadding';
-import normalizeStrokeStyle from './normalizeStrokeStyle';
-import normalizeStrokeWidth from './normalizeStrokeWidth';
-import normalizeStyle from './normalizeStyle';
+import normalizeSizeMax from './normalizeSizeMax';
+import normalizeSizeMin from './normalizeSizeMin';
 
 export default function(value) {
-	let alignment;
-	let font;
-	let lineGap;
-	let padding;
-	let strokeStyle;
-	let strokeWidth;
-	let style;
+	let gapX;
+	let gapY;
+	let paddingX;
+	let paddingY;
+	let sizeXMax;
+	let sizeXMin;
+	let sizeYMax;
+	let sizeYMin;
 	if (Object_is(value)) {
-		({
-			alignment,
-			font,
-			lineGap,
-			padding,
-			style,
-		} = value);
-		alignment = normalizeAlignment(alignment);
-		lineGap = normalizeLineGap(lineGap);
-		padding = normalizePadding(padding);
-		style = normalizeStyle(style);
 		(value => {
 			if (Object_is(value)) {
-				({
-					style: strokeStyle,
-					width: strokeWidth,
-				} = value);
-				strokeStyle = normalizeStrokeStyle(strokeStyle);
-				strokeWidth = normalizeStrokeWidth(strokeWidth);
+				gapX = normalizeGap(value.x);
+				gapY = normalizeGap(value.y);
+			} else {
+				gapX = gapY = normalizeGap(value);
 			}
-		})(value.stroke);
+		})(value.gap);
+		(value => {
+			if (Object_is(value)) {
+				paddingX = normalizePadding(value.x);
+				paddingY = normalizePadding(value.y);
+			} else {
+				paddingX = paddingY = normalizePadding(value);
+			}
+		})(value.padding);
+		(value => {
+			if (Object_is(value)) {
+				(value => {
+					if (Object_is(value)) {
+						sizeXMin = normalizeSizeMin(value.min);
+						sizeXMax = normalizeSizeMax(value.max);
+					} else {
+						sizeXMin = normalizeSizeMin(value);
+						sizeXMax = normalizeSizeMax(value);
+					}
+				})(value.x);
+				(value => {
+					if (Object_is(value)) {
+						sizeYMin = normalizeSizeMin(value.min);
+						sizeYMax = normalizeSizeMax(value.max);
+					} else {
+						sizeYMin = normalizeSizeMin(value);
+						sizeYMax = normalizeSizeMax(value);
+					}
+				})(value.y);
+			} else {
+				sizeXMin = sizeYMin = normalizeSizeMin(value);
+				sizeXMax = sizeYMax = normalizeSizeMax(value);
+			}
+		})(value.size);
 	}
-	font = normalizeFont(font);
 	({
-		lineGap = defaultLineGap,
-		padding = defaultPadding,
-		strokeStyle = defaultStrokeStyle,
-		strokeWidth = defaultStrokeWidth,
-		style = defaultStyle,
+		gapX = defaultGap,
+		gapY = defaultGap,
+		paddingX = defaultPadding,
+		paddingY = defaultPadding,
+		sizeXMax = defaultSizeMax,
+		sizeXMin = defaultSizeMin,
+		sizeYMax = defaultSizeMax,
+		sizeYMin = defaultSizeMin,
 	} = {
-		lineGap,
-		padding,
-		strokeStyle,
-		strokeWidth,
-		style,
+		gapX,
+		gapY,
+		paddingX,
+		paddingY,
+		sizeXMax,
+		sizeXMin,
+		sizeYMax,
+		sizeYMin,
 	});
 	return {
-		alignment,
-		font,
-		lineGap,
-		padding,
-		strokeStyle,
-		strokeWidth,
-		style,
+		gapX,
+		gapY,
+		paddingX,
+		paddingY,
+		sizeXMax,
+		sizeXMin,
+		sizeYMax,
+		sizeYMin,
 	};
 }
