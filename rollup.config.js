@@ -7,7 +7,7 @@ export default {
 	input: 'src/index.js',
 	plugins: [
 		nodeResolve(),
-		//terser(),
+		terser(),
 	],
 	output: {
 		file: main,

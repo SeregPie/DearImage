@@ -1,3 +1,5 @@
+// todo?
+
 import DearImage from '../@core/DearImage';
 import Function_prototype_bindPartial from '../@core/Function/prototype/bindPartial';
 
@@ -18,8 +20,8 @@ function f(b, image, options) {
 			context.drawImage(currentCanvas, 0, 0);
 			context.drawImage(canvas, 0, 0);
 		} else {
-			context.drawImage(currentCanvas, 0, 0);
 			context.drawImage(canvas, 0, 0);
+			context.drawImage(currentCanvas, 0, 0);
 		}
 		return result;
 	}
