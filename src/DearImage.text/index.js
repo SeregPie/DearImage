@@ -22,7 +22,7 @@ DearImage.text = function(text, options) {
 	let linesCount = lines.length;
 	let lineOffset = fontSize + lineGap;
 	let contentSizeX = (linesCount
-		? Math.max(...lines.map(text => this.constructor.measureText(text, font).width))
+		? Math.max(...lines.map(text => font.measureText(text).width))
 		: 0
 	);
 	let contentSizeY = (linesCount
@@ -59,7 +59,7 @@ DearImage.text = function(text, options) {
 			x = sizeX / 2;
 			return 'center';
 		})(),
-		textBaseline:  'middle',
+		textBaseline: 'middle',
 	});
 	lines.forEach(text => {
 		context.fillText(text, x, y);

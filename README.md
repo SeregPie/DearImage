@@ -48,7 +48,7 @@ Determines whether the passed value is an instance of `DearImage`.
 | ---: | :--- |
 | `value` | The value to be checked. |
 
-Returns `true` if the passed value is an instance of `DearImage`, `false` otherwise.
+Returns `true` if the passed value is an instance of `DearImage`, otherwise `false`.
 
 ---
 
@@ -825,7 +825,7 @@ Determines whether the passed value is an instance of [`URL`](https://developer.
 | ---: | :--- |
 | `value` | The value to be checked. |
 
-Returns `true` if the passed value is an instance of `URL` or an URL string, `false` otherwise.
+Returns `true` if the passed value is an instance of `URL` or an URL string, otherwise `false`.
 
 ```javascript
 console.log(DearImage.utils.isURL('https://github.com/SeregPie/DearImage'));
@@ -848,7 +848,7 @@ Determines whether the passed value is a [data URL](https://developer.mozilla.or
 | ---: | :--- |
 | `value` | The value to be checked. |
 
-Returns `true` if the passed value is a data URL string, `false` otherwise.
+Returns `true` if the passed value is a data URL string, otherwise `false`.
 
 ```javascript
 console.log(DearImage.utils.isDataURL('data:image/png;base64,R0lGODdh'));
