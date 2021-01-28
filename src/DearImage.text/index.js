@@ -1,11 +1,6 @@
 import DearImage from '../@core/DearImage';
 import Object_is from '../@core/Object/is';
 
-
-
-
-
-
 import normalizeAlignment from './normalizeAlignment';
 import normalizeFont from './normalizeFont';
 import normalizeLineGap from './normalizeLineGap';

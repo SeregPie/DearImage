@@ -1,4 +1,4 @@
-export const defaultValue = 'sans-serif';
+import defaultValue from './defaultFontFamily';
 
 export default function(value) {
 	if (value != null) {

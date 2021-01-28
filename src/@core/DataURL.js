@@ -1,3 +1,5 @@
+// todo?
+
 import String_is from './String/is';
 
 export default class {

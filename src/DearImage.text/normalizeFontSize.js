@@ -1,3 +1,9 @@
-import toNonNegativeFinite from '../@core/FreeInput/toNonNegativeFinite';
+import defaultValue from './defaultFontSize';
 
-export default toNonNegativeFinite;
+export default function(value) {
+	if (value != null) {
+		// todo
+		return value;
+	}
+	return defaultValue;
+}
