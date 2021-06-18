@@ -2,7 +2,6 @@ export default function(value) {
 	return (
 		(() => {
 			try {
-				let {ImageData} = globalThis;
 				return value instanceof ImageData;
 			} catch {
 				// pass

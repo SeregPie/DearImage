@@ -2,7 +2,6 @@ export default function(value) {
 	return (
 		(() => {
 			try {
-				let {CanvasRenderingContext2D} = globalThis;
 				return value instanceof CanvasRenderingContext2D;
 			} catch {
 				// pass
