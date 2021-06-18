@@ -1,3 +1,5 @@
+// todo: decorator
+
 import '../DearImage.prototype.toImageData';
 import DearImage from '../DearImage';
 

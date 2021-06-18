@@ -5,6 +5,7 @@ let {isDearImage} = DearImage;
 
 import createCanvasRenderingContext2D from '../utils/createCanvasRenderingContext2D';
 import createImage from '../utils/createImage';
+import decodeImage from '../utils/decodeImage';
 import isBlob from '../utils/isBlob';
 import isBuffer from '../utils/isBuffer';
 import isCanvas from '../utils/isCanvas';
@@ -92,8 +93,7 @@ function toContextFromImage(image) {
 }
 
 async function toContextFromImageAsync(image) {
-	// todo
-	await image.decode();
+	await decodeImage(image);
 	return toContextFromImage(image);
 }
 
