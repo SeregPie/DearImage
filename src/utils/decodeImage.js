@@ -1,4 +1,8 @@
 export default async function(image) {
+	if (image.decode) {
+		await image.decode();
+	}
+	/*
 	if (!image.complete) {
 		if (image.decode) {
 			await image.decode();
@@ -13,5 +17,5 @@ export default async function(image) {
 				image.onerror = null;
 			}
 		}
-	}
+	}*/
 }

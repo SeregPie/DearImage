@@ -14,7 +14,9 @@
 	"scripts": {
 		"build": "rollup -c",
 		"prepublishOnly": "npm run build",
-		"test": "jest"
+		"test": "npm run test:node && npm run test:browser",
+		"test:browser": "jest --env jsdom",
+		"test:node": "jest"
 	},
 	"devDependencies": {
 		"@babel/core": "^7.14.6",
