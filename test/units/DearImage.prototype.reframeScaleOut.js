@@ -1,5 +1,0 @@
-// todo
-
-module.exports = function() {
-
-};

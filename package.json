@@ -1,54 +1,32 @@
 {
 	"name": "dear-image",
-	"version": "1.4.0",
+	"version": "2.0.0",
 	"description": "A class that represents a graphical image.",
-	"keywords": [
-		"2d",
-		"blob",
-		"browser",
-		"buffer",
-		"canvas",
-		"contain",
-		"context",
-		"cover",
-		"crop",
-		"data",
-		"draw",
-		"edit",
-		"file",
-		"fit",
-		"flip",
-		"font",
-		"frame",
-		"html",
-		"image",
-		"load",
-		"node",
-		"resize",
-		"rotate",
-		"save",
-		"scale",
-		"size",
-		"url"
-	],
+	"keywords": [],
 	"license": "MIT",
 	"author": "Sergej Sintschilin <seregpie@gmail.com>",
 	"files": [],
 	"main": "index.js",
+	"browser": {
+		"canvas": false
+	},
 	"repository": "github:SeregPie/DearImage",
 	"scripts": {
 		"build": "rollup -c",
-		"generateExamples": "node generateExamples",
 		"prepublishOnly": "npm run build",
-		"test": "node test/index"
+		"test": "jest"
 	},
 	"devDependencies": {
-		"@rollup/plugin-node-resolve": "^8.4.0",
-		"@seregpie/native-require": "^1.0.1",
-		"canvas": "^2.6.1",
-		"eslint": "^7.5.0",
-		"eslint-config-seregpie": "^1.0.1",
-		"rollup": "^2.22.1",
-		"rollup-plugin-terser": "^6.1.0"
+		"@babel/core": "^7.14.6",
+		"@babel/preset-env": "^7.14.5",
+		"@rollup/plugin-babel": "^5.3.0",
+		"@rollup/plugin-node-resolve": "^13.0.0",
+		"babel-jest": "^27.0.2",
+		"canvas": "^2.8.0",
+		"eslint": "^7.28.0",
+		"eslint-config-seregpie": "^1.0.2",
+		"jest": "^27.0.4",
+		"rollup": "^2.52.1",
+		"rollup-plugin-terser": "^7.0.2"
 	}
 }
