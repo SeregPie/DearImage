@@ -1,8 +1,9 @@
 export default function(width, height) {
 	try {
-		let result = document.createElement('canvas');
-		Object.assign(result, {width, height});
-		return result;
+		let canvas = document.createElement('canvas');
+		canvas.width = width;
+		canvas.height = height;
+		return canvas;
 	} catch {
 		// pass
 	}

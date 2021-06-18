@@ -1,8 +1,8 @@
-export default function(src) {
+export default function(source) {
 	try {
-		let result = new Image();
-		Object.assign(result, {src});
-		return result;
+		let image = new Image();
+		image.src = source;
+		return image;
 	} catch {
 		// pass
 	}

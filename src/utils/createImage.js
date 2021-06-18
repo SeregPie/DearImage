@@ -6,12 +6,12 @@ export default function(...args) {
 	} catch {
 		// pass
 	}
-	let [src] = args;
+	let [source] = args;
 	try {
 		let {Image} = require('canvas');
-		let result = new Image();
-		Object.assign(result, {src});
-		return result;
+		let image = new Image();
+		image.src = source;
+		return image;
 	} catch {
 		// pass
 	}
