@@ -1,7 +1,7 @@
 import '../DearImage.prototype.toImageData';
 import DearImage from '../DearImage';
 
-import eopomwyzwcqh from '../utils/eopomwyzwcqh';
+import once from '../utils/once';
 
 function f() {
 	let {
@@ -11,4 +11,4 @@ function f() {
 	return !(sizeX && sizeY && this.toImageData().data.some(x => x));
 }
 
-DearImage.prototype.isBlank = eopomwyzwcqh(f);
+DearImage.prototype.isBlank = once(f);
