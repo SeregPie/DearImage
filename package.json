@@ -14,21 +14,19 @@
 	"scripts": {
 		"build": "rollup -c",
 		"prepublishOnly": "npm run build",
-		"test": "npm run test:node && npm run test:browser",
-		"test:browser": "jest --env jsdom",
-		"test:node": "jest"
+		"test": "jest"
 	},
 	"devDependencies": {
 		"@babel/core": "^7.14.6",
-		"@babel/preset-env": "^7.14.5",
+		"@babel/preset-env": "^7.14.7",
 		"@rollup/plugin-babel": "^5.3.0",
 		"@rollup/plugin-node-resolve": "^13.0.0",
-		"babel-jest": "^27.0.2",
+		"babel-jest": "^27.0.5",
 		"canvas": "^2.8.0",
-		"eslint": "^7.28.0",
+		"eslint": "^7.29.0",
 		"eslint-config-seregpie": "^1.0.2",
-		"jest": "^27.0.4",
-		"rollup": "^2.52.1",
+		"jest": "^27.0.5",
+		"rollup": "^2.52.2",
 		"rollup-plugin-terser": "^7.0.2"
 	}
 }
