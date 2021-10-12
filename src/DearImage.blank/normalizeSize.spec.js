@@ -2,6 +2,16 @@ import normalizeSize from './normalizeSize';
 
 describe('DearImage.blank/normalizeSize', () => {
 	test('valid', () => {
+		try {
+			console.log('Buffer', typeof Buffer);
+		} catch {
+			// pass
+		}
+		try {
+			console.log('Blob', typeof Buffer);
+		} catch {
+			// pass
+		}
 		expect(normalizeSize(0)).toBe(0);
 		expect(normalizeSize(100)).toBe(100);
 	});
