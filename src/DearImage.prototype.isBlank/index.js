@@ -1,16 +1,12 @@
-// todo: decorator
-
 import '../DearImage.prototype.toImageData';
 import DearImage from '../DearImage';
 
-import once from '../utils/once';
+// todo: memoize
 
-function f() {
+DearImage.prototype.isBlank = function() {
 	let {
 		sizeX,
 		sizeY,
 	} = this;
 	return !(sizeX && sizeY && this.toImageData().data.some(x => x));
-}
-
-DearImage.prototype.isBlank = once(f);
+};

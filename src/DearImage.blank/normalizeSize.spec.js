@@ -1,30 +1,21 @@
 import normalizeSize from './normalizeSize';
 
 describe('DearImage.blank/normalizeSize', () => {
-	test('valid', () => {
-		try {
-			console.log('Buffer', typeof Buffer);
-		} catch {
-			// pass
-		}
-		try {
-			console.log('Blob', typeof Buffer);
-		} catch {
-			// pass
-		}
+	it('should pass valid value', () => {
 		expect(normalizeSize(0)).toBe(0);
 		expect(normalizeSize(100)).toBe(100);
 	});
-	test('invalid', () => {
-		for (let v of [undefined, null, false, true, NaN, Infinity, -7, 'abc', {}]) {
+
+	it('should return default if value invalid', () => {
+		for (let v of [undefined, null, false, true, Number.NaN, Number.NEGATIVE_INFINITY, Number.POSITIVE_INFINITY, -7, '42x', [], {}]) {
 			expect(normalizeSize(v)).toBe(0);
 		}
 	});
-	test('cast', () => {
-		let v = 100 + 100 * Math.random();
-		let r = Math.round(v);
-		expect(normalizeSize(`${v}`)).toBe(r);
-		expect(normalizeSize(`${r}`)).toBe(r);
-		expect(normalizeSize(v)).toBe(r);
+
+	it('should cast value', () => {
+		expect(normalizeSize('4.3')).toBe(4);
+		expect(normalizeSize('4.8')).toBe(5);
+		expect(normalizeSize(4.3)).toBe(4);
+		expect(normalizeSize(4.8)).toBe(5);
 	});
 });
