@@ -4,8 +4,6 @@ export default function(width, height) {
 		canvas.width = width;
 		canvas.height = height;
 		return canvas;
-	} catch {
-		// pass
-	}
+	} catch {}
 	throw new Error('HTMLCanvasElement is not supported.');
 }

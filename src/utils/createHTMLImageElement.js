@@ -3,8 +3,6 @@ export default function(source) {
 		let image = new Image();
 		image.src = source;
 		return image;
-	} catch {
-		// pass
-	}
+	} catch {}
 	throw new Error('HTMLImageElement is not supported.');
 }

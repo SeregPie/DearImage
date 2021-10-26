@@ -1,8 +1,6 @@
 export default function(value) {
 	try {
 		return value instanceof Buffer;
-	} catch {
-		// pass
-	}
+	} catch {}
 	return false;
 }
