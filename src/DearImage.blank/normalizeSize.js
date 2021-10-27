@@ -1,6 +1,7 @@
 import isNonNegativeFinite from '../utils/isNonNegativeFinite';
 import isString from '../utils/isString';
 
+// todo: rename
 export function ljnvcyku(value, defaultValue) {
 	if (value != null) {
 		if (isString(value)) {
