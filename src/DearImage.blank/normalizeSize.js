@@ -1,7 +1,7 @@
 import isNonNegativeFinite from '../utils/isNonNegativeFinite';
 import isString from '../utils/isString';
 
-export function f(value, defaultValue) {
+export function ljnvcyku(value, defaultValue) {
 	if (value != null) {
 		if (isString(value)) {
 			value = Number(value);
@@ -14,5 +14,5 @@ export function f(value, defaultValue) {
 }
 
 export default function(value) {
-	return f(value, 0);
+	return ljnvcyku(value, 0);
 }

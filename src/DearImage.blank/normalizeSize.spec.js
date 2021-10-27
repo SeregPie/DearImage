@@ -7,15 +7,21 @@ describe('DearImage.blank/normalizeSize', () => {
 	});
 
 	it('should return default if value invalid', () => {
-		for (let v of [undefined, null, false, true, Number.NaN, Number.NEGATIVE_INFINITY, Number.POSITIVE_INFINITY, -7, '42x', [], {}]) {
+		for (let v of [
+			...[undefined, null],
+			...[false, true],
+			...[-7, Number.NaN, Number.NEGATIVE_INFINITY, Number.POSITIVE_INFINITY],
+			...['', '42x'],
+			...[[], {}],
+		]) {
 			expect(normalizeSize(v)).toBe(0);
 		}
 	});
 
 	it('should cast value', () => {
-		expect(normalizeSize('4.3')).toBe(4);
-		expect(normalizeSize('4.8')).toBe(5);
-		expect(normalizeSize(4.3)).toBe(4);
-		expect(normalizeSize(4.8)).toBe(5);
+		expect(normalizeSize('7.2')).toBe(7);
+		expect(normalizeSize('2.7')).toBe(3);
+		expect(normalizeSize(7.2)).toBe(7);
+		expect(normalizeSize(2.7)).toBe(3);
 	});
 });

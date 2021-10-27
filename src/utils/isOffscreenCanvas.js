@@ -1,6 +1,8 @@
 export default function(value) {
 	try {
 		return value instanceof OffscreenCanvas;
-	} catch {}
+	} catch {
+		// pass
+	}
 	return false;
 }

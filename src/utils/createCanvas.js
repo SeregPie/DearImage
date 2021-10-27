@@ -4,14 +4,20 @@ import createOffscreenCanvas from './createOffscreenCanvas';
 export default function(...args) {
 	try {
 		return createHTMLCanvasElement(...args);
-	} catch {}
+	} catch {
+		// pass
+	}
 	try {
 		return createOffscreenCanvas(...args);
-	} catch {}
+	} catch {
+		// pass
+	}
 	let [width, height] = args;
 	try {
 		let {Canvas} = require('canvas');
 		return new Canvas(width, height);
-	} catch {}
+	} catch {
+		// pass
+	}
 	throw new Error('Canvas is not supported.');
 }

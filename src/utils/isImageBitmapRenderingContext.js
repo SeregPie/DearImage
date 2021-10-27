@@ -1,6 +1,8 @@
 export default function(value) {
 	try {
 		return value instanceof ImageBitmapRenderingContext;
-	} catch {}
+	} catch {
+		// pass
+	}
 	return false;
 }

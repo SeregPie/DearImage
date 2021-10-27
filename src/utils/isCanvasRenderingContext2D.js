@@ -3,7 +3,9 @@ export default function(value) {
 		(() => {
 			try {
 				return value instanceof CanvasRenderingContext2D;
-			} catch {}
+			} catch {
+				// pass
+			}
 			return false;
 		})()
 		||
@@ -11,7 +13,9 @@ export default function(value) {
 			try {
 				let {CanvasRenderingContext2D} = require('canvas');
 				return value instanceof CanvasRenderingContext2D;
-			} catch {}
+			} catch {
+				// pass
+			}
 			return false;
 		})()
 	);

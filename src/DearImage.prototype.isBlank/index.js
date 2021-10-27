@@ -8,5 +8,5 @@ DearImage.prototype.isBlank = function() {
 		sizeX,
 		sizeY,
 	} = this;
-	return !(sizeX && sizeY && this.toImageData().data.some(x => x));
+	return !(sizeX && sizeY && this.toImageData().data.some((x) => x));
 };
