@@ -1,5 +1,4 @@
 declare class DearImage {
-	static is(value: any): boolean;
 	constructor(context: CanvasRenderingContext2D)
 	readonly canvas: HTMLCanvasElement
 	readonly width: number

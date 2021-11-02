@@ -1,5 +1,5 @@
 declare class DearImage {
-	static isDearImage(value: any): boolean;
+	static from(value: any): Promise<DearImage>;
 }
 
 export default DearImage;

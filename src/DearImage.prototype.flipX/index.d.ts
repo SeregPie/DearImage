@@ -1,5 +1,5 @@
 declare class DearImage {
-	static isDearImage(value: any): boolean;
+	flipX(): DearImage;
 }
 
 export default DearImage;
