@@ -1,8 +1,4 @@
 export default class {
-	static is(value) {
-		return value instanceof this;
-	}
-
 	constructor(context) {
 		this.context = context;
 	}
@@ -17,13 +13,5 @@ export default class {
 
 	get height() {
 		return this.canvas.height;
-	}
-
-	get sizeX() {
-		return this.width;
-	}
-
-	get sizeY() {
-		return this.height;
 	}
 }

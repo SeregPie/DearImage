@@ -1,6 +1,6 @@
 import '../DearImage.prototype.scale';
 import DearImage from '../DearImage';
 
-DearImage.prototype.scaleY = function(scaling) {
-	return this.scale(1, scaling);
+DearImage.prototype.scaleY = function(scalingY) {
+	return this.scale(1, scalingY);
 };

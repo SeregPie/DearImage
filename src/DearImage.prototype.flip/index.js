@@ -1,4 +1,4 @@
-import '../DearImage.prototype.flip';
+import '../DearImage.blank';
 import DearImage from '../DearImage';
 
 DearImage.prototype.flip = function(flippingX, flippingY) {

@@ -1,3 +1,5 @@
+// todo: declare
+
 declare class DearImage {
 	static from(value: any): Promise<DearImage>;
 }

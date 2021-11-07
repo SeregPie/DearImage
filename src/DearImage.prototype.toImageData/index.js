@@ -3,8 +3,8 @@ import DearImage from '../DearImage';
 DearImage.prototype.toImageData = function() {
 	let {
 		context,
-		sizeX,
-		sizeY,
+		height,
+		width,
 	} = this;
-	return context.getImageData(0, 0, sizeX, sizeY);
+	return context.getImageData(0, 0, width, height);
 };

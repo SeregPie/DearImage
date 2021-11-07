@@ -1,3 +1,5 @@
+// todo: declare
+
 export type flippingN = boolean;
 
 declare class DearImage {

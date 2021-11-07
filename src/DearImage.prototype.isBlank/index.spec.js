@@ -1,13 +1,17 @@
-import '../DearImage.blank';
 import DearImage from '../DearImage';
 
-import '.';
+import './';
 
 describe('DearImage.prototype.isBlank', () => {
-	it('should return true if image blank', () => {
-		let image = DearImage.blank(300, 150);
+	it.skip('should return true if image blank', async () => {
+		// todo: get image
+		let image;
 		expect(image.isBlank()).toBe(true);
 	});
 
-	it.todo('should return false if image not blank');
+	it.skip('should return false if image not blank', async () => {
+		// todo: get image
+		let image;
+		expect(image.isBlank()).toBe(false);
+	});
 });

@@ -1,3 +1,5 @@
+// todo: declare
+
 import {ScalingN} from '../DearImage.prototype.scaleX';
 
 export {ScalingN};
