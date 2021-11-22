@@ -3,17 +3,19 @@ import isString from '../utils/isString';
 
 // todo: rename
 export function ljnvcyku(value, defaultValue) {
-	if (value != null) {
-		if (isString(value)) {
-			value = Number(value);
-		}
-		if (isFinite(value)) {
-			if (value > 0) {
-				return Math.ceil(value);
-			}
+	if (value === undefined) {
+		return defaultValue;
+	}
+	if (isString(value)) {
+		value = Number(value);
+	}
+	if (isFinite(value)) {
+		if (value > 0) {
+			return Math.ceil(value);
 		}
 	}
-	return defaultValue;
+	// todo: rename
+	throw new TypeError();
 }
 
 export default function(value) {

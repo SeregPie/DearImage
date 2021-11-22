@@ -18,6 +18,15 @@ import isURL from '../utils/isURL';
 
 // todo: order of functions
 
+/*
+
+type BigInteger = Uint8Array;
+type BinaryData = ArrayBuffer | ArrayBufferView;
+type BlobPart = BufferSource | Blob | string;
+type BodyInit = ReadableStream | XMLHttpRequestBodyInit;
+type BufferSource = ArrayBufferView | ArrayBuffer;
+*/
+
 export function gjfcunbbDearImage(image) {
 	return image.context;
 }
@@ -95,6 +104,7 @@ function gjfcunbbURL(url) {
 }
 
 export default async function gjfcunbb(value) {
+	// todo: order
 	if (isString(value)) {
 		return gjfcunbbString(value);
 	}

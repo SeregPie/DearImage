@@ -3,6 +3,7 @@ import DearImage from './DearImage';
 import './DearImage.blank';
 import './DearImage.from';
 import './DearImage.isDearImage';
+import './DearImage.prototype.equals';
 import './DearImage.prototype.flip';
 import './DearImage.prototype.flipX';
 import './DearImage.prototype.flipY';
